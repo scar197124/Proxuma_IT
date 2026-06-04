@@ -2,7 +2,7 @@
 
 ## Supported release
 
-The current public baseline is **Proxuma IT v3.19.1**.
+The current public baseline is **Proxuma IT v3.19.2**.
 
 ## Reporting a concern
 
@@ -16,7 +16,7 @@ Avoid posting real passwords, private keys, personal documents, or sensitive acc
 
 ## Project security boundary
 
-Proxuma IT v3.19.1 is a static, offline-first browser tool:
+Proxuma IT v3.19.2 is a static, offline-first browser tool:
 
 - no active online intelligence provider;
 - no telemetry;

@@ -1,6 +1,6 @@
 # Proxuma IT Trajectory / Next Steps
 
-Current baseline: **Proxuma IT v3.19.1 — Public UI Clarity Pass**
+Current baseline: **Proxuma IT v3.19.6 — UI Wording Clarity Pass**
 
 ## Locked identity
 
@@ -25,7 +25,7 @@ Use this if GitHub Pages shows any layout/path/camera issue.
 
 - Patch only the issue found live.
 - Do not add new engine lanes during deployment stabilization.
-- Release as v3.19.2 if a live-host patch is needed.
+- Release as v3.19.6 for the compact-plus public UI baseline if a live-host patch is needed.
 
 ### Option B — QR decoder completion
 Use this when ready to complete Safari/non-native camera scanning.

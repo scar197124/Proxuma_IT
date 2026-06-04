@@ -6,8 +6,8 @@ let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
 
-assert(code.includes('version: "v3.19.1"'), 'BUILD version should be v3.19.1');
-assert(code.includes('Public UI Clarity Pass'), 'BUILD name should identify local check evolution');
+assert(code.includes('version: "v3.19.6"'), 'BUILD version should be v3.19.6');
+assert(code.includes('UI Wording Clarity Pass'), 'BUILD name should identify local check evolution');
 assert(code.includes('OFFLINE_LAB_SAMPLES'), 'local check sample bench should exist');
 assert(code.includes('buildOfflineLabReport'), 'local check report builder should exist');
 assert(code.includes('Memory boundary: sample checks use local analysis directly'), 'check summary should document no pattern-memory pollution');
@@ -23,7 +23,7 @@ const context = { console, URL, Blob: function(){}, document:{getElementById(){r
 context.globalThis = context;
 vm.createContext(context);
 vm.runInContext(code, context);
-assert(context.__proxumaBuild.version === 'v3.19.1', 'runtime build should be v3.19.1');
+assert(context.__proxumaBuild.version === 'v3.19.6', 'runtime build should be v3.19.6');
 const lab = context.__proxumaBuildOfflineLabReport();
 assert(lab.rows.length >= 6, 'local check should include at least six samples');
 assert(lab.text.includes('no fetch, API, telemetry'), 'check summary should state offline boundary');
@@ -31,4 +31,4 @@ assert(lab.text.includes('Matched results:'), 'check summary should include pass
 const hardStops = lab.rows.filter(row => row.sample.expected === 'High Risk');
 assert(hardStops.length >= 3, 'lab should include multiple high-risk samples');
 assert(hardStops.every(row => row.report.risk === 'High Risk'), 'high-risk local check samples should remain high-risk');
-console.log('PASS: v3.19.1 public release polish verified: sample bench, batch report, offline boundary, and hard-stop lanes preserved.');
+console.log('PASS: v3.19.6 public release polish verified: sample bench, batch report, offline boundary, and hard-stop lanes preserved.');

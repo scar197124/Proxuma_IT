@@ -1,4 +1,4 @@
-# Proxuma IT v3.19.1 — Public UI Clarity Pass
+# Proxuma IT v3.19.6 — UI Wording Clarity Pass
 
 Proxuma IT is an offline-first link and message intelligence tool. It helps people review suspicious URLs, domains, QR text, download links, copied messages, and scam-style prompts before trusting them.
 
@@ -29,7 +29,7 @@ Camera QR scanning is browser-dependent:
 
 - Browsers with native `BarcodeDetector` support can scan locally after the user presses **Start QR Scan** and grants camera permission.
 - Browsers without native QR support need a complete audited local decoder bundle in `assets/vendor/jsQR.js`.
-- This v3.19.1 package keeps a local guardrail file there, not a full decoder bundle. That means Safari/non-native fallback should be treated as incomplete until a full audited decoder is embedded.
+- This v3.19.6 package keeps a local guardrail file there, not a full decoder bundle. That means Safari/non-native fallback should be treated as incomplete until a full audited decoder is embedded.
 - Manual QR text paste remains the reliable fallback.
 
 ## How to run locally
@@ -59,8 +59,8 @@ README.md
 CHANGELOG.md
 SECURITY.md
 LICENSE
-BUILD_MANIFEST_v3.19.1.md
-NEXT_CHAT_HANDOFF_PROXUMA_IT_v3.19.1.md
+BUILD_MANIFEST_v3.19.6.md
+NEXT_CHAT_HANDOFF_PROXUMA_IT_v3.19.6.md
 docs/
 tests/
 ```
@@ -76,7 +76,7 @@ node tests/test_engine_v3140_case_packet_hardening.js
 node tests/test_engine_v3151_redteam_hardening.js
 node tests/test_engine_v3160_github_slim_rc.js
 node tests/test_engine_v3180_public_ui_cleanup.js
-node tests/test_engine_v3191_public_ui_clarity_pass.js
+node tests/test_engine_v3192_compact_ui_density_pass.js
 ```
 
 ## Safety note

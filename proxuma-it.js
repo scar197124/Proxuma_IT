@@ -3,8 +3,8 @@
 
   // Compatibility markers retained for regression tests: version: "v2.76.0" / version: "v2.75.0" / version: "v2.74.0" / version: "v2.73.0" / version: "v2.72.1" / version: "v2.71.0" / Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1
   const BUILD = {
-    version: "v3.19.1",
-    name: "Public UI Clarity Pass",
+    version: "v3.19.6",
+    name: "UI Wording Clarity Pass",
     privacy: "offline-first engine / local QR decoder path / no runtime CDN dependency",
     roadmap: [
       "v2.69.1 Compact Header Pass + QR/API Readiness Map",
@@ -66,7 +66,10 @@
       "v3.15.1 Red Team Hardening Pass to close red-team gaps found in spaced OTP/verification-number lures and fake CAPTCHA/Cloudflare login gates while preserving offline-only behavior",
       "v3.16.0 GitHub Slim Release Candidate to package the tested offline engine for public upload with a clean deploy surface, current docs, current tests, and no old build clutter",
       "v3.18.0 Public UI Cleanup to keep local sample checks available while removing developer-facing test-bench language from the public interface",
-      "v3.19.1 Public UI Clarity Pass to add public docs, SECURITY, LICENSE, CHANGELOG, QR honesty language, and clean GitHub release packaging without adding API calls",
+      "v3.19.2 UI Deduplication Pass to remove repeated visible labels while preserving public clarity, QR honesty, docs, and offline behavior",
+      "v3.19.6 UI Wording Clarity Density Pass to further tighten the hero, collapsed App Guide, collapsed Analysis, card spacing, and mobile vertical rhythm without changing scanner logic",
+      "v3.19.5 Message Trigger Label Tuning to route account-suspension, password, and OTP message text toward credential/MFA takeover language instead of payment-rail labels without changing offline/API behavior",
+      "v3.19.6 UI Wording Clarity Pass to separate plain-language score explanation from analyst signal evidence wording without changing engine behavior",
       "v2.77.4 Scanner + Public Language Cleanup to rename the drawer to Analysis Layers, simplify scanner copy, and tighten the public case wording",
       "v2.77.5 Public Release Surface Polish to simplify top navigation labels, soften hero proof pills, rename the analysis subtitle, and hide internal browser-RC controls from the public surface"
     ]
@@ -1152,6 +1155,19 @@
     return {active, severity, weight, pressure, actions, sensitive, countdownPattern, fearPressurePattern, actionNowPattern, visibleBrands, mismatchedBrands, trusted, density};
   }
 
+  // v3.19.5: token-aware matching prevents short payment words like "pay"
+  // from firing inside unrelated credential words like "password".
+  function hasTokenishWord(haystack, word){
+    const source = String(haystack || "").toLowerCase();
+    const term = String(word || "").toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    if (!term) return false;
+    return new RegExp("(^|[^a-z0-9])" + term + "([^a-z0-9]|$)", "i").test(source);
+  }
+
+  function collectTokenishWords(haystack, words){
+    return Array.from(words || []).filter(word => hasTokenishWord(haystack, word));
+  }
+
   function inspectPaymentInvoiceScamIntent(target, messageContext){
     const raw = String((target && (target.sourceRaw || target.raw || target.href)) || "");
     const path = String((target && target.path) || "");
@@ -1162,10 +1178,10 @@
     const mismatchedBrands = (messageContext && messageContext.mismatchedBrands) || [];
     const msgPressure = (messageContext && messageContext.pressure) || [];
     const trusted = target && target.root && matchingTrustedFamily(target.root);
-    const paymentIntent = Array.from(paymentInvoiceIntentWords).filter(word => normalized.includes(word));
-    const actions = Array.from(paymentActionWords).filter(word => normalized.includes(word));
-    const pressure = Array.from(paymentPressureWords).filter(word => normalized.includes(word));
-    const sensitive = Array.from(paymentSensitiveWords).filter(word => normalized.includes(word));
+    const paymentIntent = collectTokenishWords(normalized, paymentInvoiceIntentWords);
+    const actions = collectTokenishWords(normalized, paymentActionWords);
+    const pressure = collectTokenishWords(normalized, paymentPressureWords);
+    const sensitive = collectTokenishWords(normalized, paymentSensitiveWords);
     const moneyPattern = /(?:\$|cad|usd|amount|total|balance|fee|charge|payment|refund|invoice|subscription|renewal)/i.test(raw);
     const eTransferPattern = /(?:interac|e[-\s]?transfer|etransfer|zelle|venmo|cash\s?app|paypal)/i.test(raw);
     const failedOrUnauthorized = /(?:unauthorized|unknown|unrecognized|failed|declined|overdue|past[-\s]?due|late|subscription|renewal|refund|chargeback|billing\s?problem|payment\s?method)/i.test(raw);
@@ -1195,17 +1211,18 @@
     const mismatchedBrands = (messageContext && messageContext.mismatchedBrands) || [];
     const msgPressure = (messageContext && messageContext.pressure) || [];
     const trusted = target && target.root && matchingTrustedFamily(target.root);
-    const railWords = Array.from(moneyMovementRailWords).filter(word => normalized.includes(word));
-    const actions = Array.from(moneyMovementActionWords).filter(word => normalized.includes(word));
-    const pressure = Array.from(moneyMovementPressureWords).filter(word => normalized.includes(word));
-    const sensitive = Array.from(moneyMovementSensitiveWords).filter(word => normalized.includes(word));
+    const railWords = collectTokenishWords(normalized, moneyMovementRailWords);
+    const actions = collectTokenishWords(normalized, moneyMovementActionWords);
+    const pressure = collectTokenishWords(normalized, moneyMovementPressureWords);
+    const sensitive = collectTokenishWords(normalized, moneyMovementSensitiveWords);
     const refundDepositPattern = /(?:refund|rebate|deposit|direct[-\s]?deposit|claim[-\s]?payment|receive[-\s]?payment|release[-\s]?(?:funds|payment)|funds[-\s]?release)/i.test(readable);
     const transferRailPattern = /(?:interac|e[-\s]?transfer|etransfer|zelle|venmo|cash\s?app|paypal|wire[-\s]?transfer|bank[-\s]?transfer|send[-\s]?money|money[-\s]?transfer)/i.test(readable);
     const recipientPattern = /(?:recipient|payee|sender|remittance|beneficiary|security[-\s]?question|answer[-\s]?question|payment[-\s]?password)/i.test(readable);
-    const verificationPattern = /(?:verify|confirm|validate|authorize|approve|update).{0,35}(?:payment|deposit|transfer|recipient|bank|account|card|method)/i.test(readable);
+    const verificationPattern = /(?:verify|confirm|validate|authorize|approve|update).{0,35}(?:payment|deposit|transfer|recipient|bank|card|method|transaction|funds)/i.test(readable);
     const reversalPattern = /(?:unauthorized|unknown|unrecognized|reverse|reversal|cancel|dispute|chargeback|fraud[-\s]?alert|security[-\s]?hold).{0,45}(?:payment|transfer|charge|deposit|transaction)/i.test(readable);
+    const hasMoneyMovementCore = transferRailPattern || refundDepositPattern || recipientPattern || reversalPattern || railWords.length || /\b(payment|deposit|transfer|bank|card|method|transaction|funds|money|refund|rebate|wire|e-transfer|interac|zelle|venmo|paypal)\b/i.test(readable);
     const density = railWords.length + actions.length + pressure.length + sensitive.length + Math.min(3, msgPressure.length) + (refundDepositPattern?2:0) + (transferRailPattern?3:0) + (recipientPattern?1:0) + (verificationPattern?2:0) + (reversalPattern?2:0) + mismatchedBrands.length;
-    const active = !trusted && (
+    const active = !trusted && hasMoneyMovementCore && (
       (transferRailPattern && (actions.length || pressure.length || sensitive.length || recipientPattern || verificationPattern || msgPressure.length)) ||
       (refundDepositPattern && (actions.length || sensitive.length || pressure.length || visibleBrands.length || msgPressure.length)) ||
       (verificationPattern && (railWords.length || sensitive.length || mismatchedBrands.length)) ||
@@ -1886,6 +1903,16 @@
   }
 
 
+  function isCredentialPressurePayload(ctx){
+    const target = ctx && ctx.target;
+    if (!target || target.type !== "payload") return false;
+    const raw = String(target.sourceRaw || target.raw || target.href || "").toLowerCase();
+    const hasCredential = /\b(password|passcode|otp|one[-\s]?time|2fa|mfa|pin|verification[-\s]?code|security[-\s]?code|login[-\s]?code|code|token|credential)\b/.test(raw);
+    const hasAccountPressure = /\b(account|login|sign[-\s]?in|security)\b/.test(raw) && /\b(suspend(?:ed)?|locked|blocked|verify|confirm|validate|urgent|now|required|final|expire(?:d|s)?)\b/.test(raw);
+    const hasMoneyCore = /\b(payment|deposit|transfer|bank|card|invoice|billing|refund|rebate|transaction|funds|money|interac|e[-\s]?transfer|zelle|venmo|paypal|wire)\b/.test(raw);
+    return hasCredential && hasAccountPressure && !hasMoneyCore;
+  }
+
   function selectDominantSignal(ctx, profile){
     const signals = (ctx && ctx.signals) || [];
     if (!signals.length) return null;
@@ -1896,11 +1923,15 @@
       return acc;
     }, {});
     let best = null;
+    const credentialPressurePayload = isCredentialPressurePayload(ctx);
     signals.forEach((signal, index) => {
       const family = classifySignalFamily(signal);
       signal.family = family;
       const weightMagnitude = Math.max(0, Number(signal.weight || 0));
-      const score = (classBoost[signal.weightClass] || 0) + (severityBoost[signal.severity] || 0) + (familyBoost[family] || 0) + weightMagnitude - (index * 0.01);
+      let v3195Boost = 0;
+      if (credentialPressurePayload && /^(Credential theft|MFA \/ OTP code theft|Account recovery takeover|Urgency \/ pressure tactic)$/.test(family)) v3195Boost += 180;
+      if (credentialPressurePayload && /^(Money movement scam|Payment scam|Subscription renewal scam|Fake security alert)$/.test(family)) v3195Boost -= 220;
+      const score = (classBoost[signal.weightClass] || 0) + (severityBoost[signal.severity] || 0) + (familyBoost[family] || 0) + weightMagnitude + v3195Boost - (index * 0.01);
       signal.dominanceScore = Math.round(score * 100) / 100;
       if (!best || signal.dominanceScore > best.dominanceScore) best = signal;
     });
@@ -3245,7 +3276,7 @@
     ctx.technical.push("Report clarity layer: quick summary, primary reason, supporting evidence, lower-weight clues, and trust-relief notes generated locally.");
     ctx.technical.push("Evidence weight profile: " + evidenceProfileSummary(evidenceProfile) + ".");
     ctx.technical.push("Highest evidence class: " + highestEvidenceClass(evidenceProfile) + ".");
-    ctx.technical.push("v2.87 dominant threat cleanup: " + summarizeDominantThreat(dominant, evidenceProfile) + ".");
+    ctx.technical.push("v2.87/v3.19.5 dominant threat cleanup: " + summarizeDominantThreat(dominant, evidenceProfile) + ".");
     ctx.technical.push("v3.01 threat lane index: " + (dominant ? getThreatLane(dominant.family || classifySignalFamily(dominant)).id + " / " + getThreatLane(dominant.family || classifySignalFamily(dominant)).label : "No active lane") + " mapped from the centralized offline lane index.");
     ctx.technical.push("v3.02 report consistency pass: " + consistency.laneId + " aligned across What happened, Why it matters, What to do next, Safety habit, copied reports, and case packet fields.");
     const casePacket = buildEvidenceCasePacket(ctx, risk, score, evidenceProfile, dominant, high, medium, low);
@@ -4081,7 +4112,7 @@
       els.reportTimestamp.title = report.raw ? fullTime : "";
       els.reportTimestamp.className = report.raw ? numberClass : "";
     }
-    if (els.copyStatus && !report.raw) els.copyStatus.textContent = "Run a scan, then use Copy Simple Report for the easy version. Advanced tools stay tucked away.";
+    if (els.copyStatus && !report.raw) els.copyStatus.textContent = "Run a scan, then use Copy Simple Report for the easy version. Signal evidence stays tucked away.";
     if (els.whyScore) { els.whyScore.textContent = report.whyScore || "Waiting for local evidence."; els.whyScore.className = numberClass; }
     if (els.laneQuality) { els.laneQuality.textContent = report.laneQuality || "Standby"; els.laneQuality.className = numberClass; }
     if (els.evidenceStrength) { els.evidenceStrength.textContent = report.evidenceStrength || "Waiting"; els.evidenceStrength.className = numberClass; }
@@ -4554,7 +4585,7 @@
       "Layer: " + BUILD.name,
       "Mode: Offline-first active",
       "Online Intel: " + (armed ? "Consent gate armed; no provider/API active" : "Locked / consent required"),
-      "Release status: v3.19.1 Public UI clarity pass active",
+      "Release status: v3.19.6 UI Wording Clarity Pass active",
       "Privacy: no hidden API calls, no telemetry, no active provider lookup",
       "Use: upload the clean release root files to GitHub Pages after local/browser verification; keep working-history archives separate"
     ].join("\n");
@@ -4570,8 +4601,8 @@
       els.buildOnlineStatus.textContent = armed ? "Online Intel gate armed / no provider active" : "Online Intel locked / consent required";
       els.buildOnlineStatus.className = "status-pill " + (armed ? "status-medium" : "status-low");
     }
-    if (els.buildRcStatus) els.buildRcStatus.textContent = "v3.19.1 Public UI";
-    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.19.1 keeps the offline engine, local sample checks, public-facing wording, and honest QR camera boundaries. Build identity stays out of the public hero; no hidden API calls, no telemetry, no fetch calls, and no active online provider in " + BUILD.version + ".";
+    if (els.buildRcStatus) els.buildRcStatus.textContent = "v3.19.6 UI Wording Clarity";
+    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.19.6 keeps the offline engine, compact-plus UI, message trigger label tuning, UI deduplication, and honest QR camera boundaries while separating user-facing score explanation from analyst signal evidence wording. Build identity stays out of the public hero; no hidden API calls, no telemetry, no fetch calls, and no active online provider in " + BUILD.version + ".";
   }
 
   function copyBuildInfo(){
@@ -4648,7 +4679,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "PROXUMA_IT_v3.19.1_PUBLIC_UI_CHECKLIST.txt";
+      a.download = "PROXUMA_IT_v3.19.6_UI_WORDING_CLARITY_CHECKLIST.txt";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

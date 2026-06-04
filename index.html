@@ -20,7 +20,7 @@
       <a href="#explain">Guide</a>
       <a href="#report">Report</a>
       <a href="#details">Analysis</a>
-      <a href="#casefile">Case File</a>
+      <a href="#casefile">Saved Notes</a>
     </nav>
   </header>
 
@@ -44,8 +44,8 @@
         <div>
           <p class="eyebrow">App Guide</p>
           <h2>Card-by-card help</h2>
-          <p class="subtle label-chip-row" aria-label="Guide sections"><span>Scan Center</span><span>Scan Report</span><span>Deep Analysis</span><span>Case File</span></p>
-          <p class="collapsed-hint label-chip-row" aria-label="Guide sections"><span>Scan Center</span><span>Scan Report</span><span>Deep Analysis</span><span>Case File</span></p>
+          <p class="subtle">A short map of the main workspace. Open only when you need orientation.</p>
+          <p class="collapsed-hint">Guide hidden to keep the scanner clean.</p>
         </div>
         <button class="collapse-toggle" type="button" aria-expanded="true" aria-controls="explainGuideBody" data-expanded-label="Hide guide" data-collapsed-label="Show guide">
           <span class="toggle-dot" aria-hidden="true"></span>
@@ -56,32 +56,32 @@
       <div id="explainGuideBody" class="collapsible-card-body">
       <div class="explain-grid">
         <article class="explain-card">
-          <span class="card-kicker">Scan Center</span>
+          <span class="card-kicker">Step 1</span>
           <h3>Paste or scan here</h3>
           <p>Use this card when you have a link, QR code, copied email text, or suspicious message. Paste it into Target, then press Analyze.</p>
         </article>
         <article class="explain-card">
-          <span class="card-kicker">Scan Report</span>
+          <span class="card-kicker">Step 2</span>
           <h3>Read the main result</h3>
           <p>This card gives the simple verdict first: risk score, main warning sign, and the safest next move.</p>
         </article>
         <article class="explain-card">
-          <span class="card-kicker">Deep Analysis</span>
+          <span class="card-kicker">Step 3</span>
           <h3>Open for details</h3>
-          <p>Use Analysis when you want to understand why Proxuma reacted. It holds Explain Why, Trust Timeline, Threat Story, and Decision Guide.</p>
+          <p>Use Analysis when you want the deeper reasoning, timeline, scenario, and next-move guidance behind the verdict.</p>
         </article>
         <article class="explain-card">
-          <span class="card-kicker">Case File</span>
+          <span class="card-kicker">Step 4</span>
           <h3>Save notes locally</h3>
-          <p>Use Case File when you want to keep a local note or saved scan history for later review. Nothing is sent out by this card.</p>
+          <p>Use this area when you want to keep a local note or saved scan history for later review. Nothing is sent out by this card.</p>
         </article>
         <article class="explain-card">
-          <span class="card-kicker">Online Intel</span>
-          <h3>Optional extra checks</h3>
+          <span class="card-kicker">Optional</span>
+          <h3>Future online checks</h3>
           <p>Offline scans run first. Online intelligence is only for future live checks that the user clearly chooses.</p>
         </article>
         <article class="explain-card">
-          <span class="card-kicker">QR Scanner</span>
+          <span class="card-kicker">Optional</span>
           <h3>Camera by choice</h3>
           <p>Camera scanning starts only when you choose it and depends on browser support. Manual QR text paste works offline everywhere.</p>
         </article>
@@ -146,9 +146,9 @@
           <div class="scan-mode-row" aria-label="Scan modes">
             <button class="mode-pill mode-quick active pill-action" type="button" aria-pressed="true">Quick Scan</button>
             <button class="mode-pill mode-deep pill-action" type="button" aria-pressed="false">Deep Local Scan</button>
-            <button class="mode-pill mode-online pill-soon" type="button" aria-pressed="false">Online Intel · Optional</button>
+            <button class="mode-pill mode-online pill-soon" type="button" aria-pressed="false">Optional Online · Preview</button>
           </div>
-          <p class="quiet-note">Quick and Deep scans run locally. Online Intel remains locked until the user chooses it.</p>
+          <p class="quiet-note">Quick and Deep scans run locally. Optional online checks remain locked until the user chooses them.</p>
         </div>
 
         <div class="micro-list">
@@ -223,17 +223,17 @@
           <div class="report-copy-actions simple-case-controls" aria-label="Simple case controls">
             <button id="copySummaryButton" class="ghost-button compact-copy primary-copy" type="button">Copy Simple Report</button>
             <button id="copyReportButton" class="ghost-button compact-copy" type="button">Copy Full Report</button>
-            <button id="explainVerdictButton" class="ghost-button compact-copy" type="button">Explain Verdict</button>
+            <button id="explainVerdictButton" class="ghost-button compact-copy" type="button">Verdict Summary</button>
             <details class="advanced-evidence-tools">
-              <summary>Advanced Evidence Tools</summary>
+              <summary>Signal Evidence</summary>
               <div class="advanced-evidence-actions">
                 <button id="copyCasePacketButton" class="ghost-button compact-copy" type="button">Copy Case Packet</button>
                 <button id="downloadCasePacketButton" class="ghost-button compact-copy" type="button">Download JSON</button>
               </div>
-              <p class="quiet-note">For IT teams, support tickets, saved evidence, or future Proxuma imports. Most users only need the simple report.</p>
+              <p class="quiet-note">For analyst review, support tickets, saved evidence, or future Proxuma imports. Most users only need the verdict summary or simple report.</p>
             </details>
           </div>
-          <p id="copyStatus" class="copy-status" aria-live="polite">Run a scan, then use Copy Simple Report for the easy version. Advanced tools stay tucked away.</p>
+          <p id="copyStatus" class="copy-status" aria-live="polite">Run a scan, then use Copy Simple Report for the easy version. Signal evidence stays tucked away.</p>
         </div>
 
         <div class="action-guidance guidance-drawer" aria-label="Action guidance drawer">
@@ -295,7 +295,7 @@
         <span class="card-kicker">04 · Online Expansion</span>
         <h3>Age, Reputation, Certificate</h3>
         <strong id="scanMode">Offline-first</strong>
-        <p id="scanModeNote">This front surface stays honest: full domain age, live certificate details, and reputation checks appear only when Online Intel is enabled by the user.</p>
+        <p id="scanModeNote">This front surface stays honest: full domain age, live certificate details, and reputation checks appear only when the optional online layer is enabled by the user.</p>
         <p class="muted">Current build shows only what the local engine can truly support.</p>
       </article>
     </section>
@@ -305,8 +305,8 @@
         <div>
           <p class="eyebrow">Deep Analysis</p>
           <h2>Review the scan details</h2>
-          <p class="subtle label-chip-row" aria-label="Analysis tools"><span>Explain Why</span><span>Trust Timeline</span><span>Threat Story</span><span>Decision Guide</span></p>
-          <p class="collapsed-hint label-chip-row" aria-label="Analysis tools"><span>Explain Why</span><span>Trust Timeline</span><span>Threat Story</span><span>Decision Guide</span></p>
+          <p class="subtle">Detailed reasoning stays tucked away until you open it.</p>
+          <p class="collapsed-hint">Details hidden to keep the main report focused.</p>
         </div>
         <button class="collapse-toggle" type="button" aria-expanded="true" aria-controls="intelligenceDrawerBody" data-expanded-label="Hide drawer" data-collapsed-label="Show drawer">
           <span class="toggle-dot" aria-hidden="true"></span>
@@ -317,7 +317,7 @@
 
       <div id="intelligenceDrawerBody" class="collapsible-card-body">
       <div class="drawer-tabs" role="tablist" aria-label="Analysis layers">
-        <button class="drawer-tab active pill-action" type="button" role="tab" aria-selected="true" data-drawer-target="explainPanel">Explain Why</button>
+        <button class="drawer-tab active pill-action" type="button" role="tab" aria-selected="true" data-drawer-target="explainPanel">Why This Score</button>
         <button class="drawer-tab pill-action" type="button" role="tab" aria-selected="false" data-drawer-target="timelinePanel">Trust Timeline</button>
         <button class="drawer-tab pill-action" type="button" role="tab" aria-selected="false" data-drawer-target="threatPanel">Threat Story</button>
         <button class="drawer-tab pill-action" type="button" role="tab" aria-selected="false" data-drawer-target="decisionPanel">Decision Guide</button>
@@ -334,19 +334,19 @@
         <article id="explainPanel" class="drawer-panel active" role="tabpanel">
           <div class="drawer-panel-head" data-tone="green">
             <div>
-              <p class="eyebrow">Explain Why</p>
-              <h3>Readable reasoning</h3>
+              <p class="eyebrow">Plain-language reason</p>
+              <h3>Why this score</h3>
             </div>
             <span id="explainStatus" class="status-pill">Awaiting scan</span>
           </div>
-          <p id="explainSummary" class="card-summary">Run a scan to see the strongest reason behind the verdict.</p>
+          <p id="explainSummary" class="card-summary">Run a scan to see the plain-language reason behind the score.</p>
           <ul id="evidenceList"></ul>
         </article>
 
         <article id="timelinePanel" class="drawer-panel" role="tabpanel" hidden>
           <div class="drawer-panel-head" data-tone="green">
             <div>
-              <p class="eyebrow">Trust Timeline</p>
+              <p class="eyebrow">Timeline</p>
               <h3>Trust + decision lane</h3>
             </div>
             <span id="timelineStatus" class="status-pill">0 steps</span>
@@ -361,7 +361,7 @@
         <article id="threatPanel" class="drawer-panel" role="tabpanel" hidden>
           <div class="drawer-panel-head" data-tone="red">
             <div>
-              <p class="eyebrow">Threat Story</p>
+              <p class="eyebrow">Scenario</p>
               <h3>What might be happening</h3>
             </div>
             <span id="threatStatus" class="status-pill">Standby</span>
@@ -372,7 +372,7 @@
         <article id="decisionPanel" class="drawer-panel" role="tabpanel" hidden>
           <div class="drawer-panel-head" data-tone="orange">
             <div>
-              <p class="eyebrow">Decision Guide</p>
+              <p class="eyebrow">Next Move</p>
               <h3>Safe next move</h3>
             </div>
             <span id="decisionStatus" class="status-pill">Standby</span>
@@ -465,8 +465,8 @@
         <article id="offlineLabPanel" class="drawer-panel" role="tabpanel" hidden>
           <div class="drawer-panel-head" data-tone="green">
             <div>
-              <p class="eyebrow">Local Check</p>
-              <h3>Built-in sample check</h3>
+              <p class="eyebrow">Sample Check</p>
+              <h3>Built-in local samples</h3>
             </div>
             <span id="offlineLabStatus" class="status-pill">Samples ready</span>
           </div>
@@ -494,13 +494,13 @@
         <article id="onlinePanel" class="drawer-panel" role="tabpanel" hidden>
           <div class="drawer-panel-head" data-tone="orange">
             <div>
-              <p class="eyebrow">Online Intel</p>
+              <p class="eyebrow">Optional Online Layer</p>
               <h3>Consent-first architecture</h3>
             </div>
             <span id="onlineConsentStatus" class="status-pill status-low">Offline locked</span>
           </div>
-          <p id="onlinePreview" class="card-summary status-low">Offline result first. Online Intel has a permission gate, but v2.75.0 makes no live web/API requests.</p>
-          <div class="online-consent-card" aria-label="Consent-first Online Intel controls">
+          <p id="onlinePreview" class="card-summary status-low">Offline result first. The optional online layer has a permission gate, but this build makes no live web/API requests.</p>
+          <div class="online-consent-card" aria-label="Consent-first online controls">
             <p id="onlineConsentDetail" class="muted">No online checks can run from this build. The scanner, memory, QR, and case packet layers remain local.</p>
             <div class="online-actions">
               <button id="enableOnlineConsentButton" class="ghost-button compact-copy" type="button">Enable Online Preview</button>
@@ -517,7 +517,7 @@
                 <ul id="onlinePrivacyList" class="memory-list"><li>Default mode stays offline-first.</li></ul>
               </div>
             </div>
-            <p id="onlineArchitectureNote" class="muted">Online Intel is locked off until the user deliberately arms the explicit choice.</p>
+            <p id="onlineArchitectureNote" class="muted">Optional online checks stay locked off until the user deliberately arms the explicit choice.</p>
           </div>
         </article>
 

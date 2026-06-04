@@ -5,10 +5,10 @@ const vm = require('vm');
 const root = path.resolve(__dirname, '..');
 let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
-assert(code.includes('version: "v3.19.1"'), 'BUILD version should be v3.19.1');
-assert(code.includes('Red Team Hardening Pass') || code.includes('Public UI Clarity Pass'), 'BUILD name should preserve red-team hardening continuity or current cleanup layer');
+assert(code.includes('version: "v3.19.6"'), 'BUILD version should be v3.19.6');
+assert(code.includes('Red Team Hardening Pass') || code.includes('UI Wording Clarity Pass'), 'BUILD name should preserve red-team hardening continuity or current cleanup layer');
 assert(!/fetch\s*\(/.test(code), 'no active fetch() calls should be present');
-assert(!/api\/proxuma-intel/i.test(code), 'v3.19.1 should remain offline-only and not include online bridge API calls');
+assert(!/api\/proxuma-intel/i.test(code), 'v3.19.6 should remain offline-only and not include online bridge API calls');
 assert(/spacedOtpPattern/.test(code), 'spaced OTP / verification-number hardening should be present');
 assert(/captchaGatePattern/.test(code), 'fake CAPTCHA / Cloudflare gate hardening should be present');
 
@@ -20,7 +20,7 @@ vm.createContext(context);
 vm.runInContext(code, context);
 
 const analyze = context.__proxumaAnalyze;
-assert(context.__proxumaBuild.version === 'v3.19.1', 'runtime BUILD should expose v3.19.1');
+assert(context.__proxumaBuild.version === 'v3.19.6', 'runtime BUILD should expose v3.19.6');
 
 const spacedOtp = analyze('send your O T P code to support now');
 assert(spacedOtp.risk === 'High Risk' && spacedOtp.threatLaneId === 'LANE-OTP-014', `spaced OTP lure should be High Risk / OTP lane, got ${spacedOtp.risk} / ${spacedOtp.threatLaneId}`);
@@ -43,4 +43,4 @@ assert(delivery.risk === 'High Risk', `delivery scam should stay High Risk, got 
 const gov = analyze('CRA refund pending. Verify your government account and direct deposit details to receive benefit payment https://cra-refund-example.com');
 assert(gov.risk === 'High Risk', `government scam should stay High Risk, got ${gov.risk}`);
 
-console.log('PASS: v3.19.1 red-team hardening preserved: spaced OTP, 6-digit verification-number, fake CAPTCHA gate, trusted relief, and offline guarantees.');
+console.log('PASS: v3.19.6 red-team hardening preserved: spaced OTP, 6-digit verification-number, fake CAPTCHA gate, trusted relief, and offline guarantees.');
