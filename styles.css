@@ -1,0 +1,4866 @@
+
+:root{
+  --bg:#070a0d;
+  --panel:#0d1319;
+  --panel-2:#111922;
+  --border:#1d2833;
+  --text:#edf2f7;
+  --muted:#a5b0bd;
+  --accent:#67f0a7;
+  --warn:#ffbf47;
+  --danger:#ff6b6b;
+  --shadow:0 18px 50px rgba(0,0,0,.28);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #0d141b 0%, var(--bg) 50%, #050709 100%);
+  color:var(--text);
+}
+.ambient-grid{
+  position:fixed; inset:0; pointer-events:none; opacity:.09;
+  background-image: linear-gradient(to right, rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.08) 1px, transparent 1px);
+  background-size:32px 32px;
+  mask-image: radial-gradient(circle at center, black 20%, transparent 78%);
+}
+.site-header{
+  width:min(1180px, calc(100% - 32px)); margin:24px auto 0; padding:14px 18px;
+  display:flex; justify-content:space-between; align-items:center; gap:18px;
+  background:rgba(10,14,18,.78); border:1px solid var(--border); border-radius:20px; backdrop-filter: blur(10px);
+  position:sticky; top:16px; z-index:10; box-shadow:var(--shadow);
+}
+.brand{display:flex; align-items:center; gap:14px; color:var(--text); text-decoration:none}
+.brand img{width:48px; height:48px; object-fit:contain}
+.brand strong{display:block; font-size:1.1rem}
+.brand small{display:block; color:var(--muted)}
+.top-nav{display:flex; gap:16px; flex-wrap:wrap}
+.top-nav a{color:var(--muted); text-decoration:none; font-weight:600}
+.top-nav a:hover{color:var(--text)}
+.page{width:min(1180px, calc(100% - 32px)); margin:26px auto 56px; display:grid; gap:22px}
+.hero,.card{background:linear-gradient(180deg, rgba(17,25,34,.92), rgba(11,16,22,.96)); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+.hero{padding:34px 28px}
+.eyebrow{margin:0 0 8px; color:var(--accent); letter-spacing:.08em; text-transform:uppercase; font-size:.76rem; font-weight:700}
+.hero h1{margin:0; font-size:clamp(2rem, 4vw, 3.1rem); line-height:1.06}
+.lead{margin:14px 0 0; max-width:760px; color:#d5dde6; font-size:1.04rem}
+.proof-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+.proof-row span,.micro-list span,.local-badge,.status-pill,.card-kicker{display:inline-flex; align-items:center; gap:6px; padding:8px 12px; border-radius:999px; border:1px solid var(--border); background:rgba(255,255,255,.03)}
+.workbench{display:grid; grid-template-columns: minmax(320px, 1.02fr) minmax(360px, .98fr); gap:22px; align-items:start}
+.card{padding:22px}
+.section-head h2,.detail-card h2,.casefile h2{margin:0 0 8px}
+.subtle,.muted,.quiet-note,.card-summary,#rootDomainNote,#safeMoveNote{color:var(--muted)}
+.input-label{display:block; margin:10px 0 8px; font-weight:700}
+.input-row{display:grid; grid-template-columns:1fr auto; gap:12px}
+input,textarea{
+  width:100%; background:#0a0f14; color:var(--text); border:1px solid var(--border); border-radius:14px;
+  padding:14px 16px; font:inherit;
+}
+button{
+  appearance:none; border:1px solid var(--border); background:linear-gradient(180deg, #1a2430, #111822); color:var(--text);
+  border-radius:14px; padding:13px 16px; font:inherit; font-weight:700; cursor:pointer;
+}
+button:hover{transform:translateY(-1px)}
+button:disabled{opacity:.52; cursor:not-allowed; transform:none}
+.ghost-button{background:transparent}
+.quick-tests{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+.quick-tests button{padding:10px 12px; border-radius:999px; font-weight:600; color:var(--muted)}
+.mode-card{margin-top:18px; padding:16px; border:1px solid var(--border); border-radius:16px; background:rgba(255,255,255,.025)}
+.mini-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px}
+.scan-mode-row{display:flex; gap:10px; flex-wrap:wrap}
+.mode-pill.active{border-color:#2f855a; background:rgba(103,240,167,.12); color:#d9ffe9}
+.mode-pill.disabled{color:#7f8a97}
+.micro-list{display:flex; flex-wrap:wrap; gap:10px; margin-top:16px}
+.report-top{display:flex; justify-content:space-between; gap:20px; align-items:flex-start}
+.report-top h2{margin:0; font-size:1.9rem}
+.score-ring{min-width:110px; text-align:center; padding:12px; border-radius:18px; border:1px solid var(--border); background:rgba(255,255,255,.03)}
+.score-ring span{display:block; font-size:2rem; font-weight:800}
+.report-summary{color:#d7dfe8; font-size:1rem; margin:16px 0}
+.heat-zone{display:grid; gap:10px}
+.heat-meta{display:flex; justify-content:space-between; gap:12px; align-items:center}
+.heat-bar{height:12px; border-radius:999px; background:#0a0f14; overflow:hidden; border:1px solid var(--border)}
+#heatFill{display:block; height:100%; width:0%; background:linear-gradient(90deg, var(--accent), var(--warn), var(--danger)); transition:width .28s ease}
+.report-strip{display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top:18px}
+.report-strip > div,.intel-card,.detail-card{border:1px solid var(--border); background:rgba(255,255,255,.025); border-radius:16px}
+.report-strip > div{padding:14px}
+.report-strip small,.memory-strip{color:var(--muted)}
+.report-strip strong{display:block; margin-top:6px; font-size:1rem}
+.memory-strip{display:flex; flex-wrap:wrap; gap:14px; margin-top:14px; font-size:.94rem}
+.severity-breakdown{display:inline-flex; gap:8px; flex-wrap:wrap}
+.sev-high{color:#ff8b8b; font-style:normal}
+.sev-medium{color:#ffd27a; font-style:normal}
+.sev-low{color:#8ce4b0; font-style:normal}
+.intelligence-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:18px}
+.intel-card{padding:18px}
+.intel-card h3{margin:10px 0 12px}
+.intel-card strong{display:block; font-size:1.08rem; margin-bottom:8px}
+.details-stack{display:grid; gap:16px}
+.detail-card{padding:0; overflow:hidden}
+.detail-card summary{list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 20px; cursor:pointer}
+.detail-card summary::-webkit-details-marker{display:none}
+.detail-card > *:not(summary){padding:0 20px 18px}
+.detail-card ul,.detail-card ol,#historyList{margin:10px 0 0; padding-left:20px}
+.detail-card li,#historyList li{margin:8px 0; color:#d7dfe8}
+hr{border:none; border-top:1px solid var(--border); margin:16px 0}
+.case-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:12px}
+#historyList{padding-left:18px}
+@media (max-width: 980px){
+  .site-header{position:static}
+  .workbench,.intelligence-grid{grid-template-columns:1fr}
+  .report-strip{grid-template-columns:1fr}
+}
+@media (max-width: 640px){
+  .site-header,.page{width:min(100% - 18px, 1180px)}
+  .site-header{padding:14px; align-items:flex-start; flex-direction:column}
+  .input-row{grid-template-columns:1fr}
+  .card,.hero{padding:18px}
+}
+
+
+/* v2.35.1 — Header recovery + bordered visual lift */
+:root{
+  --border-strong:#314252;
+  --border-soft:rgba(103,240,167,.24);
+  --card-glow:0 0 0 1px rgba(103,240,167,.08), 0 18px 50px rgba(0,0,0,.36);
+}
+body{
+  background:
+    radial-gradient(circle at 50% -8%, rgba(103,240,167,.10) 0%, transparent 34%),
+    radial-gradient(circle at 12% 18%, rgba(255,255,255,.045) 0%, transparent 28%),
+    linear-gradient(180deg, #080d11 0%, #050709 100%);
+}
+.ambient-grid{opacity:.14}
+.centered-header{
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  padding:22px 24px 18px;
+  border:1px solid var(--border-strong);
+  border-bottom:1px solid var(--border-soft);
+  background:
+    linear-gradient(180deg, rgba(18,26,34,.94), rgba(8,13,18,.92)),
+    radial-gradient(circle at 50% 0%, rgba(103,240,167,.10), transparent 58%);
+}
+.brand-centered{
+  flex-direction:column;
+  gap:8px;
+  text-align:center;
+}
+.brand-centered img{
+  width:86px;
+  height:86px;
+  padding:8px;
+  border-radius:22px;
+  border:1px solid var(--border-soft);
+  background:rgba(255,255,255,.035);
+  box-shadow:0 0 28px rgba(103,240,167,.10);
+}
+.brand-centered strong{
+  font-size:1.42rem;
+  letter-spacing:.01em;
+}
+.brand-centered small{
+  color:#c7d2dd;
+  font-weight:600;
+}
+.nav-centered{
+  justify-content:center;
+  gap:10px;
+  padding:8px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:999px;
+  background:rgba(255,255,255,.025);
+}
+.nav-centered a{
+  min-width:92px;
+  text-align:center;
+  padding:9px 14px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:999px;
+  background:rgba(5,7,9,.42);
+  color:#d9e2eb;
+}
+.nav-centered a:hover{
+  border-color:var(--border-soft);
+  color:#ffffff;
+  background:rgba(103,240,167,.08);
+}
+.hero-framed{
+  position:relative;
+  overflow:hidden;
+  padding:0;
+  border:1px solid var(--border-strong);
+  box-shadow:var(--card-glow);
+  background:
+    linear-gradient(135deg, rgba(16,24,32,.96), rgba(8,13,18,.96)),
+    radial-gradient(circle at 80% 20%, rgba(103,240,167,.12), transparent 32%);
+}
+.hero-framed::before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border:1px solid rgba(103,240,167,.16);
+  border-radius:calc(var(--radius) - 4px);
+  pointer-events:none;
+}
+.hero-frame-inner{
+  position:relative;
+  padding:36px 34px;
+  max-width:880px;
+}
+.hero h1{
+  max-width:820px;
+  text-shadow:0 1px 0 rgba(0,0,0,.35);
+}
+.lead{max-width:820px}
+.hero .proof-row span{
+  border-color:rgba(103,240,167,.22);
+  background:rgba(103,240,167,.055);
+}
+.card,.hero{
+  border:1px solid var(--border-strong);
+  box-shadow:var(--card-glow);
+}
+.card{
+  background:
+    linear-gradient(180deg, rgba(17,25,34,.96), rgba(9,14,19,.98));
+}
+.scanner-panel,.report-panel,.intel-card,.detail-card,.casefile{
+  outline:1px solid rgba(255,255,255,.035);
+}
+.input-row input, textarea{
+  border-color:#334455;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+}
+.input-row input:focus, textarea:focus{
+  outline:none;
+  border-color:rgba(103,240,167,.62);
+  box-shadow:0 0 0 3px rgba(103,240,167,.11);
+}
+button{
+  border-color:#334455;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+}
+button:hover{border-color:rgba(103,240,167,.42)}
+.mode-card,.report-strip > div,.intel-card,.detail-card{
+  border-color:#2b3a48;
+}
+.report-strip > div,.mode-card,.micro-list span{
+  background:rgba(255,255,255,.035);
+}
+.score-ring{
+  border-color:rgba(103,240,167,.24);
+  background:radial-gradient(circle at 50% 0%, rgba(103,240,167,.10), rgba(255,255,255,.03));
+}
+@media (max-width: 640px){
+  .centered-header{padding:18px 14px}
+  .brand-centered img{width:72px;height:72px}
+  .nav-centered{width:100%; border-radius:18px}
+  .nav-centered a{min-width:calc(50% - 8px); flex:1}
+  .hero-frame-inner{padding:28px 20px}
+  .hero-framed::before{inset:10px}
+}
+
+
+/* v2.35.2 — Logo Header Focus
+   The logo image now carries the Proxuma IT name. The repeated text label was removed. */
+.centered-header{
+  gap:10px;
+  padding:26px 24px 20px;
+}
+.logo-only-brand{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  max-width:460px;
+}
+.logo-only-brand img{
+  width:min(340px, 86vw);
+  height:auto;
+  padding:12px 18px;
+  border-radius:24px;
+  object-fit:contain;
+  border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.022));
+  box-shadow:0 0 34px rgba(103,240,167,.13), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.header-tagline{
+  margin:0 0 2px;
+  color:#c7d2dd;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-size:.76rem;
+}
+.nav-centered{
+  margin-top:4px;
+}
+@media (max-width: 640px){
+  .logo-only-brand img{width:min(286px, 88vw); padding:10px 14px; border-radius:20px;}
+  .header-tagline{font-size:.68rem;}
+}
+
+
+/* v2.35.3 — Header Glow Trial
+   The logo remains sharp, while its green energy language spreads across the full header. */
+.header-glow-trial{
+  position:sticky;
+  overflow:hidden;
+  isolation:isolate;
+  border-color:rgba(103,240,167,.34);
+  background:
+    radial-gradient(circle at 50% 4%, rgba(103,240,167,.22), transparent 34%),
+    radial-gradient(circle at 18% 42%, rgba(103,240,167,.10), transparent 28%),
+    radial-gradient(circle at 82% 42%, rgba(103,240,167,.10), transparent 28%),
+    linear-gradient(180deg, rgba(15,23,30,.96), rgba(5,9,12,.94));
+  box-shadow:
+    0 0 0 1px rgba(103,240,167,.10),
+    0 20px 70px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
+.header-glow-trial::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(103,240,167,.10) 18%, transparent 34%, rgba(103,240,167,.11) 50%, transparent 66%, rgba(103,240,167,.10) 82%, transparent 100%),
+    repeating-linear-gradient(90deg, rgba(103,240,167,.12) 0 1px, transparent 1px 42px),
+    repeating-linear-gradient(0deg, rgba(103,240,167,.055) 0 1px, transparent 1px 20px);
+  opacity:.62;
+  mask-image:linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.header-glow-trial::after{
+  content:"";
+  position:absolute;
+  left:8%; right:8%; top:50%;
+  height:2px;
+  z-index:-1;
+  background:linear-gradient(90deg, transparent, rgba(103,240,167,.70), transparent);
+  box-shadow:0 0 22px rgba(103,240,167,.38);
+  opacity:.72;
+}
+.header-glow-trial .logo-only-brand img{
+  width:min(390px, 88vw);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(103,240,167,.12), rgba(255,255,255,.035) 52%, rgba(0,0,0,.18) 100%);
+  border-color:rgba(103,240,167,.28);
+  box-shadow:
+    0 0 46px rgba(103,240,167,.22),
+    0 0 92px rgba(103,240,167,.09),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+.header-glow-trial .header-tagline{
+  color:#dcfff0;
+  text-shadow:0 0 18px rgba(103,240,167,.30);
+}
+.header-glow-trial .nav-centered{
+  border-color:rgba(103,240,167,.20);
+  background:rgba(2,8,6,.38);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+.header-glow-trial .nav-centered a{
+  border-color:rgba(103,240,167,.16);
+  background:rgba(0,0,0,.30);
+}
+.header-glow-trial .nav-centered a:hover{
+  border-color:rgba(103,240,167,.52);
+  background:rgba(103,240,167,.10);
+}
+@media (max-width:640px){
+  .header-glow-trial .logo-only-brand img{width:min(310px, 90vw)}
+  .header-glow-trial::before{background:
+    linear-gradient(90deg, transparent, rgba(103,240,167,.14), transparent),
+    repeating-linear-gradient(90deg, rgba(103,240,167,.11) 0 1px, transparent 1px 34px);
+  }
+}
+
+
+/* v2.35.4 — Header IC Circuit Trial
+   Turn the centered logo into an IC-like chip with fine neon green traces emerging only from the top and bottom. */
+.header-ic-trial{
+  position:sticky;
+  padding-top:20px;
+  padding-bottom:22px;
+}
+.header-ic-trial .logo-only-brand{
+  position:relative;
+  z-index:3;
+}
+.header-ic-trial .logo-only-brand img{
+  position:relative;
+  width:min(392px, 88vw);
+  padding:12px 18px;
+  border-color:rgba(103,240,167,.34);
+  box-shadow:
+    0 0 0 1px rgba(103,240,167,.08),
+    0 0 36px rgba(103,240,167,.18),
+    0 0 82px rgba(103,240,167,.08),
+    inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.header-ic-trial .logo-only-brand::before,
+.header-ic-trial .logo-only-brand::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:62%;
+  height:8px;
+  border-radius:999px;
+  background:linear-gradient(90deg, transparent, rgba(103,240,167,.88) 18%, rgba(103,240,167,.88) 82%, transparent);
+  box-shadow:0 0 16px rgba(103,240,167,.35);
+  opacity:.95;
+}
+.header-ic-trial .logo-only-brand::before{top:-2px;}
+.header-ic-trial .logo-only-brand::after{bottom:-2px;}
+.circuit-crown,.circuit-bus{
+  position:relative;
+  width:min(760px, 100%);
+  height:72px;
+  margin:0 auto;
+  z-index:1;
+  pointer-events:none;
+}
+.circuit-bus{
+  height:72px;
+  margin-top:4px;
+  margin-bottom:2px;
+}
+.circuit-crown .trace,.circuit-bus .trace{
+  position:absolute;
+  height:1.5px;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(103,240,167,0), rgba(103,240,167,.82), rgba(103,240,167,.14));
+  box-shadow:0 0 8px rgba(103,240,167,.34);
+  opacity:.88;
+  transform-origin:left center;
+}
+.circuit-crown .via,.circuit-bus .via{
+  position:absolute;
+  width:5px; height:5px;
+  border-radius:50%;
+  background:rgba(103,240,167,.92);
+  box-shadow:0 0 10px rgba(103,240,167,.42);
+  opacity:.92;
+}
+/* top-half traces only */
+.circuit-crown .t1{left:50%; top:56px; width:146px; transform:rotate(-66deg);}
+.circuit-crown .t2{left:50%; top:54px; width:114px; transform:rotate(-38deg);}
+.circuit-crown .t3{left:50%; top:50px; width:170px; transform:rotate(-18deg);}
+.circuit-crown .t4{left:50%; top:50px; width:172px; transform:rotate(18deg);}
+.circuit-crown .t5{left:50%; top:54px; width:118px; transform:rotate(38deg);}
+.circuit-crown .t6{left:50%; top:56px; width:144px; transform:rotate(66deg);}
+.circuit-crown .v1{left:28%; top:10px;}
+.circuit-crown .v2{left:40%; top:20px;}
+.circuit-crown .v3{left:60%; top:20px;}
+.circuit-crown .v4{left:72%; top:10px;}
+/* bottom-half traces only */
+.circuit-bus .b1{left:50%; top:6px; width:138px; transform:rotate(66deg);}
+.circuit-bus .b2{left:50%; top:10px; width:108px; transform:rotate(34deg);}
+.circuit-bus .b3{left:50%; top:12px; width:166px; transform:rotate(14deg);}
+.circuit-bus .b4{left:50%; top:12px; width:166px; transform:rotate(-14deg);}
+.circuit-bus .b5{left:50%; top:10px; width:108px; transform:rotate(-34deg);}
+.circuit-bus .b6{left:50%; top:6px; width:138px; transform:rotate(-66deg);}
+.circuit-bus .b7{left:31%; top:56px; width:38%; transform:none; background:linear-gradient(90deg, rgba(103,240,167,.12), rgba(103,240,167,.78), rgba(103,240,167,.12));}
+.circuit-bus .v5{left:24%; top:62px;}
+.circuit-bus .v6{left:36%; top:60px;}
+.circuit-bus .v7{left:50%; top:58px;}
+.circuit-bus .v8{left:64%; top:60px;}
+.circuit-bus .v9{left:76%; top:62px;}
+.header-ic-trial .nav-centered{
+  position:relative;
+  z-index:3;
+  margin-top:2px;
+  border-color:rgba(103,240,167,.24);
+}
+.header-ic-trial .nav-centered::before{
+  content:"";
+  position:absolute;
+  left:10%; right:10%; top:-14px;
+  height:1.5px;
+  border-radius:999px;
+  background:linear-gradient(90deg, transparent, rgba(103,240,167,.62), transparent);
+  box-shadow:0 0 10px rgba(103,240,167,.24);
+}
+.header-ic-trial .nav-centered a{
+  position:relative;
+  overflow:visible;
+}
+.header-ic-trial .nav-centered a::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:-15px;
+  width:1.5px;
+  height:14px;
+  background:linear-gradient(180deg, rgba(103,240,167,.60), rgba(103,240,167,.08));
+  box-shadow:0 0 8px rgba(103,240,167,.22);
+}
+.header-ic-trial .nav-centered a::after{
+  content:"";
+  position:absolute;
+  left:50%; transform:translateX(-50%); top:-18px;
+  width:4px; height:4px; border-radius:50%;
+  background:rgba(103,240,167,.85); box-shadow:0 0 8px rgba(103,240,167,.32);
+}
+.header-ic-trial .header-tagline{
+  position:relative;
+  z-index:3;
+  letter-spacing:.10em;
+}
+@media (max-width:640px){
+  .circuit-crown,.circuit-bus{width:100%;}
+  .header-ic-trial .logo-only-brand img{width:min(316px, 90vw);}
+  .circuit-crown .t1,.circuit-crown .t6,.circuit-bus .b1,.circuit-bus .b6{width:108px;}
+  .circuit-crown .t3,.circuit-crown .t4,.circuit-bus .b3,.circuit-bus .b4{width:128px;}
+  .header-ic-trial .nav-centered::before{left:6%; right:6%;}
+}
+
+
+/* v2.35.5 — IC Side Pin Trial
+   More literal integrated-circuit mimic: logo as chip body, thin traces/pins emerging from the left and right only. */
+:root{
+  --ic-green:#52f902;
+  --ic-green-soft:rgba(82,249,2,.38);
+  --ic-green-faint:rgba(82,249,2,.14);
+}
+.header-chip-trial{
+  overflow:hidden;
+  border-color:rgba(82,249,2,.28);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(82,249,2,.12), transparent 30%),
+    linear-gradient(180deg, rgba(14,22,28,.97), rgba(6,10,14,.95));
+}
+.header-chip-trial::before{
+  background:
+    repeating-linear-gradient(90deg, rgba(82,249,2,.06) 0 1px, transparent 1px 44px),
+    repeating-linear-gradient(0deg, rgba(82,249,2,.035) 0 1px, transparent 1px 22px),
+    linear-gradient(90deg, transparent 0%, rgba(82,249,2,.08) 18%, transparent 34%, rgba(82,249,2,.08) 50%, transparent 66%, rgba(82,249,2,.08) 82%, transparent 100%);
+  opacity:.56;
+}
+.header-chip-trial .logo-only-brand{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto auto auto;
+  align-items:center;
+  gap:0;
+  max-width:760px;
+  width:100%;
+  z-index:3;
+}
+.header-chip-trial .logo-only-brand img{
+  grid-column:2;
+  width:min(396px, 78vw);
+  padding:12px 18px;
+  border-radius:18px;
+  border:1px solid rgba(82,249,2,.22);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+    radial-gradient(circle at 50% 50%, rgba(82,249,2,.06), transparent 70%);
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.08),
+    0 0 32px rgba(82,249,2,.14),
+    inset 0 1px 0 rgba(255,255,255,.07);
+}
+.header-chip-trial .logo-only-brand::before{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  width:min(418px, 82vw); height:124px;
+  transform:translate(-50%,-50%);
+  border-radius:22px;
+  border:1px solid rgba(82,249,2,.10);
+  box-shadow:0 0 22px rgba(82,249,2,.07);
+  pointer-events:none;
+}
+.header-chip-trial .ic-side{
+  position:relative;
+  width:min(160px, 18vw);
+  height:96px;
+  display:block;
+}
+.header-chip-trial .ic-left{grid-column:1;}
+.header-chip-trial .ic-right{grid-column:3;}
+.header-chip-trial .ic-side::before{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:100%; height:1px;
+  background:linear-gradient(90deg, rgba(82,249,2,.06), rgba(82,249,2,.22), rgba(82,249,2,.06));
+  box-shadow:0 0 8px rgba(82,249,2,.14);
+}
+.header-chip-trial .ic-left::before{left:0;}
+.header-chip-trial .ic-right::before{right:0;}
+.header-chip-trial .ic-side .pin{
+  position:absolute;
+  height:1.5px;
+  background:linear-gradient(90deg, rgba(82,249,2,.74), rgba(82,249,2,.18));
+  box-shadow:0 0 7px rgba(82,249,2,.20);
+  border-radius:999px;
+}
+.header-chip-trial .ic-right .pin{
+  background:linear-gradient(90deg, rgba(82,249,2,.18), rgba(82,249,2,.74));
+}
+.header-chip-trial .ic-left .p1{right:0; top:12px; width:92%;}
+.header-chip-trial .ic-left .p2{right:0; top:26px; width:70%;}
+.header-chip-trial .ic-left .p3{right:0; top:40px; width:84%;}
+.header-chip-trial .ic-left .p4{right:0; top:54px; width:66%;}
+.header-chip-trial .ic-left .p5{right:0; top:68px; width:88%;}
+.header-chip-trial .ic-left .p6{right:0; top:82px; width:58%;}
+.header-chip-trial .ic-right .p1{left:0; top:12px; width:92%;}
+.header-chip-trial .ic-right .p2{left:0; top:26px; width:70%;}
+.header-chip-trial .ic-right .p3{left:0; top:40px; width:84%;}
+.header-chip-trial .ic-right .p4{left:0; top:54px; width:66%;}
+.header-chip-trial .ic-right .p5{left:0; top:68px; width:88%;}
+.header-chip-trial .ic-right .p6{left:0; top:82px; width:58%;}
+.header-chip-trial .ic-side .pin::before{
+  content:"";
+  position:absolute;
+  top:50%; transform:translateY(-50%);
+  width:7px; height:7px; border-radius:50%;
+  background:rgba(82,249,2,.76);
+  box-shadow:0 0 10px rgba(82,249,2,.22);
+}
+.header-chip-trial .ic-left .pin::before{right:-2px;}
+.header-chip-trial .ic-right .pin::before{left:-2px;}
+.header-chip-trial .ic-side .pin::after{
+  content:"";
+  position:absolute;
+  top:50%; transform:translateY(-50%);
+  width:3px; height:3px; border-radius:50%;
+  background:rgba(82,249,2,.52);
+}
+.header-chip-trial .ic-left .pin::after{left:2px;}
+.header-chip-trial .ic-right .pin::after{right:2px;}
+.header-chip-trial .header-tagline{
+  color:#d9ffd0;
+  text-shadow:0 0 12px rgba(82,249,2,.14);
+  position:relative; z-index:3;
+}
+.header-chip-trial .nav-centered{
+  position:relative; z-index:3;
+  border-color:rgba(82,249,2,.18);
+  background:rgba(6,12,8,.36);
+}
+.header-chip-trial .nav-centered a{
+  border-color:rgba(82,249,2,.14);
+  background:rgba(0,0,0,.28);
+}
+.header-chip-trial .nav-centered a:hover{
+  border-color:rgba(82,249,2,.46);
+  background:rgba(82,249,2,.08);
+}
+@media (max-width: 800px){
+  .header-chip-trial .logo-only-brand{max-width:100%;}
+  .header-chip-trial .ic-side{width:min(92px, 13vw); height:92px;}
+  .header-chip-trial .logo-only-brand img{width:min(318px, 74vw);}
+}
+@media (max-width: 640px){
+  .header-chip-trial .logo-only-brand{grid-template-columns:56px auto 56px;}
+  .header-chip-trial .ic-side{width:56px; height:84px;}
+  .header-chip-trial .ic-left .p1,.header-chip-trial .ic-right .p1{width:100%;}
+  .header-chip-trial .ic-left .p3,.header-chip-trial .ic-right .p3{width:76%;}
+  .header-chip-trial .ic-left .p5,.header-chip-trial .ic-right .p5{width:84%;}
+  .header-chip-trial .logo-only-brand::before{width:min(336px, 82vw); height:112px;}
+}
+
+
+/* v2.35.6 — Top Bottom Trace Trial
+   Closer IC/PCB feel: traces emerge from top and bottom of the logo chip body.
+   Top traces are simple/straight. Bottom traces veer into varied directions like a PCB. */
+:root{
+  --ic-green:#52f902;
+  --ic-green-soft:rgba(82,249,2,.34);
+  --ic-green-faint:rgba(82,249,2,.12);
+}
+.header-chip-vertical-trial{
+  overflow:hidden;
+  border-color:rgba(82,249,2,.26);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(82,249,2,.10), transparent 28%),
+    linear-gradient(180deg, rgba(14,22,28,.97), rgba(6,10,14,.95));
+}
+.header-chip-vertical-trial::before{
+  background:
+    repeating-linear-gradient(90deg, rgba(82,249,2,.05) 0 1px, transparent 1px 46px),
+    repeating-linear-gradient(0deg, rgba(82,249,2,.03) 0 1px, transparent 1px 22px),
+    linear-gradient(90deg, transparent 0%, rgba(82,249,2,.06) 18%, transparent 32%, rgba(82,249,2,.06) 50%, transparent 68%, rgba(82,249,2,.06) 82%, transparent 100%);
+  opacity:.54;
+}
+.header-chip-vertical-trial .logo-only-brand{
+  position:relative;
+  z-index:3;
+  max-width:520px;
+}
+.header-chip-vertical-trial .logo-only-brand img{
+  width:min(396px, 82vw);
+  height:auto;
+  padding:12px 18px;
+  border-radius:18px;
+  border:1px solid rgba(82,249,2,.24);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+    radial-gradient(circle at 50% 50%, rgba(82,249,2,.05), transparent 72%);
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.07),
+    0 0 34px rgba(82,249,2,.14),
+    inset 0 1px 0 rgba(255,255,255,.07);
+}
+.header-chip-vertical-trial .logo-only-brand::before{
+  content:"";
+  position:absolute;
+  left:50%; top:50%; transform:translate(-50%,-50%);
+  width:min(416px, 86vw); height:124px;
+  border-radius:22px;
+  border:1px solid rgba(82,249,2,.10);
+  box-shadow:0 0 20px rgba(82,249,2,.06);
+  pointer-events:none;
+}
+.chip-top-traces,
+.chip-bottom-traces{
+  position:relative;
+  width:min(720px, 100%);
+  margin:0 auto;
+  pointer-events:none;
+  z-index:1;
+}
+.chip-top-traces{height:56px; margin-bottom:2px;}
+.chip-bottom-traces{height:92px; margin-top:2px; margin-bottom:4px;}
+.chip-top-traces .trace,
+.chip-bottom-traces .trace{
+  position:absolute;
+  height:1.5px;
+  border-radius:999px;
+  box-shadow:0 0 8px rgba(82,249,2,.22);
+}
+.chip-top-traces .trace{
+  width:42px;
+  background:linear-gradient(90deg, rgba(82,249,2,.14), rgba(82,249,2,.78), rgba(82,249,2,.14));
+  transform:rotate(90deg);
+}
+.chip-top-traces .t1{left:24%; top:26px;}
+.chip-top-traces .t2{left:34%; top:20px;}
+.chip-top-traces .t3{left:43%; top:16px;}
+.chip-top-traces .t4{left:50%; top:12px;}
+.chip-top-traces .t5{left:57%; top:16px;}
+.chip-top-traces .t6{left:66%; top:20px;}
+.chip-top-traces .t7{left:76%; top:26px;}
+.chip-bottom-traces .trace{
+  background:linear-gradient(90deg, rgba(82,249,2,.78), rgba(82,249,2,.18));
+  transform-origin:left center;
+}
+/* random-ish bottom directions starting near the chip bottom lane */
+.chip-bottom-traces .b1{left:49.7%; top:4px; width:86px; transform:rotate(22deg);} 
+.chip-bottom-traces .b2{left:49.7%; top:6px; width:122px; transform:rotate(46deg);} 
+.chip-bottom-traces .b3{left:49.7%; top:4px; width:98px; transform:rotate(74deg);} 
+.chip-bottom-traces .b4{left:50.3%; top:4px; width:82px; transform:rotate(-24deg);} 
+.chip-bottom-traces .b5{left:50.3%; top:6px; width:118px; transform:rotate(-48deg);} 
+.chip-bottom-traces .b6{left:50.3%; top:4px; width:94px; transform:rotate(-72deg);} 
+.chip-bottom-traces .b7{left:49.8%; top:10px; width:148px; transform:rotate(10deg);} 
+.chip-bottom-traces .b8{left:50.2%; top:10px; width:142px; transform:rotate(-12deg);} 
+.chip-bottom-traces .b9{left:50%; top:14px; width:64px; transform:rotate(90deg);} 
+.chip-bottom-traces .trace::after{
+  content:"";
+  position:absolute;
+  right:-2px; top:50%; transform:translateY(-50%);
+  width:4px; height:4px; border-radius:50%;
+  background:rgba(82,249,2,.68);
+  box-shadow:0 0 8px rgba(82,249,2,.22);
+}
+.chip-bottom-traces .via{
+  position:absolute;
+  width:5px; height:5px; border-radius:50%;
+  background:rgba(82,249,2,.84);
+  box-shadow:0 0 8px rgba(82,249,2,.26);
+}
+.chip-bottom-traces .v1{left:38%; top:64px;}
+.chip-bottom-traces .v2{left:31%; top:34px;}
+.chip-bottom-traces .v3{left:45%; top:84px;}
+.chip-bottom-traces .v4{left:62%; top:66px;}
+.chip-bottom-traces .v5{left:70%; top:36px;}
+.chip-bottom-traces .v6{left:56%; top:84px;}
+.header-chip-vertical-trial .header-tagline{
+  color:#d9ffd0;
+  text-shadow:0 0 12px rgba(82,249,2,.12);
+  position:relative; z-index:3;
+}
+.header-chip-vertical-trial .nav-centered{
+  position:relative; z-index:3;
+  border-color:rgba(82,249,2,.18);
+  background:rgba(6,12,8,.36);
+}
+.header-chip-vertical-trial .nav-centered a{
+  border-color:rgba(82,249,2,.14);
+  background:rgba(0,0,0,.28);
+}
+.header-chip-vertical-trial .nav-centered a:hover{
+  border-color:rgba(82,249,2,.44);
+  background:rgba(82,249,2,.08);
+}
+@media (max-width:800px){
+  .header-chip-vertical-trial .logo-only-brand img{width:min(330px, 84vw);}
+  .chip-top-traces{height:46px;}
+  .chip-bottom-traces{height:86px;}
+}
+@media (max-width:640px){
+  .header-chip-vertical-trial .logo-only-brand img{width:min(302px, 86vw);}
+  .header-chip-vertical-trial .logo-only-brand::before{width:min(334px, 90vw); height:110px;}
+  .chip-top-traces .t1{left:18%;}
+  .chip-top-traces .t7{left:82%;}
+  .chip-bottom-traces .b7,.chip-bottom-traces .b8{width:110px;}
+}
+
+
+/* v2.35.7 — Full Banner Header Trial
+   Replace the smaller logo-in-header approach with one complete header banner.
+   Goal: the banner itself is the header, with nav buttons directly beneath it and no empty header space. */
+.site-header.banner-header{
+  width:min(1180px, calc(100% - 32px));
+  margin:18px auto 0;
+  padding:0;
+  display:block;
+  position:static;
+  overflow:hidden;
+  border:1px solid rgba(82,249,2,.22);
+  border-radius:20px;
+  background:linear-gradient(180deg, rgba(8,12,16,.98), rgba(4,7,10,.98));
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.06),
+    0 18px 50px rgba(0,0,0,.34);
+}
+.banner-header .header-banner{
+  width:100%;
+  aspect-ratio:3 / 1;
+  background-image:url('assets/proxuma-header-banner.png');
+  background-size:cover;
+  background-position:center center;
+  background-repeat:no-repeat;
+  border-bottom:1px solid rgba(82,249,2,.18);
+}
+.banner-header .nav-banner{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:12px 14px 14px;
+  background:
+    linear-gradient(180deg, rgba(10,16,20,.96), rgba(6,10,14,.98));
+}
+.banner-header .nav-banner a{
+  min-width:100px;
+  text-align:center;
+  padding:10px 15px;
+  border:1px solid rgba(82,249,2,.18);
+  border-radius:999px;
+  background:rgba(0,0,0,.28);
+  color:#edf2f7;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+.banner-header .nav-banner a:hover{
+  border-color:rgba(82,249,2,.44);
+  background:rgba(82,249,2,.08);
+}
+@media (max-width: 980px){
+  .site-header.banner-header{position:static;}
+}
+@media (max-width: 640px){
+  .site-header.banner-header,
+  .page{width:min(100% - 18px, 1180px)}
+  .banner-header .header-banner{
+    aspect-ratio:2.55 / 1;
+    background-position:center center;
+  }
+  .banner-header .nav-banner{
+    gap:8px;
+    padding:10px 10px 12px;
+  }
+  .banner-header .nav-banner a{
+    flex:1 1 calc(50% - 8px);
+    min-width:0;
+    padding:10px 12px;
+    font-size:.94rem;
+  }
+}
+
+
+/* v2.35.8 — Border Visibility Lift + Nav Presence
+   Purpose: reduce flat black feel by strengthening both green-accent and blue-detail borders,
+   and give the nav buttons a more visible default state instead of only waking up on hover. */
+:root{
+  --detail-green:rgba(82,249,2,.34);
+  --detail-green-strong:rgba(82,249,2,.54);
+  --detail-blue:#4f6e89;
+  --detail-blue-strong:#6f8dab;
+  --detail-blue-soft:rgba(111,141,171,.32);
+}
+
+/* Main panels */
+.card,
+.hero,
+.site-header.banner-header{
+  border-color:var(--detail-blue);
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.08),
+    0 0 0 2px rgba(79,110,137,.22),
+    0 18px 50px rgba(0,0,0,.34);
+}
+
+.site-header.banner-header{
+  border-width:1px;
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.10),
+    0 0 0 2px rgba(79,110,137,.18),
+    0 18px 50px rgba(0,0,0,.34);
+}
+.banner-header .header-banner{
+  border-bottom:1px solid rgba(82,249,2,.26);
+}
+.banner-header .nav-banner{
+  border-top:1px solid rgba(79,110,137,.40);
+  box-shadow:inset 0 1px 0 rgba(82,249,2,.06);
+}
+
+/* Detail surfaces */
+.mode-card,
+.report-strip > div,
+.intel-card,
+.detail-card,
+.casefile,
+.score-ring,
+.quick-tests button,
+.micro-list span,
+.proof-row span,
+.local-badge,
+.status-pill,
+.card-kicker{
+  border-color:var(--detail-blue-strong);
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.08),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.scanner-panel,
+.report-panel,
+.intel-card,
+.detail-card,
+.casefile{
+  outline:1px solid rgba(82,249,2,.10);
+  outline-offset:-1px;
+}
+
+/* Inputs and standard buttons */
+.input-row input,
+textarea{
+  border-color:var(--detail-blue-strong);
+  box-shadow:
+    inset 0 0 0 1px rgba(82,249,2,.05),
+    inset 0 1px 0 rgba(255,255,255,.03);
+}
+.input-row input:focus,
+textarea:focus{
+  border-color:var(--detail-green-strong);
+  box-shadow:
+    0 0 0 3px rgba(82,249,2,.14),
+    inset 0 0 0 1px rgba(111,141,171,.18);
+}
+button{
+  border-color:var(--detail-blue-strong);
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.05),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+button:hover{
+  border-color:var(--detail-green-strong);
+}
+
+/* Navigation should look present even before hover */
+.banner-header .nav-banner a{
+  border-color:rgba(82,249,2,.30);
+  background:
+    linear-gradient(180deg, rgba(82,249,2,.10), rgba(0,0,0,.28));
+  box-shadow:
+    0 0 0 1px rgba(79,110,137,.18),
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 0 0 1px rgba(82,249,2,.06);
+}
+.banner-header .nav-banner a:hover{
+  border-color:var(--detail-green-strong);
+  background:
+    linear-gradient(180deg, rgba(82,249,2,.16), rgba(0,0,0,.24));
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.10),
+    0 0 16px rgba(82,249,2,.08),
+    inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+/* Secondary text containers and report line detail */
+.report-strip > div strong,
+.intel-card strong,
+#trustStatus,
+#heatLabel,
+#primaryTrigger,
+#evidenceStrength,
+#confidenceBrief,
+#scanMemory,
+#laneQuality{
+  text-shadow:0 0 10px rgba(82,249,2,.08);
+}
+
+/* Details summaries and list shells */
+.detail-card summary,
+.detail-card > *:not(summary),
+.casefile,
+.report-panel,
+.scanner-panel{
+  background-image:linear-gradient(180deg, rgba(255,255,255,.01), rgba(82,249,2,.015));
+}
+
+/* Mobile keeps the stronger border language */
+@media (max-width:640px){
+  .card,
+  .hero,
+  .site-header.banner-header{
+    box-shadow:
+      0 0 0 1px rgba(82,249,2,.08),
+      0 0 0 2px rgba(79,110,137,.18),
+      0 10px 28px rgba(0,0,0,.28);
+  }
+}
+
+
+/* v2.35.9 — Neon Green Border Unification Trial
+   Purpose: use the same neon green from the header/banner as the main border language across the UI.
+   Remove the mixed blue/detail feeling and push toward a cleaner SENSE-like green-accent system. */
+:root{
+  --sense-green:#52f902;
+  --sense-green-strong:rgba(82,249,2,.62);
+  --sense-green-mid:rgba(82,249,2,.42);
+  --sense-green-soft:rgba(82,249,2,.24);
+  --sense-green-faint:rgba(82,249,2,.10);
+}
+
+/* Overall main shells */
+.site-header.banner-header,
+.card,
+.hero{
+  border-color:var(--sense-green-mid) !important;
+  box-shadow:
+    0 0 0 1px var(--sense-green-faint),
+    0 0 0 2px rgba(82,249,2,.12),
+    0 18px 50px rgba(0,0,0,.34) !important;
+}
+
+.site-header.banner-header{
+  border-width:1px;
+}
+
+/* Keep the banner/header feeling connected */
+.banner-header .header-banner{
+  border-bottom:1px solid var(--sense-green-strong) !important;
+  box-shadow: inset 0 -1px 0 rgba(82,249,2,.18);
+}
+.banner-header .nav-banner{
+  border-top:1px solid var(--sense-green-strong) !important;
+  box-shadow:inset 0 1px 0 rgba(82,249,2,.18);
+}
+
+/* Nav stays green even before hover */
+.banner-header .nav-banner a{
+  border-color:var(--sense-green-mid) !important;
+  background:
+    linear-gradient(180deg, rgba(82,249,2,.12), rgba(0,0,0,.26)) !important;
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.06),
+    inset 0 1px 0 rgba(255,255,255,.06),
+    inset 0 0 0 1px rgba(82,249,2,.08) !important;
+}
+.banner-header .nav-banner a:hover{
+  border-color:var(--sense-green-strong) !important;
+  background:
+    linear-gradient(180deg, rgba(82,249,2,.18), rgba(0,0,0,.24)) !important;
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.10),
+    0 0 14px rgba(82,249,2,.10),
+    inset 0 1px 0 rgba(255,255,255,.07) !important;
+}
+
+/* Core detail surfaces */
+.mode-card,
+.report-strip > div,
+.intel-card,
+.detail-card,
+.casefile,
+.score-ring,
+.quick-tests button,
+.micro-list span,
+.proof-row span,
+.local-badge,
+.status-pill,
+.card-kicker{
+  border-color:var(--sense-green-mid) !important;
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.06),
+    inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+
+.scanner-panel,
+.report-panel,
+.intel-card,
+.detail-card,
+.casefile{
+  outline:1px solid rgba(82,249,2,.12) !important;
+  outline-offset:-1px;
+}
+
+/* Inputs and action buttons */
+.input-row input,
+textarea,
+button{
+  border-color:var(--sense-green-mid) !important;
+}
+.input-row input,
+textarea{
+  box-shadow:
+    inset 0 0 0 1px rgba(82,249,2,.05),
+    inset 0 1px 0 rgba(255,255,255,.03) !important;
+}
+.input-row input:focus,
+textarea:focus{
+  border-color:var(--sense-green-strong) !important;
+  box-shadow:
+    0 0 0 3px rgba(82,249,2,.14),
+    inset 0 0 0 1px rgba(82,249,2,.10) !important;
+}
+button{
+  box-shadow:
+    0 0 0 1px rgba(82,249,2,.05),
+    inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+button:hover{
+  border-color:var(--sense-green-strong) !important;
+}
+
+/* Make the risk score and key indicators clearly green-accented */
+.score-ring,
+#heatFill{
+  filter:none;
+}
+.score-ring{
+  border-color:var(--sense-green-strong) !important;
+  background:radial-gradient(circle at 50% 0%, rgba(82,249,2,.10), rgba(255,255,255,.03)) !important;
+}
+.heat-bar{
+  border-color:var(--sense-green-mid) !important;
+}
+
+/* Detail stack / summaries */
+.detail-card summary,
+.detail-card > *:not(summary),
+.casefile,
+.report-panel,
+.scanner-panel{
+  background-image:linear-gradient(180deg, rgba(255,255,255,.01), rgba(82,249,2,.02)) !important;
+}
+
+/* Text glow on key readouts */
+.report-strip > div strong,
+.intel-card strong,
+#trustStatus,
+#heatLabel,
+#primaryTrigger,
+#evidenceStrength,
+#confidenceBrief,
+#scanMemory,
+#laneQuality,
+#scoreValue{
+  text-shadow:0 0 10px rgba(82,249,2,.10);
+}
+
+@media (max-width:640px){
+  .site-header.banner-header,
+  .card,
+  .hero{
+    box-shadow:
+      0 0 0 1px rgba(82,249,2,.08),
+      0 0 0 2px rgba(82,249,2,.10),
+      0 10px 28px rgba(0,0,0,.28) !important;
+  }
+}
+
+
+/* v2.36.0 — Centered Hero Readability Patch
+   Purpose: center the hero message so "Readable threat intelligence before you click"
+   becomes the visual focus, with the eyebrow and supporting text aligned cleanly above and below it. */
+.hero.hero-framed{
+  text-align:center;
+}
+.hero-framed .hero-frame-inner{
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
+}
+.hero-framed .eyebrow{
+  text-align:center;
+  justify-content:center;
+}
+.hero-framed h1{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+.hero-framed .lead{
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+  max-width:760px;
+}
+.hero-framed .proof-row{
+  justify-content:center;
+  align-items:center;
+}
+@media (max-width:640px){
+  .hero-framed .hero-frame-inner{
+    max-width:100%;
+  }
+  .hero-framed .lead{
+    max-width:100%;
+  }
+}
+
+
+/* v2.36.1 — Centered Detail Stack Patch
+   Purpose: center the deeper intelligence cards so headings, subtitles, and body content
+   feel more balanced and stop hugging the left edge. */
+
+/* Detail cards: center the summary/header block */
+.detail-card summary{
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  gap:8px;
+}
+.detail-card summary > div{
+  text-align:center;
+}
+.detail-card summary .eyebrow,
+.detail-card summary h2{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+.detail-card summary h2{
+  margin-top:2px;
+}
+.detail-card .status-pill,
+.detail-card summary .status-pill{
+  align-self:center;
+  margin:0 auto;
+}
+
+/* Center body copy and readable content */
+.detail-card > *:not(summary),
+.casefile,
+.casefile .section-head{
+  text-align:center;
+}
+.detail-card .card-summary,
+.detail-card p,
+.casefile .subtle,
+.casefile .section-head p,
+.casefile .section-head h2{
+  max-width:780px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+/* Bring lists inward and center them */
+.detail-card ul,
+.detail-card ol,
+#historyList{
+  max-width:760px;
+  margin:12px auto 0;
+  padding-left:0;
+  list-style-position:inside;
+  text-align:center;
+}
+.detail-card li,
+#historyList li{
+  margin:10px auto;
+  text-align:center;
+}
+
+/* Trust timeline / list spacing */
+#trustTrail,
+#timelineList,
+#decisionList,
+#evidenceList,
+#technicalList,
+#historyList{
+  max-width:760px;
+}
+
+/* Case file support */
+.case-actions{
+  justify-content:center;
+}
+#caseNotes{
+  max-width:860px;
+  margin:0 auto;
+  display:block;
+}
+
+/* On smaller screens keep the centered presentation clean */
+@media (max-width:640px){
+  .detail-card > *:not(summary){
+    padding-left:16px;
+    padding-right:16px;
+  }
+  .detail-card ul,
+  .detail-card ol,
+  #historyList{
+    max-width:100%;
+  }
+  #caseNotes{
+    max-width:100%;
+  }
+}
+
+
+/* v2.36.2 — Intelligence Color Logic Sample
+   Adds controlled green/orange/red color meaning while preserving the locked v2.36.1 layout. */
+:root{
+  --risk-green:#52f902;
+  --risk-orange:#ff9f1c;
+  --risk-red:#ff3b3b;
+  --risk-green-soft:rgba(82,249,2,.18);
+  --risk-orange-soft:rgba(255,159,28,.18);
+  --risk-red-soft:rgba(255,59,59,.18);
+}
+
+/* Keep the frame green; add color only where intelligence meaning benefits the user */
+.score-ring{
+  border-color:rgba(82,249,2,.68) !important;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(82,249,2,.16), rgba(255,255,255,.035)) !important;
+}
+#scoreValue{color:#f4fff0;}
+
+/* Signal mix: green/orange/red meaning */
+.sev-low{
+  color:var(--risk-green) !important;
+  text-shadow:0 0 10px rgba(82,249,2,.22);
+}
+.sev-medium{
+  color:var(--risk-orange) !important;
+  text-shadow:0 0 10px rgba(255,159,28,.20);
+}
+.sev-high{
+  color:var(--risk-red) !important;
+  text-shadow:0 0 10px rgba(255,59,59,.22);
+}
+
+/* Detail cards get subtle role accents, not loud color blocks */
+.detail-card:nth-of-type(1){border-color:rgba(82,249,2,.50) !important;}      /* Explain Why */
+.detail-card:nth-of-type(2){border-color:rgba(82,249,2,.42) !important;}      /* Details */
+.detail-card:nth-of-type(3){border-color:rgba(82,249,2,.50) !important;}      /* Trust Timeline */
+.detail-card:nth-of-type(4){border-color:rgba(255,159,28,.50) !important;}    /* Decision Guide */
+.detail-card:nth-of-type(5){border-color:rgba(255,95,64,.48) !important;}     /* Threat Story */
+.detail-card:nth-of-type(6){border-color:rgba(82,249,2,.42) !important;}      /* Learning Note */
+.detail-card:nth-of-type(7){border-color:rgba(255,159,28,.42) !important;}    /* Online Intel */
+.detail-card:nth-of-type(8){border-color:rgba(82,249,2,.38) !important;}      /* Scan Memory */
+
+.detail-card:nth-of-type(4) .status-pill,
+.detail-card:nth-of-type(7) .status-pill{
+  border-color:rgba(255,159,28,.55) !important;
+  background:rgba(255,159,28,.08) !important;
+}
+.detail-card:nth-of-type(5) .status-pill{
+  border-color:rgba(255,59,59,.50) !important;
+  background:rgba(255,59,59,.07) !important;
+}
+
+/* Intelligence cards get light category accent rails */
+.intel-card:nth-of-type(1){border-color:rgba(82,249,2,.48) !important;}
+.intel-card:nth-of-type(2){border-color:rgba(82,249,2,.42) !important;}
+.intel-card:nth-of-type(3){border-color:rgba(255,159,28,.44) !important;}
+.intel-card:nth-of-type(4){border-color:rgba(255,159,28,.38) !important;}
+
+/* Report strip: Next Step can stand out, signal count stays neutral-green, trigger gets warning accent */
+.report-strip > div:nth-child(1){border-color:rgba(82,249,2,.50) !important; background:linear-gradient(180deg, rgba(82,249,2,.06), rgba(255,255,255,.025)) !important;}
+.report-strip > div:nth-child(2){border-color:rgba(82,249,2,.40) !important;}
+.report-strip > div:nth-child(3){border-color:rgba(255,159,28,.42) !important; background:linear-gradient(180deg, rgba(255,159,28,.055), rgba(255,255,255,.025)) !important;}
+
+/* Heat bar becomes the main controlled color ramp */
+#heatFill{
+  background:linear-gradient(90deg, var(--risk-green), var(--risk-orange), var(--risk-red)) !important;
+  box-shadow:0 0 14px rgba(255,159,28,.12);
+}
+.heat-bar{border-color:rgba(82,249,2,.46) !important;}
+
+/* Buttons and nav remain brand green; examples get light variety */
+.quick-tests button:nth-child(2),
+.quick-tests button:nth-child(3){
+  border-color:rgba(255,159,28,.36) !important;
+}
+.quick-tests button:nth-child(3){
+  border-color:rgba(255,59,59,.34) !important;
+}
+
+/* Case file gets calm green, because it is storage/control rather than threat */
+.casefile{border-color:rgba(82,249,2,.46) !important;}
+
+/* Risk classes from JS get visible colors without changing JS */
+.risk-low{color:var(--risk-green) !important;}
+.risk-medium{color:var(--risk-orange) !important;}
+.risk-high{color:var(--risk-red) !important;}
+
+/* Keep color soft on mobile */
+@media (max-width:640px){
+  .detail-card:nth-of-type(4),
+  .detail-card:nth-of-type(5),
+  .detail-card:nth-of-type(7){
+    box-shadow:0 0 0 1px rgba(82,249,2,.08), 0 10px 28px rgba(0,0,0,.28) !important;
+  }
+}
+
+
+/* v2.36.3 — Compact Color Detail Accordion Trial
+   Shrinks closed detail cards, keeps all content when open, and adds meaningful color to statuses/text. */
+:root{
+  --tone-green:#52f902;
+  --tone-orange:#ff9f1c;
+  --tone-red:#ff3b3b;
+}
+
+.details-stack{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:12px;
+  align-items:start;
+}
+.detail-card.compact-detail{
+  overflow:hidden;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.detail-card.compact-detail[open]{
+  grid-column:1 / -1;
+}
+.detail-card.compact-detail summary{
+  min-height:58px;
+  padding:12px 16px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:10px 14px;
+  text-align:left;
+}
+.detail-card.compact-detail summary > div{
+  text-align:left;
+}
+.detail-card.compact-detail summary .eyebrow{
+  margin:0 0 2px;
+  text-align:left;
+  font-size:.68rem;
+}
+.detail-card.compact-detail summary h2{
+  margin:0;
+  text-align:left;
+  font-size:1rem;
+  line-height:1.18;
+}
+.detail-card.compact-detail summary::after{
+  content:attr(data-preview);
+}
+.detail-card.compact-detail summary > div::after{
+  content:attr(data-preview);
+  display:block;
+  margin-top:4px;
+  color:rgba(237,242,247,.68);
+  font-size:.82rem;
+  line-height:1.25;
+  text-transform:none;
+  letter-spacing:0;
+}
+.detail-card.compact-detail[open] summary{
+  min-height:84px;
+  grid-template-columns:1fr;
+  justify-items:center;
+  text-align:center;
+  padding:18px 20px 12px;
+}
+.detail-card.compact-detail[open] summary > div,
+.detail-card.compact-detail[open] summary .eyebrow,
+.detail-card.compact-detail[open] summary h2{
+  text-align:center;
+}
+.detail-card.compact-detail[open] summary > div::after{
+  text-align:center;
+  max-width:560px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.detail-card.compact-detail .status-pill{
+  min-width:max-content;
+}
+.detail-card.compact-detail[open] .status-pill{
+  justify-self:center;
+}
+
+.detail-card.compact-detail[data-tone="green"]{border-color:rgba(82,249,2,.46)!important;}
+.detail-card.compact-detail[data-tone="orange"]{border-color:rgba(255,159,28,.50)!important;}
+.detail-card.compact-detail[data-tone="red"]{border-color:rgba(255,59,59,.50)!important;}
+.detail-card.compact-detail[data-tone="green"] .eyebrow{color:var(--tone-green)!important;}
+.detail-card.compact-detail[data-tone="orange"] .eyebrow{color:var(--tone-orange)!important;}
+.detail-card.compact-detail[data-tone="red"] .eyebrow{color:var(--tone-red)!important;}
+.detail-card.compact-detail[data-tone="orange"] .status-pill{border-color:rgba(255,159,28,.55)!important;background:rgba(255,159,28,.08)!important;}
+.detail-card.compact-detail[data-tone="red"] .status-pill{border-color:rgba(255,59,59,.55)!important;background:rgba(255,59,59,.08)!important;}
+
+.status-low,.tone-low{color:var(--tone-green)!important;text-shadow:0 0 10px rgba(82,249,2,.18);}
+.status-medium,.tone-medium{color:var(--tone-orange)!important;text-shadow:0 0 10px rgba(255,159,28,.18);}
+.status-high,.tone-high{color:var(--tone-red)!important;text-shadow:0 0 10px rgba(255,59,59,.20);}
+.status-pill.status-low{border-color:rgba(82,249,2,.60)!important;background:rgba(82,249,2,.08)!important;}
+.status-pill.status-medium{border-color:rgba(255,159,28,.60)!important;background:rgba(255,159,28,.09)!important;}
+.status-pill.status-high{border-color:rgba(255,59,59,.60)!important;background:rgba(255,59,59,.09)!important;}
+
+.detail-card li.signal-high{color:var(--tone-red);}
+.detail-card li.signal-medium{color:var(--tone-orange);}
+.detail-card li.signal-low{color:var(--tone-green);}
+.detail-card li.signal-safe{color:var(--tone-green);}
+.detail-card li.signal-info{color:#dce7f2;}
+
+.casefile{
+  border-color:rgba(82,249,2,.46)!important;
+}
+
+@media (max-width:760px){
+  .details-stack{grid-template-columns:1fr; gap:10px;}
+  .detail-card.compact-detail[open]{grid-column:auto;}
+  .detail-card.compact-detail summary{
+    min-height:56px;
+    padding:11px 13px;
+    grid-template-columns:1fr auto;
+  }
+  .detail-card.compact-detail summary h2{font-size:.96rem;}
+  .detail-card.compact-detail summary > div::after{font-size:.78rem;}
+}
+
+.detail-card.compact-detail summary::after{content:"";display:none;}
+
+
+/* v2.36.4 — Risk Color Match + Pill Color System
+   Adds meaningful color to risk label, score ring, example pills, scan-mode pills,
+   proof pills, and intelligence cards while keeping nav green and scan engine unchanged. */
+:root{
+  --state-green:#52f902;
+  --state-green-rgb:82,249,2;
+  --state-orange:#ff9f1c;
+  --state-orange-rgb:255,159,28;
+  --state-red:#ff3b3b;
+  --state-red-rgb:255,59,59;
+}
+
+/* Main risk match: text, score, and report panel must agree */
+#riskLabel.risk-low,
+.report-low #riskLabel,
+.report-low #scoreValue,
+.report-low #nextStep,
+.report-low #heatLabel{
+  color:var(--state-green) !important;
+  text-shadow:0 0 14px rgba(var(--state-green-rgb),.20);
+}
+#riskLabel.risk-medium,
+.report-medium #riskLabel,
+.report-medium #scoreValue,
+.report-medium #nextStep,
+.report-medium #heatLabel{
+  color:var(--state-orange) !important;
+  text-shadow:0 0 14px rgba(var(--state-orange-rgb),.22);
+}
+#riskLabel.risk-high,
+.report-high #riskLabel,
+.report-high #scoreValue,
+.report-high #nextStep,
+.report-high #heatLabel{
+  color:var(--state-red) !important;
+  text-shadow:0 0 16px rgba(var(--state-red-rgb),.26);
+}
+.report-low .score-ring{
+  border-color:rgba(var(--state-green-rgb),.68) !important;
+  background:radial-gradient(circle at 50% 0%, rgba(var(--state-green-rgb),.13), rgba(255,255,255,.03)) !important;
+}
+.report-medium .score-ring{
+  border-color:rgba(var(--state-orange-rgb),.72) !important;
+  background:radial-gradient(circle at 50% 0%, rgba(var(--state-orange-rgb),.14), rgba(255,255,255,.03)) !important;
+}
+.report-high .score-ring{
+  border-color:rgba(var(--state-red-rgb),.72) !important;
+  background:radial-gradient(circle at 50% 0%, rgba(var(--state-red-rgb),.14), rgba(255,255,255,.03)) !important;
+}
+.report-low{border-color:rgba(var(--state-green-rgb),.52) !important;}
+.report-medium{border-color:rgba(var(--state-orange-rgb),.48) !important;}
+.report-high{border-color:rgba(var(--state-red-rgb),.48) !important;}
+
+/* Hero proof pills: color tells the product story */
+.proof-pill.proof-local{
+  border-color:rgba(var(--state-green-rgb),.54) !important;
+  color:#eaffdf;
+  background:rgba(var(--state-green-rgb),.07) !important;
+}
+.proof-pill.proof-balanced{
+  border-color:rgba(var(--state-green-rgb),.40) !important;
+  color:#e7f9ef;
+  background:linear-gradient(180deg, rgba(var(--state-green-rgb),.055), rgba(255,255,255,.025)) !important;
+}
+.proof-pill.proof-consent{
+  border-color:rgba(var(--state-orange-rgb),.48) !important;
+  color:#ffe3b4;
+  background:rgba(var(--state-orange-rgb),.075) !important;
+}
+
+/* Example pills teach the user before scan */
+.quick-tests .example-trusted{
+  border-color:rgba(var(--state-green-rgb),.58) !important;
+  color:#dfffca !important;
+  background:rgba(var(--state-green-rgb),.075) !important;
+}
+.quick-tests .example-review{
+  border-color:rgba(var(--state-orange-rgb),.58) !important;
+  color:#ffe3b4 !important;
+  background:rgba(var(--state-orange-rgb),.075) !important;
+}
+.quick-tests .example-danger{
+  border-color:rgba(var(--state-red-rgb),.58) !important;
+  color:#ffc5c5 !important;
+  background:rgba(var(--state-red-rgb),.075) !important;
+}
+
+/* Scan mode pills */
+.mode-pill.mode-quick,
+.mode-pill.mode-quick.active{
+  border-color:rgba(var(--state-green-rgb),.62) !important;
+  color:#eaffdf !important;
+  background:rgba(var(--state-green-rgb),.10) !important;
+}
+.mode-pill.mode-deep{
+  border-color:rgba(var(--state-orange-rgb),.54) !important;
+  color:#ffe3b4 !important;
+  background:rgba(var(--state-orange-rgb),.065) !important;
+}
+.mode-pill.mode-online{
+  border-color:rgba(var(--state-orange-rgb),.34) !important;
+  color:rgba(255,227,180,.72) !important;
+  background:rgba(var(--state-orange-rgb),.045) !important;
+}
+
+/* Main Analyze action stays brand-green */
+#scanButton{
+  border-color:rgba(var(--state-green-rgb),.68) !important;
+  color:#efffe9;
+  background:linear-gradient(180deg, rgba(var(--state-green-rgb),.16), rgba(0,0,0,.25)) !important;
+}
+#scanButton:hover{
+  box-shadow:0 0 16px rgba(var(--state-green-rgb),.12), inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+/* Intelligence cards: category accents, not full color blocks */
+.intel-card.intel-identity{
+  border-color:rgba(var(--state-green-rgb),.58) !important;
+  box-shadow:0 0 0 1px rgba(var(--state-green-rgb),.08), 0 18px 50px rgba(0,0,0,.30) !important;
+}
+.intel-card.intel-confidence{
+  border-color:rgba(var(--state-green-rgb),.48) !important;
+}
+.intel-card.intel-behavior{
+  border-color:rgba(var(--state-orange-rgb),.52) !important;
+}
+.intel-card.intel-online{
+  border-color:rgba(var(--state-orange-rgb),.44) !important;
+}
+.intel-card.intel-identity .card-kicker,
+.intel-card.intel-confidence .card-kicker{
+  color:var(--state-green) !important;
+  border-color:rgba(var(--state-green-rgb),.50) !important;
+  background:rgba(var(--state-green-rgb),.055) !important;
+}
+.intel-card.intel-behavior .card-kicker,
+.intel-card.intel-online .card-kicker{
+  color:var(--state-orange) !important;
+  border-color:rgba(var(--state-orange-rgb),.48) !important;
+  background:rgba(var(--state-orange-rgb),.055) !important;
+}
+
+/* Keep nav green, but make it feel intentionally alive */
+.banner-header .nav-banner a{
+  color:#f1ffec !important;
+}
+.banner-header .nav-banner a:hover{
+  color:#ffffff !important;
+}
+
+/* Color text helper classes: make sure JS state classes win over white defaults */
+.value-low,.status-low,.tone-low{color:var(--state-green) !important;}
+.value-medium,.status-medium,.tone-medium{color:var(--state-orange) !important;}
+.value-high,.status-high,.tone-high{color:var(--state-red) !important;}
+
+/* Local badge and status markers */
+.local-badge{
+  color:var(--state-green) !important;
+  border-color:rgba(var(--state-green-rgb),.52) !important;
+  background:rgba(var(--state-green-rgb),.07) !important;
+}
+.status-pill.status-high{color:var(--state-red) !important;}
+.status-pill.status-medium{color:var(--state-orange) !important;}
+.status-pill.status-low{color:var(--state-green) !important;}
+
+/* Mobile keeps color present but not loud */
+@media (max-width:640px){
+  .quick-tests .example-pill,
+  .mode-pill{
+    box-shadow:none !important;
+  }
+}
+
+.teaching-card{margin-top:14px; padding:14px 16px; border:1px solid rgba(85,255,177,.22); border-radius:16px; background:rgba(85,255,177,.045); color:var(--text)}
+.teaching-card strong{display:block; margin-bottom:6px; color:var(--accent)}
+.teaching-card p{margin:0; color:var(--muted); line-height:1.55}
+
+/* v2.37.2 Report Detail Polish + Copy Actions */
+
+.qr-slot{display:flex; justify-content:space-between; align-items:center; gap:14px; margin-top:14px; padding:14px 16px; border:1px dashed rgba(103,240,167,.34); border-radius:16px; background:rgba(103,240,167,.035)}
+.qr-slot strong{display:block; color:var(--accent); margin-bottom:4px}
+.qr-slot p{margin:0; color:var(--muted); line-height:1.45}
+.action-guidance{display:grid; grid-template-columns:1fr; gap:12px; margin-top:16px}
+.guidance-card{padding:14px 16px; border:1px solid var(--border); border-radius:16px; background:rgba(255,255,255,.025)}
+.guidance-card strong{display:block; margin:8px 0 6px; font-size:1rem}
+.guidance-card p{margin:0; color:var(--muted); line-height:1.5}
+.guidance-next{border-color:rgba(103,240,167,.36); background:linear-gradient(180deg, rgba(103,240,167,.055), rgba(255,255,255,.02))}
+.guidance-why{border-color:rgba(255,191,71,.30); background:linear-gradient(180deg, rgba(255,191,71,.045), rgba(255,255,255,.02))}
+.guidance-reminder{border-color:rgba(255,107,107,.26); background:linear-gradient(180deg, rgba(255,107,107,.035), rgba(255,255,255,.02))}
+@media (max-width:640px){.qr-slot{align-items:flex-start; flex-direction:column}.qr-slot button{width:100%}}
+
+
+/* v2.37.2 Report Detail Polish + Copy Actions */
+.report-tools{display:grid; grid-template-columns:1fr 1fr auto; gap:12px; align-items:stretch; margin-top:14px; padding:12px; border:1px solid rgba(255,255,255,.09); border-radius:18px; background:rgba(255,255,255,.035)}
+.report-meta-card{border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:10px 12px; background:rgba(0,0,0,.16)}
+.report-meta-card small{display:block; color:var(--muted); font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:4px}
+.report-meta-card strong{display:block; color:#f5fff8; font-size:.93rem; line-height:1.25}
+.report-copy-actions{display:flex; gap:8px; align-items:center; justify-content:flex-end; flex-wrap:wrap}
+.compact-copy{padding:10px 12px; border-radius:999px; white-space:nowrap}
+.copy-status{grid-column:1/-1; margin:0; color:var(--muted); font-size:.86rem}
+@media (max-width: 820px){.report-tools{grid-template-columns:1fr}.report-copy-actions{justify-content:flex-start}.compact-copy{width:auto}}
+
+
+/* v2.37.3 Intel Report Inner Border Polish */
+.report-panel{
+  box-shadow:0 0 0 1px rgba(255,191,71,.10), 0 20px 60px rgba(0,0,0,.22);
+}
+.report-strip > div{
+  border-width:1.5px !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055), 0 8px 22px rgba(0,0,0,.16);
+}
+.report-strip > div:nth-child(1){
+  border-color:rgba(82,249,2,.62) !important;
+  background:linear-gradient(180deg, rgba(82,249,2,.075), rgba(255,255,255,.025)) !important;
+}
+.report-strip > div:nth-child(2){
+  border-color:rgba(82,249,2,.56) !important;
+  background:linear-gradient(180deg, rgba(82,249,2,.055), rgba(255,255,255,.02)) !important;
+}
+.report-strip > div:nth-child(3){
+  border-color:rgba(255,78,78,.58) !important;
+  background:linear-gradient(180deg, rgba(255,78,78,.065), rgba(255,255,255,.02)) !important;
+}
+#nextStep,#signalCount{color:var(--state-green) !important;}
+#primaryTrigger{color:var(--state-red) !important;}
+.report-tools{
+  border-color:rgba(255,191,71,.26) !important;
+  background:linear-gradient(180deg, rgba(255,191,71,.045), rgba(255,255,255,.024));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055), 0 8px 22px rgba(0,0,0,.14);
+}
+.report-meta-card{
+  border-width:1.5px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055);
+}
+.report-meta-card:nth-child(1){
+  border-color:rgba(82,249,2,.46);
+  background:linear-gradient(180deg, rgba(82,249,2,.055), rgba(0,0,0,.16));
+}
+.report-meta-card:nth-child(2){
+  border-color:rgba(255,191,71,.48);
+  background:linear-gradient(180deg, rgba(255,191,71,.052), rgba(0,0,0,.16));
+}
+#inputTypeLabel{color:var(--state-green) !important;}
+#reportTimestamp{color:var(--state-orange) !important;}
+.guidance-card{
+  border-width:1.5px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.055), 0 8px 22px rgba(0,0,0,.14);
+}
+.guidance-next{border-color:rgba(82,249,2,.58) !important;}
+.guidance-why{border-color:rgba(255,78,78,.52) !important; background:linear-gradient(180deg, rgba(255,78,78,.055), rgba(255,255,255,.02)) !important;}
+.guidance-reminder{border-color:rgba(255,159,28,.56) !important; background:linear-gradient(180deg, rgba(255,159,28,.06), rgba(255,255,255,.02)) !important;}
+#actionTitle{color:var(--state-green) !important;}
+#whyMatterTitle{color:var(--state-red) !important;}
+#safetyTitle{color:var(--state-orange) !important;}
+.memory-strip{
+  border:1px solid rgba(255,191,71,.18);
+  border-radius:14px;
+  padding:10px 12px;
+  background:rgba(255,191,71,.025);
+}
+
+
+/* v2.37.4 Centered Card Header Polish
+   Centers the main cockpit headers while preserving existing scan engine, border language, and color system. */
+.scanner-panel > .section-head,
+.report-panel .report-top > div:first-child,
+.qr-slot > div,
+.teaching-card,
+.mode-card .mini-head{
+  text-align:center;
+}
+
+.scanner-panel > .section-head{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding-bottom:4px;
+}
+.scanner-panel > .section-head .eyebrow,
+.report-panel .report-top .eyebrow{
+  margin-left:auto;
+  margin-right:auto;
+}
+.scanner-panel > .section-head h2,
+.report-panel .report-top h2{
+  text-align:center;
+  line-height:1.12;
+}
+.scanner-panel > .section-head .subtle{
+  max-width:560px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.report-top{
+  align-items:center;
+}
+.report-panel .report-top > div:first-child{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.report-panel .report-top .score-ring{
+  flex:0 0 auto;
+}
+
+.qr-slot{
+  text-align:center;
+}
+.qr-slot > div{
+  flex:1;
+}
+.teaching-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.teaching-card p{
+  max-width:640px;
+}
+
+.mode-card .mini-head{
+  justify-content:center;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:14px;
+}
+.mode-card .local-badge{
+  font-size:.74rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  padding:7px 11px;
+}
+.mode-card .quiet-note{
+  text-align:center;
+  max-width:720px;
+  margin:12px auto 0;
+}
+.scan-mode-row{
+  justify-content:center;
+}
+
+@media (max-width: 760px){
+  .report-top{
+    flex-direction:column;
+    align-items:center;
+  }
+  .report-panel .report-top .score-ring{
+    width:min(150px, 100%);
+  }
+  .qr-slot{
+    align-items:center;
+  }
+}
+
+
+/* v2.37.5 Mobile Breathing Room + Button Alignment
+   Adds responsive spacing and more intentional button wrapping without changing scan logic. */
+.workbench{
+  gap:clamp(18px, 2.6vw, 28px);
+}
+.scanner-panel.card,
+.report-panel.card{
+  min-width:0;
+}
+.input-row{
+  align-items:stretch;
+}
+.input-row input{
+  min-width:0;
+}
+.input-row button{
+  min-width:132px;
+}
+.quick-tests{
+  justify-content:center;
+  gap:10px;
+}
+.quick-tests .example-pill{
+  min-height:40px;
+}
+.report-copy-actions .ghost-button,
+.qr-slot .ghost-button,
+.input-row button{
+  box-shadow:0 10px 24px rgba(0,0,0,.16);
+}
+.report-copy-actions{
+  min-width:220px;
+}
+.report-tools{
+  align-items:center;
+}
+.scan-mode-row{
+  gap:10px;
+  flex-wrap:wrap;
+}
+.mode-pill{
+  min-height:40px;
+}
+.micro-list{
+  gap:8px;
+}
+.micro-list span{
+  white-space:normal;
+  text-align:center;
+}
+
+@media (max-width: 980px){
+  .workbench{
+    grid-template-columns:1fr;
+  }
+  .scanner-panel.card,
+  .report-panel.card{
+    width:100%;
+  }
+  .report-tools{
+    grid-template-columns:1fr 1fr;
+  }
+  .report-copy-actions{
+    grid-column:1/-1;
+    justify-content:center;
+    min-width:0;
+  }
+}
+
+@media (max-width: 700px){
+  .page{
+    padding-left:clamp(12px, 4vw, 18px);
+    padding-right:clamp(12px, 4vw, 18px);
+  }
+  .scanner-panel.card,
+  .report-panel.card,
+  .intel-card.card,
+  .detail-card.card,
+  .mode-card,
+  .teaching-card,
+  .qr-slot{
+    border-radius:18px;
+  }
+  .scanner-panel > .section-head,
+  .report-panel .report-top > div:first-child{
+    padding-left:4px;
+    padding-right:4px;
+  }
+  .input-row{
+    flex-direction:column;
+    gap:10px;
+  }
+  .input-row button{
+    width:100%;
+    min-width:0;
+  }
+  .quick-tests{
+    grid-template-columns:1fr 1fr;
+    display:grid;
+  }
+  .quick-tests .example-pill{
+    width:100%;
+    justify-content:center;
+    text-align:center;
+    padding-left:10px;
+    padding-right:10px;
+  }
+  .report-strip{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .report-tools{
+    grid-template-columns:1fr;
+    padding:12px;
+  }
+  .report-copy-actions{
+    justify-content:center;
+    width:100%;
+  }
+  .compact-copy{
+    flex:1 1 150px;
+    text-align:center;
+  }
+  .action-guidance{
+    gap:10px;
+  }
+  .guidance-card{
+    padding:13px 14px;
+  }
+  .memory-strip{
+    display:grid;
+    gap:8px;
+  }
+  .scan-mode-row{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+  }
+  .mode-pill{
+    width:100%;
+  }
+}
+
+@media (max-width: 420px){
+  .quick-tests{
+    grid-template-columns:1fr;
+  }
+  .proof-row,
+  .micro-list{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .score-ring{
+    width:138px;
+    height:138px;
+  }
+  .report-summary,
+  .quiet-note,
+  .teaching-card p,
+  .qr-slot p{
+    font-size:.94rem;
+  }
+}
+
+/* v2.37.6 Intelligence Drawer Space Saver
+   Collapses the lower report cards into one centered drawer with selectable layers.
+   UI-only polish: no scan scoring or engine logic changed. */
+.intelligence-drawer.card{
+  border-color:rgba(82,249,2,.42)!important;
+  padding:clamp(18px, 2.3vw, 26px);
+  display:grid;
+  gap:16px;
+  text-align:center;
+}
+.drawer-head.centered-head{
+  display:grid;
+  justify-items:center;
+  gap:6px;
+  max-width:760px;
+  margin:0 auto;
+}
+.drawer-head .eyebrow,
+.drawer-head h2,
+.drawer-head .subtle{
+  text-align:center;
+}
+.drawer-head h2{
+  margin:0;
+}
+.drawer-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  max-width:980px;
+  margin:0 auto;
+}
+.drawer-tab{
+  border:1px solid rgba(82,249,2,.24);
+  background:rgba(82,249,2,.055);
+  color:#eaf4ed;
+  border-radius:999px;
+  padding:10px 13px;
+  font-weight:800;
+  letter-spacing:.01em;
+  cursor:pointer;
+  min-height:39px;
+  transition:border-color .18s ease, background .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.drawer-tab:hover,
+.drawer-tab.active{
+  border-color:rgba(82,249,2,.70);
+  background:rgba(82,249,2,.13);
+  box-shadow:0 0 0 1px rgba(82,249,2,.08), 0 12px 24px rgba(0,0,0,.20);
+}
+.drawer-tab.active{
+  transform:translateY(-1px);
+}
+.drawer-tab.soon{
+  border-color:rgba(255,159,28,.42);
+  background:rgba(255,159,28,.08);
+}
+.drawer-stage{
+  max-width:920px;
+  width:100%;
+  margin:0 auto;
+}
+.drawer-panel{
+  border:1px solid rgba(82,249,2,.34);
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018));
+  border-radius:18px;
+  padding:clamp(16px, 2vw, 22px);
+  text-align:left;
+  box-shadow:0 14px 32px rgba(0,0,0,.20);
+}
+.drawer-panel[hidden]{display:none!important;}
+.drawer-panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  padding-bottom:12px;
+  margin-bottom:12px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.drawer-panel-head > div{
+  text-align:left;
+}
+.drawer-panel-head .eyebrow,
+.drawer-panel-head h3{
+  margin:0;
+}
+.drawer-panel-head h3{
+  margin-top:3px;
+  color:#f4f8f6;
+}
+.drawer-panel-head[data-tone="green"] .eyebrow{color:var(--tone-green)!important;}
+.drawer-panel-head[data-tone="orange"] .eyebrow{color:var(--tone-orange)!important;}
+.drawer-panel-head[data-tone="red"] .eyebrow{color:var(--tone-red)!important;}
+.drawer-panel-head[data-tone="orange"] .status-pill{border-color:rgba(255,159,28,.55)!important;background:rgba(255,159,28,.08)!important;}
+.drawer-panel-head[data-tone="red"] .status-pill{border-color:rgba(255,59,59,.55)!important;background:rgba(255,59,59,.08)!important;}
+.drawer-panel ul,
+.drawer-panel ol{
+  margin:10px 0 0;
+  padding-left:20px;
+}
+.drawer-panel li{
+  margin:8px 0;
+  color:#d7dfe8;
+}
+.drawer-panel li.signal-high{color:var(--tone-red);}
+.drawer-panel li.signal-medium{color:var(--tone-orange);}
+.drawer-panel li.signal-low,
+.drawer-panel li.signal-safe{color:var(--tone-green);}
+.drawer-panel li.signal-info{color:#dce7f2;}
+
+@media (max-width:700px){
+  .drawer-tabs{display:grid; grid-template-columns:1fr 1fr; width:100%;}
+  .drawer-tab{width:100%; padding-left:9px; padding-right:9px;}
+  .drawer-panel-head{display:grid; justify-items:center; text-align:center;}
+  .drawer-panel-head > div,
+  .drawer-panel-head .eyebrow,
+  .drawer-panel-head h3{text-align:center;}
+}
+@media (max-width:420px){
+  .drawer-tabs{grid-template-columns:1fr;}
+}
+
+
+/* v2.37.7-test Pill System Harmonization Test
+   UI-only role language for pills: actions, status, signals, and soon placeholders.
+   Keeps the red/orange/green language on black without changing engine logic. */
+:root{
+  --pill-green:82,249,2;
+  --pill-orange:255,159,28;
+  --pill-red:255,59,59;
+  --pill-muted:145,155,170;
+}
+.pill-action,
+.drawer-tab.pill-action,
+.quick-tests .example-pill.pill-action,
+.mode-pill.pill-action,
+.report-copy-actions .compact-copy{
+  cursor:pointer;
+  position:relative;
+  border-width:1.25px!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 8px 18px rgba(0,0,0,.18);
+}
+.pill-action:hover,
+.drawer-tab.pill-action:hover,
+.quick-tests .example-pill.pill-action:hover,
+.mode-pill.pill-action:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.08);
+}
+.pill-status,
+.proof-pill.pill-status,
+.local-badge.pill-status,
+.status-pill{
+  cursor:default!important;
+  border-style:solid!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045);
+}
+.pill-signal,
+.micro-list .pill-signal,
+.card-kicker{
+  cursor:default!important;
+  border-color:rgba(var(--pill-orange),.44)!important;
+  background:rgba(var(--pill-orange),.055)!important;
+  color:#ffe6bd!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+.micro-list .pill-signal:nth-child(1),
+.micro-list .pill-signal:nth-child(2){
+  border-color:rgba(var(--pill-green),.44)!important;
+  background:rgba(var(--pill-green),.055)!important;
+  color:#eaffdf!important;
+}
+.micro-list .pill-signal:nth-child(3),
+.micro-list .pill-signal:nth-child(7),
+.micro-list .pill-signal:nth-child(8){
+  border-color:rgba(var(--pill-red),.45)!important;
+  background:rgba(var(--pill-red),.055)!important;
+  color:#ffcfcf!important;
+}
+.pill-soon,
+.drawer-tab.pill-soon,
+.mode-pill.pill-soon,
+#qrSlotButton{
+  cursor:not-allowed!important;
+  border-color:rgba(var(--pill-orange),.36)!important;
+  background:repeating-linear-gradient(135deg, rgba(var(--pill-orange),.055), rgba(var(--pill-orange),.055) 7px, rgba(255,255,255,.018) 7px, rgba(255,255,255,.018) 14px)!important;
+  color:rgba(255,226,188,.76)!important;
+  opacity:.82;
+}
+.drawer-tab.pill-soon.active{
+  border-color:rgba(var(--pill-orange),.60)!important;
+  background:rgba(var(--pill-orange),.10)!important;
+}
+.top-nav a{
+  border:1px solid rgba(var(--pill-green),.24);
+  border-radius:999px;
+  padding:8px 12px;
+  background:rgba(var(--pill-green),.035);
+}
+.top-nav a:hover{
+  border-color:rgba(var(--pill-green),.58);
+  background:rgba(var(--pill-green),.075);
+}
+.report-tools .report-meta-card,
+.action-guidance .guidance-card,
+.memory-strip{
+  border-width:1.25px!important;
+}
+@media (max-width:640px){
+  .top-nav a, .drawer-tab, .quick-tests .example-pill, .mode-pill{
+    justify-content:center;
+  }
+}
+
+
+/* v2.38.0 Intelligence Drawer Centered Panel Alignment
+   Centers each drawer layer title, subtitle/status, and panel content for a balanced intelligence readout.
+   UI-only polish: no scan scoring or engine logic changed. */
+.drawer-panel{
+  text-align:center;
+}
+.drawer-panel-head{
+  display:grid !important;
+  grid-template-columns:1fr;
+  justify-items:center;
+  align-items:center;
+  text-align:center;
+  gap:10px;
+}
+.drawer-panel-head > div{
+  text-align:center !important;
+  display:grid;
+  justify-items:center;
+  gap:3px;
+}
+.drawer-panel-head .eyebrow,
+.drawer-panel-head h3{
+  text-align:center !important;
+}
+.drawer-panel-head .status-pill{
+  justify-self:center;
+}
+.drawer-panel .card-summary,
+.drawer-panel p,
+.drawer-panel .muted{
+  text-align:center;
+}
+.drawer-panel ul,
+.drawer-panel ol{
+  display:inline-block;
+  max-width:760px;
+  margin:12px auto 0;
+  padding-left:0;
+  list-style-position:inside;
+  text-align:center;
+}
+.drawer-panel li{
+  text-align:center;
+}
+.drawer-panel hr{
+  max-width:520px;
+  margin:16px auto;
+}
+#memoryPanel p,
+#onlinePanel p,
+#learningPanel p,
+#decisionPanel p,
+#threatPanel p,
+#timelinePanel p,
+#explainPanel p,
+#technicalPanel p{
+  max-width:780px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* v2.38.1 Heat Bar Palette Border Lock
+   Uses the full risk-heat spectrum across pills and bordered surfaces on black.
+   UI-only layer: no scan scoring or engine logic changed. */
+:root{
+  --heat-green:#52f902;
+  --heat-lime:#8cff36;
+  --heat-yellow:#ffd84d;
+  --heat-amber:#ffbf47;
+  --heat-orange:#ff9f1c;
+  --heat-red:#ff3b3b;
+  --heat-border-gradient:linear-gradient(90deg, var(--heat-green) 0%, var(--heat-lime) 18%, var(--heat-yellow) 38%, var(--heat-amber) 58%, var(--heat-orange) 78%, var(--heat-red) 100%);
+  --heat-glow-soft:0 0 0 1px rgba(140,255,54,.07), 0 10px 24px rgba(0,0,0,.24);
+}
+
+/* Main bordered surfaces adopt the heat spectrum while keeping dark fills */
+.site-header,
+.hero,
+.card,
+.mode-card,
+.qr-slot,
+.teaching-card,
+.score-ring,
+.report-strip > div,
+.report-tools .report-meta-card,
+.action-guidance .guidance-card,
+.memory-strip,
+.drawer-panel,
+.report-copy-actions{
+  border:1px solid transparent !important;
+  background:
+    linear-gradient(180deg, rgba(17,25,34,.94), rgba(11,16,22,.97)) padding-box,
+    var(--heat-border-gradient) border-box !important;
+  box-shadow:var(--shadow), var(--heat-glow-soft);
+}
+
+/* Preserve more transparent utility surfaces */
+.mode-card,
+.qr-slot,
+.teaching-card,
+.report-strip > div,
+.report-tools .report-meta-card,
+.action-guidance .guidance-card,
+.memory-strip,
+.drawer-panel,
+.report-copy-actions{
+  background:
+    linear-gradient(180deg, rgba(12,18,24,.96), rgba(9,13,18,.98)) padding-box,
+    var(--heat-border-gradient) border-box !important;
+}
+
+/* Pills and nav adopt the heat border language */
+.pill-action,
+.drawer-tab,
+.quick-tests .example-pill,
+.mode-pill,
+.report-copy-actions .compact-copy,
+.pill-status,
+.proof-pill,
+.local-badge,
+.status-pill,
+.pill-signal,
+.card-kicker,
+.pill-soon,
+#qrSlotButton,
+.top-nav a{
+  border:1px solid transparent !important;
+  background:
+    linear-gradient(180deg, rgba(15,21,28,.98), rgba(11,16,22,.98)) padding-box,
+    var(--heat-border-gradient) border-box !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 8px 20px rgba(0,0,0,.18);
+}
+
+.pill-action:hover,
+.drawer-tab:hover,
+.quick-tests .example-pill:hover,
+.mode-pill:hover,
+.report-copy-actions .compact-copy:hover,
+.top-nav a:hover{
+  filter:brightness(1.06);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 10px 24px rgba(0,0,0,.24), 0 0 18px rgba(255,191,71,.10);
+}
+
+.drawer-tab.active,
+.mode-pill.active,
+.quick-tests .example-pill:focus-visible,
+.report-copy-actions .compact-copy:focus-visible,
+.top-nav a:focus-visible{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 12px 28px rgba(0,0,0,.28), 0 0 0 1px rgba(255,216,77,.18), 0 0 22px rgba(255,159,28,.12);
+}
+
+/* Keep semantic text colors while letting the multicolor border unify the system */
+.status-pill.status-low,
+.guidance-next .card-kicker,
+#nextStep,
+#signalCount,
+.drawer-panel-head[data-tone="green"] .status-pill{
+  color:#dfffd0 !important;
+}
+.status-pill.status-medium,
+.guidance-reminder .card-kicker,
+.drawer-panel-head[data-tone="orange"] .status-pill{
+  color:#ffe0af !important;
+}
+.status-pill.status-high,
+.guidance-why .card-kicker,
+#primaryTrigger,
+.drawer-panel-head[data-tone="red"] .status-pill{
+  color:#ffd0d0 !important;
+}
+
+/* Give the heat bar exact same family for visual coherence */
+#heatFill{
+  background:var(--heat-border-gradient);
+}
+.heat-bar{
+  border:1px solid transparent !important;
+  background:
+    linear-gradient(180deg, rgba(10,15,20,.98), rgba(7,10,14,.98)) padding-box,
+    var(--heat-border-gradient) border-box;
+}
+
+/* v2.38.2 Result Aura Breathing Layer
+   Keeps the heat-bar palette locked, then adds a subtle scan-state aura.
+   UI-only: no engine, scoring, parser, or detection logic changed. */
+:root{
+  --aura-low:82,249,2;
+  --aura-review:255,191,71;
+  --aura-high:255,59,59;
+}
+
+.report-panel{
+  transition:border-color .28s ease, box-shadow .28s ease, background .28s ease;
+}
+.score-ring,
+.report-strip > div,
+.report-tools .report-meta-card,
+.action-guidance .guidance-card,
+.memory-strip,
+.mode-pill,
+.drawer-tab,
+.quick-tests .example-pill,
+.report-copy-actions .compact-copy,
+.card-kicker,
+.status-pill{
+  transition:border-color .28s ease, box-shadow .28s ease, background .28s ease, color .28s ease, filter .28s ease;
+}
+
+/* Low Risk: calm green breathing layer */
+.report-panel.report-low{
+  box-shadow:var(--shadow), 0 0 0 1px rgba(var(--aura-low),.16), 0 0 34px rgba(var(--aura-low),.10) !important;
+}
+.report-panel.report-low .score-ring,
+.report-panel.report-low .guidance-next,
+.report-panel.report-low .report-strip > div:nth-child(1),
+.report-panel.report-low .report-strip > div:nth-child(2),
+.report-panel.report-low .report-meta-card,
+.report-panel.report-low .compact-copy{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 0 18px rgba(var(--aura-low),.12) !important;
+  filter:brightness(1.03);
+}
+.report-panel.report-low #riskLabel,
+.report-panel.report-low #scoreValue,
+.report-panel.report-low #nextStep,
+.report-panel.report-low #actionTitle{
+  text-shadow:0 0 14px rgba(var(--aura-low),.22);
+}
+.report-panel.report-low ~ .intelligence-grid .intel-card,
+.workbench:has(.report-panel.report-low) .scanner-panel .mode-quick,
+.workbench:has(.report-panel.report-low) .scanner-panel #scanButton{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 0 18px rgba(var(--aura-low),.10) !important;
+}
+
+/* Needs Review: warm caution breathing layer */
+.report-panel.report-medium{
+  box-shadow:var(--shadow), 0 0 0 1px rgba(var(--aura-review),.18), 0 0 36px rgba(var(--aura-review),.12) !important;
+}
+.report-panel.report-medium .score-ring,
+.report-panel.report-medium .guidance-reminder,
+.report-panel.report-medium .report-strip > div,
+.report-panel.report-medium .report-meta-card,
+.report-panel.report-medium .compact-copy{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 0 20px rgba(var(--aura-review),.13) !important;
+  filter:brightness(1.04);
+}
+.report-panel.report-medium #riskLabel,
+.report-panel.report-medium #scoreValue,
+.report-panel.report-medium #heatLabel,
+.report-panel.report-medium #safetyTitle{
+  text-shadow:0 0 16px rgba(var(--aura-review),.25);
+}
+.workbench:has(.report-panel.report-medium) .scanner-panel .mode-deep,
+.workbench:has(.report-panel.report-medium) .scanner-panel .example-review{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 0 18px rgba(var(--aura-review),.12) !important;
+}
+
+/* High Risk: controlled red danger breathing layer */
+.report-panel.report-high{
+  box-shadow:var(--shadow), 0 0 0 1px rgba(var(--aura-high),.20), 0 0 40px rgba(var(--aura-high),.14) !important;
+}
+.report-panel.report-high .score-ring,
+.report-panel.report-high .guidance-why,
+.report-panel.report-high .report-strip > div:nth-child(3),
+.report-panel.report-high .report-meta-card,
+.report-panel.report-high .compact-copy{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 0 22px rgba(var(--aura-high),.16) !important;
+  filter:brightness(1.05);
+}
+.report-panel.report-high #riskLabel,
+.report-panel.report-high #scoreValue,
+.report-panel.report-high #primaryTrigger,
+.report-panel.report-high #whyMatterTitle{
+  text-shadow:0 0 18px rgba(var(--aura-high),.28);
+}
+.workbench:has(.report-panel.report-high) .scanner-panel .example-danger,
+.workbench:has(.report-panel.report-high) .scanner-panel #scanButton{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 0 20px rgba(var(--aura-high),.14) !important;
+}
+
+/* Respect users who prefer reduced motion: aura remains static, not animated. */
+@media (prefers-reduced-motion:no-preference){
+  .report-panel.report-low .score-ring,
+  .report-panel.report-medium .score-ring,
+  .report-panel.report-high .score-ring{
+    animation:proxumaAuraPulse 3.8s ease-in-out infinite;
+  }
+}
+@keyframes proxumaAuraPulse{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.07)}
+}
+
+/* v2.38.3 UI Stability Lock
+   Removes visible comma-domain example pressure and stabilizes copy actions.
+   UI-only: comma-domain engine guard remains intact. */
+.quick-tests{
+  align-items:stretch;
+}
+.quick-tests .example-pill{
+  flex:1 1 148px;
+  max-width:210px;
+  justify-content:center;
+  text-align:center;
+}
+.report-tools{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(232px, auto) !important;
+}
+.report-copy-actions{
+  display:grid !important;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  min-width:232px;
+  width:100%;
+  justify-content:stretch !important;
+  align-items:center;
+}
+.report-copy-actions .compact-copy{
+  width:100%;
+  min-width:0;
+  text-align:center;
+  justify-content:center;
+  padding-left:12px;
+  padding-right:12px;
+}
+@media (max-width: 980px){
+  .report-tools{
+    grid-template-columns:1fr 1fr !important;
+  }
+  .report-copy-actions{
+    grid-column:1/-1;
+    max-width:420px;
+    margin:0 auto;
+  }
+}
+@media (max-width: 520px){
+  .quick-tests .example-pill{
+    max-width:none;
+  }
+  .report-tools{
+    grid-template-columns:1fr !important;
+  }
+  .report-copy-actions{
+    grid-template-columns:1fr;
+    min-width:0;
+    max-width:none;
+  }
+}
+
+
+/* v2.59.0 — Analyst/User View Split */
+.audience-switch{min-width:220px;}
+.audience-toggle-row{display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 8px;}
+.audience-toggle{border:1px solid rgba(36,255,114,.32); background:rgba(36,255,114,.06); color:#e9fff1; border-radius:999px; padding:8px 12px; font-weight:800; cursor:pointer;}
+.audience-toggle:hover{border-color:rgba(36,255,114,.62); background:rgba(36,255,114,.11);}
+.audience-toggle.active{background:rgba(36,255,114,.20); border-color:rgba(36,255,114,.86); box-shadow:0 0 0 1px rgba(36,255,114,.20), 0 0 18px rgba(36,255,114,.12);}
+html[data-audience-view="user"] .analyst-only{display:none !important;}
+html[data-audience-view="analyst"] .audience-switch{border-color:rgba(255,183,74,.32); background:rgba(255,183,74,.045);}
+html[data-audience-view="analyst"] .audience-toggle.active{border-color:rgba(255,183,74,.75); background:rgba(255,183,74,.17); box-shadow:0 0 0 1px rgba(255,183,74,.16), 0 0 18px rgba(255,183,74,.11);}
+@media (max-width: 820px){.audience-switch{min-width:0}.audience-toggle-row{width:100%}.audience-toggle{flex:1}}
+
+
+/* v2.59.1 — Intel Report UI Stability Patch
+   Stabilizes the Intel report shell across example scans, prevents timestamp edge bleed,
+   and keeps dynamic report sections from stretching/shrinking the main card width.
+   UI-only layer: no scan scoring, parser, detection logic, or report intelligence changed. */
+.report-panel.card{
+  min-width:0;
+  overflow:hidden;
+}
+.report-panel .report-top,
+.report-panel .heat-zone,
+.report-panel .report-strip,
+.report-panel .report-tools,
+.report-panel .action-guidance{
+  min-width:0;
+}
+.report-summary,
+#summaryText,
+#trueTarget,
+#primaryTrigger,
+#nextStep,
+#inputTypeLabel,
+#reportTimestamp,
+#actionText,
+#whyMatterText,
+#safetyText{
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.report-tools{
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(220px,.85fr);
+  align-items:stretch;
+}
+.report-tools .report-meta-card{
+  min-width:0;
+  min-height:76px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.report-tools .report-meta-card strong{
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+#reportTimestamp{
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.01em;
+  line-height:1.28;
+}
+.audience-switch.report-meta-card{
+  justify-content:flex-start;
+  min-height:118px;
+}
+.audience-toggle-row{
+  min-width:0;
+}
+.audience-toggle{
+  min-width:0;
+}
+.report-copy-actions{
+  min-width:0;
+  align-content:center;
+}
+.compact-copy{
+  max-width:100%;
+}
+.action-guidance{
+  grid-template-columns:repeat(3, minmax(0,1fr));
+}
+.action-guidance .guidance-card{
+  min-width:0;
+  min-height:148px;
+}
+.intelligence-grid{
+  align-items:stretch;
+}
+.intel-card{
+  min-width:0;
+  min-height:210px;
+}
+@media (max-width:980px){
+  .report-tools{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  }
+  .audience-switch.report-meta-card,
+  .report-copy-actions,
+  .copy-status{
+    grid-column:1/-1;
+  }
+  .action-guidance{
+    grid-template-columns:1fr;
+  }
+  .action-guidance .guidance-card{
+    min-height:0;
+  }
+}
+@media (max-width:640px){
+  .report-tools{
+    grid-template-columns:1fr;
+  }
+  .report-tools .report-meta-card,
+  .audience-switch.report-meta-card{
+    min-height:0;
+  }
+  .report-copy-actions{
+    justify-content:stretch;
+  }
+  .compact-copy{
+    flex:1 1 100%;
+  }
+}
+
+
+/* v2.59.2 — Copy Action Collision Fix
+   Moves Copy Report / Copy Summary into a dedicated stable action row so the
+   buttons never collide with each other or with report metadata. UI-only layer. */
+.report-tools{
+  grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+}
+.report-copy-actions{
+  grid-column:1 / -1 !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(160px, 1fr)) !important;
+  gap:10px !important;
+  width:100% !important;
+  max-width:none !important;
+  min-width:0 !important;
+  margin:0 !important;
+  justify-content:stretch !important;
+  align-items:stretch !important;
+}
+.report-copy-actions .compact-copy{
+  width:100% !important;
+  min-width:0 !important;
+  max-width:100% !important;
+  min-height:44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  white-space:normal !important;
+  line-height:1.15;
+  overflow-wrap:anywhere;
+}
+.copy-status{
+  grid-column:1 / -1 !important;
+  min-width:0;
+}
+@media (max-width:980px){
+  .report-tools{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+}
+@media (max-width:640px){
+  .report-tools{
+    grid-template-columns:1fr !important;
+  }
+  .report-copy-actions{
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* v2.59.3 — Report Meta Compactness Patch
+   Verifies and reduces oversized Input Type / Report Time cards while keeping
+   the report area stable. UI-only layer: no engine, scoring, parser, or
+   detection logic changed. */
+.report-tools{
+  grid-template-columns:max-content max-content minmax(280px, 1fr) !important;
+  justify-content:stretch !important;
+  align-items:stretch !important;
+}
+.report-tools .report-meta-card:not(.audience-switch){
+  width:fit-content;
+  min-width:132px;
+  max-width:230px;
+  min-height:66px !important;
+  padding:8px 11px !important;
+  align-self:stretch;
+}
+.report-tools .report-meta-card:not(.audience-switch) small{
+  font-size:.70rem !important;
+  margin-bottom:3px !important;
+}
+.report-tools .report-meta-card:not(.audience-switch) strong{
+  font-size:.88rem !important;
+  line-height:1.22 !important;
+}
+#inputTypeLabel{
+  white-space:nowrap;
+}
+#reportTimestamp{
+  white-space:normal;
+  overflow-wrap:normal;
+}
+.audience-switch.report-meta-card{
+  min-width:0;
+}
+@media (max-width:980px){
+  .report-tools{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+  .report-tools .report-meta-card:not(.audience-switch){
+    width:auto;
+    max-width:none;
+  }
+  .audience-switch.report-meta-card{
+    grid-column:1 / -1;
+  }
+}
+@media (max-width:640px){
+  .report-tools{
+    grid-template-columns:1fr !important;
+  }
+  .report-tools .report-meta-card:not(.audience-switch){
+    min-height:0 !important;
+  }
+}
+
+
+/* v2.59.4 — Split-Line Report Time Stability Fix
+   Corrects the v2.59.3 over-compact layout. The metadata row returns to stable
+   equal columns so Report View controls remain inside the UI, while the visible
+   Report Time is shortened to a date/time split line. UI-only layer. */
+.report-tools{
+  grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  align-items:stretch !important;
+}
+.report-tools .report-meta-card:not(.audience-switch){
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+  min-height:70px !important;
+  padding:10px 12px !important;
+}
+#reportTimestamp{
+  white-space:pre-line !important;
+  overflow-wrap:normal !important;
+  word-break:normal !important;
+  line-height:1.18 !important;
+  letter-spacing:-.01em !important;
+}
+.audience-switch.report-meta-card{
+  min-width:0 !important;
+  max-width:100% !important;
+}
+.audience-toggle-row{
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:8px !important;
+}
+.audience-toggle{
+  width:100% !important;
+  min-width:0 !important;
+  padding:8px 10px !important;
+  white-space:normal !important;
+}
+@media (max-width:980px){
+  .report-tools{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+  .audience-switch.report-meta-card{
+    grid-column:1/-1 !important;
+  }
+}
+@media (max-width:640px){
+  .report-tools{
+    grid-template-columns:1fr !important;
+  }
+}
+
+
+/* v2.59.5 — Compact Stack-Safe Report Meta
+   Shrinks Input Type / Report Time without starving Report View. The two small
+   meta cards get compact columns on wide screens, while Report View keeps the
+   largest column. At tighter widths, Report View drops to its own full row so
+   User View / Analyst View / Coverage Summary controls do not get cut off.
+   UI-only layer: no scoring, parser, or detection logic changed. */
+.report-tools{
+  grid-template-columns:minmax(92px, .55fr) minmax(92px, .55fr) minmax(300px, 1.9fr) !important;
+  gap:10px !important;
+  align-items:stretch !important;
+}
+.report-tools .report-meta-card:not(.audience-switch){
+  min-height:56px !important;
+  padding:8px 10px !important;
+  align-self:stretch !important;
+}
+.report-tools .report-meta-card:not(.audience-switch) small{
+  font-size:.68rem !important;
+  margin-bottom:2px !important;
+  line-height:1.1 !important;
+}
+.report-tools .report-meta-card:not(.audience-switch) strong{
+  font-size:.82rem !important;
+  line-height:1.12 !important;
+}
+#inputTypeLabel{
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+}
+#reportTimestamp{
+  white-space:pre-line !important;
+  line-height:1.12 !important;
+  overflow-wrap:normal !important;
+}
+.audience-switch.report-meta-card{
+  min-width:0 !important;
+  min-height:0 !important;
+  padding:10px 12px !important;
+}
+.audience-switch.report-meta-card .quiet-note{
+  margin-bottom:0 !important;
+}
+.audience-toggle-row{
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:8px !important;
+}
+.audience-toggle{
+  min-width:0 !important;
+  width:100% !important;
+  white-space:normal !important;
+}
+@media (max-width:1100px){
+  .report-tools{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+  .audience-switch.report-meta-card{
+    grid-column:1 / -1 !important;
+  }
+}
+@media (max-width:640px){
+  .report-tools{
+    grid-template-columns:1fr !important;
+  }
+  .report-tools .report-meta-card:not(.audience-switch),
+  .audience-switch.report-meta-card{
+    min-height:0 !important;
+  }
+}
+
+
+/* v2.59.6 — Guidance Drawer Switch
+   Turns Next Move / Why This Matters / Safety Reminder into one compact
+   tabbed drawer. This removes uneven card heights and empty real estate while
+   keeping the guidance text available one panel at a time. UI-only layer. */
+.action-guidance.guidance-drawer{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:10px !important;
+  margin-top:14px !important;
+}
+.guidance-switch{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:8px;
+  padding:8px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:18px;
+  background:rgba(255,255,255,.035);
+  min-width:0;
+}
+.guidance-tab{
+  min-width:0;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:999px;
+  padding:9px 11px;
+  color:var(--muted);
+  background:rgba(0,0,0,.18);
+  font-weight:800;
+  font-size:.82rem;
+  letter-spacing:.01em;
+  cursor:pointer;
+  text-align:center;
+  white-space:normal;
+  line-height:1.15;
+  transition:border-color .18s ease, color .18s ease, background .18s ease, transform .18s ease;
+}
+.guidance-tab:hover,
+.guidance-tab:focus-visible{
+  color:#f7fff9;
+  border-color:rgba(82,249,2,.45);
+  outline:none;
+}
+.guidance-tab.active{
+  color:#08100b;
+  background:linear-gradient(135deg, rgba(82,249,2,.96), rgba(36,255,114,.82));
+  border-color:rgba(82,249,2,.82);
+  box-shadow:0 0 20px rgba(82,249,2,.16);
+}
+.guidance-panel{
+  min-height:118px !important;
+  display:none;
+}
+.guidance-panel.active{
+  display:block;
+}
+.guidance-panel[hidden]{
+  display:none !important;
+}
+.action-guidance .guidance-card{
+  min-height:118px !important;
+}
+@media (max-width:720px){
+  .guidance-switch{
+    grid-template-columns:1fr;
+  }
+  .guidance-tab{
+    text-align:left;
+    padding:10px 12px;
+  }
+  .action-guidance .guidance-card,
+  .guidance-panel{
+    min-height:0 !important;
+  }
+}
+
+
+/* v2.59.7 — Guidance Drawer Scroll Lock
+   Keeps Next Move / Why This Matters / Safety Reminder at one stable height.
+   Longer guidance text scrolls inside the drawer instead of growing or shrinking
+   the Intel Report layout. UI-only layer. */
+.action-guidance.guidance-drawer{
+  align-items:stretch !important;
+}
+.action-guidance.guidance-drawer .guidance-card,
+.action-guidance.guidance-drawer .guidance-panel{
+  height:144px !important;
+  min-height:144px !important;
+  max-height:144px !important;
+  overflow-y:auto !important;
+  overflow-x:hidden !important;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  padding-right:18px;
+}
+.action-guidance.guidance-drawer .guidance-card strong,
+.action-guidance.guidance-drawer .guidance-card p{
+  overflow-wrap:anywhere;
+}
+.action-guidance.guidance-drawer .guidance-card::-webkit-scrollbar{
+  width:8px;
+}
+.action-guidance.guidance-drawer .guidance-card::-webkit-scrollbar-thumb{
+  background:rgba(82,249,2,.32);
+  border-radius:999px;
+}
+.action-guidance.guidance-drawer .guidance-card::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.035);
+  border-radius:999px;
+}
+@media (max-width:720px){
+  .action-guidance.guidance-drawer .guidance-card,
+  .action-guidance.guidance-drawer .guidance-panel{
+    height:156px !important;
+    min-height:156px !important;
+    max-height:156px !important;
+  }
+}
+
+/* v2.63.0 — Collapsible Intelligence + Case File Cards
+   Shrinks the two longest lower cards without splitting screens or touching engine logic. */
+.collapsible-card{
+  position:relative;
+}
+.collapsible-card-head{
+  display:flex!important;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  width:100%;
+}
+.drawer-head.centered-head.collapsible-card-head{
+  max-width:980px;
+  grid-template-columns:1fr auto;
+  justify-items:stretch;
+}
+.drawer-head.centered-head.collapsible-card-head > div,
+.section-head.collapsible-card-head > div{
+  min-width:0;
+}
+.drawer-head.centered-head.collapsible-card-head > div,
+.drawer-head.centered-head.collapsible-card-head .eyebrow,
+.drawer-head.centered-head.collapsible-card-head h2,
+.drawer-head.centered-head.collapsible-card-head .subtle{
+  text-align:left;
+}
+.collapse-toggle{
+  display:inline-grid;
+  grid-template-columns:auto auto;
+  grid-template-rows:auto auto;
+  align-items:center;
+  justify-content:center;
+  gap:1px 8px;
+  min-width:132px;
+  border:1px solid rgba(82,249,2,.72);
+  border-radius:999px;
+  padding:9px 13px;
+  color:#f3fff5;
+  background:linear-gradient(180deg, rgba(82,249,2,.15), rgba(82,249,2,.055));
+  box-shadow:0 0 0 1px rgba(82,249,2,.10), 0 0 20px rgba(82,249,2,.10);
+  cursor:pointer;
+  font-weight:900;
+  letter-spacing:.01em;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+}
+.collapse-toggle:hover,
+.collapse-toggle:focus-visible{
+  transform:translateY(-1px);
+  border-color:rgba(82,249,2,.95);
+  background:linear-gradient(180deg, rgba(82,249,2,.22), rgba(82,249,2,.08));
+  box-shadow:0 0 0 1px rgba(82,249,2,.18), 0 0 26px rgba(82,249,2,.18);
+  outline:none;
+}
+.toggle-dot{
+  grid-row:1 / span 2;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--tone-green, #52f902);
+  box-shadow:0 0 16px rgba(82,249,2,.65);
+}
+.collapse-toggle small{
+  grid-column:2;
+  display:block;
+  color:rgba(237,242,247,.68);
+  font-size:.67rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.collapsible-card-body{
+  transition:opacity .16s ease;
+}
+.collapsible-card.is-collapsed{
+  padding-bottom:18px;
+}
+.collapsible-card.is-collapsed .collapsible-card-body{
+  display:none!important;
+}
+.collapsible-card.is-collapsed .collapse-toggle{
+  border-color:rgba(82,249,2,.92);
+  background:linear-gradient(180deg, rgba(82,249,2,.24), rgba(82,249,2,.09));
+}
+.collapsible-card.is-collapsed .toggle-dot{
+  background:transparent;
+  border:2px solid var(--tone-green, #52f902);
+  box-shadow:0 0 14px rgba(82,249,2,.38) inset, 0 0 14px rgba(82,249,2,.32);
+}
+.collapsible-card.is-collapsed::after{
+  content:"Hidden — use the neon toggle to expand";
+  display:block;
+  margin-top:10px;
+  color:rgba(237,242,247,.66);
+  font-size:.82rem;
+  text-align:center;
+}
+@media (max-width:760px){
+  .collapsible-card-head,
+  .drawer-head.centered-head.collapsible-card-head{
+    display:grid!important;
+    grid-template-columns:1fr;
+    justify-items:center;
+    text-align:center;
+  }
+  .drawer-head.centered-head.collapsible-card-head > div,
+  .drawer-head.centered-head.collapsible-card-head .eyebrow,
+  .drawer-head.centered-head.collapsible-card-head h2,
+  .drawer-head.centered-head.collapsible-card-head .subtle,
+  .section-head.collapsible-card-head > div,
+  .section-head.collapsible-card-head .eyebrow,
+  .section-head.collapsible-card-head h2,
+  .section-head.collapsible-card-head .subtle{
+    text-align:center;
+  }
+  .collapse-toggle{width:100%; max-width:260px;}
+}
+
+/* v2.64.0 Fixed Intelligence Drawer + Neon Scroll Cue
+   UI-only layer: keeps the Intelligence Drawer card height stable between report layers.
+   Longer layer content scrolls inside the drawer panel instead of stretching the page. */
+.intelligence-drawer.card{
+  min-height:clamp(620px, 72vh, 760px);
+  max-height:clamp(620px, 72vh, 760px);
+  overflow:hidden;
+  align-content:start;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head{
+  position:relative;
+  grid-template-columns:1fr;
+  justify-items:center;
+  text-align:center;
+  padding-right:160px;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head > div,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head h2,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .subtle{
+  text-align:center;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle{
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:hover,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:focus-visible{
+  transform:translateY(calc(-50% - 1px));
+}
+#intelligenceDrawerBody.collapsible-card-body{
+  min-height:0;
+  display:grid;
+  grid-template-rows:auto 1fr;
+  gap:14px;
+}
+.intelligence-drawer .drawer-tabs{
+  flex:0 0 auto;
+}
+.intelligence-drawer .drawer-stage{
+  position:relative;
+  min-height:0;
+  height:clamp(330px, 38vh, 430px);
+  overflow:hidden;
+}
+.intelligence-drawer .drawer-stage::before{
+  content:"";
+  position:absolute;
+  top:14px;
+  bottom:14px;
+  left:10px;
+  width:3px;
+  border-radius:999px;
+  background:linear-gradient(180deg, rgba(82,249,2,.20), rgba(82,249,2,.96), rgba(82,249,2,.20));
+  box-shadow:0 0 16px rgba(82,249,2,.45);
+  z-index:2;
+  pointer-events:none;
+}
+.intelligence-drawer .drawer-panel{
+  height:100%;
+  max-height:100%;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-left:clamp(22px, 2.4vw, 30px);
+  scrollbar-width:thin;
+  scrollbar-color:rgba(82,249,2,.82) rgba(255,255,255,.06);
+}
+.intelligence-drawer .drawer-panel::-webkit-scrollbar{width:9px;}
+.intelligence-drawer .drawer-panel::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg, rgba(82,249,2,.92), rgba(82,249,2,.42));
+  border-radius:999px;
+}
+.intelligence-drawer .drawer-panel::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.055);
+  border-radius:999px;
+}
+.intelligence-drawer .drawer-panel::after{
+  content:"Scroll inside this drawer for more";
+  position:sticky;
+  bottom:-1px;
+  display:block;
+  width:max-content;
+  max-width:100%;
+  margin:16px auto -6px;
+  padding:6px 11px;
+  border:1px solid rgba(82,249,2,.42);
+  border-radius:999px;
+  color:rgba(237,242,247,.72);
+  background:rgba(7,15,11,.82);
+  box-shadow:0 0 18px rgba(82,249,2,.10);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.intelligence-drawer.is-collapsed{
+  min-height:auto;
+  max-height:none;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head{
+  padding-right:160px;
+}
+@media (max-width:760px){
+  .intelligence-drawer.card{
+    min-height:680px;
+    max-height:680px;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head{
+    padding-right:0;
+    gap:12px;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle{
+    position:static;
+    transform:none;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:hover,
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:focus-visible{
+    transform:translateY(-1px);
+  }
+  .intelligence-drawer .drawer-stage{
+    height:340px;
+  }
+  .intelligence-drawer.is-collapsed{
+    min-height:auto;
+    max-height:none;
+  }
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head{
+    padding-right:0;
+  }
+}
+
+
+/* v2.65.0 Intelligence Drawer Header Polish
+   UI-only layer: tightens the fixed drawer header without changing scan logic. */
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head{
+  padding-right:0;
+  padding-top:8px;
+  align-items:start;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head > div{
+  justify-self:center;
+  max-width:72%;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head h2{
+  text-align:center;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head h2{
+  margin-top:4px;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle{
+  top:0;
+  right:0;
+  transform:none;
+  min-width:112px;
+  padding:6px 10px;
+  gap:0 6px;
+  font-size:.78rem;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:hover,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:focus-visible{
+  transform:translateY(-1px);
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle small{
+  font-size:.58rem;
+  letter-spacing:.06em;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .toggle-dot{
+  width:11px;
+  height:11px;
+}
+.intelligence-drawer .drawer-panel::after{
+  margin-top:12px;
+  font-size:.68rem;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head{
+  padding-right:0;
+}
+@media (max-width:760px){
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head > div{
+    max-width:100%;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle{
+    position:static;
+    justify-self:center;
+    transform:none;
+  }
+}
+
+/* v2.69.1 — Compact Header Pass
+   Purpose: keep the Proxuma IT banner identity but reduce vertical dominance before QR/camera work.
+   Engine unchanged. Offline-first behavior unchanged. */
+.site-header.banner-header{
+  width:min(1120px, calc(100% - 32px));
+  margin:14px auto 0;
+  border-radius:18px;
+}
+.banner-header .header-banner{
+  aspect-ratio:5 / 1;
+  min-height:118px;
+  max-height:190px;
+  background-size:cover;
+  background-position:center center;
+}
+.banner-header .nav-banner{
+  padding:9px 12px 11px;
+  gap:8px;
+}
+.banner-header .nav-banner a{
+  min-width:92px;
+  padding:8px 13px;
+  font-size:.94rem;
+}
+@media (max-width:900px){
+  .banner-header .header-banner{
+    aspect-ratio:4.3 / 1;
+    min-height:104px;
+    max-height:160px;
+  }
+}
+@media (max-width:640px){
+  .site-header.banner-header,
+  .page{width:min(100% - 18px, 1180px)}
+  .site-header.banner-header{margin-top:10px; border-radius:16px;}
+  .banner-header .header-banner{
+    aspect-ratio:3.8 / 1;
+    min-height:92px;
+    max-height:132px;
+    background-position:center center;
+  }
+  .banner-header .nav-banner{
+    gap:7px;
+    padding:8px 9px 10px;
+  }
+  .banner-header .nav-banner a{
+    flex:1 1 calc(50% - 7px);
+    min-width:0;
+    padding:8px 10px;
+    font-size:.9rem;
+  }
+}
+
+
+/* v2.70.0 — Browser QR Scanner Attachment
+   Camera permission is user-triggered only. QR decoding uses the browser's local BarcodeDetector when available. */
+.qr-scanner-ready{
+  flex-wrap:wrap;
+  border-style:solid;
+  border-color:rgba(103,240,167,.46);
+  background:linear-gradient(180deg, rgba(103,240,167,.065), rgba(255,255,255,.022));
+}
+.qr-actions{display:flex; gap:8px; align-items:center; justify-content:flex-end; flex-wrap:wrap}
+.qr-stop{border-color:rgba(255,107,107,.38); color:#ffd0d0}
+.qr-camera-panel{width:100%; margin-top:12px; padding:10px; border:1px solid rgba(103,240,167,.28); border-radius:16px; background:rgba(0,0,0,.24)}
+.qr-video{display:block; width:100%; max-height:280px; object-fit:cover; border-radius:12px; border:1px solid rgba(255,255,255,.10); background:#020607}
+@media (max-width:640px){.qr-actions{width:100%}.qr-actions button{flex:1 1 100%}.qr-video{max-height:220px}}
+
+/* v2.71.0 — Trusted Share Wrapper Intelligence
+   Keeps the compact header and QR slot. Unsupported native QR browsers use a compatibility decoder path before manual paste fallback. */
+.qr-slot .qr-copy p{line-height:1.45}
+
+
+/* v2.72.1 Simple Case Controls / Driver Mode */
+.simple-case-controls{
+  align-items:flex-start;
+}
+.simple-case-controls .primary-copy{
+  font-weight:800;
+  box-shadow:0 0 0 1px rgba(36,255,114,.35), 0 0 22px rgba(36,255,114,.12);
+}
+.advanced-evidence-tools{
+  width:100%;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  padding:10px 12px;
+  background:rgba(255,255,255,.035);
+}
+.advanced-evidence-tools summary{
+  cursor:pointer;
+  color:var(--muted);
+  font-size:.86rem;
+  font-weight:700;
+  letter-spacing:.03em;
+}
+.advanced-evidence-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.advanced-evidence-tools .quiet-note{
+  margin:10px 0 0;
+  font-size:.82rem;
+}
+@media (max-width:820px){
+  .simple-case-controls .compact-copy{width:100%; justify-content:center;}
+}
+
+
+/* v2.74.0 Local Memory Dashboard */
+.memory-dashboard {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(36,255,114,.28);
+  border-radius: 18px;
+  background: rgba(3, 12, 8, .38);
+}
+.memory-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+.memory-stat {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px;
+  padding: .8rem;
+  background: rgba(255,255,255,.035);
+}
+.memory-stat-label {
+  display: block;
+  font-size: .74rem;
+  color: var(--muted, #a9b9ad);
+  margin-bottom: .25rem;
+}
+.memory-stat strong {
+  font-size: 1.45rem;
+  color: var(--green, #24ff72);
+}
+.memory-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.memory-columns h4 {
+  margin: .25rem 0 .5rem;
+}
+.memory-list {
+  padding-left: 1rem;
+}
+.memory-list li {
+  margin-bottom: .55rem;
+}
+.memory-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: .9rem;
+}
+.danger-action {
+  border-color: rgba(255, 103, 103, .45) !important;
+}
+@media (max-width: 720px) {
+  .memory-stat-grid,
+  .memory-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* v2.75.0 Consent-First Online Intel Architecture */
+.online-consent-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 196, 87, .32);
+  border-radius: 18px;
+  background: rgba(24, 15, 3, .34);
+}
+.online-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: .75rem 0 1rem;
+}
+.online-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.online-columns h4 {
+  margin: .25rem 0 .5rem;
+}
+@media (max-width: 720px) {
+  .online-columns { grid-template-columns: 1fr; }
+  .online-actions .compact-copy { width: 100%; justify-content: center; }
+}
+
+
+/* v2.76.0 Browser Check Package */
+.browser-test-card {
+  border: 1px solid rgba(36, 255, 114, 0.28);
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(8, 12, 10, 0.78);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+.browser-test-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* v2.77 Deploy Polish / Version Banner */
+.build-banner{
+  margin:18px 0 24px;
+  border-color:rgba(82,249,2,.46) !important;
+  background:linear-gradient(180deg, rgba(18,29,25,.94), rgba(9,14,18,.96));
+}
+.build-banner-main{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.build-banner h2{
+  margin:0 0 6px;
+  font-size:clamp(1.25rem, 2vw, 1.75rem);
+}
+.build-status-grid{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  max-width:560px;
+}
+.build-banner-actions{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.08);
+  flex-wrap:wrap;
+}
+.build-banner-actions .muted{
+  margin:0;
+  max-width:760px;
+}
+@media (max-width:720px){
+  .build-status-grid{justify-content:flex-start}
+  .build-banner-actions{align-items:flex-start}
+}
+
+/* v2.77.1 — Hero Compression / Command Deck Polish
+   Purpose: keep the logo/header untouched while tightening the hero so the scanner arrives sooner.
+   This is a UI-only override layer; no engine or scoring logic is changed. */
+.hero.hero-framed{
+  margin-top:14px;
+  margin-bottom:12px;
+  padding:18px 20px !important;
+  border-radius:20px;
+}
+.hero.hero-framed::before{
+  inset:8px;
+  border-radius:16px;
+  opacity:.78;
+}
+.hero-framed .hero-frame-inner{
+  max-width:780px;
+  padding:18px 16px !important;
+}
+.hero-framed .eyebrow{
+  margin-bottom:8px;
+  font-size:.76rem;
+  letter-spacing:.15em;
+}
+.hero-framed h1{
+  font-size:clamp(1.7rem, 3.1vw, 2.45rem) !important;
+  line-height:1.04;
+  margin-bottom:10px;
+}
+.hero-framed .lead{
+  max-width:680px;
+  font-size:clamp(.94rem, 1.4vw, 1.05rem);
+  line-height:1.52;
+  margin-bottom:14px;
+}
+.hero-framed .proof-row{
+  gap:8px;
+  margin-top:10px;
+}
+.hero-framed .proof-pill{
+  padding:7px 10px;
+  font-size:.78rem;
+}
+/* Turn the deploy identity panel into a slimmer command-deck strip beneath the hero. */
+.build-banner{
+  margin:10px 0 18px !important;
+  padding:14px 16px !important;
+  border-radius:18px;
+}
+.build-banner-main{
+  align-items:center;
+  gap:12px;
+}
+.build-banner h2{
+  font-size:clamp(1.05rem, 1.6vw, 1.32rem) !important;
+  margin-bottom:2px;
+}
+.build-banner .eyebrow{
+  margin-bottom:4px;
+}
+.build-status-grid{
+  gap:6px;
+}
+.build-status-grid .status-pill{
+  padding:6px 9px;
+  font-size:.76rem;
+}
+.build-banner-actions{
+  margin-top:10px !important;
+  padding-top:10px !important;
+  gap:10px;
+}
+.build-banner-actions .muted{
+  font-size:.86rem;
+  line-height:1.45;
+}
+@media (max-width:720px){
+  .hero.hero-framed{
+    margin-top:10px;
+    padding:14px 12px !important;
+  }
+  .hero-framed .hero-frame-inner{
+    padding:16px 12px !important;
+  }
+  .hero-framed .proof-row{
+    gap:6px;
+  }
+  .hero-framed .proof-pill,
+  .build-status-grid .status-pill{
+    width:auto;
+  }
+  .build-banner{
+    padding:13px 12px !important;
+  }
+  .build-banner-actions .compact-copy{
+    width:100%;
+    justify-content:center;
+  }
+}
+
+
+/* v2.77.2 — Public UI Garage Cleanup
+   Purpose: remove user-facing build/debug clutter from the public landing surface before public release.
+   Engine unchanged. Diagnostics remain in testing/report internals. */
+.hero-framed .eyebrow{
+  color:rgba(228,236,242,.78);
+}
+.hero.hero-framed{
+  margin-bottom:16px;
+}
+
+
+/* v2.77.3 — Drawer + Case File Centering Cleanup
+   UI-only: centers the Intelligence Drawer and Case File header text while simplifying public-facing case copy. */
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head,
+.casefile .section-head.collapsible-card-head{
+  display:grid!important;
+  grid-template-columns:1fr;
+  justify-items:center;
+  align-items:start;
+  text-align:center;
+  gap:10px;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head > div,
+.casefile .section-head.collapsible-card-head > div{
+  justify-self:center;
+  max-width:760px;
+  margin:0 auto;
+  text-align:center;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head h2,
+.casefile .section-head.collapsible-card-head .eyebrow,
+.casefile .section-head.collapsible-card-head h2,
+.casefile .section-head.collapsible-card-head .subtle{
+  text-align:center!important;
+  margin-left:auto;
+  margin-right:auto;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+.casefile .section-head.collapsible-card-head .collapse-toggle{
+  position:static!important;
+  justify-self:center;
+  transform:none!important;
+  margin-top:2px;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:hover,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:focus-visible,
+.casefile .section-head.collapsible-card-head .collapse-toggle:hover,
+.casefile .section-head.collapsible-card-head .collapse-toggle:focus-visible{
+  transform:translateY(-1px)!important;
+}
+.casefile .section-head.collapsible-card-head .subtle{
+  max-width:560px;
+  color:rgba(237,242,247,.74);
+}
+
+/* v2.77.4 — Scanner + Public Language Cleanup
+   UI-only: makes the public scan path easier to read, renames the drawer to Analysis Layers, and keeps advanced tools tucked away. */
+.scanner-panel.card{
+  gap:14px;
+}
+.scanner-panel > .section-head h2{
+  max-width:620px;
+}
+.scanner-panel > .section-head .subtle{
+  font-weight:700;
+  color:rgba(82,249,2,.82);
+}
+.input-label{
+  text-align:center;
+  width:100%;
+}
+.input-row{
+  max-width:860px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.qr-slot{
+  padding:14px 16px;
+}
+.qr-copy p,
+.teaching-card p,
+.mode-card .quiet-note{
+  max-width:720px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.teaching-card,
+.mode-card{
+  padding-top:14px;
+  padding-bottom:14px;
+}
+.casefile .section-head.collapsible-card-head h2{
+  margin-bottom:4px;
+}
+.casefile .section-head.collapsible-card-head .subtle{
+  font-size:.95rem;
+  color:rgba(82,249,2,.80);
+}
+#caseNotes{
+  min-height:110px;
+}
+.case-actions{
+  justify-content:center;
+}
+@media (max-width:720px){
+  .input-row{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  #scanButton,
+  .case-actions button{
+    width:100%;
+  }
+}
+
+
+/* v2.77.5 — Public Release Surface Polish
+   UI-only release pass: sharper public nav labels, softer hero proof pills,
+   simpler Analysis Layers title, and hidden internal browser-RC test controls.
+   No scan engine, scoring, QR, local memory, or consent logic changed. */
+.internal-only[hidden],
+.drawer-tab.internal-only[hidden]{
+  display:none!important;
+}
+.hero-framed .proof-row{
+  gap:10px;
+}
+.hero-framed .proof-pill{
+  white-space:nowrap;
+}
+.drawer-head.centered-head h2{
+  max-width:720px;
+}
+@media (max-width:520px){
+  .hero-framed .proof-pill{
+    white-space:normal;
+  }
+}
+
+
+/* v2.77.6 — Compact Drawer + Explain Guide
+   UI-only: turns closed Intelligence/Case File cards into slim command bars and adds a plain-language Explain guide.
+   Engine unchanged. No API calls added. */
+.explain-page.card{
+  border-color:rgba(82,249,2,.34)!important;
+  padding:clamp(18px,2.4vw,28px);
+  display:grid;
+  gap:18px;
+}
+.explain-head{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto;
+}
+.explain-head h2,
+.explain-head .eyebrow,
+.explain-head .subtle{
+  text-align:center;
+}
+.explain-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.explain-card{
+  border:1px solid rgba(82,249,2,.22);
+  border-radius:22px;
+  background:rgba(255,255,255,.028);
+  padding:15px;
+  min-height:150px;
+}
+.explain-card h3{
+  margin:6px 0 8px;
+}
+.explain-card p{
+  margin:0;
+  color:rgba(237,242,247,.78);
+  line-height:1.55;
+}
+.collapsed-hint{
+  display:none;
+  margin:3px 0 0;
+  color:rgba(237,242,247,.68);
+  font-size:.86rem;
+  font-weight:700;
+}
+.intelligence-drawer.card.is-collapsed,
+.casefile.card.is-collapsed{
+  min-height:0!important;
+  max-height:none!important;
+  padding:10px 14px!important;
+  gap:0!important;
+  border-color:rgba(82,249,2,.30)!important;
+  background:linear-gradient(180deg, rgba(82,249,2,.045), rgba(255,255,255,.018));
+}
+.collapsible-card.is-collapsed::after{
+  content:none!important;
+  display:none!important;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head,
+.casefile.is-collapsed .section-head.collapsible-card-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  justify-items:stretch;
+  gap:10px;
+  text-align:left;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head > div,
+.casefile.is-collapsed .section-head.collapsible-card-head > div{
+  justify-self:start;
+  max-width:none;
+  margin:0;
+  text-align:left;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.casefile.is-collapsed .section-head.collapsible-card-head .eyebrow{
+  margin:0;
+  text-align:left!important;
+  font-size:.72rem;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head h2,
+.casefile.is-collapsed .section-head.collapsible-card-head h2,
+.casefile.is-collapsed .section-head.collapsible-card-head .subtle{
+  display:none;
+}
+.intelligence-drawer.is-collapsed .collapsed-hint,
+.casefile.is-collapsed .collapsed-hint{
+  display:block;
+  text-align:left;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+.casefile.is-collapsed .section-head.collapsible-card-head .collapse-toggle{
+  justify-self:end;
+  min-width:88px;
+  padding:7px 10px;
+  margin:0;
+  font-size:.76rem;
+}
+.intelligence-drawer.is-collapsed .collapse-toggle small,
+.casefile.is-collapsed .collapse-toggle small{
+  display:none;
+}
+@media (max-width:860px){
+  .explain-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:640px){
+  .top-nav.nav-banner{gap:7px;}
+  .top-nav.nav-banner a{padding-left:8px; padding-right:8px;}
+  .explain-grid{grid-template-columns:1fr;}
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head,
+  .casefile.is-collapsed .section-head.collapsible-card-head{
+    grid-template-columns:1fr;
+    justify-items:center;
+    text-align:center;
+  }
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head > div,
+  .casefile.is-collapsed .section-head.collapsible-card-head > div,
+  .intelligence-drawer.is-collapsed .collapsed-hint,
+  .casefile.is-collapsed .collapsed-hint,
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .eyebrow,
+  .casefile.is-collapsed .section-head.collapsible-card-head .eyebrow{
+    text-align:center!important;
+    justify-self:center;
+  }
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+  .casefile.is-collapsed .section-head.collapsible-card-head .collapse-toggle{
+    justify-self:center;
+  }
+}
+
+
+/* v2.77.7 — Compact Explain Guide Drawer
+   UI-only: tucks the Explain guide behind a slim command bar and raises inner explanation-card borders slightly.
+   Engine unchanged. No API calls added. */
+.explain-page.card{
+  padding:clamp(12px,1.8vw,18px);
+}
+.explain-page.card.is-collapsed{
+  min-height:0!important;
+  max-height:none!important;
+  padding:10px 14px!important;
+  gap:0!important;
+  border-color:rgba(82,249,2,.30)!important;
+  background:linear-gradient(180deg, rgba(82,249,2,.045), rgba(255,255,255,.018));
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  justify-items:stretch;
+  gap:10px;
+  text-align:left;
+  margin:0;
+  max-width:none;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head > div{
+  justify-self:start;
+  max-width:none;
+  margin:0;
+  text-align:left;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head .eyebrow{
+  margin:0;
+  text-align:left!important;
+  font-size:.72rem;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head h2,
+.explain-page.is-collapsed .explain-head.collapsible-card-head .subtle{
+  display:none;
+}
+.explain-page.is-collapsed .collapsed-hint{
+  display:block;
+  text-align:left;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head .collapse-toggle{
+  justify-self:end;
+  min-width:88px;
+  padding:7px 10px;
+  margin:0;
+  font-size:.76rem;
+}
+.explain-page.is-collapsed .collapse-toggle small{
+  display:none;
+}
+.explain-page:not(.is-collapsed) .explain-head.collapsible-card-head{
+  display:grid;
+  gap:12px;
+  justify-items:center;
+}
+.explain-card{
+  border-color:rgba(82,249,2,.36)!important;
+  box-shadow:0 0 0 1px rgba(82,249,2,.045), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.explain-card:hover{
+  border-color:rgba(82,249,2,.46)!important;
+}
+@media (max-width:640px){
+  .explain-page.is-collapsed .explain-head.collapsible-card-head{
+    grid-template-columns:1fr;
+    justify-items:center;
+    text-align:center;
+  }
+  .explain-page.is-collapsed .explain-head.collapsible-card-head > div,
+  .explain-page.is-collapsed .collapsed-hint,
+  .explain-page.is-collapsed .explain-head.collapsible-card-head .eyebrow{
+    text-align:center!important;
+    justify-self:center;
+  }
+  .explain-page.is-collapsed .explain-head.collapsible-card-head .collapse-toggle{
+    justify-self:center;
+  }
+}
+
+
+/* v2.77.8 — Explain Guide Center + Button Lock
+   UI-only: centers the Explain Guide command text and locks Show/Hide Guide to one consistent corner.
+   Engine unchanged. No API calls added. */
+.explain-page .explain-head.collapsible-card-head{
+  position:relative;
+  display:block!important;
+  text-align:center!important;
+  max-width:none!important;
+  margin:0!important;
+  padding-right:132px;
+  min-height:44px;
+}
+.explain-page .explain-head.collapsible-card-head > div{
+  max-width:760px!important;
+  margin:0 auto!important;
+  text-align:center!important;
+  justify-self:center!important;
+}
+.explain-page .explain-head.collapsible-card-head .eyebrow,
+.explain-page .explain-head.collapsible-card-head h2,
+.explain-page .explain-head.collapsible-card-head .subtle,
+.explain-page .explain-head.collapsible-card-head .collapsed-hint{
+  text-align:center!important;
+}
+.explain-page .explain-head.collapsible-card-head .eyebrow{
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.explain-page .explain-head.collapsible-card-head .collapse-toggle{
+  position:absolute;
+  top:50%;
+  right:0;
+  transform:translateY(-50%);
+  width:112px;
+  min-width:112px!important;
+  margin:0!important;
+  justify-self:auto!important;
+  padding:8px 11px!important;
+  font-size:.76rem!important;
+}
+.explain-page .explain-head.collapsible-card-head .collapse-toggle small{
+  display:none!important;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head{
+  grid-template-columns:none!important;
+  align-items:center;
+  justify-items:center;
+  gap:0;
+  padding-right:132px!important;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head > div{
+  justify-self:center!important;
+  text-align:center!important;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head .eyebrow{
+  text-align:center!important;
+  font-size:.78rem;
+}
+.explain-page:not(.is-collapsed) .explain-head.collapsible-card-head{
+  padding-right:132px;
+}
+.explain-page:not(.is-collapsed) .explain-head.collapsible-card-head .collapse-toggle{
+  right:0;
+}
+@media (max-width:640px){
+  .explain-page .explain-head.collapsible-card-head,
+  .explain-page.is-collapsed .explain-head.collapsible-card-head,
+  .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head{
+    padding-right:0!important;
+    padding-top:42px;
+  }
+  .explain-page .explain-head.collapsible-card-head .collapse-toggle{
+    top:0;
+    right:50%;
+    transform:translateX(50%);
+  }
+}
+
+
+/* v2.77.9 — Explain Guide Center Stability
+   UI-only: removes title drift between collapsed/expanded Explain Guide states and anchors the Show/Hide control.
+   Engine unchanged. No API calls added. */
+.explain-page .explain-head.collapsible-card-head,
+.explain-page.is-collapsed .explain-head.collapsible-card-head,
+.explain-page:not(.is-collapsed) .explain-head.collapsible-card-head{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:54px!important;
+  text-align:center!important;
+}
+.explain-page .explain-head.collapsible-card-head > div,
+.explain-page.is-collapsed .explain-head.collapsible-card-head > div,
+.explain-page:not(.is-collapsed) .explain-head.collapsible-card-head > div{
+  width:100%!important;
+  max-width:760px!important;
+  margin:0 auto!important;
+  padding:0 138px!important;
+  justify-self:center!important;
+  text-align:center!important;
+}
+.explain-page .explain-head.collapsible-card-head .eyebrow,
+.explain-page .explain-head.collapsible-card-head h2,
+.explain-page .explain-head.collapsible-card-head .subtle,
+.explain-page .explain-head.collapsible-card-head .collapsed-hint,
+.explain-page.is-collapsed .explain-head.collapsible-card-head .eyebrow,
+.explain-page.is-collapsed .explain-head.collapsible-card-head h2,
+.explain-page.is-collapsed .explain-head.collapsible-card-head .subtle,
+.explain-page.is-collapsed .explain-head.collapsible-card-head .collapsed-hint{
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head h2,
+.explain-page.is-collapsed .explain-head.collapsible-card-head .subtle{
+  display:none!important;
+}
+.explain-page.is-collapsed .collapsed-hint{
+  display:block!important;
+}
+.explain-page .explain-head.collapsible-card-head .collapse-toggle,
+.explain-page.is-collapsed .explain-head.collapsible-card-head .collapse-toggle,
+.explain-page:not(.is-collapsed) .explain-head.collapsible-card-head .collapse-toggle{
+  position:absolute!important;
+  top:50%!important;
+  right:0!important;
+  left:auto!important;
+  transform:translateY(-50%)!important;
+  width:116px!important;
+  min-width:116px!important;
+  max-width:116px!important;
+  height:36px!important;
+  min-height:36px!important;
+  margin:0!important;
+  padding:7px 10px!important;
+  justify-self:auto!important;
+  white-space:nowrap!important;
+  box-sizing:border-box!important;
+}
+.explain-page .explain-head.collapsible-card-head .collapse-toggle .toggle-copy{
+  display:inline-block!important;
+  min-width:68px!important;
+  text-align:center!important;
+}
+.explain-page .explain-head.collapsible-card-head .collapse-toggle small{
+  display:none!important;
+}
+@media (max-width:640px){
+  .explain-page .explain-head.collapsible-card-head,
+  .explain-page.is-collapsed .explain-head.collapsible-card-head,
+  .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head{
+    min-height:92px!important;
+    align-items:end!important;
+    padding-top:42px!important;
+  }
+  .explain-page .explain-head.collapsible-card-head > div,
+  .explain-page.is-collapsed .explain-head.collapsible-card-head > div,
+  .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head > div{
+    padding:0!important;
+  }
+  .explain-page .explain-head.collapsible-card-head .collapse-toggle,
+  .explain-page.is-collapsed .explain-head.collapsible-card-head .collapse-toggle,
+  .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head .collapse-toggle{
+    top:0!important;
+    right:50%!important;
+    transform:translateX(50%)!important;
+  }
+}
+
+
+/* v2.77.10 — Analysis + Case File Center Stability
+   UI-only: applies the Explain Guide stable header pattern to Analysis Layers and Case File.
+   Keeps title/helper text centered in collapsed and expanded states while anchoring one fixed Show/Hide button position.
+   Engine unchanged. No QR changes. No API calls added. */
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head,
+.intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head,
+.casefile .section-head.collapsible-card-head,
+.casefile.is-collapsed .section-head.collapsible-card-head,
+.casefile:not(.is-collapsed) .section-head.collapsible-card-head{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:54px!important;
+  text-align:center!important;
+  gap:0!important;
+  grid-template-columns:none!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head > div,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head > div,
+.intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head > div,
+.casefile .section-head.collapsible-card-head > div,
+.casefile.is-collapsed .section-head.collapsible-card-head > div,
+.casefile:not(.is-collapsed) .section-head.collapsible-card-head > div{
+  width:100%!important;
+  max-width:760px!important;
+  margin:0 auto!important;
+  padding:0 152px!important;
+  justify-self:center!important;
+  text-align:center!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head h2,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .subtle,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapsed-hint,
+.casefile .section-head.collapsible-card-head .eyebrow,
+.casefile .section-head.collapsible-card-head h2,
+.casefile .section-head.collapsible-card-head .subtle,
+.casefile .section-head.collapsible-card-head .collapsed-hint{
+  text-align:center!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  justify-self:center!important;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head h2,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .subtle,
+.casefile.is-collapsed .section-head.collapsible-card-head h2,
+.casefile.is-collapsed .section-head.collapsible-card-head .subtle{
+  display:none!important;
+}
+.intelligence-drawer.is-collapsed .collapsed-hint,
+.casefile.is-collapsed .collapsed-hint{
+  display:block!important;
+  text-align:center!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+.intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+.casefile .section-head.collapsible-card-head .collapse-toggle,
+.casefile.is-collapsed .section-head.collapsible-card-head .collapse-toggle,
+.casefile:not(.is-collapsed) .section-head.collapsible-card-head .collapse-toggle{
+  position:absolute!important;
+  top:50%!important;
+  right:0!important;
+  left:auto!important;
+  transform:translateY(-50%)!important;
+  width:136px!important;
+  min-width:136px!important;
+  max-width:136px!important;
+  height:36px!important;
+  min-height:36px!important;
+  margin:0!important;
+  padding:7px 10px!important;
+  justify-self:auto!important;
+  white-space:nowrap!important;
+  box-sizing:border-box!important;
+  font-size:.76rem!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:hover,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:focus-visible,
+.casefile .section-head.collapsible-card-head .collapse-toggle:hover,
+.casefile .section-head.collapsible-card-head .collapse-toggle:focus-visible{
+  transform:translateY(calc(-50% - 1px))!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle .toggle-copy,
+.casefile .section-head.collapsible-card-head .collapse-toggle .toggle-copy{
+  display:inline-block!important;
+  min-width:82px!important;
+  text-align:center!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle small,
+.casefile .section-head.collapsible-card-head .collapse-toggle small{
+  display:none!important;
+}
+@media (max-width:640px){
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head,
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head,
+  .intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head,
+  .casefile .section-head.collapsible-card-head,
+  .casefile.is-collapsed .section-head.collapsible-card-head,
+  .casefile:not(.is-collapsed) .section-head.collapsible-card-head{
+    min-height:92px!important;
+    align-items:end!important;
+    padding-top:42px!important;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head > div,
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head > div,
+  .intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head > div,
+  .casefile .section-head.collapsible-card-head > div,
+  .casefile.is-collapsed .section-head.collapsible-card-head > div,
+  .casefile:not(.is-collapsed) .section-head.collapsible-card-head > div{
+    padding:0!important;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+  .intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+  .casefile .section-head.collapsible-card-head .collapse-toggle,
+  .casefile.is-collapsed .section-head.collapsible-card-head .collapse-toggle,
+  .casefile:not(.is-collapsed) .section-head.collapsible-card-head .collapse-toggle{
+    top:0!important;
+    right:50%!important;
+    transform:translateX(50%)!important;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:hover,
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle:focus-visible,
+  .casefile .section-head.collapsible-card-head .collapse-toggle:hover,
+  .casefile .section-head.collapsible-card-head .collapse-toggle:focus-visible{
+    transform:translateX(50%) translateY(-1px)!important;
+  }
+}
+
+
+/* v2.77.11 — Label Stack Centering
+   UI-only: places the Analysis Layers and Case File labels directly above their centered helper lines in both collapsed and expanded states.
+   Engine unchanged. No QR changes. No API calls added. */
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head,
+.intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head,
+.casefile .section-head.collapsible-card-head,
+.casefile.is-collapsed .section-head.collapsible-card-head,
+.casefile:not(.is-collapsed) .section-head.collapsible-card-head{
+  position:relative!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  width:100%!important;
+  min-height:54px!important;
+  padding:0!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head > div,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head > div,
+.intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head > div,
+.casefile .section-head.collapsible-card-head > div,
+.casefile.is-collapsed .section-head.collapsible-card-head > div,
+.casefile:not(.is-collapsed) .section-head.collapsible-card-head > div{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  max-width:760px!important;
+  margin:0 auto!important;
+  padding:0!important;
+  text-align:center!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.casefile .section-head.collapsible-card-head .eyebrow,
+.casefile.is-collapsed .section-head.collapsible-card-head .eyebrow,
+.casefile:not(.is-collapsed) .section-head.collapsible-card-head .eyebrow{
+  display:block!important;
+  order:1!important;
+  width:100%!important;
+  text-align:center!important;
+  margin:0 auto 4px!important;
+  padding:0!important;
+  justify-self:center!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head h2,
+.casefile .section-head.collapsible-card-head h2{
+  order:2!important;
+  width:100%!important;
+  text-align:center!important;
+  margin:0 auto 4px!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .subtle,
+.casefile .section-head.collapsible-card-head .subtle{
+  order:3!important;
+  width:100%!important;
+  text-align:center!important;
+  margin:0 auto 4px!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapsed-hint,
+.casefile .section-head.collapsible-card-head .collapsed-hint{
+  order:4!important;
+  width:100%!important;
+  text-align:center!important;
+  margin:0 auto!important;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head h2,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .subtle,
+.casefile.is-collapsed .section-head.collapsible-card-head h2,
+.casefile.is-collapsed .section-head.collapsible-card-head .subtle{
+  display:none!important;
+}
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .collapsed-hint,
+.casefile.is-collapsed .section-head.collapsible-card-head .collapsed-hint{
+  display:block!important;
+}
+@media (min-width:641px){
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head,
+  .casefile .section-head.collapsible-card-head{
+    padding-right:148px!important;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+  .intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head .collapse-toggle,
+  .casefile .section-head.collapsible-card-head .collapse-toggle,
+  .casefile.is-collapsed .section-head.collapsible-card-head .collapse-toggle,
+  .casefile:not(.is-collapsed) .section-head.collapsible-card-head .collapse-toggle{
+    position:absolute!important;
+    top:50%!important;
+    right:0!important;
+    transform:translateY(-50%)!important;
+  }
+}
+@media (max-width:640px){
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head,
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head,
+  .intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head,
+  .casefile .section-head.collapsible-card-head,
+  .casefile.is-collapsed .section-head.collapsible-card-head,
+  .casefile:not(.is-collapsed) .section-head.collapsible-card-head{
+    min-height:92px!important;
+    padding-top:42px!important;
+    padding-right:0!important;
+  }
+}
+
+/* v2.89.0 — UI Label Language Polish
+   UI-only: strengthens the hero product mark and renames public labels to clearer user-facing language.
+   Engine unchanged. No QR changes. No API calls added. */
+.hero-framed .hero-product-mark{
+  display:block!important;
+  font-size:clamp(1.18rem, 2.4vw, 1.86rem)!important;
+  line-height:1!important;
+  letter-spacing:.16em!important;
+  font-weight:900!important;
+  margin:0 auto 12px!important;
+  text-align:center!important;
+  color:var(--accent)!important;
+  text-shadow:0 0 16px rgba(82,249,2,.26)!important;
+}
+.hero-framed h1{
+  margin-top:0!important;
+}
+.explain-page .explain-head.collapsible-card-head .eyebrow,
+.scanner-panel > .section-head .eyebrow,
+.report-panel .report-top .eyebrow,
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head .eyebrow,
+.casefile .section-head.collapsible-card-head .eyebrow{
+  letter-spacing:.11em!important;
+}
+.explain-page .collapsed-hint,
+.explain-page .subtle{
+  text-align:center!important;
+}
+
+
+/* v2.89.1 — Label Chip Wrap UI Polish
+   UI-only: separates helper labels into small wrapped chips for App Guide, Deep Analysis, and Case File.
+   Engine unchanged. No QR changes. No API calls added. */
+.label-chip-row,
+.explain-page .label-chip-row,
+.intelligence-drawer .label-chip-row,
+.casefile .label-chip-row{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+  width:100%!important;
+  max-width:720px!important;
+  margin:7px auto 0!important;
+  text-align:center!important;
+}
+.label-chip-row span,
+.explain-page .label-chip-row span,
+.intelligence-drawer .label-chip-row span,
+.casefile .label-chip-row span{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:24px!important;
+  padding:5px 10px!important;
+  border:1px solid rgba(82,249,2,.32)!important;
+  border-radius:999px!important;
+  background:rgba(82,249,2,.045)!important;
+  color:rgba(232,255,238,.86)!important;
+  box-shadow:inset 0 0 12px rgba(82,249,2,.035)!important;
+  font-size:.74rem!important;
+  line-height:1.1!important;
+  letter-spacing:.04em!important;
+  white-space:nowrap!important;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head .collapsed-hint.label-chip-row,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .collapsed-hint.label-chip-row,
+.casefile.is-collapsed .section-head.collapsible-card-head .collapsed-hint.label-chip-row{
+  display:flex!important;
+}
+.explain-page.is-collapsed .explain-head.collapsible-card-head .subtle.label-chip-row,
+.intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head .subtle.label-chip-row,
+.casefile.is-collapsed .section-head.collapsible-card-head .subtle.label-chip-row{
+  display:none!important;
+}
+.explain-page:not(.is-collapsed) .explain-head.collapsible-card-head .collapsed-hint.label-chip-row,
+.intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head .collapsed-hint.label-chip-row,
+.casefile:not(.is-collapsed) .section-head.collapsible-card-head .collapsed-hint.label-chip-row{
+  display:none!important;
+}
+.explain-page:not(.is-collapsed) .explain-head.collapsible-card-head .subtle.label-chip-row,
+.intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head .subtle.label-chip-row,
+.casefile:not(.is-collapsed) .section-head.collapsible-card-head .subtle.label-chip-row{
+  display:flex!important;
+}
+@media (max-width:640px){
+  .label-chip-row,
+  .explain-page .label-chip-row,
+  .intelligence-drawer .label-chip-row,
+  .casefile .label-chip-row{
+    gap:6px!important;
+    max-width:100%!important;
+  }
+  .label-chip-row span,
+  .explain-page .label-chip-row span,
+  .intelligence-drawer .label-chip-row span,
+  .casefile .label-chip-row span{
+    font-size:.7rem!important;
+    padding:5px 8px!important;
+  }
+}
+
+/* v2.89.2 — Compact Mobile-Friendly Spacing Pass
+   UI-only: tightens vertical real estate between cards and cards' internal spacing while preserving the locked visual identity.
+   Engine unchanged. No QR changes. No API calls added. */
+.page{
+  gap:clamp(14px, 1.8vw, 20px)!important;
+  margin-top:clamp(18px, 2vw, 24px)!important;
+  margin-bottom:clamp(34px, 4vw, 48px)!important;
+}
+.workbench{
+  gap:clamp(14px, 2vw, 20px)!important;
+}
+.hero-framed .hero-frame-inner{
+  padding:clamp(26px, 3.2vw, 34px) clamp(22px, 3vw, 32px)!important;
+}
+.card,
+.scanner-panel.card,
+.report-panel.card,
+.intelligence-drawer.card,
+.casefile{
+  padding:clamp(16px, 2vw, 21px)!important;
+}
+.explain-page.card{
+  padding:clamp(14px, 1.9vw, 19px)!important;
+}
+.mode-card,
+.teaching-card,
+.qr-slot,
+.report-tools,
+.guidance-card,
+.report-meta-card{
+  padding-top:clamp(10px, 1.4vw, 13px)!important;
+  padding-bottom:clamp(10px, 1.4vw, 13px)!important;
+}
+.mode-card,
+.teaching-card,
+.qr-slot,
+.report-tools,
+.micro-list,
+.memory-strip,
+.quick-tests,
+.report-strip,
+.action-guidance{
+  margin-top:clamp(10px, 1.4vw, 14px)!important;
+}
+.report-strip,
+.action-guidance,
+.details-stack,
+.drawer-tabs,
+.quick-tests,
+.micro-list,
+.scan-mode-row,
+.report-copy-actions,
+.explain-grid{
+  gap:clamp(8px, 1.15vw, 12px)!important;
+}
+.score-ring{
+  padding:10px!important;
+}
+.intelligence-drawer.is-collapsed,
+.casefile.is-collapsed,
+.explain-page.is-collapsed{
+  padding-top:clamp(12px, 1.6vw, 16px)!important;
+  padding-bottom:clamp(12px, 1.6vw, 16px)!important;
+}
+.intelligence-drawer .drawer-head.centered-head.collapsible-card-head,
+.casefile .section-head.collapsible-card-head,
+.explain-page .explain-head.collapsible-card-head{
+  min-height:50px!important;
+}
+.label-chip-row,
+.explain-page .label-chip-row,
+.intelligence-drawer .label-chip-row,
+.casefile .label-chip-row{
+  margin-top:5px!important;
+  gap:6px!important;
+}
+.label-chip-row span,
+.explain-page .label-chip-row span,
+.intelligence-drawer .label-chip-row span,
+.casefile .label-chip-row span{
+  min-height:22px!important;
+  padding:4px 9px!important;
+}
+.drawer-panel{
+  padding:clamp(14px, 1.8vw, 18px)!important;
+}
+.drawer-panel-head{
+  padding-bottom:10px!important;
+  margin-bottom:10px!important;
+}
+@media (max-width:700px){
+  .site-header{
+    margin-top:14px!important;
+  }
+  .page{
+    width:min(1180px, calc(100% - 20px))!important;
+    gap:12px!important;
+    margin-top:14px!important;
+  }
+  .hero-framed .hero-frame-inner{
+    padding:22px 16px!important;
+  }
+  .card,
+  .hero,
+  .scanner-panel.card,
+  .report-panel.card,
+  .intelligence-drawer.card,
+  .casefile,
+  .explain-page.card{
+    padding:14px!important;
+    border-radius:18px!important;
+  }
+  .intelligence-drawer .drawer-head.centered-head.collapsible-card-head,
+  .intelligence-drawer.is-collapsed .drawer-head.centered-head.collapsible-card-head,
+  .intelligence-drawer:not(.is-collapsed) .drawer-head.centered-head.collapsible-card-head,
+  .casefile .section-head.collapsible-card-head,
+  .casefile.is-collapsed .section-head.collapsible-card-head,
+  .casefile:not(.is-collapsed) .section-head.collapsible-card-head,
+  .explain-page .explain-head.collapsible-card-head,
+  .explain-page.is-collapsed .explain-head.collapsible-card-head,
+  .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head{
+    min-height:82px!important;
+    padding-top:38px!important;
+  }
+  .report-strip,
+  .action-guidance,
+  .details-stack,
+  .drawer-tabs,
+  .quick-tests,
+  .micro-list,
+  .scan-mode-row,
+  .report-copy-actions,
+  .explain-grid{
+    gap:8px!important;
+  }
+  .mode-pill{
+    height:auto!important;
+    min-height:92px!important;
+  }
+}
+@media (max-width:420px){
+  .label-chip-row span,
+  .explain-page .label-chip-row span,
+  .intelligence-drawer .label-chip-row span,
+  .casefile .label-chip-row span{
+    font-size:.68rem!important;
+    padding:4px 7px!important;
+  }
+}
+
+
+/* v3.18.0 Local Sample Check */
+.offline-lab-card {
+  border: 1px solid rgba(36, 255, 114, 0.30);
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(6, 15, 10, 0.78);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+.offline-lab-load {
+  margin-right: .45rem;
+  padding: .35rem .65rem !important;
+}
+.offline-lab-pass small,
+.offline-lab-watch small { color: var(--tone-green, #24ff72); }
+.offline-lab-check small { color: var(--tone-red, #ff5555); }
+
+
+/* v3.19.1 public UI clarity pass */
+.privacy-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.55rem;
+  align-items:center;
+  margin:0.75rem 0 1rem;
+  padding:0.72rem 0.85rem;
+  border:1px solid rgba(70,255,174,0.32);
+  border-radius:16px;
+  background:rgba(5,18,14,0.62);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+.privacy-strip span{
+  display:inline-flex;
+  align-items:center;
+  gap:0.35rem;
+  padding:0.35rem 0.58rem;
+  border:1px solid rgba(70,255,174,0.28);
+  border-radius:999px;
+  background:rgba(70,255,174,0.08);
+  color:#dfffee;
+  font-size:0.78rem;
+  letter-spacing:0.01em;
+}
+.privacy-strip span::before{
+  content:"✓";
+  color:#46ffae;
+  font-weight:800;
+}
+@media (max-width:640px){
+  .privacy-strip{padding:0.62rem; gap:0.45rem;}
+  .privacy-strip span{font-size:0.72rem;}
+}
