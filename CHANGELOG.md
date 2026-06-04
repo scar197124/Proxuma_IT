@@ -40,3 +40,8 @@
 ## v3.19.7 Canonical Link Patch
 
 Adds a clean link back to the canonical PROXUMA homepage while preserving offline-first scanning and existing engine behavior.
+
+
+## v3.19.8 Return to Canonical Path
+- Added a compact return-to-PROXUMA ecosystem card near the bottom of the scanner flow so IP, URL, QR, and message checks do not feel like a dead end.
+- Preserved the v3.19.7 canonical link, v3.19.6 wording clarity, v3.19.5 message trigger tuning, compact UI, and offline-first behavior.
