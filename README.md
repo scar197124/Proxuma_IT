@@ -92,3 +92,8 @@ Adds a clean link back to the canonical PROXUMA homepage while preserving offlin
 ## v3.19.8 Return to Canonical Path
 - Added a compact return-to-PROXUMA ecosystem card near the bottom of the scanner flow so IP, URL, QR, and message checks do not feel like a dead end.
 - Preserved the v3.19.7 canonical link, v3.19.6 wording clarity, v3.19.5 message trigger tuning, compact UI, and offline-first behavior.
+
+
+### v3.19.9 navigation note
+
+The Proxuma IT page now keeps one clean return path back to the canonical PROXUMA ecosystem using the footer `← PROXUMA Home` button. Header and hero duplicate return links were removed to reduce visual repetition.
