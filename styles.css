@@ -5305,3 +5305,10 @@ html[data-audience-view="analyst"] .audience-toggle.active{border-color:rgba(255
     display:none;
   }
 }
+
+
+/* v3.19.7 Canonical PROXUMA link patch */
+.ecosystem-link-note{margin:8px 0 0;font-size:.9rem}
+.ecosystem-link-note a{color:var(--accent,#69ffd4);text-decoration:none;font-weight:800}
+.ecosystem-link-note a:hover{text-decoration:underline}
+@media(max-width:720px){.ecosystem-link-note{font-size:.86rem;text-align:center}}

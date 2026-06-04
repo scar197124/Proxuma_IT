@@ -82,3 +82,8 @@ node tests/test_engine_v3192_compact_ui_density_pass.js
 ## Safety note
 
 Proxuma IT does not guarantee that a link is safe or unsafe. It provides local risk analysis, warning signs, and guidance. Users should still verify important links through official typed websites, known apps, or trusted contacts.
+
+
+## v3.19.7 Canonical Link Patch
+
+Adds a clean link back to the canonical PROXUMA homepage while preserving offline-first scanning and existing engine behavior.

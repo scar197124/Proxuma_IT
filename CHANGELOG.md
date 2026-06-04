@@ -35,3 +35,8 @@
 - Reworded the visible Local Check surface so it no longer looked like a developer test bench.
 - Kept built-in local sample checks.
 - Preserved offline-first behavior and no active online provider.
+
+
+## v3.19.7 Canonical Link Patch
+
+Adds a clean link back to the canonical PROXUMA homepage while preserving offline-first scanning and existing engine behavior.
