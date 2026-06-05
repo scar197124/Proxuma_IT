@@ -5359,3 +5359,628 @@ html[data-audience-view="analyst"] .audience-toggle.active{border-color:rgba(255
     min-height:44px;
   }
 }
+
+
+/* v3.19.10 Mobile scan-mode button density patch
+   Keeps desktop scan-mode controls unchanged while reducing oversized mobile pills. */
+@media (max-width:700px){
+  .mode-card{
+    padding-top:12px!important;
+    padding-bottom:12px!important;
+  }
+  .mode-card .mini-head{
+    gap:5px!important;
+    margin-bottom:9px!important;
+  }
+  .scan-mode-row{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:6px!important;
+    width:100%!important;
+  }
+  .mode-pill,
+  .mode-pill.pill-action,
+  .mode-pill.pill-soon{
+    width:100%!important;
+    min-height:44px!important;
+    height:auto!important;
+    padding:8px 12px!important;
+    border-radius:14px!important;
+    font-size:.86rem!important;
+    line-height:1.15!important;
+    letter-spacing:.01em!important;
+  }
+  .mode-card .quiet-note{
+    margin-top:8px!important;
+    font-size:.78rem!important;
+    line-height:1.35!important;
+  }
+}
+@media (max-width:420px){
+  .mode-pill,
+  .mode-pill.pill-action,
+  .mode-pill.pill-soon{
+    min-height:42px!important;
+    padding:7px 10px!important;
+    font-size:.82rem!important;
+  }
+  .mode-card .quiet-note{
+    font-size:.74rem!important;
+  }
+}
+
+
+/* v3.21.0 Local Scan History polish */
+.history-privacy-note{
+  margin:0 0 10px;
+}
+#historyStatus{
+  margin:8px 0 10px;
+}
+#historyList{
+  list-style:none;
+  padding-left:0 !important;
+}
+#historyList .history-card{
+  border:1px solid rgba(82,249,2,.18);
+  border-radius:16px;
+  padding:12px;
+  background:rgba(255,255,255,.035);
+}
+.history-item-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+.history-item-actions .ghost-button{
+  min-height:38px;
+  padding:8px 10px;
+}
+@media (max-width: 640px){
+  #historyList .history-card{
+    padding:10px;
+  }
+  .history-item-actions .ghost-button{
+    flex:1 1 100%;
+    min-height:42px;
+  }
+}
+
+
+/* v3.22.1 Unified Scanner Input */
+.unified-input-note{
+  margin:8px 0 0;
+  font-size:.88rem;
+  color:var(--muted);
+  line-height:1.45;
+}
+.input-type-chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:10px;
+}
+.input-type-chips span{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:5px 10px;
+  border:1px solid rgba(103,240,167,.2);
+  border-radius:999px;
+  background:rgba(255,255,255,.035);
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:700;
+}
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+@media (max-width:640px){
+  .unified-input-note{
+    font-size:.82rem;
+    margin-top:7px;
+  }
+  .input-type-chips{
+    gap:6px;
+    margin-top:8px;
+  }
+  .input-type-chips span{
+    min-height:26px;
+    padding:4px 8px;
+    font-size:.72rem;
+  }
+}
+
+/* v3.22.2 — Compact Scan Report Snapshot
+   Combines short one-line metadata into a single compact panel so Signal Count,
+   Input Type, Trigger, and Report Time do not consume oversized cards. */
+.report-snapshot-card{
+  margin-top:14px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(0,0,0,.12));
+  padding:12px;
+  display:grid;
+  grid-template-columns:minmax(180px, 1.15fr) minmax(280px, 1.85fr);
+  gap:12px;
+  align-items:stretch;
+}
+.snapshot-next-step,
+.snapshot-grid > div{
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  background:rgba(0,0,0,.15);
+}
+.snapshot-next-step{
+  padding:12px 14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:62px;
+  border-color:rgba(82,249,2,.42);
+  background:linear-gradient(180deg, rgba(82,249,2,.065), rgba(0,0,0,.15));
+}
+.snapshot-grid{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:8px;
+}
+.snapshot-grid > div{
+  padding:10px 11px;
+  min-height:62px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.report-snapshot-card small,
+.snapshot-grid small{
+  display:block;
+  color:var(--muted);
+  font-size:.72rem;
+  letter-spacing:.065em;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.report-snapshot-card strong,
+.snapshot-grid strong{
+  display:block;
+  color:#f5fff8;
+  font-size:.92rem;
+  line-height:1.2;
+  overflow-wrap:anywhere;
+}
+.snapshot-next-step strong{
+  font-size:1rem;
+}
+.report-tools{
+  grid-template-columns:minmax(240px, .8fr) minmax(280px, 1.2fr) !important;
+  align-items:stretch;
+}
+.report-tools .report-meta-card:not(.audience-switch){
+  display:none !important;
+}
+@media (max-width: 900px){
+  .report-snapshot-card{
+    grid-template-columns:1fr;
+  }
+  .snapshot-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px){
+  .report-snapshot-card{
+    padding:10px;
+    gap:9px;
+    border-radius:16px;
+  }
+  .snapshot-next-step,
+  .snapshot-grid > div{
+    min-height:50px;
+    padding:8px 10px;
+    border-radius:12px;
+  }
+  .snapshot-grid{
+    gap:7px;
+  }
+  .report-snapshot-card small,
+  .snapshot-grid small{
+    font-size:.66rem;
+    margin-bottom:3px;
+  }
+  .report-snapshot-card strong,
+  .snapshot-grid strong{
+    font-size:.84rem;
+  }
+  .snapshot-next-step strong{
+    font-size:.92rem;
+  }
+  .report-tools{
+    grid-template-columns:1fr !important;
+  }
+}
+
+/* v3.22.3 — Report Snapshot Readability Correction
+   Keeps the scan report compact while preventing trigger/next-step text from stacking
+   vertically in narrow metric cards. Short facts become horizontal key/value rows;
+   longer fields get enough width to read left-to-right. */
+.report-snapshot-card{
+  grid-template-columns:1fr !important;
+  gap:9px !important;
+  padding:11px !important;
+}
+.snapshot-next-step{
+  min-height:0 !important;
+  padding:9px 12px !important;
+  display:grid !important;
+  grid-template-columns:minmax(84px, max-content) minmax(0, 1fr) !important;
+  gap:10px !important;
+  align-items:center !important;
+}
+.snapshot-next-step small{
+  margin:0 !important;
+  white-space:nowrap !important;
+}
+.snapshot-next-step strong{
+  font-size:.96rem !important;
+  line-height:1.3 !important;
+  white-space:normal !important;
+  overflow-wrap:break-word !important;
+  word-break:normal !important;
+}
+.snapshot-grid{
+  grid-template-columns:minmax(110px, .55fr) minmax(140px, .75fr) minmax(260px, 1.7fr) minmax(190px, 1.1fr) !important;
+  gap:7px !important;
+  align-items:stretch !important;
+}
+.snapshot-grid > div{
+  min-height:0 !important;
+  padding:8px 10px !important;
+  display:grid !important;
+  grid-template-columns:auto minmax(0, 1fr) !important;
+  gap:8px !important;
+  align-items:center !important;
+  justify-content:start !important;
+}
+.snapshot-grid small{
+  margin:0 !important;
+  white-space:nowrap !important;
+  font-size:.66rem !important;
+}
+.snapshot-grid strong{
+  font-size:.86rem !important;
+  line-height:1.28 !important;
+  white-space:normal !important;
+  overflow-wrap:break-word !important;
+  word-break:normal !important;
+}
+#primaryTrigger{
+  min-width:0 !important;
+  white-space:normal !important;
+  overflow-wrap:break-word !important;
+  word-break:normal !important;
+}
+@media (max-width: 980px){
+  .snapshot-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  }
+  .snapshot-grid > div:nth-child(3),
+  .snapshot-grid > div:nth-child(4){
+    grid-column:1 / -1 !important;
+  }
+}
+@media (max-width: 560px){
+  .report-snapshot-card{
+    padding:10px !important;
+    gap:8px !important;
+  }
+  .snapshot-next-step{
+    grid-template-columns:1fr !important;
+    gap:3px !important;
+    padding:8px 10px !important;
+  }
+  .snapshot-grid{
+    grid-template-columns:1fr !important;
+    gap:6px !important;
+  }
+  .snapshot-grid > div{
+    grid-column:1 / -1 !important;
+    padding:7px 9px !important;
+    grid-template-columns:88px minmax(0, 1fr) !important;
+  }
+  .snapshot-grid small{
+    font-size:.63rem !important;
+  }
+  .snapshot-grid strong{
+    font-size:.82rem !important;
+    line-height:1.25 !important;
+  }
+}
+
+/* v3.22.4 — Snapshot Chip Border Wrap
+   Adds subtle privacy-strip-style borders around small report metrics and accepted input chips
+   so short values feel intentionally wrapped instead of floating in empty space. */
+.input-type-chips{
+  padding:8px 9px !important;
+  border:1px solid rgba(70,255,174,0.32) !important;
+  border-radius:16px !important;
+  background:rgba(5,18,14,0.42) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03) !important;
+}
+.input-type-chips span{
+  border-color:rgba(70,255,174,0.28) !important;
+  background:rgba(70,255,174,0.08) !important;
+  color:#dfffee !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.02) !important;
+}
+.snapshot-grid > div,
+.snapshot-next-step{
+  border-color:rgba(70,255,174,0.26) !important;
+  background:rgba(5,18,14,0.48) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03) !important;
+}
+.snapshot-grid > div:nth-child(1),
+.snapshot-grid > div:nth-child(2){
+  width:fit-content !important;
+  min-width:0 !important;
+  max-width:100% !important;
+}
+.snapshot-grid > div:nth-child(3),
+.snapshot-grid > div:nth-child(4),
+.snapshot-next-step{
+  width:auto !important;
+}
+.snapshot-grid > div:nth-child(3){
+  border-color:rgba(70,255,174,0.32) !important;
+  background:rgba(70,255,174,0.06) !important;
+}
+.snapshot-grid small,
+.snapshot-next-step small{
+  color:rgba(223,255,238,0.74) !important;
+}
+.snapshot-grid strong,
+.snapshot-next-step strong{
+  color:#f5fff8 !important;
+}
+@media (max-width: 560px){
+  .input-type-chips{
+    padding:7px 8px !important;
+    border-radius:14px !important;
+  }
+  .snapshot-grid > div:nth-child(1),
+  .snapshot-grid > div:nth-child(2){
+    width:100% !important;
+  }
+}
+
+/* v3.22.5 — Report View Space Cleanup
+   Converts the Report View selector from a large half-width card into a compact
+   full-width toolbar. Removes duplicated active view text and gives the copy/export
+   controls the full available width. UI-only layer: no scan, scoring, export,
+   history, or parser logic changed. */
+.report-tools{
+  grid-template-columns:1fr !important;
+  gap:9px !important;
+  align-items:stretch !important;
+}
+.audience-switch.report-meta-card{
+  width:100% !important;
+  min-height:0 !important;
+  padding:9px 10px !important;
+  display:grid !important;
+  grid-template-columns:max-content minmax(220px, 300px) minmax(0, 1fr) !important;
+  gap:10px !important;
+  align-items:center !important;
+  justify-content:stretch !important;
+  border-color:rgba(70,255,174,0.26) !important;
+  background:rgba(5,18,14,0.42) !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03) !important;
+}
+.audience-switch.report-meta-card > small{
+  margin:0 !important;
+  white-space:nowrap !important;
+  color:rgba(223,255,238,0.74) !important;
+}
+.audience-switch.report-meta-card #activeAudienceMode{
+  display:none !important;
+}
+.audience-switch.report-meta-card .quiet-note{
+  margin:0 !important;
+  min-width:0 !important;
+  line-height:1.28 !important;
+}
+.audience-toggle-row{
+  margin:0 !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:7px !important;
+}
+.audience-toggle{
+  min-height:38px !important;
+  padding:7px 10px !important;
+  line-height:1.1 !important;
+  white-space:nowrap !important;
+}
+.report-copy-actions.simple-case-controls{
+  grid-column:1 / -1 !important;
+  width:100% !important;
+  max-width:none !important;
+  display:grid !important;
+  grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  gap:8px !important;
+}
+.advanced-evidence-tools{
+  grid-column:1 / -1 !important;
+  width:100% !important;
+}
+.advanced-evidence-tools > summary{
+  min-height:38px !important;
+  display:flex !important;
+  align-items:center !important;
+}
+.copy-status{
+  grid-column:1 / -1 !important;
+  margin-top:0 !important;
+}
+@media (max-width: 760px){
+  .audience-switch.report-meta-card{
+    grid-template-columns:1fr !important;
+    gap:7px !important;
+  }
+  .audience-switch.report-meta-card > small{
+    white-space:normal !important;
+  }
+  .audience-switch.report-meta-card .quiet-note{
+    font-size:.82rem !important;
+  }
+  .report-copy-actions.simple-case-controls{
+    grid-template-columns:1fr !important;
+  }
+}
+@media (max-width: 420px){
+  .audience-toggle{
+    min-height:36px !important;
+    padding:7px 8px !important;
+    font-size:.82rem !important;
+  }
+}
+
+
+/* v3.22.6 — Centered Report View Balance
+   Rebalances the Report View block after the compact toolbar pass. The Report View
+   title is centered at the top, User View / Analyst View are centered beneath it,
+   and the deeper evidence / technical notes drawer is centered under the action
+   controls. UI-only layer: no scan, scoring, history, export, or parser logic changed. */
+.report-tools{
+  grid-template-columns:1fr !important;
+  justify-items:center !important;
+  gap:10px !important;
+}
+.audience-switch.report-meta-card{
+  width:100% !important;
+  max-width:720px !important;
+  min-height:0 !important;
+  padding:12px 14px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  gap:8px !important;
+}
+.audience-switch.report-meta-card > small{
+  width:100% !important;
+  text-align:center !important;
+  margin:0 !important;
+  letter-spacing:.11em !important;
+}
+.audience-switch.report-meta-card #activeAudienceMode{
+  display:none !important;
+}
+.audience-switch.report-meta-card .quiet-note{
+  max-width:520px !important;
+  margin:0 auto !important;
+  text-align:center !important;
+  line-height:1.35 !important;
+}
+.audience-toggle-row{
+  width:min(100%, 390px) !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+  gap:8px !important;
+  justify-content:center !important;
+}
+.audience-toggle{
+  text-align:center !important;
+  justify-content:center !important;
+}
+.report-copy-actions.simple-case-controls{
+  width:100% !important;
+  max-width:760px !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  gap:8px !important;
+  justify-items:stretch !important;
+}
+.advanced-evidence-tools{
+  grid-column:1 / -1 !important;
+  width:100% !important;
+  max-width:760px !important;
+  margin:2px auto 0 !important;
+  text-align:center !important;
+}
+.advanced-evidence-tools > summary{
+  min-height:38px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+.advanced-evidence-actions{
+  justify-content:center !important;
+}
+.advanced-evidence-tools .quiet-note{
+  max-width:620px !important;
+  margin:8px auto 0 !important;
+  text-align:center !important;
+}
+.copy-status{
+  width:100% !important;
+  max-width:760px !important;
+  margin:0 auto !important;
+  text-align:center !important;
+}
+@media (max-width: 760px){
+  .audience-switch.report-meta-card{
+    max-width:none !important;
+    padding:10px 11px !important;
+    gap:7px !important;
+  }
+  .audience-toggle-row{
+    width:100% !important;
+    max-width:360px !important;
+  }
+  .report-copy-actions.simple-case-controls{
+    max-width:420px !important;
+    grid-template-columns:1fr !important;
+  }
+  .advanced-evidence-tools{
+    max-width:420px !important;
+  }
+}
+@media (max-width: 420px){
+  .audience-toggle-row{
+    max-width:100% !important;
+  }
+  .audience-toggle{
+    min-height:36px !important;
+    padding:7px 8px !important;
+    font-size:.82rem !important;
+  }
+}
+
+.technical-notes-label{
+  grid-column:1 / -1 !important;
+  width:100% !important;
+  max-width:760px !important;
+  margin:2px auto -2px !important;
+  text-align:center !important;
+  color:rgba(223,255,238,0.72) !important;
+  font-size:.76rem !important;
+  font-weight:800 !important;
+  letter-spacing:.08em !important;
+  text-transform:uppercase !important;
+}
+@media (max-width: 760px){
+  .technical-notes-label{max-width:420px !important;}
+}

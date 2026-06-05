@@ -97,10 +97,18 @@
           <p class="subtle">Scans run locally in your browser.</p>
         </div>
 
-        <label class="input-label" for="targetInput">Target</label>
+        <label class="input-label" for="targetInput">Universal scanner input</label>
         <div class="input-row">
-          <input id="targetInput" type="text" autocomplete="off" spellcheck="false" placeholder="Paste a suspicious link, domain, message, or QR text" />
+          <input id="targetInput" type="text" autocomplete="off" spellcheck="false" placeholder="Paste a URL, IP, QR payload, message, or text snippet" />
           <button id="scanButton" type="button">Analyze</button>
+        </div>
+        <p class="unified-input-note">One input handles links, domains, IPs, decoded QR text, copied SMS/email content, and raw suspicious snippets.</p>
+        <div class="input-type-chips" aria-label="Accepted input types">
+          <span>URL</span>
+          <span>IP</span>
+          <span>QR text</span>
+          <span>Message</span>
+          <span>Snippet</span>
         </div>
 
         <div class="privacy-strip" aria-label="Privacy promise">
@@ -187,30 +195,32 @@
           </div>
         </div>
 
-        <div class="report-strip">
-          <div>
+        <div class="report-snapshot-card" aria-label="Compact report snapshot">
+          <div class="snapshot-next-step">
             <small>Next Step</small>
             <strong id="nextStep">Scan first</strong>
           </div>
-          <div>
-            <small>Signal Count</small>
-            <strong id="signalCount">0</strong>
-          </div>
-          <div>
-            <small>Primary Trigger</small>
-            <strong id="primaryTrigger">Waiting</strong>
+          <div class="snapshot-grid" aria-label="Report quick facts">
+            <div>
+              <small>Signals</small>
+              <strong id="signalCount">0</strong>
+            </div>
+            <div>
+              <small>Input</small>
+              <strong id="inputTypeLabel">Standby</strong>
+            </div>
+            <div>
+              <small>Trigger</small>
+              <strong id="primaryTrigger">Waiting</strong>
+            </div>
+            <div>
+              <small>Time</small>
+              <strong id="reportTimestamp">Not scanned</strong>
+            </div>
           </div>
         </div>
 
-        <div class="report-tools" aria-label="Report details and copy actions">
-          <div class="report-meta-card">
-            <small>Input Type</small>
-            <strong id="inputTypeLabel">Standby</strong>
-          </div>
-          <div class="report-meta-card">
-            <small>Report Time</small>
-            <strong id="reportTimestamp">Not scanned</strong>
-          </div>
+        <div class="report-tools" aria-label="Report view and copy actions">
           <div class="audience-switch report-meta-card" aria-label="Report view selector">
             <small>Report View</small>
             <div class="audience-toggle-row" role="group" aria-label="Choose report depth">
@@ -224,16 +234,18 @@
             <button id="copySummaryButton" class="ghost-button compact-copy primary-copy" type="button">Copy Simple Report</button>
             <button id="copyReportButton" class="ghost-button compact-copy" type="button">Copy Full Report</button>
             <button id="explainVerdictButton" class="ghost-button compact-copy" type="button">Verdict Summary</button>
+            <div class="technical-notes-label">Deeper Evidence / Technical Notes</div>
             <details class="advanced-evidence-tools">
               <summary>Signal Evidence</summary>
               <div class="advanced-evidence-actions">
                 <button id="copyCasePacketButton" class="ghost-button compact-copy" type="button">Copy Case Packet</button>
+                <button id="downloadCaseTextButton" class="ghost-button compact-copy" type="button">Download TXT</button>
                 <button id="downloadCasePacketButton" class="ghost-button compact-copy" type="button">Download JSON</button>
               </div>
-              <p class="quiet-note">For analyst review, support tickets, saved evidence, or future Proxuma imports. Most users only need the verdict summary or simple report.</p>
+              <p class="quiet-note">For analyst review, support tickets, saved evidence, or future Proxuma imports. Download TXT for a readable case report; Download JSON for structured local evidence.</p>
             </details>
           </div>
-          <p id="copyStatus" class="copy-status" aria-live="polite">Run a scan, then use Copy Simple Report for the easy version. Signal evidence stays tucked away.</p>
+          <p id="copyStatus" class="copy-status" aria-live="polite">Run a scan, then use Copy Simple Report for the easy version. Deeper evidence and technical notes stay tucked away.</p>
         </div>
 
         <div class="action-guidance guidance-drawer" aria-label="Action guidance drawer">
@@ -556,9 +568,9 @@
       <div class="section-head collapsible-card-head">
         <div>
           <p class="eyebrow">Case File</p>
-          <h2>Keep notes locally</h2>
-          <p class="subtle label-chip-row" aria-label="Case file tools"><span>Notes</span><span>Saved scans</span><span>Local history</span></p>
-          <p class="collapsed-hint label-chip-row" aria-label="Case file tools"><span>Notes</span><span>Saved scans</span><span>Local history</span></p>
+          <h2>Local Scan History</h2>
+          <p class="subtle label-chip-row" aria-label="Case file tools"><span>Auto-saved scans</span><span>Notes</span><span>Local only</span></p>
+          <p class="collapsed-hint label-chip-row" aria-label="Case file tools"><span>Recent scans</span><span>Device only</span></p>
         </div>
         <button class="collapse-toggle" type="button" aria-expanded="true" aria-controls="caseFileBody" data-expanded-label="Hide case file" data-collapsed-label="Show case file">
           <span class="toggle-dot" aria-hidden="true"></span>
@@ -567,12 +579,15 @@
         </button>
       </div>
       <div id="caseFileBody" class="collapsible-card-body">
-      <textarea id="caseNotes" rows="5" placeholder="Add a quick note about this scan."></textarea>
+      <p class="quiet-note history-privacy-note">Recent scans are stored only in this browser on this device. Nothing is uploaded, synced, or sent to Proxuma.</p>
+      <p id="historyStatus" class="copy-status" aria-live="polite">No local scan history yet.</p>
+      <textarea id="caseNotes" rows="4" placeholder="Optional: add a private note to the current scan before saving it again."></textarea>
       <div class="case-actions">
-        <button id="saveCaseButton" type="button">Save scan</button>
-        <button id="clearHistoryButton" type="button" class="ghost-button">Clear saved cases</button>
+        <button id="saveCaseButton" type="button">Save Current Scan</button>
+        <button id="clearHistoryButton" type="button" class="ghost-button">Clear Local History</button>
+        <button id="clearAllLocalDataButton" type="button" class="ghost-button danger-action">Clear All Local Data</button>
       </div>
-      <ul id="historyList"></ul>
+      <ul id="historyList" aria-label="Local scan history"></ul>
       </div>
     </section>
 

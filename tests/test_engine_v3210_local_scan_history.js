@@ -1,0 +1,22 @@
+const fs = require('fs');
+const path = require('path');
+function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
+const root = path.resolve(__dirname, '..');
+const js = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+assert(js.includes('version: "v3.22.1"'), 'Build version should be v3.22.1');
+assert(js.includes('name: "Unified Scanner Input"'), 'Build name should identify Unified Scanner Input');
+assert(js.includes('addScanToHistory(lastReport, "auto")'), 'runScan should auto-save compact local scan history');
+assert(js.includes('function handleHistoryAction'), 'history should support item actions');
+assert(js.includes('View Previous Scan'), 'history item should include View Previous Scan action');
+assert(js.includes('Copy Previous Result'), 'history item should include Copy Previous Result action');
+assert(js.includes('clearAllLocalDataButton'), 'local data clear path should exist');
+assert(!/fetch\s*\(/.test(js), 'no active fetch calls should be introduced');
+assert(!/XMLHttpRequest|sendBeacon|WebSocket|EventSource/.test(js), 'no hidden network APIs should be introduced');
+assert(html.includes('Local Scan History'), 'case file heading should be Local Scan History');
+assert(html.includes('historyStatus'), 'history status should exist');
+assert(html.includes('Clear Local History'), 'clear local history button should exist');
+assert(html.includes('Clear All Local Data'), 'clear all local data button should exist');
+assert(css.includes('v3.21.0 Local Scan History polish'), 'history CSS polish should be present');
+console.log('PASS v3.22.1 local scan history checks');

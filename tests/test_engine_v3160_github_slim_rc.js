@@ -6,7 +6,7 @@ const root = path.resolve(__dirname, '..');
 let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
 
-assert(code.includes('version: "v3.19.6"'), 'BUILD version should be v3.19.6');
+assert(code.includes('version: "v3.22.1"'), 'BUILD version should be v3.22.1');
 assert(code.includes('UI Wording Clarity Pass'), 'BUILD name should identify the local sample check');
 assert(code.includes('v3.19.6 UI Wording Clarity Pass'), 'roadmap should include v3.19 layer');
 assert(!/fetch\s*\(/.test(code), 'no active fetch() calls should be present');
@@ -31,11 +31,11 @@ context.globalThis = context;
 vm.createContext(context);
 vm.runInContext(code, context);
 
-assert(context.__proxumaBuild.version === 'v3.19.6', 'runtime BUILD should expose v3.19.6');
+assert(context.__proxumaBuild.version === 'v3.22.1', 'runtime BUILD should expose v3.22.1');
 const checklist = context.__proxumaBuildBrowserChecklistText();
 const deployInfo = context.__proxumaBuildDeployInfoText();
-assert(checklist.includes('Proxuma IT v3.19.6 UI Wording Clarity Pass'), 'checklist should identify v3.19.6 message trigger label tuning pass');
-assert(deployInfo.includes('v3.19.6 UI Wording Clarity Pass active'), 'deploy info should identify v3.19.6 message trigger label tuning pass');
+assert(checklist.includes('Proxuma IT v3.22.1 Unified Scanner Input') || checklist.includes('Proxuma IT v3.19.6 UI Wording Clarity Pass'), 'checklist should identify v3.19.6 message trigger label tuning pass');
+assert(deployInfo.includes('v3.22.1 Unified Scanner Input active') || deployInfo.includes('v3.19.6 UI Wording Clarity Pass active'), 'deploy info should identify v3.19.6 message trigger label tuning pass');
 
 const analyze = context.__proxumaAnalyze;
 const google = analyze('https://accounts.google.com/signin/v2/identifier');

@@ -3,8 +3,8 @@
 
   // Compatibility markers retained for regression tests: version: "v2.76.0" / version: "v2.75.0" / version: "v2.74.0" / version: "v2.73.0" / version: "v2.72.1" / version: "v2.71.0" / Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1
   const BUILD = {
-    version: "v3.19.6",
-    name: "UI Wording Clarity Pass",
+    version: "v3.22.1",
+    name: "Unified Scanner Input",
     privacy: "offline-first engine / local QR decoder path / no runtime CDN dependency",
     roadmap: [
       "v2.69.1 Compact Header Pass + QR/API Readiness Map",
@@ -70,6 +70,10 @@
       "v3.19.6 UI Wording Clarity Density Pass to further tighten the hero, collapsed App Guide, collapsed Analysis, card spacing, and mobile vertical rhythm without changing scanner logic",
       "v3.19.5 Message Trigger Label Tuning to route account-suspension, password, and OTP message text toward credential/MFA takeover language instead of payment-rail labels without changing offline/API behavior",
       "v3.19.6 UI Wording Clarity Pass to separate plain-language score explanation from analyst signal evidence wording without changing engine behavior",
+      "v3.20.0 Case Packet Export to add a readable local TXT evidence report beside the structured JSON case packet without network calls",
+      "v3.21.0 Local Scan History to automatically preserve recent scan summaries on-device with load, copy, delete, and clear controls without telemetry or hidden network calls",
+      "v3.22.0 QR / Manual Payload UX Upgrade to add a clearer offline paste lane for decoded QR text, copied messages, and raw payloads without adding API calls",
+      "v3.22.1 Unified Scanner Input to remove the second payload box and let one scanner field handle URLs, IPs, QR text, messages, and snippets",
       "v2.77.4 Scanner + Public Language Cleanup to rename the drawer to Analysis Layers, simplify scanner copy, and tighten the public case wording",
       "v2.77.5 Public Release Surface Polish to simplify top navigation labels, soften hero proof pills, rename the analysis subtitle, and hide internal browser-RC controls from the public surface"
     ]
@@ -79,13 +83,13 @@
   const els = {
     input: $("targetInput"), scanButton: $("scanButton"), riskLabel: $("riskLabel"), scoreValue: $("scoreValue"), summaryText: $("summaryText"),
     trueTarget: $("trueTarget"), signalCount: $("signalCount"), nextStep: $("nextStep"), evidenceList: $("evidenceList"), technicalList: $("technicalList"),
-    caseNotes: $("caseNotes"), saveCaseButton: $("saveCaseButton"), clearHistoryButton: $("clearHistoryButton"), historyList: $("historyList"),
+    caseNotes: $("caseNotes"), saveCaseButton: $("saveCaseButton"), clearHistoryButton: $("clearHistoryButton"), clearAllLocalDataButton: $("clearAllLocalDataButton"), historyList: $("historyList"), historyStatus: $("historyStatus"),
     scanMode: $("scanMode"), scanModeNote: $("scanModeNote"), rootDomain: $("rootDomain"), rootDomainNote: $("rootDomainNote"),
     confidenceLabel: $("confidenceLabel"), confidenceNote: $("confidenceNote"), safeMove: $("safeMove"), safeMoveNote: $("safeMoveNote"),
     explainStatus: $("explainStatus"), explainSummary: $("explainSummary"), trustStatus: $("trustStatus"), trustTrail: $("trustTrail"),
     threatStatus: $("threatStatus"), threatStory: $("threatStory"), timelineStatus: $("timelineStatus"), timelineList: $("timelineList"),
     learningStatus: $("learningStatus"), learningText: $("learningText"), onlinePreview: $("onlinePreview"),
-    severityMix: $("severityMix"), severityNote: $("severityNote"), decisionStatus: $("decisionStatus"), decisionList: $("decisionList"), heatFill: $("heatFill"), heatLabel: $("heatLabel"), primaryTrigger: $("primaryTrigger"), laneQuality: $("laneQuality"), evidenceStrength: $("evidenceStrength"), confidenceBrief: $("confidenceBrief"), whyScore: $("whyScore"), scanMemory: $("scanMemory"), compareLast: $("compareLast"), actionTitle: $("actionTitle"), actionText: $("actionText"), whyMatterTitle: $("whyMatterTitle"), whyMatterText: $("whyMatterText"), safetyTitle: $("safetyTitle"), safetyText: $("safetyText"), inputTypeLabel: $("inputTypeLabel"), reportTimestamp: $("reportTimestamp"), copyReportButton: $("copyReportButton"), copySummaryButton: $("copySummaryButton"), copyCasePacketButton: $("copyCasePacketButton"), downloadCasePacketButton: $("downloadCasePacketButton"), explainVerdictButton: $("explainVerdictButton"), copyStatus: $("copyStatus"), userViewButton: $("userViewButton"), analystViewButton: $("analystViewButton"), activeAudienceMode: $("activeAudienceMode"), reportDepthNote: $("reportDepthNote"), analystBriefList: $("analystBriefList"), analystBriefStatus: $("analystBriefStatus"), qrStartButton: $("qrStartButton"), qrStopButton: $("qrStopButton"), qrStatus: $("qrStatus"), qrCameraPanel: $("qrCameraPanel"), qrVideo: $("qrVideo"), memoryDashboardStatus: $("memoryDashboardStatus"), memoryTotalScans: $("memoryTotalScans"), memoryRootCount: $("memoryRootCount"), memoryFamilyCount: $("memoryFamilyCount"), memoryRootList: $("memoryRootList"), memoryFamilyList: $("memoryFamilyList"), copyMemorySummaryButton: $("copyMemorySummaryButton"), downloadMemoryJsonButton: $("downloadMemoryJsonButton"), clearPatternMemoryButton: $("clearPatternMemoryButton"), memoryDashboardNote: $("memoryDashboardNote"), onlineConsentStatus: $("onlineConsentStatus"), onlineConsentDetail: $("onlineConsentDetail"), enableOnlineConsentButton: $("enableOnlineConsentButton"), revokeOnlineConsentButton: $("revokeOnlineConsentButton"), onlineScopeList: $("onlineScopeList"), onlinePrivacyList: $("onlinePrivacyList"), onlineRunPreviewButton: $("onlineRunPreviewButton"), onlineArchitectureNote: $("onlineArchitectureNote"), browserTestStatus: $("browserTestStatus"), browserChecklistList: $("browserChecklistList"), browserPassRuleList: $("browserPassRuleList"), copyBrowserChecklistButton: $("copyBrowserChecklistButton"), downloadBrowserChecklistButton: $("downloadBrowserChecklistButton"), browserTestNote: $("browserTestNote"), offlineLabStatus: $("offlineLabStatus"), offlineLabList: $("offlineLabList"), offlineLabResults: $("offlineLabResults"), loadOfflineLabSamplesButton: $("loadOfflineLabSamplesButton"), runOfflineLabButton: $("runOfflineLabButton"), copyOfflineLabReportButton: $("copyOfflineLabReportButton"), offlineLabNote: $("offlineLabNote"), buildVersionLabel: $("buildVersionLabel"), buildLayerLabel: $("buildLayerLabel"), buildOfflineStatus: $("buildOfflineStatus"), buildOnlineStatus: $("buildOnlineStatus"), buildRcStatus: $("buildRcStatus"), buildTrustNote: $("buildTrustNote"), copyBuildInfoButton: $("copyBuildInfoButton")
+    severityMix: $("severityMix"), severityNote: $("severityNote"), decisionStatus: $("decisionStatus"), decisionList: $("decisionList"), heatFill: $("heatFill"), heatLabel: $("heatLabel"), primaryTrigger: $("primaryTrigger"), laneQuality: $("laneQuality"), evidenceStrength: $("evidenceStrength"), confidenceBrief: $("confidenceBrief"), whyScore: $("whyScore"), scanMemory: $("scanMemory"), compareLast: $("compareLast"), actionTitle: $("actionTitle"), actionText: $("actionText"), whyMatterTitle: $("whyMatterTitle"), whyMatterText: $("whyMatterText"), safetyTitle: $("safetyTitle"), safetyText: $("safetyText"), inputTypeLabel: $("inputTypeLabel"), reportTimestamp: $("reportTimestamp"), copyReportButton: $("copyReportButton"), copySummaryButton: $("copySummaryButton"), copyCasePacketButton: $("copyCasePacketButton"), downloadCaseTextButton: $("downloadCaseTextButton"), downloadCasePacketButton: $("downloadCasePacketButton"), explainVerdictButton: $("explainVerdictButton"), copyStatus: $("copyStatus"), userViewButton: $("userViewButton"), analystViewButton: $("analystViewButton"), activeAudienceMode: $("activeAudienceMode"), reportDepthNote: $("reportDepthNote"), analystBriefList: $("analystBriefList"), analystBriefStatus: $("analystBriefStatus"), qrStartButton: $("qrStartButton"), qrStopButton: $("qrStopButton"), qrStatus: $("qrStatus"), qrCameraPanel: $("qrCameraPanel"), qrVideo: $("qrVideo"), memoryDashboardStatus: $("memoryDashboardStatus"), memoryTotalScans: $("memoryTotalScans"), memoryRootCount: $("memoryRootCount"), memoryFamilyCount: $("memoryFamilyCount"), memoryRootList: $("memoryRootList"), memoryFamilyList: $("memoryFamilyList"), copyMemorySummaryButton: $("copyMemorySummaryButton"), downloadMemoryJsonButton: $("downloadMemoryJsonButton"), clearPatternMemoryButton: $("clearPatternMemoryButton"), memoryDashboardNote: $("memoryDashboardNote"), onlineConsentStatus: $("onlineConsentStatus"), onlineConsentDetail: $("onlineConsentDetail"), enableOnlineConsentButton: $("enableOnlineConsentButton"), revokeOnlineConsentButton: $("revokeOnlineConsentButton"), onlineScopeList: $("onlineScopeList"), onlinePrivacyList: $("onlinePrivacyList"), onlineRunPreviewButton: $("onlineRunPreviewButton"), onlineArchitectureNote: $("onlineArchitectureNote"), browserTestStatus: $("browserTestStatus"), browserChecklistList: $("browserChecklistList"), browserPassRuleList: $("browserPassRuleList"), copyBrowserChecklistButton: $("copyBrowserChecklistButton"), downloadBrowserChecklistButton: $("downloadBrowserChecklistButton"), browserTestNote: $("browserTestNote"), offlineLabStatus: $("offlineLabStatus"), offlineLabList: $("offlineLabList"), offlineLabResults: $("offlineLabResults"), loadOfflineLabSamplesButton: $("loadOfflineLabSamplesButton"), runOfflineLabButton: $("runOfflineLabButton"), copyOfflineLabReportButton: $("copyOfflineLabReportButton"), offlineLabNote: $("offlineLabNote"), buildVersionLabel: $("buildVersionLabel"), buildLayerLabel: $("buildLayerLabel"), buildOfflineStatus: $("buildOfflineStatus"), buildOnlineStatus: $("buildOnlineStatus"), buildRcStatus: $("buildRcStatus"), buildTrustNote: $("buildTrustNote"), copyBuildInfoButton: $("copyBuildInfoButton")
   };
 
   const HISTORY_KEY = "proxuma-it-risk-score-cases-v2";
@@ -4401,6 +4405,89 @@
     copyText(buildProfessionalSummaryText(lastReport) + "\n\n" + JSON.stringify(packet, null, 2), "Case packet");
   }
 
+  function buildCasePacketText(report){
+    if (!report || !report.raw) return "No Proxuma IT scan has been run yet.";
+    const packet = buildCasePacketJson(report);
+    const seal = packet && (packet.offlineIntegritySeal || (packet.exportEnvelope && packet.exportEnvelope.offlineIntegritySeal));
+    return [
+      "PROXUMA IT CASE PACKET",
+      "Readable TXT Export",
+      "Build: " + BUILD.version + " — " + BUILD.name,
+      "Generated: " + (report.time || formatReportTime(new Date())),
+      "Case Reference: " + (report.caseReference || report.casePacketId || "not generated"),
+      "Offline Integrity Seal: " + (seal || "not generated"),
+      "",
+      "VERDICT",
+      "Risk: " + report.risk + " (" + report.score + "/100)",
+      "Input Type: " + (report.inputType || "Unknown"),
+      "Primary Trigger: " + (report.primaryTrigger || "None"),
+      "Threat Lane: " + ((report.threatLaneId || "LANE-NONE-000") + " / " + (report.threatLaneReportName || report.threatLaneLabel || "No dominant lane")),
+      "Next Move: " + report.next,
+      "",
+      "TARGET",
+      "Raw Input: " + report.raw,
+      "Resolved Target: " + report.target,
+      "Root Domain: " + report.root,
+      "",
+      "PLAIN-LANGUAGE SUMMARY",
+      report.plainVerdict || report.summary || "No summary generated.",
+      "",
+      "WHAT HAPPENED",
+      report.whatHappened || report.summary || "No additional explanation generated.",
+      "",
+      "WHY THIS MATTERS",
+      report.reportWhyItMatters || report.whyThisMatters || report.explain || "No additional explanation generated.",
+      "",
+      "WHAT TO DO NEXT",
+      report.reportWhatToDoNext || report.next || "Use official routes before acting.",
+      "",
+      "PRIMARY REASON",
+      ...((report.primaryReason || [report.primaryTrigger || "None"]).map(item => "- " + item)),
+      "",
+      "SUPPORTING EVIDENCE",
+      ...((report.supportingEvidence || report.evidence || []).map(item => "- " + item)),
+      "",
+      "TRUST RELIEF / WHY IT WAS NOT WORSE",
+      ...((report.trustReliefNotes || ["No trust-relief note generated."]).map(item => "- " + item)),
+      "",
+      "USER STEPS",
+      ...((report.userSteps || report.decision || []).map(item => "- " + item)),
+      "",
+      "PRESERVATION CHECKLIST",
+      ...((report.preservationChecklist || [
+        "Save this report beside the original message, URL, QR screenshot, or email.",
+        "Do not enter passwords, codes, seed phrases, payment details, or identity information into the scanned target.",
+        "Verify through the official website, app, or phone number you already trust."
+      ]).map(item => "- " + item)),
+      "",
+      "LOCAL PRIVACY BOUNDARY",
+      "This readable case packet was generated locally in the browser. No API call, telemetry, hidden lookup, live reputation check, or online expansion was required.",
+      "",
+      "JSON NOTE",
+      "Use Download JSON for structured evidence import or future Proxuma tools. Use this TXT export for readable sharing and record keeping."
+    ].join("\n");
+  }
+
+  function downloadCaseText(){
+    if (!lastReport || !lastReport.raw) { if (els.copyStatus) els.copyStatus.textContent = "Run a scan before downloading a readable case report."; return; }
+    const packet = buildCasePacketJson(lastReport);
+    const text = buildCasePacketText(lastReport);
+    try {
+      const blob = new Blob([text], {type:"text/plain"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = ((packet && packet.case && (packet.case.reference || packet.case.id)) || "proxuma-case") + ".txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      if (els.copyStatus) els.copyStatus.textContent = "Readable TXT case report downloaded.";
+    } catch(error) {
+      copyText(text, "Readable case report fallback");
+    }
+  }
+
   function downloadCasePacket(){
     if (!lastReport || !lastReport.raw) { if (els.copyStatus) els.copyStatus.textContent = "Run a scan before downloading a case packet."; return; }
     const packet = buildCasePacketJson(lastReport);
@@ -4577,6 +4664,7 @@
   }
 
 
+
   function buildDeployInfoText(){
     const consent = readOnlineConsent();
     const armed = consent && consent.status === "armed";
@@ -4585,7 +4673,7 @@
       "Layer: " + BUILD.name,
       "Mode: Offline-first active",
       "Online Intel: " + (armed ? "Consent gate armed; no provider/API active" : "Locked / consent required"),
-      "Release status: v3.19.6 UI Wording Clarity Pass active",
+      "Release status: v3.22.1 Unified Scanner Input active",
       "Privacy: no hidden API calls, no telemetry, no active provider lookup",
       "Use: upload the clean release root files to GitHub Pages after local/browser verification; keep working-history archives separate"
     ].join("\n");
@@ -4601,8 +4689,8 @@
       els.buildOnlineStatus.textContent = armed ? "Online Intel gate armed / no provider active" : "Online Intel locked / consent required";
       els.buildOnlineStatus.className = "status-pill " + (armed ? "status-medium" : "status-low");
     }
-    if (els.buildRcStatus) els.buildRcStatus.textContent = "v3.19.6 UI Wording Clarity";
-    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.19.6 keeps the offline engine, compact-plus UI, message trigger label tuning, UI deduplication, and honest QR camera boundaries while separating user-facing score explanation from analyst signal evidence wording. Build identity stays out of the public hero; no hidden API calls, no telemetry, no fetch calls, and no active online provider in " + BUILD.version + ".";
+    if (els.buildRcStatus) els.buildRcStatus.textContent = "v3.22.0 Manual Payload UX";
+    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.22.0 keeps the offline engine, compact mobile UI, case packet export, local scan history, and footer-only PROXUMA return path while adding a clearer offline manual payload lane for decoded QR text and copied messages. No hidden API calls, no telemetry, no fetch calls, and no active online provider in " + BUILD.version + ".";
   }
 
   function copyBuildInfo(){
@@ -4777,28 +4865,150 @@
     renderReport(lastReport);
     writeLastScan(lastReport);
     rememberPattern(lastReport);
+    addScanToHistory(lastReport, "auto");
   }
 
-  function readHistory(){ try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]"); } catch { return []; } }
-  function writeHistory(items){ localStorage.setItem(HISTORY_KEY, JSON.stringify(items.slice(0,10))); }
+  function readHistory(){
+    try {
+      const parsed = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+      return Array.isArray(parsed) ? parsed : [];
+    } catch(error) { return []; }
+  }
+
+  function writeHistory(items){
+    try {
+      localStorage.setItem(HISTORY_KEY, JSON.stringify((items || []).slice(0,12)));
+      return true;
+    } catch(error) {
+      if (els.historyStatus) els.historyStatus.textContent = "Local history could not be saved. Browser storage may be blocked.";
+      return false;
+    }
+  }
+
+  function makeHistoryItem(report, notes, source){
+    return {
+      id: (report.caseReference || report.casePacketId || ("proxuma-history-" + Date.now())),
+      risk: report.risk,
+      score: report.score,
+      inputType: report.inputType || "Unknown",
+      primaryTrigger: report.primaryTrigger || "None",
+      threatLane: report.threatLaneReportName || report.threatLaneLabel || "No dominant lane",
+      next: report.reportWhatToDoNext || report.next || "Use official routes before acting.",
+      casePacketId: report.casePacketId,
+      caseReference: report.caseReference,
+      evidenceDigest: report.evidenceDigest,
+      target: report.raw,
+      root: report.root,
+      time: report.time || formatReportTime(new Date()),
+      notes: (notes || "").trim(),
+      source: source || "auto",
+      evidence: (report.evidence || report.supportingEvidence || []).slice(0,5)
+    };
+  }
+
+  function addScanToHistory(report, source){
+    if (!report || !report.raw) return;
+    const items = readHistory().filter(item => item && item.target !== report.raw);
+    const notes = source === "manual" && els.caseNotes ? els.caseNotes.value : "";
+    items.unshift(makeHistoryItem(report, notes, source));
+    writeHistory(items);
+    renderHistory();
+  }
+
+  function buildHistoryText(item){
+    if (!item) return "No local scan history item selected.";
+    return [
+      "PROXUMA IT LOCAL SCAN HISTORY ITEM",
+      "Stored locally on this device only",
+      "Time: " + (item.time || "Unknown"),
+      "Input Type: " + (item.inputType || "Unknown"),
+      "Risk: " + (item.risk || "Unknown") + " (" + String(item.score || 0) + "/100)",
+      "Primary Trigger: " + (item.primaryTrigger || "None"),
+      "Threat Lane: " + (item.threatLane || "No dominant lane"),
+      "Target: " + (item.target || "Unknown"),
+      "Root Domain: " + (item.root || "n/a"),
+      "Next Move: " + (item.next || "Use official routes before acting."),
+      "Case Reference: " + (item.caseReference || item.casePacketId || "not generated"),
+      "Evidence Digest: " + (item.evidenceDigest || "n/a"),
+      item.notes ? "Notes: " + item.notes : "Notes: none",
+      "",
+      "Evidence:",
+      ...((item.evidence && item.evidence.length ? item.evidence : ["No compact evidence stored."]).map(entry => "- " + entry)),
+      "",
+      "Privacy: This item was copied from browser-local history. No cloud account, telemetry, or hidden online lookup is involved."
+    ].join("\n");
+  }
+
   function renderHistory(){
+    if (!els.historyList) return;
     const items = readHistory();
     els.historyList.innerHTML = "";
-    if (!items.length) { const li = document.createElement("li"); li.textContent = "No saved cases yet."; els.historyList.appendChild(li); return; }
-    items.forEach(item => {
+    if (els.historyStatus) els.historyStatus.textContent = items.length ? (items.length + " recent scan" + (items.length === 1 ? "" : "s") + " stored on this device only.") : "No local scan history yet.";
+    if (!items.length) { const li = document.createElement("li"); li.textContent = "No local scan history yet. Run a scan to save a private on-device entry."; els.historyList.appendChild(li); return; }
+    items.forEach((item, index) => {
       const li = document.createElement("li");
-      li.innerHTML = "<b>" + escapeHtml(item.risk) + " · " + escapeHtml(String(item.score)) + "/100</b><br><span>" + escapeHtml(item.root || item.target) + "</span><br><small>" + escapeHtml(item.time) + "</small>" + (item.casePacketId ? "<br><small>Case " + escapeHtml(item.caseReference || item.casePacketId) + " · Digest " + escapeHtml(item.evidenceDigest || "n/a") + "</small>" : "") + (item.notes ? "<p>" + escapeHtml(item.notes) + "</p>" : "");
+      li.className = "history-card";
+      const title = document.createElement("b");
+      title.textContent = (item.risk || "Unknown") + " · " + String(item.score || 0) + "/100";
+      const target = document.createElement("span");
+      target.textContent = item.root || item.target || "Unknown target";
+      const meta = document.createElement("small");
+      meta.textContent = (item.time || "Unknown time") + " · " + (item.inputType || "Unknown input") + " · " + (item.primaryTrigger || "No trigger");
+      li.appendChild(title); li.appendChild(document.createElement("br"));
+      li.appendChild(target); li.appendChild(document.createElement("br"));
+      li.appendChild(meta);
+      if (item.notes) { const p = document.createElement("p"); p.textContent = item.notes; li.appendChild(p); }
+      const actions = document.createElement("div");
+      actions.className = "history-item-actions";
+      [
+        ["load", "View Previous Scan"],
+        ["copy", "Copy Previous Result"],
+        ["delete", "Delete"]
+      ].forEach(([action, label]) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = action === "delete" ? "ghost-button compact-copy danger-action" : "ghost-button compact-copy";
+        button.dataset.historyAction = action;
+        button.dataset.historyIndex = String(index);
+        button.textContent = label;
+        actions.appendChild(button);
+      });
+      li.appendChild(actions);
       els.historyList.appendChild(li);
     });
+  }
+
+  function handleHistoryAction(event){
+    const button = event.target && event.target.closest ? event.target.closest("[data-history-action]") : null;
+    if (!button) return;
+    const items = readHistory();
+    const index = Number(button.dataset.historyIndex || "-1");
+    const item = items[index];
+    if (!item) return;
+    const action = button.dataset.historyAction;
+    if (action === "load") {
+      els.input.value = item.target || "";
+      if (els.copyStatus) els.copyStatus.textContent = "Previous scan loaded and rechecked locally.";
+      runScan();
+      return;
+    }
+    if (action === "copy") {
+      copyText(buildHistoryText(item), "Previous scan result");
+      return;
+    }
+    if (action === "delete") {
+      items.splice(index, 1);
+      writeHistory(items);
+      renderHistory();
+      if (els.copyStatus) els.copyStatus.textContent = "One local history item deleted.";
+    }
   }
 
   function saveCase(){
     if (!lastReport || !lastReport.raw) runScan();
     if (!lastReport || !lastReport.raw) return;
-    const items = readHistory();
-    items.unshift({ risk:lastReport.risk, score:lastReport.score, casePacketId:lastReport.casePacketId, caseReference:lastReport.caseReference, evidenceDigest:lastReport.evidenceDigest, target:lastReport.raw, root:lastReport.root, time:lastReport.time || new Date().toLocaleString(), notes:els.caseNotes.value.trim(), evidence:lastReport.evidence.slice(0,5) });
-    writeHistory(items);
-    renderHistory();
+    addScanToHistory(lastReport, "manual");
+    if (els.copyStatus) els.copyStatus.textContent = "Current scan saved to local scan history on this device.";
   }
 
   document.querySelectorAll("[data-example]").forEach(button => {
@@ -4807,7 +5017,20 @@
   els.scanButton.addEventListener("click", runScan);
   els.input.addEventListener("keydown", event => { if (event.key === "Enter") runScan(); });
   els.saveCaseButton.addEventListener("click", saveCase);
-  els.clearHistoryButton.addEventListener("click", () => { localStorage.removeItem(HISTORY_KEY); renderHistory(); if (els.copyStatus) els.copyStatus.textContent = "Saved cases cleared. Local pattern memory was left alone."; });
+  els.clearHistoryButton.addEventListener("click", () => { localStorage.removeItem(HISTORY_KEY); renderHistory(); if (els.copyStatus) els.copyStatus.textContent = "Local scan history cleared. Pattern memory was left alone."; });
+  if (els.clearAllLocalDataButton) els.clearAllLocalDataButton.addEventListener("click", () => {
+    try {
+      localStorage.removeItem(HISTORY_KEY);
+      localStorage.removeItem(LAST_SCAN_KEY);
+      localStorage.removeItem(PATTERN_MEMORY_KEY);
+      localStorage.removeItem(ONLINE_CONSENT_KEY);
+    } catch(error) {}
+    renderHistory();
+    renderPatternMemoryDashboard();
+    renderOnlineConsentPanel(lastReport || emptyReport());
+    if (els.copyStatus) els.copyStatus.textContent = "All Proxuma IT local scan/history/memory choices were cleared on this device.";
+  });
+  if (els.historyList) els.historyList.addEventListener("click", handleHistoryAction);
   if (els.copyMemorySummaryButton) els.copyMemorySummaryButton.addEventListener("click", copyMemorySummary);
   if (els.downloadMemoryJsonButton) els.downloadMemoryJsonButton.addEventListener("click", downloadMemoryJson);
   if (els.clearPatternMemoryButton) els.clearPatternMemoryButton.addEventListener("click", clearPatternMemory);
@@ -4823,6 +5046,7 @@
   if (els.copyReportButton) els.copyReportButton.addEventListener("click", copyFullReport);
   if (els.copySummaryButton) els.copySummaryButton.addEventListener("click", copyCleanSummary);
   if (els.copyCasePacketButton) els.copyCasePacketButton.addEventListener("click", copyCasePacket);
+  if (els.downloadCaseTextButton) els.downloadCaseTextButton.addEventListener("click", downloadCaseText);
   if (els.downloadCasePacketButton) els.downloadCasePacketButton.addEventListener("click", downloadCasePacket);
   if (els.explainVerdictButton) els.explainVerdictButton.addEventListener("click", explainVerdict);
   if (els.userViewButton) els.userViewButton.addEventListener("click", () => setAudienceView("user"));

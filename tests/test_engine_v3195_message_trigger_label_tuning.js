@@ -5,7 +5,7 @@ const vm = require('vm');
 const root = path.resolve(__dirname, '..');
 let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
-assert(code.includes('version: "v3.19.6"'), 'BUILD version should be v3.19.6');
+assert(code.includes('version: "v3.22.1"'), 'BUILD version should be v3.22.1');
 assert(code.includes('UI Wording Clarity Pass'), 'BUILD name should identify message trigger label tuning');
 assert(!/fetch\s*\(/.test(code), 'no active fetch() calls should be present');
 assert(!/XMLHttpRequest|WebSocket|EventSource|sendBeacon/.test(code), 'no hidden runtime network primitives should be present');

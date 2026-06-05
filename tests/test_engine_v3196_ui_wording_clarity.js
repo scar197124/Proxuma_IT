@@ -4,7 +4,7 @@ const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
-assert(code.includes('version: "v3.19.6"'), 'build version should be v3.19.6');
+assert(code.includes('version: "v3.22.1"'), 'build version should be v3.22.1');
 assert(code.includes('UI Wording Clarity Pass'), 'build name should identify wording clarity pass');
 assert(html.includes('Verdict Summary'), 'simple explain action should be named Verdict Summary');
 assert(html.includes('Signal Evidence'), 'advanced disclosure should be named Signal Evidence');

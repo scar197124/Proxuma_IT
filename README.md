@@ -97,3 +97,36 @@ Adds a clean link back to the canonical PROXUMA homepage while preserving offlin
 ### v3.19.9 navigation note
 
 The Proxuma IT page now keeps one clean return path back to the canonical PROXUMA ecosystem using the footer `← PROXUMA Home` button. Header and hero duplicate return links were removed to reduce visual repetition.
+
+## Case Packet Export
+
+After running a scan, open **Signal Evidence** to save the result locally:
+
+- **Download TXT** creates a readable case report for sharing or record keeping.
+- **Download JSON** creates a structured evidence packet for future Proxuma tools or analyst review.
+
+Both exports are generated locally in the browser. No API call, telemetry, hidden lookup, or online expansion is required.
+
+
+## v3.21.0 Local Scan History
+
+Proxuma IT now keeps a small local scan history on the current browser/device. Recent checks can be loaded again, copied as a readable result, deleted individually, or cleared entirely. This history is local-only: it does not sync to an account, send telemetry, or run hidden online lookups.
+
+
+## v3.22.2 UI Note
+The Scan Report quick facts are now consolidated into a compact Report Snapshot panel so short values like signal count, input type, trigger, and report time do not waste card space.
+
+
+## v3.22.3 — Report Snapshot Readability Correction
+
+Refines the Scan Report snapshot so short facts stay compact while longer values such as Primary Trigger and Next Step read left-to-right instead of stacking vertically on narrow screens. Engine logic remains unchanged.
+
+### v3.22.4 Snapshot Chip Border Wrap
+Small Scan Report values and accepted input chips now use subtle matching borders for clearer visual separation without adding extra layout weight.
+
+
+
+### v3.22.5 — Report View Space Cleanup
+- Tightened the Report View area into a compact full-width toolbar.
+- Removed duplicate active-view text and reduced empty space beside the selector.
+- Preserved scan engine, exports, history, offline-first behavior, and v3.22.4 border polish.

@@ -5,7 +5,7 @@ const vm = require('vm');
 const root = path.resolve(__dirname, '..');
 let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
-assert(/version: \"v3\.(14|15|16|17|18|19)\.[0-9]+\"/.test(code), 'BUILD version should be v3.14.0 or newer continuity build');
+assert(/version: \"v3\.(14|15|16|17|18|19|20|21|22)\.[0-9]+\"/.test(code), 'BUILD version should be v3.14.0 or newer continuity build');
 assert(code.includes('Evidence Case Packet Hardening / Offline Export Envelope') || code.includes('Browser / Deployment Test Lock') || code.includes('Red Team Hardening Pass') || code.includes('UI Wording Clarity Pass'), 'BUILD name should describe current continuity layer');
 assert(!/fetch\s*\(/.test(code), 'no active fetch() calls should be present');
 assert(!/api\/proxuma-intel/i.test(code), 'v3.14 should remain offline-only and not include online bridge API calls');

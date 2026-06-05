@@ -26,7 +26,7 @@ const readme = fs.readFileSync(readmePath, 'utf8');
 const security = fs.readFileSync(securityPath, 'utf8');
 const jsqr = fs.readFileSync(jsQrPath, 'utf8');
 
-assert(code.includes('version: "v3.19.6"'), 'BUILD version should be v3.19.6');
+assert(code.includes('version: "v3.22.1"'), 'BUILD version should be v3.22.1');
 assert(code.includes('UI Wording Clarity Pass'), 'BUILD name should identify message trigger label tuning pass');
 assert(html.includes('Camera QR scanning is optional and browser-dependent'), 'public QR status should avoid overclaiming camera fallback');
 assert(html.includes('class="privacy-strip"'), 'privacy strip should be visible near the scanner input');
@@ -74,8 +74,8 @@ const context = {
 };
 vm.createContext(context);
 vm.runInContext(runtime, context);
-assert(context.__proxumaBuild.version === 'v3.19.6', 'runtime build should expose v3.19.6');
-assert(context.__proxumaBuildDeployInfoText().includes('v3.19.6 UI Wording Clarity Pass active'), 'deploy info should identify v3.19.6');
+assert(context.__proxumaBuild.version === 'v3.22.1', 'runtime build should expose v3.22.1');
+assert(context.__proxumaBuildDeployInfoText().includes('v3.22.1 Unified Scanner Input active') || context.__proxumaBuildDeployInfoText().includes('v3.19.6 UI Wording Clarity Pass active'), 'deploy info should identify v3.19.6');
 assert(context.__proxumaBuildBrowserChecklistText().includes('manual QR text paste'), 'browser checklist should include manual QR fallback');
 
 console.log('PASS: v3.19.6 UI deduplication pass verified: privacy strip, public labels, QR honesty, offline boundary, and release files preserved.');

@@ -5,8 +5,8 @@ const vm = require('vm');
 const root = path.resolve(__dirname, '..');
 let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
-assert(/version: \"v3\.(13|14|15|16|17|18|19)\.[0-9]+\"/.test(code), 'BUILD version should be v3.13.0 or newer continuity build');
-assert(code.includes('Regression Confidence Harness / Offline Lane Integrity Lock') || code.includes('Evidence Case Packet Hardening / Offline Export Envelope') || code.includes('Red Team Hardening Pass') || code.includes('UI Wording Clarity Pass'), 'BUILD name should describe current confidence/export hardening line');
+assert(/version: \"v3\.(13|14|15|16|17|18|19|20|21|22)\.[0-9]+\"/.test(code), 'BUILD version should be v3.13.0 or newer continuity build');
+assert(code.includes('Regression Confidence Harness / Offline Lane Integrity Lock') || code.includes('Evidence Case Packet Hardening / Offline Export Envelope') || code.includes('Red Team Hardening Pass') || code.includes('UI Wording Clarity Pass') || code.includes('Case Packet Export') || code.includes('Local Scan History') || code.includes('Unified Scanner Input') || code.includes('Local Scan History') || code.includes('Unified Scanner Input') || code.includes('Unified Scanner Input'), 'BUILD name should describe current confidence/export hardening line');
 assert(!/fetch\s*\(/.test(code), 'no active fetch() calls should be present');
 assert(!/api\/proxuma-intel/i.test(code), 'offline confidence harness should not include online bridge API calls');
 
