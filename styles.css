@@ -5984,3 +5984,178 @@ html[data-audience-view="analyst"] .audience-toggle.active{border-color:rgba(255
 @media (max-width: 760px){
   .technical-notes-label{max-width:420px !important;}
 }
+
+
+/* v3.23.0 — Link Anatomy Breakdown
+   Adds a new structural inspection card without duplicating confidence, evidence,
+   examples, or verdict language. It shows protocol, host, root, path, query keys,
+   and local risk tokens in a compact, readable layout. */
+.link-anatomy-card{
+  margin-top:12px;
+  padding:12px;
+  border:1px solid rgba(70,255,174,0.26);
+  border-radius:18px;
+  background:rgba(5,18,14,0.42);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03);
+}
+.link-anatomy-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+.link-anatomy-head small,
+.anatomy-row span{
+  display:block;
+  color:rgba(223,255,238,0.74);
+  font-size:.68rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.link-anatomy-head strong{
+  display:block;
+  margin-top:3px;
+  color:#f5fff8;
+  font-size:.94rem;
+  line-height:1.25;
+}
+.anatomy-badge{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  padding:5px 10px;
+  border:1px solid rgba(70,255,174,0.26);
+  border-radius:999px;
+  background:rgba(70,255,174,0.08);
+  color:#dfffee;
+  font-size:.72rem;
+  font-weight:800;
+}
+.link-anatomy-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:7px;
+}
+.anatomy-row{
+  min-width:0;
+  padding:8px 10px;
+  border:1px solid rgba(70,255,174,0.18);
+  border-radius:13px;
+  background:rgba(0,0,0,0.14);
+}
+.anatomy-row strong{
+  display:block;
+  margin-top:3px;
+  color:#f5fff8;
+  font-size:.84rem;
+  line-height:1.3;
+  white-space:normal;
+  overflow-wrap:break-word;
+  word-break:normal;
+}
+.anatomy-wide{grid-column:span 3;}
+#anatomyNote{margin:9px 2px 0!important;}
+@media (max-width: 760px){
+  .link-anatomy-card{padding:10px; border-radius:16px;}
+  .link-anatomy-head{align-items:flex-start; flex-direction:column; gap:7px;}
+  .link-anatomy-grid{grid-template-columns:1fr; gap:6px;}
+  .anatomy-wide{grid-column:1 / -1;}
+  .anatomy-row{padding:7px 9px;}
+  .anatomy-row strong{font-size:.82rem;}
+}
+
+
+/* v3.23.1 — Link Anatomy Fill + Compact Guard
+   Keep the structural view useful without adding visual clutter. */
+.link-anatomy-card.anatomy-empty{
+  opacity:.72;
+}
+.link-anatomy-card.anatomy-populated{
+  padding:12px 13px!important;
+}
+.link-anatomy-card.anatomy-populated .link-anatomy-grid{
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:7px;
+}
+.link-anatomy-card.anatomy-populated .anatomy-row{
+  min-height:0;
+  padding:7px 9px;
+  overflow:hidden;
+}
+.link-anatomy-card.anatomy-populated .anatomy-row span{
+  white-space:nowrap;
+}
+.link-anatomy-card.anatomy-populated .anatomy-row strong{
+  display:block;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  line-height:1.25;
+}
+.link-anatomy-card.anatomy-populated .anatomy-row:nth-child(1),
+.link-anatomy-card.anatomy-populated .anatomy-row:nth-child(2),
+.link-anatomy-card.anatomy-populated .anatomy-row:nth-child(3){
+  grid-column:span 2;
+}
+.link-anatomy-card.anatomy-populated .anatomy-wide{
+  grid-column:1 / -1;
+}
+.link-anatomy-card.anatomy-populated #anatomyNote{
+  font-size:.82rem;
+  margin-top:7px!important;
+}
+@media(max-width:760px){
+  .link-anatomy-card.anatomy-populated .link-anatomy-grid{
+    grid-template-columns:1fr;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-row,
+  .link-anatomy-card.anatomy-populated .anatomy-row:nth-child(1),
+  .link-anatomy-card.anatomy-populated .anatomy-row:nth-child(2),
+  .link-anatomy-card.anatomy-populated .anatomy-row:nth-child(3),
+  .link-anatomy-card.anatomy-populated .anatomy-wide{
+    grid-column:1 / -1;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-row{
+    display:grid;
+    grid-template-columns:minmax(86px, 32%) 1fr;
+    align-items:start;
+    gap:8px;
+  }
+}
+
+/* v3.23.2 — Link Anatomy Card Wrap Polish
+   Wrap Protocol, Host, Root Domain, Path, Query, and Risk Tokens in the same
+   subtle green bordered chip language used by the privacy strip. */
+.link-anatomy-card .anatomy-row{
+  border:1px solid rgba(70,255,174,0.28)!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg, rgba(70,255,174,0.075), rgba(70,255,174,0.035))!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.035)!important;
+}
+.link-anatomy-card .anatomy-row span{
+  color:rgba(223,255,238,0.78)!important;
+}
+.link-anatomy-card .anatomy-row strong{
+  color:#f5fff8!important;
+}
+.link-anatomy-card .anatomy-wide{
+  padding:9px 11px!important;
+}
+.link-anatomy-card .anatomy-wide strong{
+  line-height:1.35!important;
+}
+.link-anatomy-card .anatomy-row:hover{
+  border-color:rgba(70,255,174,0.42)!important;
+  background:linear-gradient(180deg, rgba(70,255,174,0.105), rgba(70,255,174,0.045))!important;
+}
+@media(max-width:760px){
+  .link-anatomy-card .anatomy-row{
+    border-radius:13px!important;
+  }
+  .link-anatomy-card .anatomy-wide{
+    padding:8px 10px!important;
+  }
+}

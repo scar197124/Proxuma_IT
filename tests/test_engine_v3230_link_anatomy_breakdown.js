@@ -1,0 +1,21 @@
+const fs = require('fs');
+const path = require('path');
+const root = path.join(__dirname, '..');
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const js = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
+function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
+assert(html.includes('class="link-anatomy-card"'), 'Link Anatomy card should exist');
+assert(html.includes('id="anatomyProtocol"'), 'Protocol anatomy field should exist');
+assert(html.includes('id="anatomyHost"'), 'Host anatomy field should exist');
+assert(html.includes('id="anatomyRoot"'), 'Root anatomy field should exist');
+assert(html.includes('id="anatomyPath"'), 'Path anatomy field should exist');
+assert(html.includes('id="anatomyQuery"'), 'Query anatomy field should exist');
+assert(html.includes('id="anatomyTokens"'), 'Risk token anatomy field should exist');
+assert(js.includes('function makeLinkAnatomy(target)'), 'makeLinkAnatomy builder should exist');
+assert(js.includes('anatomy:makeLinkAnatomy(ctx.target)'), 'scan report should carry anatomy object');
+assert(js.includes('anatomyProtocol: $("anatomyProtocol")'), 'anatomy DOM refs should be wired');
+assert(js.includes('URL structure parsed locally'), 'URL anatomy status should be present');
+assert(js.includes('Message / QR payload'), 'Payload anatomy status should be present');
+const forbiddenNetwork = /\b(fetch|XMLHttpRequest|WebSocket|EventSource|sendBeacon)\s*\(/;
+assert(!forbiddenNetwork.test(js), 'No active network primitives should be introduced');
+console.log('PASS v3.23.0 link anatomy breakdown');

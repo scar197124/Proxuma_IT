@@ -1,3 +1,9 @@
+## v3.24.0 — No-New-Cards Guardrails
+
+- Added feature map and duplicate-prevention guardrails.
+- Added regression test to prevent obvious duplicate UI lanes/cards.
+- No public UI cards added.
+
 ## v3.22.2 — Compact Scan Report Metrics
 
 ## v3.22.4 — Snapshot Chip Border Wrap

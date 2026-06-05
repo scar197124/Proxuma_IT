@@ -96,3 +96,7 @@ For GitHub pushes:
 **Next build:** v3.23.0 — Built-in Sample Training Mode
 
 Reason: it helps new visitors understand Proxuma IT immediately without risking the scanner engine.
+
+
+## v3.23.0 — Link Anatomy Breakdown
+Added a structural Link Anatomy card for protocol, host, root domain, path, query keys, and local risk tokens. This is a new structural view, not a duplicate explanation/evidence panel.
