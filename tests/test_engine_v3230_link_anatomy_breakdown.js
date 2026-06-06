@@ -16,6 +16,6 @@ assert(js.includes('anatomy:makeLinkAnatomy(ctx.target)'), 'scan report should c
 assert(js.includes('anatomyProtocol: $("anatomyProtocol")'), 'anatomy DOM refs should be wired');
 assert(js.includes('URL structure parsed locally'), 'URL anatomy status should be present');
 assert(js.includes('Message / QR payload'), 'Payload anatomy status should be present');
-const forbiddenNetwork = /\b(fetch|XMLHttpRequest|WebSocket|EventSource|sendBeacon)\s*\(/;
-assert(!forbiddenNetwork.test(js), 'No active network primitives should be introduced');
+const networkCount = (js.match(/\b(fetch|XMLHttpRequest|WebSocket|EventSource|sendBeacon)\s*\(/g) || []).length;
+assert(networkCount <= 1 && js.includes('runConsentGatedRdapLookup'), 'Only the explicit consent-gated RDAP fetch may be introduced');
 console.log('PASS v3.23.0 link anatomy breakdown');

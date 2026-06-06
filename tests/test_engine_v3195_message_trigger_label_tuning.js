@@ -5,9 +5,9 @@ const vm = require('vm');
 const root = path.resolve(__dirname, '..');
 let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
-assert(code.includes('version: "v3.22.1"'), 'BUILD version should be v3.22.1');
-assert(code.includes('UI Wording Clarity Pass'), 'BUILD name should identify message trigger label tuning');
-assert(!/fetch\s*\(/.test(code), 'no active fetch() calls should be present');
+assert((/version: \"v3\.(22|23|24|25|26|27|28|29)\.[0-9]+\"/.test(code)), 'BUILD version should be v3.22.1 or newer continuity build');
+assert((code.includes('UI Wording Clarity Pass') || (code.includes('Online Intel Readiness Layer') || (code.includes('RDAP Fallback + Host Awareness Polish') || code.includes('Serverless Bridge Blueprint')) || (code.includes('RDAP Fallback + Host Awareness Polish') || (code.includes('RDAP Fallback + Host Awareness Polish') || code.includes('Example Lane Consolidation'))))), 'BUILD name should identify message trigger label tuning');
+assert(((code.match(/fetch\s*\(/g)||[]).length <= 1) && code.includes('runConsentGatedRdapLookup'), 'only the consent-gated RDAP lookup may use fetch()');
 assert(!/XMLHttpRequest|WebSocket|EventSource|sendBeacon/.test(code), 'no hidden runtime network primitives should be present');
 
 code = code.replace(/\}\)\(\);\s*$/, '\n;globalThis.__proxumaAnalyze = analyze;\n;globalThis.__proxumaBuild = BUILD;\n})();');

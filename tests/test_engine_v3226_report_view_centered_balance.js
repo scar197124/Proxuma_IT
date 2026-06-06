@@ -14,5 +14,5 @@ assert(css.includes('v3.22.6') && css.includes('Centered Report View Balance'), 
 assert(/\.audience-switch\.report-meta-card[\s\S]*flex-direction:column/.test(css), 'Report View selector should be centered in a vertical stack');
 assert(/\.audience-toggle-row[\s\S]*width:min\(100%, 390px\)/.test(css), 'User/Analyst toggles should be centered with a controlled width');
 assert(/\.technical-notes-label[\s\S]*text-align:center/.test(css), 'Technical notes label should be centered');
-assert(!/fetch\s*\(/.test(code), 'no active fetch calls should be introduced');
+assert(((code.match(/fetch\s*\(/g)||[]).length <= 1) && code.includes('runConsentGatedRdapLookup'), 'only the consent-gated RDAP lookup may use fetch()');
 console.log('PASS: v3.22.6 Report View centered balance verified.');

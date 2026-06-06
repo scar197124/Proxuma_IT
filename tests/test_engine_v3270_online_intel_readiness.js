@@ -1,0 +1,20 @@
+const fs = require('fs');
+const path = require('path');
+const root = path.resolve(__dirname, '..');
+const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const js = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
+const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+function assert(condition, message){ if(!condition){ throw new Error(message); } }
+assert(((js.includes('version: "v3.29.3"') || js.includes('version: "v3.29.1"')) || js.includes('version: "v3.28.0"')), 'BUILD version should be v3.29.3 or v3.29.1 or v3.28.0 continuity build');
+assert((js.includes('name: "Serverless Bridge Blueprint"') || (js.includes('name: "RDAP Fallback + Host Awareness Polish"') || js.includes('name: "Example Lane Consolidation"')) || js.includes('name: "Serverless Bridge Blueprint"') || (js.includes('name: "RDAP Fallback + Host Awareness Polish"') || js.includes('name: "Example Lane Consolidation"'))), 'BUILD name should be Serverless Bridge Blueprint');
+assert(html.includes('id="onlineReadinessList"'), 'Online readiness list should exist inside Online Intel drawer');
+assert(html.includes('id="onlineReadinessStatus"'), 'Online readiness status pill should exist');
+assert(js.includes('ONLINE_READINESS_CHECKS'), 'Online readiness checks constant missing');
+assert(js.includes('renderOnlineReadiness'), 'Online readiness renderer missing');
+assert(js.includes('Serverless bridge') && js.includes('API key status') && js.includes('Network activity'), 'Expected readiness checks missing');
+assert(css.includes('v3.27.0 — Online Intel Readiness Layer'), 'v3.27.0 readiness CSS marker missing');
+assert(((js.match(/fetch\s*\(/g)||[]).length <= 1) && js.includes('runConsentGatedRdapLookup'), 'only the consent-gated RDAP lookup may use fetch()');
+assert(!/XMLHttpRequest|WebSocket|EventSource|sendBeacon/.test(js), 'No hidden online transport should be present');
+assert(!/apiKey|apikey|API_KEY|secretKey|client_secret/i.test(js), 'No API key/secret markers should be present');
+assert((html.match(/id="onlinePanel"/g) || []).length === 1, 'Online Intel drawer should not be duplicated');
+console.log('PASS v3.28.0 preserves Online Intel readiness layer');

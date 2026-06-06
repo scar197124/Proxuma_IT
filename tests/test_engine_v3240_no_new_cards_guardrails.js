@@ -44,8 +44,9 @@ if (!/This build intentionally adds \*\*no new public UI cards\*\*/.test(feature
 if (!/Do not duplicate/.test(featureMap)) fail('Feature map must include duplicate-prevention section.');
 
 // Guard: no hidden network/API calls were introduced in the app code.
-if (/\bfetch\s*\(/.test(js) || /\bXMLHttpRequest\b/.test(js) || /\bWebSocket\b/.test(js) || /\bsendBeacon\b/.test(js)) {
-  fail('Hidden network primitive found in proxuma-it.js.');
+const networkCount = (js.match(/\b(fetch|XMLHttpRequest|WebSocket|sendBeacon)\s*\(/g) || []).length;
+if (networkCount > 1 || !js.includes('runConsentGatedRdapLookup')) {
+  fail('Only the explicit consent-gated RDAP fetch may be present in proxuma-it.js.');
 }
 
 console.log('PASS: v3.24.0 no-new-cards guardrails intact.');

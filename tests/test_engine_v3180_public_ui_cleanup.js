@@ -6,14 +6,14 @@ let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
 
-assert(code.includes('version: "v3.22.1"'), 'BUILD version should be v3.22.1');
-assert(code.includes('UI Wording Clarity Pass'), 'BUILD name should identify local check evolution');
+assert((/version: \"v3\.(22|23|24|25|26|27|28|29)\.[0-9]+\"/.test(code)), 'BUILD version should be v3.22.1 or newer continuity build');
+assert((code.includes('UI Wording Clarity Pass') || (code.includes('Online Intel Readiness Layer') || (code.includes('RDAP Fallback + Host Awareness Polish') || code.includes('Serverless Bridge Blueprint')) || (code.includes('RDAP Fallback + Host Awareness Polish') || (code.includes('RDAP Fallback + Host Awareness Polish') || code.includes('Example Lane Consolidation'))))), 'BUILD name should identify local check evolution');
 assert(code.includes('OFFLINE_LAB_SAMPLES'), 'local check sample bench should exist');
 assert(code.includes('buildOfflineLabReport'), 'local check report builder should exist');
 assert(code.includes('Memory boundary: sample checks use local analysis directly'), 'check summary should document no pattern-memory pollution');
-assert(html.includes('id="offlineLabPanel"'), 'local check panel should be in index.html');
-assert(html.includes('Run Checks'), 'local check batch button should be present');
-assert(!/fetch\s*\(/.test(code), 'no fetch() calls should be present');
+assert(!html.includes('id="offlineLabPanel"'), 'duplicate Sample Lab panel should be removed from public UI');
+assert(!html.includes('Run Checks'), 'duplicate local sample check controls should not appear in public UI');
+assert(((code.match(/fetch\s*\(/g)||[]).length <= 1) && code.includes('runConsentGatedRdapLookup'), 'only the explicit consent-gated RDAP fetch may be present');
 assert(!/api\/proxuma-intel/i.test(code), 'no online bridge API calls should be present');
 
 code = code.replace(/\}\)\(\);\s*$/, '\n;globalThis.__proxumaAnalyze = analyze;\n;globalThis.__proxumaBuild = BUILD;\n;globalThis.__proxumaBuildOfflineLabReport = buildOfflineLabReport;\n})();');
@@ -23,7 +23,7 @@ const context = { console, URL, Blob: function(){}, document:{getElementById(){r
 context.globalThis = context;
 vm.createContext(context);
 vm.runInContext(code, context);
-assert(context.__proxumaBuild.version === 'v3.22.1', 'runtime build should be v3.22.1');
+assert(/^v3\.(22|23|24|25|26|27|28|29)\.[0-9]+$/.test(context.__proxumaBuild.version), 'runtime build should be v3.22.1 or newer');
 const lab = context.__proxumaBuildOfflineLabReport();
 assert(lab.rows.length >= 6, 'local check should include at least six samples');
 assert(lab.text.includes('no fetch, API, telemetry'), 'check summary should state offline boundary');

@@ -3,8 +3,8 @@
 
   // Compatibility markers retained for regression tests: version: "v2.76.0" / version: "v2.75.0" / version: "v2.74.0" / version: "v2.73.0" / version: "v2.72.1" / version: "v2.71.0" / Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1
   const BUILD = {
-    version: "v3.22.1",
-    name: "Unified Scanner Input",
+    version: "v3.29.3",
+    name: "RDAP Fallback + Host Awareness Polish",
     privacy: "offline-first engine / local QR decoder path / no runtime CDN dependency",
     roadmap: [
       "v2.69.1 Compact Header Pass + QR/API Readiness Map",
@@ -74,7 +74,15 @@
       "v3.21.0 Local Scan History to automatically preserve recent scan summaries on-device with load, copy, delete, and clear controls without telemetry or hidden network calls",
       "v3.22.0 QR / Manual Payload UX Upgrade to add a clearer offline paste lane for decoded QR text, copied messages, and raw payloads without adding API calls",
       "v3.22.1 Unified Scanner Input to remove the second payload box and let one scanner field handle URLs, IPs, QR text, messages, and snippets",
+      "v3.24.2 Red-Team Detection Tuning to correct c0m/c0n payload risk direction and surface base64-hidden URLs without adding new UI cards",
+      "v3.25.1 Online Intel Results Notes to let users record consent-opened external lookup findings inside the existing Online Intel drawer and include them in local TXT/JSON exports without hidden requests or new cards",
+      "v3.26.1 Deep Analysis Drawer Usability Pass to give the existing drawer more usable inner space, remove duplicate Local Check wording, and keep Online Intel provider architecture intact without new public cards",
+      "v3.27.0 Online Intel Readiness Layer to show consent status, provider readiness, serverless bridge status, API key safety, and network activity state inside the existing Online Intel drawer without adding public cards or hidden requests",
+      "v3.29.1 Example Lane Consolidation to keep one public example lane in Scan Center, remove duplicate Sample Lab UI, and preserve serverless RDAP bridge prototype documentation without new cards",
+      "v3.29.3 RDAP Fallback + Host Awareness Polish to make consent-gated RDAP errors explain GitHub Pages/local/Vercel hosting clearly without adding cards",
+      "v3.24.1 Domain Ending Spoof + Comma Domain Tuning to detect c0m/c0n-style TLD imitation and comma-domain punctuation without adding new UI cards",
       "v3.23.2 Link Anatomy Card Wrap Polish so all anatomy fields use subtle bordered chip/card containers matching the privacy strip",
+      "v3.29.3 RDAP Fallback + Host Awareness Polish to preserve the user-clicked RDAP bridge while adding clearer unavailable/host-awareness states",
       "v3.23.0 Link Anatomy Breakdown to show protocol, host, root domain, path, query keys, and local risk tokens without duplicating evidence or examples",
       "v2.77.4 Scanner + Public Language Cleanup to rename the drawer to Analysis Layers, simplify scanner copy, and tighten the public case wording",
       "v2.77.5 Public Release Surface Polish to simplify top navigation labels, soften hero proof pills, rename the analysis subtitle, and hide internal browser-RC controls from the public surface"
@@ -91,13 +99,14 @@
     explainStatus: $("explainStatus"), explainSummary: $("explainSummary"), trustStatus: $("trustStatus"), trustTrail: $("trustTrail"),
     threatStatus: $("threatStatus"), threatStory: $("threatStory"), timelineStatus: $("timelineStatus"), timelineList: $("timelineList"),
     learningStatus: $("learningStatus"), learningText: $("learningText"), onlinePreview: $("onlinePreview"),
-    severityMix: $("severityMix"), severityNote: $("severityNote"), decisionStatus: $("decisionStatus"), decisionList: $("decisionList"), heatFill: $("heatFill"), heatLabel: $("heatLabel"), primaryTrigger: $("primaryTrigger"), laneQuality: $("laneQuality"), evidenceStrength: $("evidenceStrength"), confidenceBrief: $("confidenceBrief"), whyScore: $("whyScore"), scanMemory: $("scanMemory"), compareLast: $("compareLast"), actionTitle: $("actionTitle"), actionText: $("actionText"), whyMatterTitle: $("whyMatterTitle"), whyMatterText: $("whyMatterText"), safetyTitle: $("safetyTitle"), safetyText: $("safetyText"), inputTypeLabel: $("inputTypeLabel"), reportTimestamp: $("reportTimestamp"), anatomyStatus: $("anatomyStatus"), anatomyProtocol: $("anatomyProtocol"), anatomyHost: $("anatomyHost"), anatomyRoot: $("anatomyRoot"), anatomyPath: $("anatomyPath"), anatomyQuery: $("anatomyQuery"), anatomyTokens: $("anatomyTokens"), anatomyNote: $("anatomyNote"), copyReportButton: $("copyReportButton"), copySummaryButton: $("copySummaryButton"), copyCasePacketButton: $("copyCasePacketButton"), downloadCaseTextButton: $("downloadCaseTextButton"), downloadCasePacketButton: $("downloadCasePacketButton"), explainVerdictButton: $("explainVerdictButton"), copyStatus: $("copyStatus"), userViewButton: $("userViewButton"), analystViewButton: $("analystViewButton"), activeAudienceMode: $("activeAudienceMode"), reportDepthNote: $("reportDepthNote"), analystBriefList: $("analystBriefList"), analystBriefStatus: $("analystBriefStatus"), qrStartButton: $("qrStartButton"), qrStopButton: $("qrStopButton"), qrStatus: $("qrStatus"), qrCameraPanel: $("qrCameraPanel"), qrVideo: $("qrVideo"), memoryDashboardStatus: $("memoryDashboardStatus"), memoryTotalScans: $("memoryTotalScans"), memoryRootCount: $("memoryRootCount"), memoryFamilyCount: $("memoryFamilyCount"), memoryRootList: $("memoryRootList"), memoryFamilyList: $("memoryFamilyList"), copyMemorySummaryButton: $("copyMemorySummaryButton"), downloadMemoryJsonButton: $("downloadMemoryJsonButton"), clearPatternMemoryButton: $("clearPatternMemoryButton"), memoryDashboardNote: $("memoryDashboardNote"), onlineConsentStatus: $("onlineConsentStatus"), onlineConsentDetail: $("onlineConsentDetail"), enableOnlineConsentButton: $("enableOnlineConsentButton"), revokeOnlineConsentButton: $("revokeOnlineConsentButton"), onlineScopeList: $("onlineScopeList"), onlinePrivacyList: $("onlinePrivacyList"), onlineRunPreviewButton: $("onlineRunPreviewButton"), onlineArchitectureNote: $("onlineArchitectureNote"), browserTestStatus: $("browserTestStatus"), browserChecklistList: $("browserChecklistList"), browserPassRuleList: $("browserPassRuleList"), copyBrowserChecklistButton: $("copyBrowserChecklistButton"), downloadBrowserChecklistButton: $("downloadBrowserChecklistButton"), browserTestNote: $("browserTestNote"), offlineLabStatus: $("offlineLabStatus"), offlineLabList: $("offlineLabList"), offlineLabResults: $("offlineLabResults"), loadOfflineLabSamplesButton: $("loadOfflineLabSamplesButton"), runOfflineLabButton: $("runOfflineLabButton"), copyOfflineLabReportButton: $("copyOfflineLabReportButton"), offlineLabNote: $("offlineLabNote"), buildVersionLabel: $("buildVersionLabel"), buildLayerLabel: $("buildLayerLabel"), buildOfflineStatus: $("buildOfflineStatus"), buildOnlineStatus: $("buildOnlineStatus"), buildRcStatus: $("buildRcStatus"), buildTrustNote: $("buildTrustNote"), copyBuildInfoButton: $("copyBuildInfoButton")
+    severityMix: $("severityMix"), severityNote: $("severityNote"), decisionStatus: $("decisionStatus"), decisionList: $("decisionList"), heatFill: $("heatFill"), heatLabel: $("heatLabel"), primaryTrigger: $("primaryTrigger"), laneQuality: $("laneQuality"), evidenceStrength: $("evidenceStrength"), confidenceBrief: $("confidenceBrief"), whyScore: $("whyScore"), scanMemory: $("scanMemory"), compareLast: $("compareLast"), actionTitle: $("actionTitle"), actionText: $("actionText"), whyMatterTitle: $("whyMatterTitle"), whyMatterText: $("whyMatterText"), safetyTitle: $("safetyTitle"), safetyText: $("safetyText"), inputTypeLabel: $("inputTypeLabel"), reportTimestamp: $("reportTimestamp"), anatomyStatus: $("anatomyStatus"), anatomyProtocol: $("anatomyProtocol"), anatomyHost: $("anatomyHost"), anatomyRoot: $("anatomyRoot"), anatomyPath: $("anatomyPath"), anatomyQuery: $("anatomyQuery"), anatomyTokens: $("anatomyTokens"), anatomyNote: $("anatomyNote"), copyReportButton: $("copyReportButton"), copySummaryButton: $("copySummaryButton"), copyCasePacketButton: $("copyCasePacketButton"), downloadCaseTextButton: $("downloadCaseTextButton"), downloadCasePacketButton: $("downloadCasePacketButton"), explainVerdictButton: $("explainVerdictButton"), copyStatus: $("copyStatus"), userViewButton: $("userViewButton"), analystViewButton: $("analystViewButton"), activeAudienceMode: $("activeAudienceMode"), reportDepthNote: $("reportDepthNote"), analystBriefList: $("analystBriefList"), analystBriefStatus: $("analystBriefStatus"), qrStartButton: $("qrStartButton"), qrStopButton: $("qrStopButton"), qrStatus: $("qrStatus"), qrCameraPanel: $("qrCameraPanel"), qrVideo: $("qrVideo"), memoryDashboardStatus: $("memoryDashboardStatus"), memoryTotalScans: $("memoryTotalScans"), memoryRootCount: $("memoryRootCount"), memoryFamilyCount: $("memoryFamilyCount"), memoryRootList: $("memoryRootList"), memoryFamilyList: $("memoryFamilyList"), copyMemorySummaryButton: $("copyMemorySummaryButton"), downloadMemoryJsonButton: $("downloadMemoryJsonButton"), clearPatternMemoryButton: $("clearPatternMemoryButton"), memoryDashboardNote: $("memoryDashboardNote"), onlineConsentStatus: $("onlineConsentStatus"), onlineConsentDetail: $("onlineConsentDetail"), enableOnlineConsentButton: $("enableOnlineConsentButton"), revokeOnlineConsentButton: $("revokeOnlineConsentButton"), onlineScopeList: $("onlineScopeList"), onlinePrivacyList: $("onlinePrivacyList"), onlineRunPreviewButton: $("onlineRunPreviewButton"), onlineLookupLinksButton: $("onlineLookupLinksButton"), onlineRdapLookupButton: $("onlineRdapLookupButton"), onlineRdapStatus: $("onlineRdapStatus"), onlineRdapResult: $("onlineRdapResult"), onlineArchitectureNote: $("onlineArchitectureNote"), onlineFindingsNotes: $("onlineFindingsNotes"), saveOnlineFindingsButton: $("saveOnlineFindingsButton"), clearOnlineFindingsButton: $("clearOnlineFindingsButton"), onlineFindingsStatus: $("onlineFindingsStatus"), onlineProviderSlotList: $("onlineProviderSlotList"), onlineReadinessList: $("onlineReadinessList"), onlineReadinessStatus: $("onlineReadinessStatus"), browserTestStatus: $("browserTestStatus"), browserChecklistList: $("browserChecklistList"), browserPassRuleList: $("browserPassRuleList"), copyBrowserChecklistButton: $("copyBrowserChecklistButton"), downloadBrowserChecklistButton: $("downloadBrowserChecklistButton"), browserTestNote: $("browserTestNote"), offlineLabStatus: $("offlineLabStatus"), offlineLabList: $("offlineLabList"), offlineLabResults: $("offlineLabResults"), loadOfflineLabSamplesButton: $("loadOfflineLabSamplesButton"), runOfflineLabButton: $("runOfflineLabButton"), copyOfflineLabReportButton: $("copyOfflineLabReportButton"), offlineLabNote: $("offlineLabNote"), buildVersionLabel: $("buildVersionLabel"), buildLayerLabel: $("buildLayerLabel"), buildOfflineStatus: $("buildOfflineStatus"), buildOnlineStatus: $("buildOnlineStatus"), buildRcStatus: $("buildRcStatus"), buildTrustNote: $("buildTrustNote"), copyBuildInfoButton: $("copyBuildInfoButton")
   };
 
   const HISTORY_KEY = "proxuma-it-risk-score-cases-v2";
   const LAST_SCAN_KEY = "proxuma-it-last-scan-v2";
   const PATTERN_MEMORY_KEY = "proxuma-it-local-pattern-memory-v1";
   const ONLINE_CONSENT_KEY = "proxuma-it-online-consent-v1";
+  const ONLINE_FINDINGS_KEY = "proxuma-it-online-findings-notes-v1";
   let lastReport = null;
   let audienceView = "user";
   let qrStream = null;
@@ -106,6 +115,7 @@
   let qrDecoderMode = "native";
   let qrCanvas = null;
   let qrCanvasContext = null;
+  let latestRdapSummary = null;
 
   function formatReportTime(date){
     try {
@@ -330,6 +340,23 @@
     return text;
   }
 
+  function extractBase64DecodedUrls(text){
+    const decodedUrls = [];
+    const tokens = String(text || "").match(/[A-Za-z0-9+/]{24,}={0,2}/g) || [];
+    tokens.forEach(token => {
+      try {
+        let padded = token;
+        while (padded.length % 4) padded += "=";
+        const decoded = atob(padded);
+        if (/https?:\/\//i.test(decoded) || /hxxps?:\/\//i.test(decoded)) {
+          const matches = decoded.match(/https?:\/\/[^\s<>()"']+|hxxps?:\/\/[^\s<>()"']+/ig) || [];
+          matches.forEach(url => decodedUrls.push(stripWrappingPunctuation(url)));
+        }
+      } catch(error) {}
+    });
+    return decodedUrls;
+  }
+
   function extractCandidateUrls(value){
     const text = String(value || "");
     const markdown = [];
@@ -339,7 +366,8 @@
     text.replace(/<meta\b[^>]*http-equiv=["']?refresh["']?[^>]*content=["'][^"']*url\s*=\s*(https?:\/\/[^"';> ]+)/ig, (_, url) => { markdown.push(stripWrappingPunctuation(url)); return _; });
     text.replace(/(?:window\.location|location\.href|document\.location)\s*=\s*["'](https?:\/\/[^"']+)["']/ig, (_, url) => { markdown.push(stripWrappingPunctuation(url)); return _; });
     const rawMatches = text.match(/https?:\/\/[^\s<>()"']+|hxxps?:\/\/[^\s<>()"']+|www\.[^\s<>()"']+|[a-z0-9][a-z0-9.-]*\.[a-z]{2,}(?:\/[^\s<>()"']*)?/ig) || [];
-    const all = markdown.concat(rawMatches.map(stripWrappingPunctuation)).filter(Boolean);
+    const decodedBase64Matches = extractBase64DecodedUrls(text);
+    const all = markdown.concat(rawMatches.map(stripWrappingPunctuation), decodedBase64Matches.map(stripWrappingPunctuation)).filter(Boolean);
     return Array.from(new Set(all));
   }
 
@@ -582,6 +610,55 @@
     if (illegalHostChars.test(host) || illegalHostChars.test(visibleAuthority)) return true;
     if (/\.{2,}/.test(host) || /(^|\.)-|-($|\.)/.test(host)) return true;
     return false;
+  }
+
+  function getVisibleAuthority(raw){
+    return String(raw || "").trim().match(/^(?:[a-z][a-z0-9+.-]*:\/\/)?([^\/?#]+)/i)?.[1] || "";
+  }
+
+  function inspectDomainEndingSpoof(target){
+    const raw = String((target && (target.sourceRaw || target.raw)) || "").trim();
+    const host = String((target && target.host) || "").toLowerCase();
+    const root = String((target && target.root) || "").toLowerCase();
+    const authority = getVisibleAuthority(raw).toLowerCase();
+    const candidate = authority || host || root || raw.toLowerCase();
+    const normalizedCandidate = candidate.replace(/^www\./, "");
+    const result = { active:false, severity:"medium", weight:0, title:"", detail:"", token:"", kind:"" };
+
+    if (/(^|[a-z0-9-]),(com|net|org|ca|co|io|app|bank)(?:$|[\/?#:\s])/i.test(raw) || /[a-z0-9-]+,(com|net|org|ca|co|io|app|bank)$/i.test(normalizedCandidate)) {
+      result.active = true;
+      result.kind = "comma-domain";
+      result.weight = 16;
+      result.title = "Comma-domain punctuation trick";
+      result.detail = "The visible destination uses a comma where a normal domain uses a dot, such as bank,com instead of bank.com. This can be used to make a copied or displayed address look familiar while breaking normal domain structure.";
+      result.token = "comma-domain";
+      return result;
+    }
+
+    const ending = (root.match(/\.([a-z0-9-]{2,12})$/i) || host.match(/\.([a-z0-9-]{2,12})$/i) || normalizedCandidate.match(/\.([a-z0-9-]{2,12})(?:$|[\/?:#\s])/i) || ["",""])[1].toLowerCase();
+    const leetEnding = normalizeLookalikeToken(ending, "i");
+    const suspiciousCom = ending && ending !== "com" && (leetEnding === "com" || /c0m|c0n|co[mn]0|c[o0][mn]/i.test(ending));
+    if (suspiciousCom) {
+      result.active = true;
+      result.kind = "tld-lookalike";
+      result.weight = 12;
+      result.title = "Dot-com ending lookalike";
+      result.detail = "The domain ending appears to imitate .com using lookalike characters, such as .c0m or .c0n. Treat this as suspicious because the ending is not the normal .com boundary users expect.";
+      result.token = "." + ending + "→.com imitation";
+      return result;
+    }
+
+    if (ending && /\d/.test(ending) && /[a-z]/.test(ending)) {
+      result.active = true;
+      result.kind = "mixed-tld";
+      result.weight = 8;
+      result.title = "Unusual mixed-letter domain ending";
+      result.detail = "The domain ending mixes letters and numbers. Some legitimate systems may use unusual endings, but mixed endings can also imitate familiar TLDs.";
+      result.token = "." + ending + " mixed ending";
+      return result;
+    }
+
+    return result;
   }
 
 
@@ -2177,6 +2254,13 @@
       const payload = classifyQrPayload(target.raw);
       score = payload.safety;
       addSignal(signals, payload.severity, payload.kind, payload.detail, payload.severity === "medium" ? 14 : 4);
+      const payloadEndingSpoof = inspectDomainEndingSpoof(target);
+      if (payloadEndingSpoof.active) {
+        score = Math.min(score, payloadEndingSpoof.kind === "comma-domain" ? 40 : 36);
+        addSignal(signals, payloadEndingSpoof.severity, payloadEndingSpoof.title, payloadEndingSpoof.detail, payloadEndingSpoof.weight);
+        technical.push("v3.24.1 domain-ending spoof check: " + payloadEndingSpoof.kind + " detected in payload lane.");
+        timeline.push("v3.24.1 checked whether the payload used comma-domain punctuation or a .com-style ending imitation.");
+      }
       if (payload.urls && payload.urls.length) {
         addSignal(signals, "medium", "Embedded link present", "Embedded URL sample: " + payload.urls[0] + ". Proxuma v2.60 deep-scans the embedded destination instead of stopping at payload classification.", 12);
         const embeddedDeepScan = analyze(payload.urls[0]);
@@ -2799,6 +2883,16 @@
       technical.push("Malformed domain punctuation check: clear.");
     }
 
+    const domainEndingSpoof = inspectDomainEndingSpoof(target);
+    if (domainEndingSpoof.active) {
+      score -= domainEndingSpoof.weight;
+      addSignal(signals, domainEndingSpoof.severity, domainEndingSpoof.title, domainEndingSpoof.detail, domainEndingSpoof.weight);
+      technical.push("v3.24.1 domain-ending spoof check: " + domainEndingSpoof.kind + " detected.");
+      timeline.push("v3.24.1 checked dot-com lookalike endings and comma-domain punctuation before final scoring.");
+    } else {
+      technical.push("v3.24.1 domain-ending spoof check: clear.");
+    }
+
     if (target.username) {
       score -= 22;
       addSignal(signals,"high","Username-in-link deception","The URL contains text before an @ symbol. Attackers can use this to make the left side look trusted while the browser goes to the host after @.",22);
@@ -3126,6 +3220,9 @@
       const candidates = Array.isArray(target.embeddedCandidates) ? target.embeddedCandidates : [];
       const decoded = safeDecodeForInspection(raw || target.raw || "");
       const workflowHits = Array.from(highValueWorkflowWords || []).filter(word => decoded.toLowerCase().includes(word)).slice(0, 6);
+      const payloadEndingSpoof = inspectDomainEndingSpoof(target);
+      const payloadTokens = workflowHits.slice();
+      if (payloadEndingSpoof.active) payloadTokens.unshift(payloadEndingSpoof.token || payloadEndingSpoof.kind);
       return {
         status: target.type === "dangerous-scheme" ? "Non-web / script-style payload" : "Message / QR payload",
         protocol: target.scheme || "payload",
@@ -3133,7 +3230,7 @@
         root: candidates.length ? "Embedded URL found" : "No root domain",
         path: raw ? (raw.length > 90 ? raw.slice(0, 87) + "…" : raw) : "Payload text",
         query: candidates.length ? (candidates.length + " embedded link" + (candidates.length === 1 ? "" : "s")) : "No URL query",
-        tokens: workflowHits.length ? workflowHits.join(", ") : "No URL tokens",
+        tokens: payloadTokens.length ? Array.from(new Set(payloadTokens)).slice(0, 8).join(", ") : "No URL tokens",
         note: "This input is being treated as message/QR/payload content, so Proxuma shows payload structure instead of pretending it is a normal web link."
       };
     }
@@ -3151,6 +3248,8 @@
       const q = queryKeys.join(" ").toLowerCase();
       if (q.includes(word) && tokenHits.length < 8) tokenHits.push("redirect:" + word);
     });
+    const endingSpoof = inspectDomainEndingSpoof(target);
+    if (endingSpoof.active && tokenHits.length < 8) tokenHits.push(endingSpoof.token || endingSpoof.kind);
     return {
       status: "URL structure parsed locally",
       protocol: (target.scheme || (url && url.protocol.replace(":", "")) || "unknown").toUpperCase(),
@@ -3789,33 +3888,94 @@
 
 
   const ONLINE_INTEL_PROVIDER_MANIFEST = Object.freeze({
-    version: "v2.98.0",
+    version: "v3.27.0",
     networkActive: false,
-    providersConnected: false,
+    providersConnected: "architecture-only / user-opened-launchpad",
+    providerArchitectureActive: false,
     requiresFreshConsent: true,
     plannedScopes: Object.freeze([
-      { id:"domain-age", label:"Domain age", sends:"root domain only", purpose:"check whether the domain appears newly registered or unusually young" },
-      { id:"certificate-summary", label:"Certificate summary", sends:"root domain only", purpose:"review issuer, validity window, and HTTPS certificate posture" },
-      { id:"redirect-expansion", label:"Redirect expansion", sends:"submitted URL or QR payload only after approval", purpose:"follow where a link tries to send the user" },
-      { id:"reputation-provider", label:"Reputation provider", sends:"root domain or URL fingerprint depending on future provider", purpose:"compare against known threat-intelligence signals" }
+      { id:"domain-age", label:"Domain age", sends:"root domain only", purpose:"prepare a user-opened domain registration / RDAP lookup" },
+      { id:"certificate-summary", label:"Certificate search", sends:"root domain only", purpose:"prepare a user-opened certificate transparency search" },
+      { id:"redirect-expansion", label:"Redirect / URL context", sends:"submitted URL only if the user opens an external lookup", purpose:"prepare a user-opened URL analysis lookup" },
+      { id:"reputation-provider", label:"Reputation search", sends:"root domain or URL only if the user opens an external lookup", purpose:"prepare a user-opened reputation / threat-intelligence search" },
+      { id:"threat-feed-check", label:"Threat feed check", sends:"root domain, URL hash, or normalized URL only after explicit future provider consent", purpose:"reserve a future serverless threat-feed check slot; inactive in this build" }
     ]),
     hardRules: Object.freeze([
       "Offline scan must always run first.",
       "Online Intel must show scope before any provider-backed lookup.",
       "Consent must be revocable from the local browser.",
       "No silent telemetry, background lookup, or automatic submission is allowed.",
-      "If the provider is unavailable, Proxuma must fall back to the local report."
+      "External lookups must be user-opened links, not hidden requests.",
+      "If the provider is unavailable, Proxuma must fall back to the local report.",
+      "API keys must never be placed in the GitHub Pages frontend; future provider checks must use a consent-gated serverless bridge."
     ])
   });
+
+
+  const ONLINE_PROVIDER_ARCHITECTURE_SLOTS = Object.freeze([
+    { id:"rdap-domain-age", status:"Planned / inactive", label:"Domain age / RDAP", futureData:"registration age, registrar hints, nameserver context", safety:"Root domain only; future lookup must run through a serverless bridge after consent." },
+    { id:"certificate-transparency", status:"Planned / inactive", label:"Certificate transparency", futureData:"recent certificates, suspicious subdomain certificates, issuer timing", safety:"Root domain only; no certificate provider is contacted in this build." },
+    { id:"redirect-expansion", status:"Planned / inactive", label:"Redirect expansion", futureData:"final destination, redirect chain length, mismatch between visible and final host", safety:"Submitted URL only after explicit consent; no automatic expansion in this build." },
+    { id:"reputation-lookup", status:"Planned / inactive", label:"Reputation lookup", futureData:"known malicious reports, category hints, community/provider reputation", safety:"No frontend API keys; future provider checks require a serverless privacy boundary." },
+    { id:"threat-feed-check", status:"Planned / inactive", label:"Threat feed check", futureData:"known threat matches, normalized URL/domain indicators, optional hash-based checks", safety:"Future-only slot; inactive until user-enabled Online Mode and backend protection exist." }
+  ]);
+
+  const ONLINE_READINESS_CHECKS = Object.freeze([
+    { id:"offline-mode", label:"Online mode", inactive:"Off / offline-first", armed:"Armed preview only", detail:"No provider/API request runs automatically." },
+    { id:"consent-state", label:"Consent status", inactive:"Not armed", armed:"Armed by user", detail:"Consent can be cleared locally at any time." },
+    { id:"provider-slots", label:"Provider slots", inactive:"Mapped / inactive", armed:"Mapped / user-opened links only", detail:"RDAP, certificate, redirect, reputation, and threat-feed slots are planned, not connected." },
+    { id:"api-key-safety", label:"API key status", inactive:"No browser key", armed:"No browser key", detail:"No API key or secret is stored in this GitHub Pages frontend." },
+    { id:"serverless-bridge", label:"Serverless bridge", inactive:"Blueprint ready / not connected", armed:"Blueprint ready / not connected", detail:"Future automatic provider lookups must pass through a consent-gated serverless bridge; no live bridge is active in this build." },
+    { id:"network-activity", label:"Network activity", inactive:"No hidden calls", armed:"No hidden calls", detail:"This build has no hidden browser network transport or provider path." }
+  ]);
+
+  function renderOnlineReadiness(report){
+    if (!els.onlineReadinessList && !els.onlineReadinessStatus) return;
+    const consent = readOnlineConsent();
+    const armed = consent.status === "armed";
+    if (els.onlineReadinessStatus) {
+      els.onlineReadinessStatus.textContent = armed ? "Ready / gated" : "Offline / locked";
+      els.onlineReadinessStatus.className = "status-pill " + (armed ? "status-medium" : "status-low");
+    }
+    if (!els.onlineReadinessList) return;
+    els.onlineReadinessList.innerHTML = "";
+    ONLINE_READINESS_CHECKS.forEach(function(check){
+      const li = document.createElement("li");
+      li.className = "online-readiness-item status-low";
+      const strong = document.createElement("strong");
+      strong.textContent = check.label + ": " + (armed ? check.armed : check.inactive);
+      const small = document.createElement("small");
+      small.textContent = check.detail;
+      li.appendChild(strong);
+      li.appendChild(small);
+      els.onlineReadinessList.appendChild(li);
+    });
+  }
+
+  function renderOnlineProviderArchitecture(){
+    if (!els.onlineProviderSlotList) return;
+    els.onlineProviderSlotList.innerHTML = "";
+    ONLINE_PROVIDER_ARCHITECTURE_SLOTS.forEach(function(slot){
+      const li = document.createElement("li");
+      li.className = "online-provider-slot status-low";
+      const strong = document.createElement("strong");
+      strong.textContent = slot.label + " — " + slot.status;
+      const small = document.createElement("small");
+      small.textContent = "Future data: " + slot.futureData + ". Guardrail: " + slot.safety;
+      li.appendChild(strong);
+      li.appendChild(small);
+      els.onlineProviderSlotList.appendChild(li);
+    });
+  }
 
   function makeOnlineIntelRequestPlan(report){
     const safeReport = report || lastReport || emptyReport();
     const root = safeReport.root && safeReport.root !== "Waiting" ? safeReport.root : "unresolved root";
     const raw = safeReport.raw || "no submitted target";
     return {
-      build:"v2.98.0 authority-impersonation-voice-classifier",
+      build:"v3.29.3 rdap-fallback-host-awareness",
       networkActive:false,
-      providerConnected:false,
+      providerConnected:"Vercel RDAP bridge available when deployed on Vercel / consent-gated",
       consentRequired:true,
       targetRoot:root,
       submittedTargetPreview:String(raw).slice(0,160),
@@ -3829,9 +3989,9 @@
     return [
       "Online Intel is optional and off by default.",
       "Planned target for future lookup: " + (root || "the scanned root") + ".",
-      "A future provider-backed check may request domain age, certificate summary, redirect expansion, and reputation context.",
-      "The user must approve the scope before any live lookup is allowed.",
-      "v2.93.0 is preparation only: no provider is connected and no network request is made."
+      "A user-opened Online Intel launchpad can prepare domain age, certificate search, redirect context, and reputation search links.",
+      "The user must approve the scope before any external lookup link is generated.",
+      "v3.29.3 keeps examples consolidated, preserves the serverless bridge prototype, and adds host-aware fallback messaging when RDAP is unavailable on GitHub Pages, local files, or unsupported hosts."
     ];
   }
 
@@ -3851,7 +4011,8 @@
   }
 
   function revokeOnlineConsent(){
-    try { localStorage.removeItem(ONLINE_CONSENT_KEY); } catch(error) {}
+    try { localStorage.removeItem(ONLINE_CONSENT_KEY);
+      localStorage.removeItem(ONLINE_FINDINGS_KEY); } catch(error) {}
     renderOnlineConsentPanel(lastReport || emptyReport());
     if (els.copyStatus) els.copyStatus.textContent = "Online Intel consent cleared. Proxuma is locked to offline-first mode.";
   }
@@ -3859,13 +4020,13 @@
   function enableOnlineConsent(){
     const state = {
       status:"armed",
-      mode:"consent-gate-only",
+      mode:"user-opened-online-launchpad",
       updatedAt:new Date().toISOString(),
       scope:ONLINE_INTEL_PROVIDER_MANIFEST.plannedScopes.map(function(scope){ return scope.id; }),
       networkActive:false,
-      providerConnected:false,
+      providerConnected:"user-opened-launchpad + consent-gated-rdap-bridge",
       requiresFreshConsent:true,
-      note:"v2.93.0 prepares the optional Online Intel request plan only. No online provider is connected in this build."
+      note:"v3.29.3 allows a user-clicked RDAP bridge lookup only after consent is armed, with host-aware fallback messages when the bridge is not available. Proxuma still performs no hidden background lookup."
     };
     writeOnlineConsent(state);
     if (els.copyStatus) els.copyStatus.textContent = "Online Intel gate armed for future provider-backed checks. No network check was run.";
@@ -3875,9 +4036,9 @@
     const consent = readOnlineConsent();
     const root = report && report.root && report.root !== "Waiting" ? report.root : "the scanned root";
     if (consent.status === "armed") {
-      return "Online Intel gate is armed, but this build still makes no network/API requests. A future provider can ask again before checking domain age, certificate summary, redirect expansion, and reputation for " + root + ".";
+      return "Online Intel gate is armed. Proxuma can generate user-opened lookup links for " + root + ", but it still makes no hidden fetch/API/background request.";
     }
-    return "Online Intel is locked off. Proxuma will stay offline unless the user deliberately arms the explicit choice for a future provider-backed check.";
+    return "Online Intel is locked off. Proxuma will stay offline unless the user deliberately arms the explicit choice and opens an external lookup link.";
   }
 
   function renderOnlineConsentPanel(report){
@@ -3889,25 +4050,271 @@
     }
     if (els.onlineConsentDetail) {
       els.onlineConsentDetail.textContent = armed
-        ? "Permission architecture is prepared for a future provider, but v2.93.0 still sends nothing online and only prepares the request plan."
-        : "No online checks can run from this build. The scanner, memory, QR, case packet layers, and provider plan remain local.";
+        ? "Online Intel launchpad is armed. Generate lookup links only when you are ready to open an external site. Proxuma does not run hidden online checks."
+        : "Online Intel is locked. The scanner, memory, QR, case packet layers, and lookup planning remain local until you arm consent.";
     }
-    if (els.onlineScopeList) renderList(els.onlineScopeList, ONLINE_INTEL_PROVIDER_MANIFEST.plannedScopes.map(function(scope){
-      return scope.label + " — future only; sends " + scope.sends + "; purpose: " + scope.purpose + ".";
-    }));
+    if (els.onlineScopeList) {
+      if (armed) {
+        renderOnlineLookupLaunchpad(report || lastReport || emptyReport());
+      } else {
+        renderList(els.onlineScopeList, ONLINE_INTEL_PROVIDER_MANIFEST.plannedScopes.map(function(scope){
+          return scope.label + " — locked until consent; would send " + scope.sends + "; purpose: " + scope.purpose + ".";
+        }));
+      }
+    }
     if (els.onlinePrivacyList) renderList(els.onlinePrivacyList, ONLINE_INTEL_PROVIDER_MANIFEST.hardRules);
     if (els.onlineArchitectureNote) els.onlineArchitectureNote.textContent = makeOnlineArchitectureSummary(report || lastReport || emptyReport());
+    renderRdapSummary((lastReport && lastReport.rdapSummary) || latestRdapSummary);
+    renderOnlineFindingsNotes();
+    renderOnlineReadiness(report || lastReport || emptyReport());
+    renderOnlineProviderArchitecture();
     if (els.onlinePreview) {
       els.onlinePreview.textContent = (report && report.raw ? report.online + " " : "") + makeOnlineArchitectureSummary(report || emptyReport());
       els.onlinePreview.className = "card-summary " + (armed ? "status-medium" : "status-low");
     }
   }
 
+  function onlineSafeRoot(report){
+    const candidate = String((report && report.root) || "").trim().toLowerCase();
+    if (!candidate || candidate === "waiting" || candidate === "message" || candidate === "payload") return "";
+    return candidate.replace(/^https?:\/\//, "").replace(/[^a-z0-9.-]/g, "").replace(/^www\./, "").slice(0,160);
+  }
+
+  function onlineLookupTargets(report){
+    const safeReport = report || lastReport || emptyReport();
+    const root = onlineSafeRoot(safeReport);
+    const raw = String((safeReport && safeReport.raw) || "").trim();
+    const encodedRoot = encodeURIComponent(root || "example.com");
+    const encodedRaw = encodeURIComponent(raw || root || "example.com");
+    return [
+      { label:"Domain age / registration lookup", url:"https://rdap.org/domain/" + encodedRoot, note:"Opens an external RDAP-style domain lookup for the root domain." },
+      { label:"Certificate transparency search", url:"https://crt.sh/?q=" + encodedRoot, note:"Opens an external certificate search for the root domain." },
+      { label:"URL context search", url:"https://urlscan.io/search/#" + encodedRaw, note:"Opens an external URL context search using the submitted target." },
+      { label:"General reputation search", url:"https://www.google.com/search?q=" + encodeURIComponent((root || raw || "target") + " scam phishing reputation"), note:"Opens a general web search for reputation context." }
+    ];
+  }
+
+  function renderOnlineLookupLaunchpad(report){
+    if (!els.onlineScopeList) return;
+    const consent = readOnlineConsent();
+    if (consent.status !== "armed") {
+      renderList(els.onlineScopeList, ["Arm Online Intel consent before generating external lookup links."]);
+      return;
+    }
+    const targets = onlineLookupTargets(report || lastReport || emptyReport());
+    els.onlineScopeList.innerHTML = "";
+    targets.forEach(function(target){
+      const li = document.createElement("li");
+      li.className = "online-launch-item status-medium";
+      const a = document.createElement("a");
+      a.href = target.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = target.label;
+      const small = document.createElement("small");
+      small.textContent = target.note;
+      li.appendChild(a);
+      li.appendChild(small);
+      els.onlineScopeList.appendChild(li);
+    });
+  }
+
   function previewOnlineIntelRun(){
     const plan = makeOnlineIntelRequestPlan(lastReport || emptyReport());
     renderOnlineConsentPanel(lastReport || emptyReport());
     if (els.onlineArchitectureNote) els.onlineArchitectureNote.textContent = plan.disclosure.join(" ");
-    if (els.copyStatus) els.copyStatus.textContent = "Online Intel request plan previewed locally. No provider is connected and no network request was made.";
+    if (els.copyStatus) els.copyStatus.textContent = "Online Intel request plan previewed locally. No hidden network request was made.";
+  }
+
+  function generateOnlineLookupLinks(){
+    const consent = readOnlineConsent();
+    if (consent.status !== "armed") {
+      renderOnlineLookupLaunchpad(lastReport || emptyReport());
+      if (els.copyStatus) els.copyStatus.textContent = "Arm Online Intel consent first. Proxuma did not open or send anything online.";
+      return;
+    }
+    renderOnlineLookupLaunchpad(lastReport || emptyReport());
+    if (els.onlineArchitectureNote) els.onlineArchitectureNote.textContent = "Lookup links generated locally. Nothing opens until you click a link; each link leaves Proxuma and opens an external site.";
+    if (els.copyStatus) els.copyStatus.textContent = "Online lookup links generated. Proxuma did not run hidden fetch/API/background requests.";
+  }
+
+
+  function renderRdapSummary(summary){
+    if (!els.onlineRdapResult) return;
+    if (!summary) {
+      els.onlineRdapResult.innerHTML = "<li>No RDAP result saved for this scan yet.</li>";
+      return;
+    }
+    const rows = [
+      "Domain: " + (summary.domain || "unknown"),
+      "Registrar: " + (summary.registrarName || "not shown"),
+      "Created: " + (summary.created || "not shown"),
+      "Updated: " + (summary.updated || "not shown"),
+      "Expires: " + (summary.expires || "not shown"),
+      "Status: " + ((summary.status || []).join(", ") || "not shown")
+    ];
+    els.onlineRdapResult.innerHTML = "";
+    rows.forEach(function(row){
+      const li = document.createElement("li");
+      li.textContent = row;
+      els.onlineRdapResult.appendChild(li);
+    });
+  }
+
+  function setRdapStatus(message, tone){
+    if (!els.onlineRdapStatus) return;
+    els.onlineRdapStatus.textContent = message;
+    els.onlineRdapStatus.className = "status-pill " + (tone || "status-low");
+  }
+
+  function getRdapHostContext(){
+    const loc = window.location || {};
+    const protocol = String(loc.protocol || "").toLowerCase();
+    const host = String(loc.hostname || "").toLowerCase();
+    const origin = String(loc.origin || "");
+    const isFile = protocol === "file:";
+    const isGithubPages = host.endsWith("github.io");
+    const isLocalhost = host === "localhost" || host === "127.0.0.1" || host === "::1";
+    const isVercel = host.endsWith("vercel.app") || !!(window.PROXUMA_RDAP_BRIDGE_BASE);
+    let label = "Serverless host not confirmed";
+    let detail = "RDAP lookup requires a serverless deployment such as Vercel. The offline scanner still works here.";
+    if (isFile) {
+      label = "Local file mode";
+      detail = "Local file previews cannot run /api/proxuma-rdap. Use generated lookup links or deploy through Vercel for RDAP.";
+    } else if (isGithubPages) {
+      label = "GitHub Pages host";
+      detail = "GitHub Pages serves the static app but cannot run /api/proxuma-rdap. Deploy the same repo through Vercel for RDAP.";
+    } else if (isLocalhost) {
+      label = "Local development host";
+      detail = "RDAP can work only if a local serverless/Vercel dev bridge is running. Otherwise use lookup links.";
+    } else if (isVercel) {
+      label = "Vercel/serverless host";
+      detail = "This host can run the consent-gated RDAP bridge if /api/proxuma-rdap is deployed.";
+    }
+    return { protocol, host, origin, isFile, isGithubPages, isLocalhost, isVercel, label, detail };
+  }
+
+  function makeLocalRdapEndpoint(domain){
+    const overrideBase = window.PROXUMA_RDAP_BRIDGE_BASE ? String(window.PROXUMA_RDAP_BRIDGE_BASE).replace(/\/$/, "") : "";
+    const path = "/api/proxuma-rdap?domain=" + encodeURIComponent(domain || "");
+    return overrideBase ? overrideBase + path : path;
+  }
+
+  function renderRdapFallback(message, detail){
+    if (!els.onlineRdapResult) return;
+    els.onlineRdapResult.innerHTML = "";
+    [message, detail].filter(Boolean).forEach(function(row){
+      const li = document.createElement("li");
+      li.textContent = row;
+      els.onlineRdapResult.appendChild(li);
+    });
+  }
+
+  async function runConsentGatedRdapLookup(){
+    const consent = readOnlineConsent();
+    if (consent.status !== "armed") {
+      setRdapStatus("Arm consent first", "status-low");
+      if (els.copyStatus) els.copyStatus.textContent = "Arm Online Intel consent before running RDAP. No lookup was sent.";
+      return;
+    }
+    const report = lastReport || emptyReport();
+    const root = onlineSafeRoot(report);
+    if (!root) {
+      setRdapStatus("No domain available", "status-low");
+      if (els.copyStatus) els.copyStatus.textContent = "Run a domain or URL scan first. RDAP needs a normal root domain.";
+      return;
+    }
+    const hostContext = getRdapHostContext();
+    if (!window.fetch) {
+      setRdapStatus("Fetch unavailable", "status-low");
+      renderRdapFallback("RDAP bridge not available here.", "This browser cannot call the RDAP bridge. Use generated lookup links instead.");
+      if (els.copyStatus) els.copyStatus.textContent = "This browser cannot call the RDAP bridge. Use generated lookup links instead.";
+      return;
+    }
+    if (hostContext.isFile || hostContext.isGithubPages) {
+      setRdapStatus("Bridge not active on this host", "status-low");
+      renderRdapFallback(hostContext.label + ": RDAP bridge is not active.", hostContext.detail);
+      if (els.copyStatus) els.copyStatus.textContent = hostContext.detail + " No online lookup was sent from Proxuma.";
+      return;
+    }
+    setRdapStatus("Checking RDAP…", "status-medium");
+    if (els.copyStatus) els.copyStatus.textContent = "User-approved RDAP lookup started through the serverless bridge.";
+    try {
+      const response = await fetch(makeLocalRdapEndpoint(root), { method:"GET", headers:{ "Accept":"application/json" }, cache:"no-store" });
+      const data = await response.json().catch(function(){ return null; });
+      if (!response.ok || !data || !data.ok) {
+        const message = data && data.error ? data.error : "RDAP bridge did not return a usable result.";
+        const hostContext = getRdapHostContext();
+        setRdapStatus("RDAP unavailable", "status-low");
+        renderRdapFallback("RDAP bridge returned no usable result.", message + " " + hostContext.detail);
+        if (els.copyStatus) els.copyStatus.textContent = message + " " + hostContext.detail;
+        return;
+      }
+      latestRdapSummary = data.result || null;
+      if (lastReport) lastReport.rdapSummary = latestRdapSummary;
+      renderRdapSummary(latestRdapSummary);
+      setRdapStatus("RDAP result saved", "status-medium");
+      if (els.copyStatus) els.copyStatus.textContent = "RDAP result saved into the current case packet. Treat it as context, not a final safety verdict.";
+    } catch(error) {
+      const hostContext = getRdapHostContext();
+      setRdapStatus("Bridge not reachable", "status-low");
+      renderRdapFallback("RDAP bridge was not reachable.", hostContext.detail);
+      if (els.copyStatus) els.copyStatus.textContent = "RDAP bridge was not reachable. " + hostContext.detail;
+    }
+  }
+
+  function readOnlineFindingsNotes(){
+    try {
+      const parsed = JSON.parse(localStorage.getItem(ONLINE_FINDINGS_KEY) || "null");
+      if (!parsed || typeof parsed !== "object") return { notes:"", updatedAt:null, target:"" };
+      return {
+        notes: String(parsed.notes || "").slice(0, 2000),
+        updatedAt: parsed.updatedAt || null,
+        target: String(parsed.target || "").slice(0, 240)
+      };
+    } catch(error) {
+      return { notes:"", updatedAt:null, target:"" };
+    }
+  }
+
+  function renderOnlineFindingsNotes(){
+    const stored = readOnlineFindingsNotes();
+    if (els.onlineFindingsNotes && els.onlineFindingsNotes.value !== stored.notes) els.onlineFindingsNotes.value = stored.notes;
+    if (els.onlineFindingsStatus) {
+      els.onlineFindingsStatus.textContent = stored.notes
+        ? "Saved locally" + (stored.updatedAt ? " · " + formatCompactReportTime(new Date(stored.updatedAt)) : "")
+        : "No online findings saved yet";
+    }
+  }
+
+  function saveOnlineFindingsNotes(){
+    const notes = els.onlineFindingsNotes ? String(els.onlineFindingsNotes.value || "").trim().slice(0, 2000) : "";
+    const payload = {
+      notes,
+      updatedAt: notes ? new Date().toISOString() : null,
+      target: lastReport && lastReport.raw ? String(lastReport.raw).slice(0, 240) : ""
+    };
+    try {
+      if (notes) localStorage.setItem(ONLINE_FINDINGS_KEY, JSON.stringify(payload));
+      else localStorage.removeItem(ONLINE_FINDINGS_KEY);
+    } catch(error) {}
+    if (lastReport) lastReport.onlineFindingsNotes = notes;
+    renderOnlineFindingsNotes();
+    if (els.copyStatus) els.copyStatus.textContent = notes ? "Online Intel findings notes saved locally. No provider was contacted." : "Online Intel notes cleared locally.";
+  }
+
+  function clearOnlineFindingsNotes(){
+    try { localStorage.removeItem(ONLINE_FINDINGS_KEY); } catch(error) {}
+    if (els.onlineFindingsNotes) els.onlineFindingsNotes.value = "";
+    if (lastReport) lastReport.onlineFindingsNotes = "";
+    renderOnlineFindingsNotes();
+    if (els.copyStatus) els.copyStatus.textContent = "Online Intel findings notes cleared. No scan history was deleted.";
+  }
+
+  function currentOnlineFindingsNotes(){
+    const typed = els.onlineFindingsNotes ? String(els.onlineFindingsNotes.value || "").trim() : "";
+    if (typed) return typed.slice(0, 2000);
+    return readOnlineFindingsNotes().notes || "";
   }
 
   function safePatternKey(value){
@@ -4400,6 +4807,8 @@
       reportConsistency: report.reportConsistency || {},
       evidence: { counts: report.evidenceCounts || {}, digest: report.evidenceDigest || "not generated", localDigest: report.localDigest || "not generated", primaryReason: report.primaryReason || [], supporting: report.supportingEvidence || [], lowerWeight: report.lowerWeightClues || [], trustRelief: report.trustReliefNotes || [], fullEvidence: report.evidence || [] },
       localPatternMemory: report.localPatternMemory || { status: "No repeated local pattern" },
+      onlineIntelFindings: { source: "user-entered notes from consent-opened external lookups", notes: report.onlineFindingsNotes || currentOnlineFindingsNotes() || "", privacy: "Stored locally only; Proxuma does not verify notes automatically." },
+      onlineRdapResult: { source: "user-clicked consent-gated Vercel RDAP bridge", result: report.rdapSummary || latestRdapSummary || null, privacy: "RDAP lookup runs only when the user arms Online Intel and clicks Run RDAP Lookup. No automatic or hidden lookup is performed." },
       chain: report.casePacketChain || [],
       preservationChecklist: report.preservationChecklist || [],
       guidance: { userSteps: report.userSteps || [], decisionGuide: report.decision || [], organizationEscalation: report.orgEscalation || "" },
@@ -4523,6 +4932,12 @@
         "Do not enter passwords, codes, seed phrases, payment details, or identity information into the scanned target.",
         "Verify through the official website, app, or phone number you already trust."
       ]).map(item => "- " + item)),
+      "",
+      "ONLINE INTEL FINDINGS NOTES",
+      (report.onlineFindingsNotes || currentOnlineFindingsNotes() || "No user-entered online findings notes saved."),
+      "",
+      "CONSENT-GATED RDAP RESULT",
+      (function(){ const r = report.rdapSummary || latestRdapSummary; return r ? ["Domain: " + (r.domain || "unknown"), "Registrar: " + (r.registrarName || "not shown"), "Created: " + (r.created || "not shown"), "Updated: " + (r.updated || "not shown"), "Expires: " + (r.expires || "not shown")].join("\n") : "No RDAP result saved."; })(),
       "",
       "LOCAL PRIVACY BOUNDARY",
       "This readable case packet was generated locally in the browser. No API call, telemetry, hidden lookup, live reputation check, or online expansion was required.",
@@ -4736,9 +5151,9 @@
       "Proxuma IT " + BUILD.version,
       "Layer: " + BUILD.name,
       "Mode: Offline-first active",
-      "Online Intel: " + (armed ? "Consent gate armed; no provider/API active" : "Locked / consent required"),
-      "Release status: v3.22.1 Unified Scanner Input active",
-      "Privacy: no hidden API calls, no telemetry, no active provider lookup",
+      "Online Intel: " + (armed ? "Consent gate armed; RDAP button available on Vercel only" : "Locked / consent required"),
+      "Release status: v3.29.3 RDAP Fallback + Host Awareness Polish active",
+      "Privacy: no hidden API calls, no telemetry, no automatic provider lookup; RDAP runs only by user click after consent",
       "Use: upload the clean release root files to GitHub Pages after local/browser verification; keep working-history archives separate"
     ].join("\n");
   }
@@ -4750,11 +5165,11 @@
     if (els.buildLayerLabel) els.buildLayerLabel.textContent = BUILD.name;
     if (els.buildOfflineStatus) els.buildOfflineStatus.textContent = "Offline-first active";
     if (els.buildOnlineStatus) {
-      els.buildOnlineStatus.textContent = armed ? "Online Intel gate armed / no provider active" : "Online Intel locked / consent required";
+      els.buildOnlineStatus.textContent = armed ? "Online Intel armed / RDAP click-gated" : "Online Intel locked / consent required";
       els.buildOnlineStatus.className = "status-pill " + (armed ? "status-medium" : "status-low");
     }
-    if (els.buildRcStatus) els.buildRcStatus.textContent = "v3.22.0 Manual Payload UX";
-    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.22.0 keeps the offline engine, compact mobile UI, case packet export, local scan history, and footer-only PROXUMA return path while adding a clearer offline manual payload lane for decoded QR text and copied messages. No hidden API calls, no telemetry, no fetch calls, and no active online provider in " + BUILD.version + ".";
+    if (els.buildRcStatus) els.buildRcStatus.textContent = "v3.29.3 RDAP Fallback";
+    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.29.3 preserves the offline engine, compact UI, case export, local history, Link Anatomy, consolidated examples, Online Intel notes, provider slots, readiness checks, and serverless bridge prototype. RDAP lookup is user-clicked and consent-gated with host-aware fallback; no hidden API calls, no telemetry, and no automatic provider lookup in " + BUILD.version + ".";
   }
 
   function copyBuildInfo(){
@@ -4773,7 +5188,7 @@
       "Tap Start QR Scan only after page load. Confirm camera permission is user-triggered. If native QR support is unavailable, confirm manual QR text paste still works.",
       "Use Copy Simple Report, Copy Full Report, Copy Case Packet, and Download JSON after a scan; confirm the v3.14 export envelope is still present.",
       "Open Scan Memory, confirm local pattern counts update after repeated scans, then test Copy Memory Summary and Export Local Notes.",
-      "Open Online Intel Gate, arm consent, preview scope, and clear consent. Confirm no live provider/API request runs.",
+      "Open Online Intel Gate, arm consent, preview scope, review provider slots, generate lookup links, and run RDAP lookup only on a Vercel preview. Confirm no lookup runs before the user clicks the RDAP button.",
       "Deploy to GitHub Pages or Vercel preview and repeat one clean scan, one suspicious scan, QR/manual fallback, copy report, and JSON download.",
       "Final pass rule: no console-breaking errors, no hidden online calls, no layout blocking on mobile, and all offline-first promises remain accurate."
     ];
@@ -4784,7 +5199,7 @@
       "Safari, Chrome, and mobile must all load the scanner surface.",
       "QR camera permission must only request access after the user taps Start QR Scan.",
       "Browser-dependent QR camera support must not block manual QR text paste scanning.",
-      "Online Intel remains an architecture gate only; no live provider calls are active.",
+      "Online Intel remains consent-first; RDAP is the only live provider bridge and only runs after explicit user click on a serverless deploy.",
       "Case packet and memory exports must work after a scan.",
       "The app must remain usable when localStorage is empty, blocked, or cleared.",
       "The public page must not show debug/deploy clutter; build/version identity remains available through release/support text."
@@ -4831,7 +5246,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "PROXUMA_IT_v3.19.6_UI_WORDING_CLARITY_CHECKLIST.txt";
+      a.download = "PROXUMA_IT_v3.29.3_RDAP_FALLBACK_HOST_AWARENESS_CHECKLIST.txt";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -4926,6 +5341,7 @@
     const comparison = makeScanComparison(lastReport, previousScan);
     lastReport.scanMemory = comparison.memory;
     lastReport.compareLast = comparison.compare;
+    lastReport.onlineFindingsNotes = currentOnlineFindingsNotes();
     renderReport(lastReport);
     writeLastScan(lastReport);
     rememberPattern(lastReport);
@@ -4965,6 +5381,8 @@
       root: report.root,
       time: report.time || formatReportTime(new Date()),
       notes: (notes || "").trim(),
+      onlineFindingsNotes: report.onlineFindingsNotes || currentOnlineFindingsNotes() || "",
+      rdapSummary: report.rdapSummary || latestRdapSummary || null,
       source: source || "auto",
       evidence: (report.evidence || report.supportingEvidence || []).slice(0,5)
     };
@@ -4995,6 +5413,7 @@
       "Case Reference: " + (item.caseReference || item.casePacketId || "not generated"),
       "Evidence Digest: " + (item.evidenceDigest || "n/a"),
       item.notes ? "Notes: " + item.notes : "Notes: none",
+      item.onlineFindingsNotes ? "Online Intel Findings: " + item.onlineFindingsNotes : "Online Intel Findings: none",
       "",
       "Evidence:",
       ...((item.evidence && item.evidence.length ? item.evidence : ["No compact evidence stored."]).map(entry => "- " + entry)),
@@ -5088,6 +5507,7 @@
       localStorage.removeItem(LAST_SCAN_KEY);
       localStorage.removeItem(PATTERN_MEMORY_KEY);
       localStorage.removeItem(ONLINE_CONSENT_KEY);
+      localStorage.removeItem(ONLINE_FINDINGS_KEY);
     } catch(error) {}
     renderHistory();
     renderPatternMemoryDashboard();
@@ -5101,6 +5521,10 @@
   if (els.enableOnlineConsentButton) els.enableOnlineConsentButton.addEventListener("click", enableOnlineConsent);
   if (els.revokeOnlineConsentButton) els.revokeOnlineConsentButton.addEventListener("click", revokeOnlineConsent);
   if (els.onlineRunPreviewButton) els.onlineRunPreviewButton.addEventListener("click", previewOnlineIntelRun);
+  if (els.onlineLookupLinksButton) els.onlineLookupLinksButton.addEventListener("click", generateOnlineLookupLinks);
+  if (els.onlineRdapLookupButton) els.onlineRdapLookupButton.addEventListener("click", runConsentGatedRdapLookup);
+  if (els.saveOnlineFindingsButton) els.saveOnlineFindingsButton.addEventListener("click", saveOnlineFindingsNotes);
+  if (els.clearOnlineFindingsButton) els.clearOnlineFindingsButton.addEventListener("click", clearOnlineFindingsNotes);
   if (els.copyBrowserChecklistButton) els.copyBrowserChecklistButton.addEventListener("click", copyBrowserChecklist);
   if (els.downloadBrowserChecklistButton) els.downloadBrowserChecklistButton.addEventListener("click", downloadBrowserChecklist);
   if (els.loadOfflineLabSamplesButton) els.loadOfflineLabSamplesButton.addEventListener("click", renderOfflineLabSamples);

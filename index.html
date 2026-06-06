@@ -86,6 +86,7 @@
           <p>Camera scanning starts only when you choose it and depends on browser support. Manual QR text paste works offline everywhere.</p>
         </article>
       </div>
+      <p class="drawer-scroll-cue" aria-hidden="true">Scroll the selected layer for more</p>
       </div>
     </section>
 
@@ -338,7 +339,6 @@
         <div>
           <p class="eyebrow">Deep Analysis</p>
           <h2>Review the scan details</h2>
-          <p class="subtle">Detailed reasoning stays tucked away until you open it.</p>
           <p class="collapsed-hint">Details hidden to keep the main report focused.</p>
         </div>
         <button class="collapse-toggle" type="button" aria-expanded="true" aria-controls="intelligenceDrawerBody" data-expanded-label="Hide drawer" data-collapsed-label="Show drawer">
@@ -358,7 +358,6 @@
         <button class="drawer-tab pill-action" type="button" role="tab" aria-selected="false" data-drawer-target="analystBriefPanel">Brief</button>
         <button class="drawer-tab pill-action analyst-only" type="button" role="tab" aria-selected="false" data-drawer-target="technicalPanel">Details</button>
         <button class="drawer-tab pill-action" type="button" role="tab" aria-selected="false" data-drawer-target="memoryPanel">Scan Memory</button>
-        <button class="drawer-tab pill-action" type="button" role="tab" aria-selected="false" data-drawer-target="offlineLabPanel">Local Check</button>
         <button class="drawer-tab pill-action" type="button" role="tab" aria-selected="false" data-drawer-target="onlinePanel">Online Intel</button>
         <button class="drawer-tab pill-action internal-only" type="button" role="tab" aria-selected="false" data-drawer-target="browserTestPanel" hidden>Browser Check</button>
       </div>
@@ -494,63 +493,67 @@
           </div>
         </article>
 
-
-        <article id="offlineLabPanel" class="drawer-panel" role="tabpanel" hidden>
-          <div class="drawer-panel-head" data-tone="green">
-            <div>
-              <p class="eyebrow">Sample Check</p>
-              <h3>Built-in local samples</h3>
-            </div>
-            <span id="offlineLabStatus" class="status-pill">Samples ready</span>
-          </div>
-          <p class="card-summary">Run built-in safety samples locally. Checks stay on this device, avoid provider lookups, and do not save sample runs into scan memory.</p>
-          <div class="offline-lab-card" aria-label="Local sample check controls">
-            <div class="browser-test-actions">
-              <button id="loadOfflineLabSamplesButton" class="ghost-button compact-copy" type="button">Refresh Samples</button>
-              <button id="runOfflineLabButton" class="ghost-button compact-copy" type="button">Run Checks</button>
-              <button id="copyOfflineLabReportButton" class="ghost-button compact-copy" type="button">Copy Check Summary</button>
-            </div>
-            <div class="online-columns">
-              <div>
-                <h4>Samples</h4>
-                <ul id="offlineLabList" class="memory-list"><li>Samples load after app initialization.</li></ul>
-              </div>
-              <div>
-                <h4>Results</h4>
-                <ul id="offlineLabResults" class="memory-list"><li>Run the checks to compare local verdicts.</li></ul>
-              </div>
-            </div>
-            <p id="offlineLabNote" class="muted">Use Load to place a sample into the main scanner, or run checks for a quick local confidence pass.</p>
-          </div>
-        </article>
-
         <article id="onlinePanel" class="drawer-panel" role="tabpanel" hidden>
           <div class="drawer-panel-head" data-tone="orange">
             <div>
               <p class="eyebrow">Optional Online Layer</p>
-              <h3>Consent-first architecture</h3>
+              <h3>Consent-first provider architecture</h3>
             </div>
             <span id="onlineConsentStatus" class="status-pill status-low">Offline locked</span>
           </div>
-          <p id="onlinePreview" class="card-summary status-low">Offline result first. The optional online layer has a permission gate, but this build makes no live web/API requests.</p>
+          <p id="onlinePreview" class="card-summary status-low">Offline result first. Provider slots are mapped and the serverless bridge blueprint is ready, but online intelligence is still consent-gated, user-opened only, and no hidden background requests run.</p>
           <div class="online-consent-card" aria-label="Consent-first online controls">
-            <p id="onlineConsentDetail" class="muted">No online checks can run from this build. The scanner, memory, QR, and case packet layers remain local.</p>
+            <p id="onlineConsentDetail" class="muted">No online checks can run from this build. The scanner, memory, QR, case packet, and serverless bridge blueprint remain local documentation only.</p>
             <div class="online-actions">
               <button id="enableOnlineConsentButton" class="ghost-button compact-copy" type="button">Enable Online Preview</button>
               <button id="onlineRunPreviewButton" class="ghost-button compact-copy" type="button">View Online Boundaries</button>
+              <button id="onlineLookupLinksButton" class="ghost-button compact-copy" type="button">Generate Lookup Links</button>
+              <button id="onlineRdapLookupButton" class="ghost-button compact-copy" type="button">Run RDAP Lookup</button>
               <button id="revokeOnlineConsentButton" class="ghost-button compact-copy danger-action" type="button">Clear Online Choice</button>
+            </div>
+            <div class="online-readiness-card" aria-label="Online Intel readiness status">
+              <div class="readiness-head">
+                <h4>Online readiness</h4>
+                <span id="onlineReadinessStatus" class="status-pill status-low">Offline / locked</span>
+              </div>
+              <ul id="onlineReadinessList" class="memory-list online-readiness-list">
+                <li>Readiness checks load locally. No provider is contacted.</li>
+              </ul>
+            </div>
+            <div class="online-rdap-result" aria-label="Consent-gated RDAP result">
+              <div class="readiness-head">
+                <h4>RDAP bridge result</h4>
+                <span id="onlineRdapStatus" class="status-pill status-low">Not run</span>
+              </div>
+              <ul id="onlineRdapResult" class="memory-list"><li>No RDAP result saved for this scan yet.</li></ul>
+              <p class="muted">Runs only after online consent is armed and the user clicks Run RDAP Lookup. If this page is on GitHub Pages or opened as a local file, RDAP will show a host-aware fallback. Deploy through Vercel for live bridge results.</p>
             </div>
             <div class="online-columns">
               <div>
-                <h4>Future check scope</h4>
-                <ul id="onlineScopeList" class="memory-list"><li>Domain age, certificate, redirect, and reputation checks stay future-only.</li></ul>
+                <h4>Online lookup launchpad</h4>
+                <ul id="onlineScopeList" class="memory-list"><li>Arm consent and generate user-opened lookup links for the current scanned root.</li></ul>
               </div>
               <div>
                 <h4>Privacy guardrails</h4>
                 <ul id="onlinePrivacyList" class="memory-list"><li>Default mode stays offline-first.</li></ul>
               </div>
+              <div>
+                <h4>Provider slots</h4>
+                <ul id="onlineProviderSlotList" class="memory-list"><li>Future provider slots are mapped but inactive.</li></ul>
+              </div>
             </div>
-            <p id="onlineArchitectureNote" class="muted">Optional online checks stay locked off until the user deliberately arms the explicit choice.</p>
+
+            <div class="online-findings-note" aria-label="Online Intel findings notes">
+              <label for="onlineFindingsNotes">Online findings notes</label>
+              <textarea id="onlineFindingsNotes" rows="4" maxlength="2000" placeholder="After opening a lookup link yourself, paste brief findings here: domain age, certificate clue, redirect note, reputation clue, or anything worth preserving in the case packet."></textarea>
+              <div class="online-actions online-note-actions">
+                <button id="saveOnlineFindingsButton" class="ghost-button compact-copy" type="button">Save Findings Notes</button>
+                <button id="clearOnlineFindingsButton" class="ghost-button compact-copy danger-action" type="button">Clear Findings Notes</button>
+                <span id="onlineFindingsStatus" class="status-pill status-low">No online findings saved yet</span>
+              </div>
+              <p class="muted">Notes stay in this browser only and are included in TXT/JSON case exports. Proxuma does not verify or fetch these findings automatically.</p>
+            </div>
+            <p id="onlineArchitectureNote" class="muted">Optional online intelligence stays locked off until the user deliberately arms the explicit choice. External lookup links open only when the user clicks them; future automatic checks require the documented serverless bridge.</p>
           </div>
         </article>
 
@@ -582,6 +585,7 @@
           </div>
         </article>
       </div>
+      <p class="drawer-scroll-cue" aria-hidden="true">Scroll the selected layer for more</p>
       </div>
     </section>
 
@@ -610,6 +614,7 @@
       </div>
       <ul id="historyList" aria-label="Local scan history"></ul>
       </div>
+      <p class="casefile-scroll-cue" aria-hidden="true">Scroll the case file for more</p>
     </section>
 
     <section class="ecosystem-return card" aria-label="Return to PROXUMA ecosystem">

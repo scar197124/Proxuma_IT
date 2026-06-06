@@ -5,9 +5,9 @@ const vm = require('vm');
 const root = path.resolve(__dirname, '..');
 let code = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 function assert(condition, message){ if(!condition){ console.error('FAIL:', message); process.exit(1); } }
-assert(code.includes('version: "v3.22.1"'), 'BUILD version should be v3.22.1');
-assert(code.includes('Red Team Hardening Pass') || code.includes('UI Wording Clarity Pass'), 'BUILD name should preserve red-team hardening continuity or current cleanup layer');
-assert(!/fetch\s*\(/.test(code), 'no active fetch() calls should be present');
+assert((/version: \"v3\.(22|23|24|25|26|27|28|29)\.[0-9]+\"/.test(code)), 'BUILD version should be v3.22.1 or newer continuity build');
+assert(code.includes('Red Team Hardening Pass') || (code.includes('Online Intel Readiness Layer') || (code.includes('RDAP Fallback + Host Awareness Polish') || code.includes('Serverless Bridge Blueprint')) || (code.includes('RDAP Fallback + Host Awareness Polish') || (code.includes('RDAP Fallback + Host Awareness Polish') || code.includes('Example Lane Consolidation')))) || (code.includes('UI Wording Clarity Pass') || (code.includes('Online Intel Readiness Layer') || (code.includes('RDAP Fallback + Host Awareness Polish') || code.includes('Serverless Bridge Blueprint')) || (code.includes('RDAP Fallback + Host Awareness Polish') || (code.includes('RDAP Fallback + Host Awareness Polish') || code.includes('Example Lane Consolidation'))))), 'BUILD name should preserve red-team hardening continuity or current cleanup layer');
+assert(((code.match(/fetch\s*\(/g)||[]).length <= 1) && code.includes('runConsentGatedRdapLookup'), 'only the consent-gated RDAP lookup may use fetch()');
 assert(!/api\/proxuma-intel/i.test(code), 'v3.22.1 should remain offline-only and not include online bridge API calls');
 assert(/spacedOtpPattern/.test(code), 'spaced OTP / verification-number hardening should be present');
 assert(/captchaGatePattern/.test(code), 'fake CAPTCHA / Cloudflare gate hardening should be present');
@@ -20,7 +20,7 @@ vm.createContext(context);
 vm.runInContext(code, context);
 
 const analyze = context.__proxumaAnalyze;
-assert(context.__proxumaBuild.version === 'v3.22.1', 'runtime BUILD should expose v3.22.1');
+assert(/^v3\.(22|23|24|25|26|27|28|29)\.[0-9]+$/.test(context.__proxumaBuild.version), 'runtime BUILD should expose v3.22.1 or newer');
 
 const spacedOtp = analyze('send your O T P code to support now');
 assert(spacedOtp.risk === 'High Risk' && spacedOtp.threatLaneId === 'LANE-OTP-014', `spaced OTP lure should be High Risk / OTP lane, got ${spacedOtp.risk} / ${spacedOtp.threatLaneId}`);

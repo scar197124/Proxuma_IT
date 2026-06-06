@@ -1,4 +1,4 @@
-# Proxuma IT v3.19.6 — UI Wording Clarity Pass
+# Proxuma IT v3.27.0 — Online Intel Readiness Layer
 
 Proxuma IT is an offline-first link and message intelligence tool. It helps people review suspicious URLs, domains, QR text, download links, copied messages, and scam-style prompts before trusting them.
 
@@ -8,7 +8,7 @@ Proxuma IT is an offline-first link and message intelligence tool. It helps peop
 - Explains warning signs in plain language.
 - Checks for lookalike brands, pressure tactics, suspicious redirects, executable/download traps, credential-harvest intent, payment lures, delivery/customs lures, government/tax/legal threats, fake security alerts, job scams, crypto/investment scams, OTP/MFA code theft, and other modern scam patterns.
 - Creates local reports and case-packet style summaries.
-- Keeps Online Intel locked behind a consent-first architecture placeholder. No provider is active in this release.
+- Keeps Online Intel consent-gated with provider slots, user-opened lookup links, local findings notes, and readiness status checks. No provider is active in this release.
 
 ## Privacy boundary
 
@@ -130,3 +130,44 @@ Small Scan Report values and accepted input chips now use subtle matching border
 - Tightened the Report View area into a compact full-width toolbar.
 - Removed duplicate active-view text and reduced empty space beside the selector.
 - Preserved scan engine, exports, history, offline-first behavior, and v3.22.4 border polish.
+
+
+## v3.25.1 — Online Intel Results Notes
+
+Adds a local notes field inside the existing Online Intel drawer so users can record findings from consent-opened external lookup pages. Notes are stored locally and included in TXT/JSON case exports. No hidden fetch, telemetry, API keys, or automatic provider calls are added.
+
+## v3.26.1 — Online Intel Provider Architecture
+
+Maps future Online Intel provider slots inside the existing Online Intel drawer: Domain Age/RDAP, Certificate Transparency, Redirect Expansion, Reputation Lookup, and Threat Feed Check. These slots are inactive architecture only. No provider API calls, hidden fetch calls, telemetry, automatic lookups, or frontend API keys are included.
+
+
+## Online Intel readiness
+
+The existing Online Intel drawer now shows readiness states before any future online provider integration:
+
+- Online mode status
+- Consent status
+- Provider slot status
+- API-key safety status
+- Serverless bridge status
+- Network activity status
+
+This does not activate automatic provider checks. It is a safety switchboard for future consent-gated online intelligence.
+
+
+## Proxuma IT v3.29.1 — Example Lane Consolidation
+
+This build keeps one public example/training lane in the Scan Center and removes the duplicate Sample Lab drawer UI. The Vercel RDAP bridge prototype files remain included for future serverless deployment, but the static frontend still performs no hidden online lookups.
+
+## Proxuma IT v3.28.0 — Serverless Bridge Blueprint
+
+This build keeps Proxuma IT offline-first while documenting the future safe online-intelligence path: frontend consent gate → serverless bridge → provider lookup → sanitized result → local report. No API keys are stored in the browser, no provider calls are active, and no hidden fetch/telemetry behavior is introduced.
+
+## Proxuma IT v3.29.2 — Consent-Gated RDAP Lookup Wiring
+
+This build wires the existing Online Intel drawer to the Vercel RDAP bridge prototype. The lookup is **not automatic**: the user must run a local scan, open Online Intel, arm consent, and click **Run RDAP Lookup**. The frontend stores no API keys and does not run background lookups. GitHub Pages can host the static app, but the `/api/proxuma-rdap` bridge only executes on a serverless host such as Vercel.
+
+
+## Proxuma IT v3.29.3 — RDAP Fallback + Host Awareness Polish
+
+This release keeps the consent-gated RDAP wiring from v3.29.2 but improves the user-facing fallback behavior. GitHub Pages and local file previews now explain that `/api/proxuma-rdap` requires a serverless host such as Vercel. No lookup runs automatically, no frontend API keys are exposed, and the offline scanner remains intact.
