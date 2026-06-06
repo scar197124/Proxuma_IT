@@ -5,8 +5,8 @@ const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const js = fs.readFileSync(path.join(root, 'proxuma-it.js'), 'utf8');
 const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
 function assert(condition, message){ if(!condition){ throw new Error(message); } }
-assert(((js.includes('version: "v3.29.3"') || js.includes('version: "v3.29.1"')) || js.includes('version: "v3.28.0"')), 'BUILD version should be v3.29.3 or v3.29.1 or v3.28.0 continuity build');
-assert((js.includes('name: "Serverless Bridge Blueprint"') || (js.includes('name: "RDAP Fallback + Host Awareness Polish"') || js.includes('name: "Example Lane Consolidation"')) || js.includes('name: "Serverless Bridge Blueprint"') || (js.includes('name: "RDAP Fallback + Host Awareness Polish"') || js.includes('name: "Example Lane Consolidation"'))), 'BUILD name should be Serverless Bridge Blueprint');
+assert(((js.includes('version: "v3.29.4"') || js.includes('version: "v3.29.1"')) || js.includes('version: "v3.28.0"')), 'BUILD version should be v3.29.4 or v3.29.1 or v3.28.0 continuity build');
+assert((js.includes('name: "Serverless Bridge Blueprint"') || (js.includes('name: "Encoded Risk Token Alignment"') || js.includes('name: "Example Lane Consolidation"')) || js.includes('name: "Serverless Bridge Blueprint"') || (js.includes('name: "Encoded Risk Token Alignment"') || js.includes('name: "Example Lane Consolidation"'))), 'BUILD name should be Serverless Bridge Blueprint');
 assert(html.includes('id="onlineReadinessList"'), 'Online readiness list should exist inside Online Intel drawer');
 assert(html.includes('id="onlineReadinessStatus"'), 'Online readiness status pill should exist');
 assert(js.includes('ONLINE_READINESS_CHECKS'), 'Online readiness checks constant missing');

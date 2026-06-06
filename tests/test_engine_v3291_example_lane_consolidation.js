@@ -10,5 +10,5 @@ assert(!html.includes('data-drawer-target="offlineLabPanel"'), 'Sample Lab drawe
 assert(!html.includes('id="offlineLabPanel"'), 'Sample Lab drawer panel should be removed to avoid duplicate example systems');
 assert(!html.includes('Run Checks'), 'Public duplicate sample-check controls should be removed');
 assert(html.includes('data-drawer-target="onlinePanel"'), 'Online Intel drawer should remain present');
-assert((js.includes('version: "v3.29.3"') || js.includes('version: "v3.29.1"')), 'Build version should be v3.29.3 or v3.29.1');
+assert((js.includes('version: "v3.29.4"') || js.includes('version: "v3.29.1"')), 'Build version should be v3.29.4 or v3.29.1');
 console.log('v3.29.1 example lane consolidation checks passed');

@@ -3,8 +3,8 @@
 
   // Compatibility markers retained for regression tests: version: "v2.76.0" / version: "v2.75.0" / version: "v2.74.0" / version: "v2.73.0" / version: "v2.72.1" / version: "v2.71.0" / Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1
   const BUILD = {
-    version: "v3.29.3",
-    name: "RDAP Fallback + Host Awareness Polish",
+    version: "v3.29.4",
+    name: "Encoded Risk Token Alignment",
     privacy: "offline-first engine / local QR decoder path / no runtime CDN dependency",
     roadmap: [
       "v2.69.1 Compact Header Pass + QR/API Readiness Map",
@@ -80,6 +80,7 @@
       "v3.27.0 Online Intel Readiness Layer to show consent status, provider readiness, serverless bridge status, API key safety, and network activity state inside the existing Online Intel drawer without adding public cards or hidden requests",
       "v3.29.1 Example Lane Consolidation to keep one public example lane in Scan Center, remove duplicate Sample Lab UI, and preserve serverless RDAP bridge prototype documentation without new cards",
       "v3.29.3 RDAP Fallback + Host Awareness Polish to make consent-gated RDAP errors explain GitHub Pages/local/Vercel hosting clearly without adding cards",
+      "v3.29.4 Encoded Risk Token Alignment to surface encoded login, encoded redirect, encoded slash, and obfuscated path tokens inside Link Anatomy without adding cards",
       "v3.24.1 Domain Ending Spoof + Comma Domain Tuning to detect c0m/c0n-style TLD imitation and comma-domain punctuation without adding new UI cards",
       "v3.23.2 Link Anatomy Card Wrap Polish so all anatomy fields use subtle bordered chip/card containers matching the privacy strip",
       "v3.29.3 RDAP Fallback + Host Awareness Polish to preserve the user-clicked RDAP bridge while adding clearer unavailable/host-awareness states",
@@ -661,6 +662,52 @@
     return result;
   }
 
+
+
+  function inspectEncodedRiskTokens(target){
+    const raw = String((target && (target.sourceRaw || target.raw || target.display || target.href)) || "");
+    const path = String((target && target.path) || "");
+    const display = String((target && target.display) || "");
+    const combined = raw + " " + path + " " + display;
+    const decodedOnce = safeDecodeForInspection(combined);
+    const decodedTwice = safeDecodeForInspection(decodedOnce);
+    const decodedLower = (decodedOnce + " " + decodedTwice).toLowerCase();
+    const rawLower = combined.toLowerCase();
+    const tokens = [];
+
+    function add(token){
+      if (token && !tokens.includes(token)) tokens.push(token);
+    }
+
+    if (/%[0-9a-f]{2}/i.test(combined)) add("percent-encoded content");
+    if (/%2f/i.test(combined) || /%5c/i.test(combined) || decodedLower.includes("/")) {
+      if (/%2f|%5c/i.test(combined)) add("encoded slash / path boundary");
+    }
+    if (/%3a/i.test(combined)) add("encoded colon");
+    if (/%3f/i.test(combined)) add("encoded query marker");
+    if (/%3d/i.test(combined)) add("encoded equals / parameter");
+    if (/%26/i.test(combined)) add("encoded ampersand / chained parameter");
+    if (/%40/i.test(combined)) add("encoded @ authority marker");
+
+    const sensitiveWords = ["login", "logon", "signin", "sign-in", "secure", "verify", "verification", "password", "passcode", "otp", "mfa", "2fa", "account", "session", "token", "redirect", "return", "continue", "next", "url", "target", "auth", "authenticate"];
+    sensitiveWords.forEach(word => {
+      if (decodedLower.includes(word) && (!rawLower.includes(word) || /%[0-9a-f]{2}/i.test(combined))) {
+        if (["login", "logon", "signin", "sign-in"].includes(word)) add("encoded login keyword");
+        else if (["secure", "verify", "verification"].includes(word)) add("encoded verification/security word");
+        else if (["password", "passcode", "otp", "mfa", "2fa"].includes(word)) add("encoded credential/MFA word");
+        else if (["redirect", "return", "continue", "next", "url", "target"].includes(word)) add("encoded redirect/navigation word");
+        else if (["session", "token", "auth", "authenticate"].includes(word)) add("encoded session/auth token word");
+        else add("encoded " + word + " word");
+      }
+    });
+
+    const compactDecoded = decodedLower.replace(/[^a-z0-9]+/g, " ");
+    if (/login|signin|verify|password|otp|mfa|2fa/.test(compactDecoded) && /%[0-9a-f]{2}/i.test(combined)) add("obfuscated credential path");
+    if (/https?:\/\//i.test(decodedOnce) && !/https?:\/\//i.test(raw)) add("encoded embedded URL");
+    if (/%25[0-9a-f]{2}/i.test(combined)) add("double-encoded marker");
+
+    return tokens.slice(0, 10);
+  }
 
   function parsedUrlForTarget(target){
     try { return target && target.display ? new URL(target.display) : null; } catch(error) { return null; }
@@ -3221,7 +3268,8 @@
       const decoded = safeDecodeForInspection(raw || target.raw || "");
       const workflowHits = Array.from(highValueWorkflowWords || []).filter(word => decoded.toLowerCase().includes(word)).slice(0, 6);
       const payloadEndingSpoof = inspectDomainEndingSpoof(target);
-      const payloadTokens = workflowHits.slice();
+      const encodedTokens = inspectEncodedRiskTokens(target);
+      const payloadTokens = workflowHits.concat(encodedTokens);
       if (payloadEndingSpoof.active) payloadTokens.unshift(payloadEndingSpoof.token || payloadEndingSpoof.kind);
       return {
         status: target.type === "dangerous-scheme" ? "Non-web / script-style payload" : "Message / QR payload",
@@ -3230,7 +3278,7 @@
         root: candidates.length ? "Embedded URL found" : "No root domain",
         path: raw ? (raw.length > 90 ? raw.slice(0, 87) + "…" : raw) : "Payload text",
         query: candidates.length ? (candidates.length + " embedded link" + (candidates.length === 1 ? "" : "s")) : "No URL query",
-        tokens: payloadTokens.length ? Array.from(new Set(payloadTokens)).slice(0, 8).join(", ") : "No URL tokens",
+        tokens: payloadTokens.length ? Array.from(new Set(payloadTokens)).slice(0, 10).join(", ") : "No URL tokens",
         note: "This input is being treated as message/QR/payload content, so Proxuma shows payload structure instead of pretending it is a normal web link."
       };
     }
@@ -3248,8 +3296,11 @@
       const q = queryKeys.join(" ").toLowerCase();
       if (q.includes(word) && tokenHits.length < 8) tokenHits.push("redirect:" + word);
     });
+    inspectEncodedRiskTokens(target).forEach(token => {
+      if (tokenHits.length < 10) tokenHits.push(token);
+    });
     const endingSpoof = inspectDomainEndingSpoof(target);
-    if (endingSpoof.active && tokenHits.length < 8) tokenHits.push(endingSpoof.token || endingSpoof.kind);
+    if (endingSpoof.active && tokenHits.length < 10) tokenHits.push(endingSpoof.token || endingSpoof.kind);
     return {
       status: "URL structure parsed locally",
       protocol: (target.scheme || (url && url.protocol.replace(":", "")) || "unknown").toUpperCase(),
@@ -5152,7 +5203,7 @@
       "Layer: " + BUILD.name,
       "Mode: Offline-first active",
       "Online Intel: " + (armed ? "Consent gate armed; RDAP button available on Vercel only" : "Locked / consent required"),
-      "Release status: v3.29.3 RDAP Fallback + Host Awareness Polish active",
+      "Release status: v3.29.4 Encoded Risk Token Alignment active",
       "Privacy: no hidden API calls, no telemetry, no automatic provider lookup; RDAP runs only by user click after consent",
       "Use: upload the clean release root files to GitHub Pages after local/browser verification; keep working-history archives separate"
     ].join("\n");
@@ -5169,7 +5220,7 @@
       els.buildOnlineStatus.className = "status-pill " + (armed ? "status-medium" : "status-low");
     }
     if (els.buildRcStatus) els.buildRcStatus.textContent = "v3.29.3 RDAP Fallback";
-    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.29.3 preserves the offline engine, compact UI, case export, local history, Link Anatomy, consolidated examples, Online Intel notes, provider slots, readiness checks, and serverless bridge prototype. RDAP lookup is user-clicked and consent-gated with host-aware fallback; no hidden API calls, no telemetry, and no automatic provider lookup in " + BUILD.version + ".";
+    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.29.4 preserves the offline engine, compact UI, case export, local history, Link Anatomy, consolidated examples, Online Intel notes, provider slots, readiness checks, and serverless bridge prototype. RDAP lookup is user-clicked and consent-gated with host-aware fallback; no hidden API calls, no telemetry, and no automatic provider lookup in " + BUILD.version + ".";
   }
 
   function copyBuildInfo(){

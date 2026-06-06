@@ -1,4 +1,6 @@
-# Proxuma IT v3.27.0 — Online Intel Readiness Layer
+# Proxuma IT
+
+Current baseline: **v3.29.4 — Encoded Risk Token Alignment**. This build keeps Proxuma IT offline-first and consent-gated while improving Link Anatomy risk tokens for encoded login and obfuscated path tricks. v3.27.0 — Online Intel Readiness Layer
 
 Proxuma IT is an offline-first link and message intelligence tool. It helps people review suspicious URLs, domains, QR text, download links, copied messages, and scam-style prompts before trusting them.
 

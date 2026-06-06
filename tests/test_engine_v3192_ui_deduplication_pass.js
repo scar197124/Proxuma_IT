@@ -8,9 +8,9 @@ const htmlPath = path.join(root, 'index.html');
 const readmePath = path.join(root, 'README.md');
 const securityPath = path.join(root, 'SECURITY.md');
 const licensePath = path.join(root, 'LICENSE');
-const manifestPath = path.join(root, 'BUILD_MANIFEST_v3.19.6.md');
-const handoffPath = path.join(root, 'NEXT_CHAT_HANDOFF_PROXUMA_IT_v3.19.6.md');
-const releaseNotesPath = path.join(root, 'docs', 'RELEASE_NOTES_v3.19.6.md');
+const manifestPath = path.join(root, 'BUILD_MANIFEST_v3.29.4.md');
+const handoffPath = path.join(root, 'NEXT_CHAT_HANDOFF_PROXUMA_IT_v3.29.4.md');
+const releaseNotesPath = path.join(root, 'docs', 'PROXUMA_IT_SERVERLESS_BRIDGE_BLUEPRINT.md');
 const jsQrPath = path.join(root, 'assets', 'vendor', 'jsQR.js');
 
 function assert(condition, message){
@@ -42,9 +42,9 @@ assert(security.includes('Known limitation'), 'SECURITY should include known QR 
 assert(jsqr.includes('available: false'), 'jsQR placeholder should remain honest as unavailable');
 assert(fs.existsSync(securityPath), 'SECURITY.md should exist');
 assert(fs.existsSync(licensePath), 'LICENSE should exist');
-assert(fs.existsSync(manifestPath), 'v3.19 manifest should exist');
-assert(fs.existsSync(handoffPath), 'v3.19 handoff should exist');
-assert(fs.existsSync(releaseNotesPath), 'v3.19 release notes should exist');
+assert(fs.existsSync(manifestPath), 'current manifest should exist');
+assert(fs.existsSync(handoffPath), 'current handoff should exist');
+assert(fs.existsSync(releaseNotesPath), 'current online/serverless documentation should exist');
 assert(((code.match(/fetch\s*\(/g)||[]).length <= 1) && code.includes('runConsentGatedRdapLookup'), 'public release should only include the explicit consent-gated RDAP fetch');
 assert(!/api\/proxuma-intel/i.test(code), 'public release should not include online bridge API calls');
 
@@ -75,7 +75,7 @@ const context = {
 vm.createContext(context);
 vm.runInContext(runtime, context);
 assert(/^v3\.(22|23|24|25|26|27|28|29)\.[0-9]+$/.test(context.__proxumaBuild.version), 'runtime build should expose v3.22.1 or newer');
-assert((context.__proxumaBuildDeployInfoText().includes('v3.29.3 RDAP Fallback + Host Awareness Polish active') || context.__proxumaBuildDeployInfoText().includes('v3.29.1 Example Lane Consolidation active')) || context.__proxumaBuildDeployInfoText().includes('v3.28.0 Serverless Bridge Blueprint active') || context.__proxumaBuildDeployInfoText().includes('v3.27.0 Online Intel Readiness Layer active') || context.__proxumaBuildDeployInfoText().includes('v3.26.1 Deep Analysis Drawer Usability Pass active') || context.__proxumaBuildDeployInfoText().includes('v3.26.0 Online Intel Provider Architecture active') || context.__proxumaBuildDeployInfoText().includes('v3.24.1 Domain Ending Spoof + Comma Domain Tuning active') || context.__proxumaBuildDeployInfoText().includes('v3.22.1 Unified Scanner Input active') || context.__proxumaBuildDeployInfoText().includes('v3.19.6 UI Wording Clarity Pass active'), 'deploy info should identify v3.19.6');
+assert((context.__proxumaBuildDeployInfoText().includes('v3.29.4 Encoded Risk Token Alignment active') || context.__proxumaBuildDeployInfoText().includes('v3.29.1 Example Lane Consolidation active')) || context.__proxumaBuildDeployInfoText().includes('v3.28.0 Serverless Bridge Blueprint active') || context.__proxumaBuildDeployInfoText().includes('v3.27.0 Online Intel Readiness Layer active') || context.__proxumaBuildDeployInfoText().includes('v3.26.1 Deep Analysis Drawer Usability Pass active') || context.__proxumaBuildDeployInfoText().includes('v3.26.0 Online Intel Provider Architecture active') || context.__proxumaBuildDeployInfoText().includes('v3.24.1 Domain Ending Spoof + Comma Domain Tuning active') || context.__proxumaBuildDeployInfoText().includes('v3.22.1 Unified Scanner Input active') || context.__proxumaBuildDeployInfoText().includes('v3.19.6 UI Wording Clarity Pass active'), 'deploy info should identify v3.19.6');
 assert(context.__proxumaBuildBrowserChecklistText().includes('manual QR text paste'), 'browser checklist should include manual QR fallback');
 
 console.log('PASS: v3.19.6 UI deduplication pass verified: privacy strip, public labels, QR honesty, offline boundary, and release files preserved.');

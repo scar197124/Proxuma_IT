@@ -12,7 +12,7 @@ function assert(cond, msg){
   }
 }
 
-assert(((js.includes('version: "v3.29.3"') || js.includes('version: "v3.29.1"')) || js.includes('version: "v3.28.0"')), 'Build version should be v3.29.3 or v3.29.1 or v3.28.0 continuity build');
+assert(((js.includes('version: "v3.29.4"') || js.includes('version: "v3.29.1"')) || js.includes('version: "v3.28.0"')), 'Build version should be v3.29.4 or v3.29.1 or v3.28.0 continuity build');
 assert(js.includes('Serverless Bridge Blueprint') || js.includes('Example Lane Consolidation'), 'Build name should identify current continuity layer');
 assert(html.includes('serverless bridge blueprint is ready'), 'Online Intel copy should mention blueprint readiness');
 assert(js.includes('Blueprint ready / not connected'), 'Readiness layer should show bridge blueprint ready but not connected');

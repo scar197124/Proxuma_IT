@@ -189,3 +189,10 @@ Maps future Online Intel provider slots inside the existing Online Intel drawer:
 - Added provider contract and privacy rules documentation.
 - Updated Online Intel readiness copy to show the bridge is blueprint-ready but not connected.
 - Preserved no hidden calls, no telemetry, no frontend API keys, no automatic provider lookup, and no-new-cards discipline.
+
+## v3.29.4 — Encoded Risk Token Alignment
+
+- Surfaced percent-encoded login/security/redirect markers inside existing Link Anatomy Risk Tokens.
+- Added encoded slash/path, encoded query/parameter, encoded credential/MFA, encoded embedded URL, and double-encoded markers.
+- Preserved RDAP fallback/host awareness, consent-gated online behavior, and no-new-cards discipline.
+
