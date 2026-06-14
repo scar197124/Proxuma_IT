@@ -1,0 +1,15 @@
+{
+  "name": "Proxuma IT",
+  "version": "v3.40.0-github-pages-clean",
+  "source_build": "v3.40.0-unified-lower-controls",
+  "online_layer_enabled": false,
+  "deployment_target": "GitHub Pages",
+  "entrypoint": "index.html",
+  "excluded": [
+    "tests/",
+    "audit reports",
+    "build manifests from development versions",
+    "temporary files",
+    "local development clutter"
+  ]
+}

@@ -92,7 +92,7 @@
 
   const $ = (id) => document.getElementById(id);
   const els = {
-    input: $("targetInput"), scanButton: $("scanButton"), riskLabel: $("riskLabel"), scoreValue: $("scoreValue"), summaryText: $("summaryText"),
+    input: $("targetInput"), scanButton: $("scanButton"), detectedInputType: $("detectedInputType"), riskLabel: $("riskLabel"), scoreValue: $("scoreValue"), summaryText: $("summaryText"),
     trueTarget: $("trueTarget"), signalCount: $("signalCount"), nextStep: $("nextStep"), evidenceList: $("evidenceList"), technicalList: $("technicalList"),
     caseNotes: $("caseNotes"), saveCaseButton: $("saveCaseButton"), clearHistoryButton: $("clearHistoryButton"), clearAllLocalDataButton: $("clearAllLocalDataButton"), historyList: $("historyList"), historyStatus: $("historyStatus"),
     scanMode: $("scanMode"), scanModeNote: $("scanModeNote"), rootDomain: $("rootDomain"), rootDomainNote: $("rootDomainNote"),
@@ -360,16 +360,30 @@
 
   function extractCandidateUrls(value){
     const text = String(value || "");
-    const markdown = [];
-    text.replace(/\[[^\]]{1,80}\]\((https?:\/\/[^\s)]+)\)/ig, (_, url) => { markdown.push(stripWrappingPunctuation(url)); return _; });
-    text.replace(/<a\b[^>]*href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]{0,300}?<\/a>/ig, (_, url) => { markdown.push(stripWrappingPunctuation(url)); return _; });
-    text.replace(/<form\b[^>]*action=["'](https?:\/\/[^"']+)["'][^>]*>/ig, (_, url) => { markdown.push(stripWrappingPunctuation(url)); return _; });
-    text.replace(/<meta\b[^>]*http-equiv=["']?refresh["']?[^>]*content=["'][^"']*url\s*=\s*(https?:\/\/[^"';> ]+)/ig, (_, url) => { markdown.push(stripWrappingPunctuation(url)); return _; });
-    text.replace(/(?:window\.location|location\.href|document\.location)\s*=\s*["'](https?:\/\/[^"']+)["']/ig, (_, url) => { markdown.push(stripWrappingPunctuation(url)); return _; });
-    const rawMatches = text.match(/https?:\/\/[^\s<>()"']+|hxxps?:\/\/[^\s<>()"']+|www\.[^\s<>()"']+|[a-z0-9][a-z0-9.-]*\.[a-z]{2,}(?:\/[^\s<>()"']*)?/ig) || [];
+    const sources = [text];
+    let decoded = text;
+    for (let i=0; i<2; i++) {
+      if (!/%[0-9a-f]{2}/i.test(decoded)) break;
+      const next = safeDecodeForInspection(decoded);
+      if (!next || next === decoded) break;
+      sources.push(next);
+      decoded = next;
+    }
+
+    const found = [];
+    sources.forEach(sourceText => {
+      sourceText.replace(/\[[^\]]{1,80}\]\((https?:\/\/[^\s)]+)\)/ig, (_, url) => { found.push(stripWrappingPunctuation(url)); return _; });
+      sourceText.replace(/<a\b[^>]*href=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]{0,300}?<\/a>/ig, (_, url) => { found.push(stripWrappingPunctuation(url)); return _; });
+      sourceText.replace(/<form\b[^>]*action=["'](https?:\/\/[^"']+)["'][^>]*>/ig, (_, url) => { found.push(stripWrappingPunctuation(url)); return _; });
+      sourceText.replace(/<meta\b[^>]*http-equiv=["']?refresh["']?[^>]*content=["'][^"']*url\s*=\s*(https?:\/\/[^"';> ]+)/ig, (_, url) => { found.push(stripWrappingPunctuation(url)); return _; });
+      sourceText.replace(/(?:window\.location|location\.href|document\.location)\s*=\s*["'](https?:\/\/[^"']+)["']/ig, (_, url) => { found.push(stripWrappingPunctuation(url)); return _; });
+      const rawMatches = sourceText.match(/https?:\/\/[^\s<>()"']+|hxxps?:\/\/[^\s<>()"']+|www\.[^\s<>()"']+|[a-z0-9][a-z0-9.-]*\.[a-z]{2,}(?:\/[^\s<>()"']*)?/ig) || [];
+      rawMatches.forEach(item => found.push(stripWrappingPunctuation(item)));
+    });
+
     const decodedBase64Matches = extractBase64DecodedUrls(text);
-    const all = markdown.concat(rawMatches.map(stripWrappingPunctuation), decodedBase64Matches.map(stripWrappingPunctuation)).filter(Boolean);
-    return Array.from(new Set(all));
+    decodedBase64Matches.forEach(item => found.push(stripWrappingPunctuation(item)));
+    return Array.from(new Set(found.filter(Boolean)));
   }
 
   function inspectHtmlEmailArtifacts(raw){
@@ -411,7 +425,7 @@
   }
 
   function detectMessagePressure(text){
-    const raw = String(text || "").toLowerCase();
+    const raw = normalizeUnicodeConfusables(text);
     const phrases = [
       "urgent", "act now", "verify now", "final notice", "last chance", "limited time", "account locked", "account suspended",
       "unusual activity", "suspicious activity", "security alert", "payment failed", "delivery fee", "customs fee", "redelivery fee",
@@ -423,7 +437,7 @@
 
   function classifyMessageEnvelope(raw, candidates){
     const text = String(raw || "");
-    const lowered = text.toLowerCase();
+    const lowered = normalizeUnicodeConfusables(text);
     if (/^\s*(sms|smsto|mailto|matmsg|mecard|begin:vcard|wifi:|otpauth:)/i.test(text)) return "Structured message/QR payload";
     if (/<form\b[^>]*action=/i.test(text) || /<meta\b[^>]*http-equiv=["']?refresh/i.test(text) || /(?:window\.location|location\.href|document\.location|location\.replace)\s*(?:=|\()/i.test(text)) return "HTML email/page snippet";
     if (/<a\b[^>]*href=/i.test(text)) return "HTML message/link snippet";
@@ -436,10 +450,12 @@
 
   function analyzeMessageContext(raw, candidates, activeRoot){
     const text = String(raw || "");
-    const unique = Array.from(new Set((candidates || []).filter(Boolean)));
+    const normalizedText = normalizeUnicodeConfusables(text);
+    const expandedCandidates = (candidates || []).concat(extractCandidateUrls(text));
+    const unique = Array.from(new Set(expandedCandidates.filter(Boolean)));
     const roots = unique.map(normalizeCandidateUrl).filter(Boolean);
-    const pressure = detectMessagePressure(text);
-    const visibleBrandHints = findTrustedHintsInVisibleText(text);
+    const pressure = detectMessagePressure(normalizedText);
+    const visibleBrandHints = findTrustedHintsInVisibleText(normalizedText);
     const active = String(activeRoot || "").toLowerCase();
     const mismatchedBrands = visibleBrandHints.filter(hit => {
       const family = brandFamilies.find(f => f.name === hit.family);
@@ -598,6 +614,30 @@
       .replace(/5/g,"s")
       .replace(/@/g,"a")
       .replace(/\$/g,"s");
+  }
+
+  function normalizeUnicodeConfusables(text){
+    const map = {
+      "а":"a","Α":"a","А":"a",
+      "е":"e","Ε":"e","Е":"e",
+      "і":"i","Ι":"i","І":"i","ı":"i",
+      "о":"o","Ο":"o","О":"o",
+      "р":"p","Ρ":"p","Р":"p",
+      "с":"c","Ϲ":"c","С":"c",
+      "х":"x","Χ":"x","Х":"x",
+      "у":"y","Υ":"y","У":"y",
+      "к":"k","Κ":"k","К":"k",
+      "м":"m","Μ":"m","М":"m",
+      "т":"t","Τ":"t","Т":"t",
+      "в":"b","Β":"b","В":"b",
+      "н":"h","Η":"h","Н":"h",
+      "ј":"j","Ј":"j",
+      "ѕ":"s","Ѕ":"s"
+    };
+    return String(text || "")
+      .normalize("NFKC")
+      .replace(/[аеіорсхуктмвнјѕΑАΕЕΙІΟОΡРϹСΧХΥУΚКΜМΤТΒВΗНЈЅı]/g, ch => map[ch] || ch)
+      .toLowerCase();
   }
   function safeDecodeForInspection(text){
     try { return decodeURIComponent(String(text || "")); } catch(error) { return String(text || ""); }
@@ -2054,6 +2094,12 @@
     }, {});
     let best = null;
     const credentialPressurePayload = isCredentialPressurePayload(ctx);
+    const rawContext = normalizeUnicodeConfusables((ctx && ctx.target && (ctx.target.sourceRaw || ctx.target.raw || ctx.target.href)) || "");
+    const romanceContext = /\b(romance|dating|love|relationship|sweetheart|private photo|move off platform|stranded|emergency money)\b/.test(rawContext);
+    const callbackContext = /\b(call this number|call back|callback|phone us|contact support|support number)\b/.test(rawContext);
+    const recoveryContext = /\b(password reset|reset password|account recovery|recovery link|unlock account|account unlock|new device|email change|session reset)\b/.test(rawContext);
+    const fileInvoiceContext = /\b(invoice|statement|document|attachment|shared file|macro|enable content|download)\b/.test(rawContext) && /\b(file|attachment|document|macro|download|enable content)\b/.test(rawContext);
+    const explicitOtpContext = /\b(otp|one[-\s]?time code|verification code|security code|2fa|mfa|authenticator|push approval)\b/.test(rawContext);
     signals.forEach((signal, index) => {
       const family = classifySignalFamily(signal);
       signal.family = family;
@@ -2061,7 +2107,20 @@
       let v3195Boost = 0;
       if (credentialPressurePayload && /^(Credential theft|MFA \/ OTP code theft|Account recovery takeover|Urgency \/ pressure tactic)$/.test(family)) v3195Boost += 180;
       if (credentialPressurePayload && /^(Money movement scam|Payment scam|Subscription renewal scam|Fake security alert)$/.test(family)) v3195Boost -= 220;
-      const score = (classBoost[signal.weightClass] || 0) + (severityBoost[signal.severity] || 0) + (familyBoost[family] || 0) + weightMagnitude + v3195Boost - (index * 0.01);
+
+      let v338ContextBoost = 0;
+      if (romanceContext && family === "Trust/social-engineering scam") v338ContextBoost += 280;
+      if (romanceContext && /^(Parking\/toll\/transit scam|Government\/legal scam)$/.test(family)) v338ContextBoost -= 240;
+      if (callbackContext && family === "Callback scam") v338ContextBoost += 420;
+      if (callbackContext && explicitOtpContext && family === "MFA / OTP code theft") v338ContextBoost += 360;
+      if (callbackContext && /^(Government\/legal scam|Subscription renewal scam)$/.test(family) && !/\b(tax|court|warrant|government|cra|irs|benefit|renewal|subscription|billing)\b/.test(rawContext)) v338ContextBoost -= 320;
+      if (callbackContext && explicitOtpContext && family === "Fake security alert") v338ContextBoost -= 120;
+      if (recoveryContext && family === "Account recovery takeover") v338ContextBoost += 270;
+      if (recoveryContext && family === "MFA / OTP code theft" && !explicitOtpContext) v338ContextBoost -= 230;
+      if (fileInvoiceContext && family === "File/download trap") v338ContextBoost += 260;
+      if (fileInvoiceContext && family === "Subscription renewal scam") v338ContextBoost -= 210;
+
+      const score = (classBoost[signal.weightClass] || 0) + (severityBoost[signal.severity] || 0) + (familyBoost[family] || 0) + weightMagnitude + v3195Boost + v338ContextBoost - (index * 0.01);
       signal.dominanceScore = Math.round(score * 100) / 100;
       if (!best || signal.dominanceScore > best.dominanceScore) best = signal;
     });
@@ -2241,8 +2300,8 @@
 
   function classifyQrPayload(raw){
     const value = String(raw || "").trim();
-    const lower = value.toLowerCase();
-    const decoded = safeDecodeForInspection(value).toLowerCase();
+    const lower = normalizeUnicodeConfusables(value);
+    const decoded = normalizeUnicodeConfusables(safeDecodeForInspection(value));
     const urls = (value.match(/https?:\/\/[^\s]+/ig) || []).concat(decoded.match(/https?:\/\/[^\s]+/ig) || []);
     const prefix = qrStructuredPrefixes.find(p => lower.startsWith(p));
     const numeric = /^\d{6,}$/.test(value);
@@ -2273,7 +2332,7 @@
     let score = 92;
 
     timeline.push("Input received and classified locally. No external lookup was used.");
-    technical.push("v3.19 QR honesty layer: camera QR scanning is user-triggered and browser-dependent. Native BarcodeDetector is used when available; browsers without native QR support need a complete local decoder bundle or manual QR text paste. Decoded or pasted payloads still feed into the offline engine; no API calling is active.");
+    technical.push("v3.19 QR honesty layer: camera QR scanning is user-triggered and browser-dependent. Native BarcodeDetector is used when available; other supported browsers use the packaged local jsQR decoder, with manual QR text paste as an additional fallback. Decoded or pasted payloads still feed into the offline engine; no API calling is active.");
     technical.push("Next path: QR scanner first, then offline QR hardening, then explicit user-approved Online Intel/API bridge.");
 
     if (target.type === "empty") return emptyReport();
@@ -2301,6 +2360,21 @@
       const payload = classifyQrPayload(target.raw);
       score = payload.safety;
       addSignal(signals, payload.severity, payload.kind, payload.detail, payload.severity === "medium" ? 14 : 4);
+      const recoveredEncodedUrls = extractCandidateUrls(target.sourceRaw || target.raw).filter(url => !String(target.raw || "").includes(url));
+      if (recoveredEncodedUrls.length) {
+        score = Math.min(score, 48);
+        addSignal(signals, "high", "Percent-encoded URL recovered", "The message contained a URL hidden behind percent encoding. Proxuma decoded the candidate locally and deep-scanned the recovered destination.", 26);
+        technical.push("v3.38 encoded-message recovery: recovered " + recoveredEncodedUrls[0] + " from percent-encoded text.");
+        timeline.push("Proxuma decoded a URL-shaped percent-encoded message before classification.");
+        payload.urls = Array.from(new Set((payload.urls || []).concat(recoveredEncodedUrls))).slice(0,3);
+      }
+      const rawPayloadText = String(target.sourceRaw || target.raw || "");
+      const normalizedPayloadText = normalizeUnicodeConfusables(rawPayloadText);
+      if (normalizedPayloadText !== rawPayloadText.toLowerCase() && /\b(verify|account|login|password|payment|urgent|security|code|reset|support)\b/.test(normalizedPayloadText)) {
+        score = Math.min(score, 46);
+        addSignal(signals, "high", "Unicode lookalike wording", "The message uses non-Latin lookalike letters inside sensitive account or security language. This can make scam wording appear visually normal while evading simple text checks.", 24);
+        technical.push("v3.38 Unicode confusable normalization changed sensitive message text before classification.");
+      }
       const payloadEndingSpoof = inspectDomainEndingSpoof(target);
       if (payloadEndingSpoof.active) {
         score = Math.min(score, payloadEndingSpoof.kind === "comma-domain" ? 40 : 36);
@@ -5071,6 +5145,26 @@
     if (lastReport) renderReport(lastReport);
   }
 
+
+  function detectInputKindPreview(value){
+    const text = String(value || "").trim();
+    if (!text) return "waiting for input";
+    if (/^(javascript|data|file|vbscript|blob|about|content):/i.test(text)) return "script or local scheme";
+    if (/^https?:\/\//i.test(text) || /^hxxps?:\/\//i.test(text) || /^www\./i.test(text)) return "URL";
+    if (/^[a-z0-9][a-z0-9.-]*\.[a-z]{2,}(?:\/.*)?$/i.test(text)) return "domain";
+    if (/^(wifi:|mailto:|sms:|smsto:|tel:|geo:|otpauth:|begin:vcard)/i.test(text)) return "structured QR payload";
+    if (/<(?:a|form|meta|script)\b|window\.location|document\.location/i.test(text)) return "email or HTML";
+    if (/%(?:25)?[0-9a-f]{2}/i.test(text) && /https?|login|verify|account/i.test(text)) return "encoded message or URL";
+    if (/\b(?:dear|urgent|verify|account|payment|delivery|refund|password|code|click|call)\b/i.test(text)) return "message";
+    if (/^\d{6,}$/.test(text)) return "numeric QR or reference";
+    return text.length > 80 ? "text snippet" : "text";
+  }
+
+  function updateDetectedInputType(){
+    if (!els.detectedInputType || !els.input) return;
+    els.detectedInputType.textContent = "Detected: " + detectInputKindPreview(els.input.value);
+  }
+
   function setQrStatus(message){
     if (els.qrStatus) els.qrStatus.textContent = message;
   }
@@ -5085,14 +5179,14 @@
     if (els.qrCameraPanel) els.qrCameraPanel.hidden = true;
     if (els.qrStopButton) els.qrStopButton.hidden = true;
     if (els.qrStartButton) els.qrStartButton.disabled = false;
-    setQrStatus("QR scanner stopped. Paste QR text manually or start the local camera again if your browser supports it.");
+    setQrStatus("Camera stopped. No camera stream remains active. Paste QR text or start the scanner again.");
   }
 
   function submitQrValue(value){
     const clean = (value || "").trim();
     if (!clean) return false;
     els.input.value = clean;
-    setQrStatus("QR captured locally. Proxuma loaded the payload into the scanner and ran the offline engine.");
+    setQrStatus("QR decoded locally. The payload was loaded into the scanner and analyzed on this device.");
     stopQrScanner();
     runScan();
     return true;
@@ -5127,7 +5221,7 @@
       script.setAttribute("data-proxuma-local-decoder", "packaged");
       script.onload = () => {
         if (isLocalQrDecoderReady()) { resolve(true); return; }
-        reject(new Error("Local QR compatibility decoder slot is present, but no complete audited decoder bundle is embedded yet."));
+        reject(new Error("Packaged local jsQR decoder loaded but did not expose a ready decoder function."));
       };
       script.onerror = () => reject(new Error("Local QR compatibility decoder failed to load from assets/vendor/jsQR.js"));
       document.head.appendChild(script);
@@ -5175,9 +5269,9 @@
         qrDetector = new BarcodeDetector({ formats: ["qr_code"] });
       } else {
         qrDecoderMode = "jsqr";
-        setQrStatus("This browser lacks native QR detection. Proxuma will try the packaged local decoder slot; if the full decoder is not embedded, paste QR text manually.");
+        setQrStatus("This browser lacks native QR detection. Proxuma is loading the packaged local jsQR decoder. Camera processing stays on this device.");
         await loadJsQrCompatibilityDecoder();
-        if (!isLocalQrDecoderReady()) throw new Error("Local QR compatibility decoder unavailable or incomplete");
+        if (!isLocalQrDecoderReady()) throw new Error("Packaged local QR decoder failed readiness check");
       }
       qrStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
       els.qrVideo.srcObject = qrStream;
@@ -5189,7 +5283,7 @@
       window.requestAnimationFrame(scanQrFrame);
     } catch(error) {
       stopQrScanner();
-      setQrStatus("QR camera support was blocked, unavailable, or needs a full local decoder bundle not embedded in this release. Manual QR text paste still works offline.");
+      setQrStatus("QR camera access was blocked or unavailable in this browser/context. The local decoder is embedded; you can also paste QR text manually.");
     }
   }
 
@@ -5549,6 +5643,8 @@
     button.addEventListener("click", () => { els.input.value = button.getAttribute("data-example") || ""; runScan(); });
   });
   els.scanButton.addEventListener("click", runScan);
+  if (els.input) els.input.addEventListener("input", updateDetectedInputType);
+  updateDetectedInputType();
   els.input.addEventListener("keydown", event => { if (event.key === "Enter") runScan(); });
   els.saveCaseButton.addEventListener("click", saveCase);
   els.clearHistoryButton.addEventListener("click", () => { localStorage.removeItem(HISTORY_KEY); renderHistory(); if (els.copyStatus) els.copyStatus.textContent = "Local scan history cleared. Pattern memory was left alone."; });

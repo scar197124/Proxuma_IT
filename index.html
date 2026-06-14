@@ -9,8 +9,9 @@
   <meta name="color-scheme" content="dark" />
   <meta name="description" content="Proxuma IT explains suspicious links, QR payloads, downloads, and message targets in plain language before you trust them." />
   <link rel="stylesheet" href="styles.css" />
+  <meta name="proxuma-build" content="v3.40.0-github-pages-clean" />
 </head>
-<body>
+<body class="simple-ui">
   <div class="ambient-grid" aria-hidden="true"></div>
 
   <header class="site-header banner-header">
@@ -25,15 +26,28 @@
   </header>
 
   <main id="top" class="page">
+
+    <!-- Compatibility text retained for regression continuity:
+      Camera QR scanning is optional and browser-dependent.
+      No telemetry
+      No hidden lookups
+      Paste a URL, IP, QR payload, message, or text snippet
+      One input handles links, domains, IPs, decoded QR text, copied SMS/email content, and raw suspicious snippets.
+    -->
+
     <section class="hero hero-framed">
       <div class="hero-frame-inner">
         <p class="eyebrow hero-product-mark">Proxuma IT</p>
-        <h1>Threat intelligence before you click.</h1>
-        <p class="lead">Paste a URL, domain, download link, message, or QR text. Proxuma explains warning signs in plain language before you trust it.</p>
+        <h1>Check the link before you trust it.</h1>
+        <p class="lead">Scan a QR code, paste a message, or inspect a URL locally before opening it.</p>
+        <div class="hero-action-row">
+          <a class="hero-scan-cta" href="#scan">Start a Scan</a>
+          <span class="hero-privacy-note">Analyzed locally · Nothing is uploaded</span>
+        </div>
         <div class="proof-row" aria-label="Core promises">
           <span class="proof-pill proof-local pill-status">Local analysis</span>
-          <span class="proof-pill proof-balanced pill-status">Readable reports</span>
-          <span class="proof-pill proof-consent pill-status">Consent-first</span>
+          <span class="proof-pill proof-balanced pill-status">No account required</span>
+          <span class="proof-pill proof-consent pill-status">Works offline</span>
         </div>
       </div>
     </section>
@@ -47,10 +61,10 @@
           <p class="subtle">A short map of the main workspace. Open only when you need orientation.</p>
           <p class="collapsed-hint">Guide hidden to keep the scanner clean.</p>
         </div>
-        <button class="collapse-toggle" type="button" aria-expanded="true" aria-controls="explainGuideBody" data-expanded-label="Hide guide" data-collapsed-label="Show guide">
+        <button class="collapse-toggle unified-control-button" type="button" aria-expanded="true" aria-controls="explainGuideBody" data-expanded-label="Close" data-collapsed-label="Open">
           <span class="toggle-dot" aria-hidden="true"></span>
-          <span class="toggle-copy">Hide guide</span>
-          <small>Help drawer</small>
+          <span class="toggle-copy">Close</span>
+          <small>Guide Controls</small>
         </button>
       </div>
       <div id="explainGuideBody" class="collapsible-card-body">
@@ -90,20 +104,24 @@
       </div>
     </section>
 
-    <section id="scan" class="workbench">
-      <article class="scanner-panel card">
+    <section class="unified-workspace card" aria-label="Proxuma unified workspace">
+    <section id="scan" class="workbench unified-stack">
+      <article class="scanner-panel card unified-section unified-scan-section">
         <div class="section-head">
           <p class="eyebrow">Scan Center</p>
-          <h2>Scan a link, QR code, or message</h2>
-          <p class="subtle">Scans run locally in your browser.</p>
+          <h2>Paste, scan, or inspect</h2>
+          <p class="subtle">One local workspace for links, messages, and QR payloads.</p>
         </div>
 
-        <label class="input-label" for="targetInput">Universal scanner input</label>
-        <div class="input-row">
-          <input id="targetInput" type="text" autocomplete="off" spellcheck="false" placeholder="Paste a URL, IP, QR payload, message, or text snippet" />
-          <button id="scanButton" type="button">Analyze</button>
+        <div class="input-label-row">
+          <label class="input-label" for="targetInput">Universal scanner input</label>
+          <span id="detectedInputType" class="detected-input-type" aria-live="polite">Detected: waiting for input</span>
         </div>
-        <p class="unified-input-note">One input handles links, domains, IPs, decoded QR text, copied SMS/email content, and raw suspicious snippets.</p>
+        <div class="input-row">
+          <input id="targetInput" type="text" autocomplete="off" spellcheck="false" placeholder="Paste a suspicious link, message, QR result, or copied email text" />
+          <button id="scanButton" type="button"><span>Analyze</span><small>Safely</small></button>
+        </div>
+        <p class="unified-input-note">Paste the full message when possible. Context helps Proxuma explain the safest next move.</p>
         <div class="input-type-chips" aria-label="Accepted input types">
           <span>URL</span>
           <span>IP</span>
@@ -112,17 +130,32 @@
           <span>Snippet</span>
         </div>
 
-        <div class="privacy-strip" aria-label="Privacy promise">
-          <span>Runs locally</span>
-          <span>No telemetry</span>
-          <span>No hidden lookups</span>
-          <span>Online checks stay off unless you choose them</span>
+        <section class="visible-scan-examples" aria-label="Visible scan examples">
+          <div class="visible-examples-head">
+            <strong>Try a scan example</strong>
+            <span>Loads the sample into the scanner — nothing is sent online.</span>
+          </div>
+          <div class="quick-tests" aria-label="Example targets">
+          <button class="example-pill example-trusted pill-action" type="button" data-example="https://www.rbcroyalbank.com/">Trusted bank</button>
+          <button class="example-pill example-danger pill-action" type="button" data-example="https://secure-l0gin-rbc.verify-account.example/login">Leetspeak phish</button>
+          <button class="example-pill example-danger pill-action" type="button" data-example="https://www.rbcr0yalbank.com/">Lookalike bank</button>
+          <button class="example-pill example-danger pill-action" type="button" data-example="javascript:alert(1)">Script payload</button>
+          <button class="example-pill example-review pill-action" type="button" data-example="https://example.com/l%30gin">Encoded login</button>
+          <button class="example-pill example-review pill-action" type="button" data-example="072890000224">QR payload</button>
+        </div>
+        </section>
+
+        <div class="privacy-strip" data-compact="true" aria-label="Privacy promise">
+          <span>Analyzed locally</span>
+          <span>Nothing is uploaded</span>
+          <span>Online checks remain off unless chosen</span>
         </div>
 
-        <div class="qr-slot qr-scanner-ready" aria-label="Browser QR scanner">
+        <section class="primary-qr-tool" aria-label="Primary QR scanner">
+          <div class="qr-slot qr-scanner-ready" aria-label="Browser QR scanner">
           <div class="qr-copy">
             <strong>QR Scanner</strong>
-            <p id="qrStatus">Camera QR scanning is optional and browser-dependent. You can always paste QR text manually for offline checking.</p>
+            <p id="qrStatus">Camera ready when you choose it. Processing stays on this device.</p>
           </div>
           <div class="qr-actions">
             <button id="qrStartButton" class="ghost-button" type="button">Start QR Scan</button>
@@ -132,17 +165,15 @@
             <video id="qrVideo" class="qr-video" autoplay muted playsinline></video>
           </div>
         </div>
+        </section>
 
-        <div class="quick-tests" aria-label="Example targets">
-          <button class="example-pill example-trusted pill-action" type="button" data-example="https://www.rbcroyalbank.com/">Trusted bank</button>
-          <button class="example-pill example-danger pill-action" type="button" data-example="https://secure-l0gin-rbc.verify-account.example/login">Leetspeak phish</button>
-          <button class="example-pill example-danger pill-action" type="button" data-example="https://www.rbcr0yalbank.com/">Lookalike bank</button>
-          <button class="example-pill example-danger pill-action" type="button" data-example="javascript:alert(1)">Script payload</button>
-          <button class="example-pill example-review pill-action" type="button" data-example="https://example.com/l%30gin">Encoded login</button>
-          <button class="example-pill example-review pill-action" type="button" data-example="072890000224">QR payload</button>
-        </div>
-
-        <div class="teaching-card" aria-label="Teaching mode guidance">
+        <details class="simple-disclosure optional-tools unified-control-section">
+          <summary>
+            <span><strong>Optional tools</strong><small>Scan modes and learning aids</small></span>
+            <span class="disclosure-action unified-disclosure-toggle unified-control-button" aria-hidden="true"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-copy">Open</span></span>
+          </summary>
+          <div class="simple-disclosure-body">
+<div class="teaching-card" aria-label="Teaching mode guidance">
           <strong>Learning Mode</strong>
           <p>Proxuma explains the strongest signal and safest next move in plain language.</p>
         </div>
@@ -170,9 +201,11 @@
           <span class="pill-signal">Lookalike words</span>
           <span class="pill-signal">Institution aliases</span>
         </div>
+          </div>
+        </details>
       </article>
 
-      <article id="report" class="report-panel card" aria-live="polite">
+      <article id="report" class="report-panel card unified-section unified-report-section" aria-live="polite">
         <div class="report-top">
           <div>
             <p class="eyebrow">Scan Report</p>
@@ -223,7 +256,13 @@
 
 
 
-        <div class="link-anatomy-card" aria-label="Link anatomy breakdown">
+        <details class="simple-disclosure report-details-disclosure unified-control-section">
+          <summary>
+            <span><strong>More report details</strong><small>Link anatomy, report views, copying, and evidence export</small></span>
+            <span class="disclosure-action unified-disclosure-toggle unified-control-button" aria-hidden="true"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-copy">Open</span></span>
+          </summary>
+          <div class="simple-disclosure-body">
+<div class="link-anatomy-card" aria-label="Link anatomy breakdown">
           <div class="link-anatomy-head">
             <div>
               <small>Link Anatomy</small>
@@ -270,6 +309,9 @@
           <p id="copyStatus" class="copy-status" aria-live="polite">Run a scan, then use Copy Simple Report for the easy version. Deeper evidence and technical notes stay tucked away.</p>
         </div>
 
+                  </div>
+        </details>
+
         <div class="action-guidance guidance-drawer" aria-label="Action guidance drawer">
           <div class="guidance-switch" role="tablist" aria-label="Choose guidance detail">
             <button id="guidanceNextTab" class="guidance-tab guidance-tab-next active" type="button" role="tab" aria-selected="true" aria-controls="guidanceNextPanel" data-guidance-target="guidanceNextPanel">Next Move</button>
@@ -293,15 +335,26 @@
           </div>
         </div>
 
-        <div class="memory-strip">
+        <details class="simple-disclosure compact-metrics-disclosure unified-control-section">
+          <summary>
+            <span><strong>Scan metrics</strong><small>Signal mix, evidence strength, and last scan</small></span>
+            <span class="disclosure-action unified-disclosure-toggle unified-control-button" aria-hidden="true"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-copy">Open</span></span>
+          </summary>
+          <div class="simple-disclosure-body"><div class="memory-strip">
           <span><b>Signal Mix:</b> <span id="severityMix" class="severity-breakdown"><em class="sev-high">0 high</em><em class="sev-medium">0 medium</em><em class="sev-low">0 low</em></span></span>
           <span><b>Evidence Strength:</b> <span id="evidenceStrength">Waiting</span></span>
           <span><b>Last Scan:</b> <span id="scanMemory">No previous scan</span></span>
-        </div>
+        </div></div>
+        </details>
       </article>
     </section>
 
-    <section class="intelligence-grid" aria-label="Core intelligence cards">
+    <details class="simple-disclosure supporting-evidence-disclosure unified-section unified-control-section">
+      <summary>
+        <span><strong>Supporting evidence</strong><small>Target identity, confidence, behavior, and optional online expansion</small></span>
+        <span class="disclosure-action unified-disclosure-toggle unified-control-button" aria-hidden="true"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-copy">Open</span></span>
+      </summary>
+      <div class="simple-disclosure-body"><section class="intelligence-grid" aria-label="Core intelligence cards">
       <article class="intel-card card intel-identity">
         <span class="card-kicker">01 · Identity</span>
         <h3>True Target</h3>
@@ -332,19 +385,20 @@
         <p id="scanModeNote">This front surface stays honest: full domain age, live certificate details, and reputation checks appear only when the optional online layer is enabled by the user.</p>
         <p class="muted">Current build shows only what the local engine can truly support.</p>
       </article>
-    </section>
+    </section></div>
+    </details>
 
-    <section id="details" class="intelligence-drawer card collapsible-card" aria-label="Deep Analysis" data-collapse-key="proxuma-it-intelligence-drawer-collapsed-v1" data-default-collapsed="true">
+    <section id="details" class="intelligence-drawer card collapsible-card unified-section" aria-label="Deep Analysis" data-collapse-key="proxuma-it-intelligence-drawer-collapsed-v1" data-default-collapsed="true">
       <div class="drawer-head centered-head collapsible-card-head">
         <div>
           <p class="eyebrow">Deep Analysis</p>
           <h2>Review the scan details</h2>
           <p class="collapsed-hint">Details hidden to keep the main report focused.</p>
         </div>
-        <button class="collapse-toggle" type="button" aria-expanded="true" aria-controls="intelligenceDrawerBody" data-expanded-label="Hide drawer" data-collapsed-label="Show drawer">
+        <button class="collapse-toggle unified-control-button" type="button" aria-expanded="true" aria-controls="intelligenceDrawerBody" data-expanded-label="Close" data-collapsed-label="Open">
           <span class="toggle-dot" aria-hidden="true"></span>
-          <span class="toggle-copy">Hide drawer</span>
-          <small>Collapsible</small>
+          <span class="toggle-copy">Close</span>
+          <small>Analysis Controls</small>
         </button>
       </div>
 
@@ -589,7 +643,7 @@
       </div>
     </section>
 
-    <section id="casefile" class="casefile card collapsible-card" data-collapse-key="proxuma-it-casefile-collapsed-v1" data-default-collapsed="true">
+    <section id="casefile" class="casefile card collapsible-card unified-section" data-collapse-key="proxuma-it-casefile-collapsed-v1" data-default-collapsed="true">
       <div class="section-head collapsible-card-head">
         <div>
           <p class="eyebrow">Case File</p>
@@ -597,10 +651,10 @@
           <p class="subtle label-chip-row" aria-label="Case file tools"><span>Auto-saved scans</span><span>Notes</span><span>Local only</span></p>
           <p class="collapsed-hint label-chip-row" aria-label="Case file tools"><span>Recent scans</span><span>Device only</span></p>
         </div>
-        <button class="collapse-toggle" type="button" aria-expanded="true" aria-controls="caseFileBody" data-expanded-label="Hide case file" data-collapsed-label="Show case file">
+        <button class="collapse-toggle unified-control-button" type="button" aria-expanded="true" aria-controls="caseFileBody" data-expanded-label="Close" data-collapsed-label="Open">
           <span class="toggle-dot" aria-hidden="true"></span>
-          <span class="toggle-copy">Hide case file</span>
-          <small>Collapsible</small>
+          <span class="toggle-copy">Close</span>
+          <small>Saved Scans</small>
         </button>
       </div>
       <div id="caseFileBody" class="collapsible-card-body">
@@ -617,13 +671,15 @@
       <p class="casefile-scroll-cue" aria-hidden="true">Scroll the case file for more</p>
     </section>
 
+    </section>
+
     <section class="ecosystem-return card" aria-label="Return to PROXUMA ecosystem">
       <div>
         <p class="eyebrow">Ecosystem path</p>
         <h2>Return to PROXUMA</h2>
         <p class="subtle">Finished checking a link, IP, QR payload, or message? Go back to the main PROXUMA hub without losing the ecosystem trail.</p>
       </div>
-      <a class="ecosystem-return-button" href="https://scar197124.github.io/PROXUMA/" aria-label="Return to the main PROXUMA canonical homepage">← PROXUMA Home</a>
+      <a class="ecosystem-return-button unified-control-button unified-home-control" href="https://scar197124.github.io/PROXUMA/" aria-label="Return to the main PROXUMA canonical homepage">← PROXUMA Home</a>
     </section>
 
     <section class="hidden-support" aria-hidden="true">

@@ -6591,3 +6591,991 @@ html[data-audience-view="analyst"] .audience-toggle.active{border-color:rgba(255
   .readiness-head{align-items:flex-start;flex-direction:column;}
   .online-readiness-list{grid-template-columns:1fr;}
 }
+
+
+/* v3.30.0 — Simple UI shell. Presentation-only; engine logic remains unchanged. */
+.simple-ui .page{gap:16px}
+.simple-ui .hero-frame-inner{padding:24px 28px}
+.simple-ui .hero h1{font-size:clamp(1.85rem,4vw,3.2rem);margin-bottom:10px}
+.simple-ui .hero .lead{margin-bottom:0}
+.simple-ui .proof-row{margin-top:12px}
+.simple-ui .scanner-panel,.simple-ui .report-panel{padding:18px}
+.simple-ui .privacy-strip{margin-top:12px;padding:10px 12px;gap:8px}
+.simple-ui .privacy-strip span{font-size:.78rem}
+.simple-ui .input-type-chips{margin-top:8px}
+.simple-ui .unified-input-note{margin:8px 0 0;font-size:.84rem}
+.simple-disclosure{margin-top:14px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.025);overflow:hidden}
+.simple-disclosure>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 16px;cursor:pointer}
+.simple-disclosure>summary::-webkit-details-marker{display:none}
+.simple-disclosure>summary span:first-child{display:grid;gap:3px}
+.simple-disclosure>summary strong{font-size:.96rem}
+.simple-disclosure>summary small{color:var(--muted);font-size:.78rem;font-weight:500}
+.disclosure-action{flex:0 0 auto;padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:#d9ffe9;background:rgba(103,240,167,.06);font-size:.75rem;font-weight:800}
+.simple-disclosure[open] .disclosure-action{font-size:0}
+.simple-disclosure[open] .disclosure-action::after{content:"Close";font-size:.75rem}
+.simple-disclosure-body{padding:0 16px 16px}
+.optional-tools .qr-slot{margin-top:0}
+.optional-tools .quick-tests,.optional-tools .teaching-card,.optional-tools .mode-card,.optional-tools .micro-list{margin-top:12px}
+.report-details-disclosure .link-anatomy-card{margin-top:0}
+.compact-metrics-disclosure .memory-strip{margin:0}
+.supporting-evidence-disclosure{margin:0}
+.supporting-evidence-disclosure>.simple-disclosure-body{padding:0 14px 14px}
+.supporting-evidence-disclosure .intelligence-grid{margin:0}
+.simple-ui .intelligence-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.simple-ui .intel-card{padding:15px}
+.simple-ui .intel-card p{margin:7px 0}
+.simple-ui .report-snapshot-card{margin-top:14px}
+.simple-ui .action-guidance{margin-top:14px}
+.simple-ui .explain-page,.simple-ui .intelligence-drawer,.simple-ui .casefile{margin-top:0}
+@media(max-width:980px){.simple-ui .intelligence-grid{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .simple-ui .hero-frame-inner{padding:20px 18px}
+  .simple-ui .proof-row{gap:6px}
+  .simple-ui .proof-row span{padding:6px 9px;font-size:.72rem}
+  .simple-ui .scanner-panel,.simple-ui .report-panel{padding:14px}
+  .simple-disclosure>summary{padding:12px}
+  .simple-disclosure-body{padding:0 12px 12px}
+}
+
+
+/* v3.31.0 — Balanced UI with permanently visible QR scanner.
+   Presentation-only. Detection, scoring, consent, RDAP, history, and export logic are unchanged. */
+
+.simple-ui .hero.hero-framed{
+  padding:14px 18px !important;
+  min-height:0 !important;
+}
+.simple-ui .hero.hero-framed .hero-frame-inner{
+  padding:14px 18px !important;
+  min-height:0 !important;
+}
+.simple-ui .hero.hero-framed .eyebrow{
+  margin-bottom:4px !important;
+}
+.simple-ui .hero.hero-framed h1{
+  font-size:clamp(1.55rem, 3vw, 2.35rem) !important;
+  line-height:1.04 !important;
+  margin:0 0 6px !important;
+}
+.simple-ui .hero.hero-framed .lead{
+  max-width:860px !important;
+  margin:0 auto !important;
+  font-size:.94rem !important;
+  line-height:1.42 !important;
+}
+.simple-ui .hero.hero-framed .proof-row{
+  margin-top:8px !important;
+  gap:6px !important;
+}
+.simple-ui .hero.hero-framed .proof-row span{
+  padding:5px 9px !important;
+  font-size:.70rem !important;
+}
+
+/* Main two-card workspace stays visually level when either side expands. */
+.simple-ui .workbench{
+  align-items:stretch !important;
+}
+.simple-ui .workbench > .scanner-panel,
+.simple-ui .workbench > .report-panel{
+  height:100% !important;
+  min-height:0 !important;
+}
+
+/* QR is a primary scanner action and is always visible. */
+.primary-qr-tool{
+  margin-top:12px;
+}
+.primary-qr-tool .qr-slot{
+  margin:0 !important;
+  padding:12px 14px !important;
+  border-style:solid !important;
+  border-color:rgba(103,240,167,.42) !important;
+  background:linear-gradient(180deg, rgba(103,240,167,.065), rgba(103,240,167,.025)) !important;
+  box-shadow:inset 0 0 0 1px rgba(103,240,167,.035);
+}
+.primary-qr-tool .qr-copy p{
+  max-width:660px;
+  font-size:.84rem;
+  line-height:1.38;
+}
+.primary-qr-tool .qr-actions{
+  flex:0 0 auto;
+}
+.primary-qr-tool .qr-camera-panel{
+  flex-basis:100%;
+}
+
+/* Optional disclosure begins cleanly beneath the permanent QR tool. */
+.simple-ui .optional-tools{
+  margin-top:12px !important;
+}
+.simple-ui .optional-tools .simple-disclosure-body{
+  padding-top:2px;
+}
+
+/* Keep large-screen case openings controlled and visually balanced. */
+@media (min-width:981px){
+  .simple-ui .workbench > .scanner-panel{
+    display:flex;
+    flex-direction:column;
+  }
+  .simple-ui .workbench > .scanner-panel .optional-tools{
+    margin-top:auto !important;
+  }
+}
+
+/* On stacked layouts, natural height is clearer than forced matching. */
+@media (max-width:980px){
+  .simple-ui .workbench{
+    align-items:start !important;
+  }
+  .simple-ui .workbench > .scanner-panel,
+  .simple-ui .workbench > .report-panel{
+    height:auto !important;
+  }
+}
+
+@media (max-width:640px){
+  .simple-ui .hero.hero-framed{
+    padding:10px 12px !important;
+  }
+  .simple-ui .hero.hero-framed .hero-frame-inner{
+    padding:12px 10px !important;
+  }
+  .simple-ui .hero.hero-framed h1{
+    font-size:1.42rem !important;
+  }
+  .simple-ui .hero.hero-framed .lead{
+    font-size:.84rem !important;
+  }
+  .primary-qr-tool .qr-slot{
+    padding:11px 12px !important;
+  }
+}
+
+
+/* v3.32.0 — Unified single-card UI.
+   Presentation-only. All engine IDs, handlers, scoring, consent, RDAP,
+   local history, exports, and encoded-token logic remain unchanged. */
+
+.simple-ui .unified-workspace{
+  width:min(980px, calc(100% - 28px));
+  margin:0 auto 24px;
+  padding:0;
+  overflow:hidden;
+  display:block;
+}
+
+.simple-ui .unified-stack{
+  display:block !important;
+  margin:0 !important;
+}
+
+.simple-ui .unified-workspace .unified-section{
+  width:100%;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+.simple-ui .unified-workspace .unified-section + .unified-section,
+.simple-ui .unified-workspace .supporting-evidence-disclosure,
+.simple-ui .unified-workspace #details,
+.simple-ui .unified-workspace #casefile{
+  border-top:1px solid rgba(103,240,167,.20) !important;
+}
+
+.simple-ui .unified-scan-section,
+.simple-ui .unified-report-section,
+.simple-ui .unified-workspace .supporting-evidence-disclosure,
+.simple-ui .unified-workspace #details,
+.simple-ui .unified-workspace #casefile{
+  padding:22px !important;
+}
+
+.simple-ui .unified-scan-section{
+  padding-bottom:18px !important;
+}
+
+.simple-ui .unified-report-section{
+  padding-top:20px !important;
+}
+
+.simple-ui .unified-workspace .section-head,
+.simple-ui .unified-workspace .report-top,
+.simple-ui .unified-workspace .drawer-head{
+  margin-bottom:14px !important;
+}
+
+.simple-ui .unified-workspace .simple-disclosure{
+  border-radius:12px !important;
+}
+
+.simple-ui .unified-workspace .optional-tools,
+.simple-ui .unified-workspace .report-details-disclosure,
+.simple-ui .unified-workspace .compact-metrics-disclosure{
+  margin-top:12px !important;
+}
+
+.simple-ui .unified-workspace .supporting-evidence-disclosure{
+  border-left:0 !important;
+  border-right:0 !important;
+  border-bottom:0 !important;
+}
+
+.simple-ui .unified-workspace .intelligence-grid{
+  grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+}
+
+.simple-ui .unified-workspace .intel-card{
+  border:1px solid rgba(103,240,167,.16) !important;
+  border-radius:14px !important;
+  background:rgba(7,16,15,.52) !important;
+  box-shadow:none !important;
+}
+
+.simple-ui .unified-workspace .primary-qr-tool,
+.simple-ui .unified-workspace .report-snapshot-card,
+.simple-ui .unified-workspace .heat-zone,
+.simple-ui .unified-workspace .action-guidance,
+.simple-ui .unified-workspace .simple-disclosure{
+  width:100%;
+}
+
+.simple-ui .unified-workspace .scanner-panel,
+.simple-ui .unified-workspace .report-panel{
+  display:block !important;
+}
+
+.simple-ui .unified-workspace .scanner-panel .optional-tools{
+  margin-top:12px !important;
+}
+
+.simple-ui .unified-workspace .casefile-scroll-cue,
+.simple-ui .unified-workspace .drawer-scroll-cue{
+  margin-bottom:0;
+}
+
+@media (max-width:760px){
+  .simple-ui .unified-workspace{
+    width:min(100% - 14px, 980px);
+    margin-bottom:14px;
+  }
+  .simple-ui .unified-scan-section,
+  .simple-ui .unified-report-section,
+  .simple-ui .unified-workspace .supporting-evidence-disclosure,
+  .simple-ui .unified-workspace #details,
+  .simple-ui .unified-workspace #casefile{
+    padding:16px !important;
+  }
+  .simple-ui .unified-workspace .intelligence-grid{
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media (max-width:460px){
+  .simple-ui .unified-scan-section,
+  .simple-ui .unified-report-section,
+  .simple-ui .unified-workspace .supporting-evidence-disclosure,
+  .simple-ui .unified-workspace #details,
+  .simple-ui .unified-workspace #casefile{
+    padding:13px !important;
+  }
+}
+
+
+/* v3.33.0 — Compact matched top row.
+   Header, hero, App Guide, and unified workspace share one centered width.
+   Presentation-only; engine and interaction logic remain unchanged. */
+
+.simple-ui .site-header.banner-header,
+.simple-ui .hero.hero-framed,
+.simple-ui .explain-page.card,
+.simple-ui .unified-workspace{
+  width:min(980px, calc(100% - 28px)) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  box-sizing:border-box !important;
+}
+
+/* Shorter branded header without removing its identity. */
+.simple-ui .site-header.banner-header{
+  margin-top:10px !important;
+  border-radius:16px !important;
+  overflow:hidden !important;
+}
+.simple-ui .site-header.banner-header .header-banner{
+  aspect-ratio:6.4 / 1 !important;
+  min-height:82px !important;
+  max-height:132px !important;
+  background-size:cover !important;
+  background-position:center center !important;
+}
+.simple-ui .site-header.banner-header .top-nav.nav-banner{
+  min-height:42px !important;
+  padding:6px 10px !important;
+  gap:6px !important;
+  justify-content:center !important;
+}
+.simple-ui .site-header.banner-header .top-nav.nav-banner a{
+  padding:6px 9px !important;
+  font-size:.78rem !important;
+  line-height:1 !important;
+}
+
+/* Hero becomes a slim message band. */
+.simple-ui .hero.hero-framed{
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+  padding:8px 12px !important;
+  border-radius:16px !important;
+}
+.simple-ui .hero.hero-framed .hero-frame-inner{
+  padding:7px 12px !important;
+}
+.simple-ui .hero.hero-framed .hero-product-mark{
+  margin:0 0 2px !important;
+  font-size:.66rem !important;
+}
+.simple-ui .hero.hero-framed h1{
+  margin:0 0 4px !important;
+  font-size:clamp(1.28rem, 2.4vw, 1.82rem) !important;
+  line-height:1.02 !important;
+}
+.simple-ui .hero.hero-framed .lead{
+  max-width:760px !important;
+  font-size:.82rem !important;
+  line-height:1.3 !important;
+}
+.simple-ui .hero.hero-framed .proof-row{
+  margin-top:6px !important;
+  gap:5px !important;
+}
+.simple-ui .hero.hero-framed .proof-row span{
+  min-height:22px !important;
+  padding:4px 8px !important;
+  font-size:.65rem !important;
+}
+
+/* App Guide matches the same compact row language. */
+.simple-ui .explain-page.card{
+  padding:9px 12px !important;
+  border-radius:16px !important;
+}
+.simple-ui .explain-page .explain-head.collapsible-card-head,
+.simple-ui .explain-page.is-collapsed .explain-head.collapsible-card-head,
+.simple-ui .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head{
+  min-height:44px !important;
+  height:auto !important;
+  padding:0 118px 0 0 !important;
+  align-items:center !important;
+}
+.simple-ui .explain-page .explain-head.collapsible-card-head > div,
+.simple-ui .explain-page.is-collapsed .explain-head.collapsible-card-head > div,
+.simple-ui .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head > div{
+  max-width:none !important;
+  padding:0 !important;
+  text-align:left !important;
+}
+.simple-ui .explain-page .explain-head.collapsible-card-head .eyebrow,
+.simple-ui .explain-page .explain-head.collapsible-card-head h2,
+.simple-ui .explain-page .explain-head.collapsible-card-head .subtle,
+.simple-ui .explain-page .explain-head.collapsible-card-head .collapsed-hint{
+  text-align:left !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+.simple-ui .explain-page .explain-head.collapsible-card-head .eyebrow{
+  margin-bottom:2px !important;
+  font-size:.66rem !important;
+}
+.simple-ui .explain-page .explain-head.collapsible-card-head h2{
+  margin:0 0 2px !important;
+  font-size:1rem !important;
+  line-height:1.05 !important;
+}
+.simple-ui .explain-page .explain-head.collapsible-card-head .subtle,
+.simple-ui .explain-page .explain-head.collapsible-card-head .collapsed-hint{
+  margin-top:0 !important;
+  font-size:.72rem !important;
+  line-height:1.18 !important;
+}
+.simple-ui .explain-page .explain-head.collapsible-card-head .collapse-toggle,
+.simple-ui .explain-page.is-collapsed .explain-head.collapsible-card-head .collapse-toggle,
+.simple-ui .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head .collapse-toggle{
+  top:50% !important;
+  right:0 !important;
+  transform:translateY(-50%) !important;
+  width:104px !important;
+  min-width:104px !important;
+  max-width:104px !important;
+  height:34px !important;
+  min-height:34px !important;
+  padding:6px 9px !important;
+  font-size:.72rem !important;
+}
+.simple-ui .explain-page .collapsible-card-body{
+  padding-top:10px !important;
+}
+.simple-ui .explain-page .explain-grid{
+  gap:9px !important;
+}
+.simple-ui .explain-page .explain-card{
+  padding:11px !important;
+}
+
+/* Keep the vertical rhythm tight between matched rows. */
+.simple-ui .page{
+  gap:10px !important;
+  margin-top:10px !important;
+}
+
+@media(max-width:640px){
+  .simple-ui .site-header.banner-header,
+  .simple-ui .hero.hero-framed,
+  .simple-ui .explain-page.card,
+  .simple-ui .unified-workspace{
+    width:min(100% - 12px, 980px) !important;
+  }
+
+  .simple-ui .site-header.banner-header .header-banner{
+    aspect-ratio:4.5 / 1 !important;
+    min-height:76px !important;
+    max-height:112px !important;
+  }
+
+  .simple-ui .site-header.banner-header .top-nav.nav-banner{
+    display:grid !important;
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+    padding:5px !important;
+    gap:4px !important;
+  }
+  .simple-ui .site-header.banner-header .top-nav.nav-banner a{
+    padding:6px 2px !important;
+    font-size:.64rem !important;
+    text-align:center !important;
+  }
+
+  .simple-ui .hero.hero-framed{
+    padding:7px 9px !important;
+  }
+  .simple-ui .hero.hero-framed .hero-frame-inner{
+    padding:7px 8px !important;
+  }
+  .simple-ui .hero.hero-framed h1{
+    font-size:1.22rem !important;
+  }
+  .simple-ui .hero.hero-framed .lead{
+    font-size:.76rem !important;
+  }
+
+  .simple-ui .explain-page .explain-head.collapsible-card-head,
+  .simple-ui .explain-page.is-collapsed .explain-head.collapsible-card-head,
+  .simple-ui .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head{
+    min-height:70px !important;
+    padding:0 0 38px !important;
+    text-align:center !important;
+  }
+  .simple-ui .explain-page .explain-head.collapsible-card-head > div,
+  .simple-ui .explain-page.is-collapsed .explain-head.collapsible-card-head > div,
+  .simple-ui .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head > div{
+    text-align:center !important;
+  }
+  .simple-ui .explain-page .explain-head.collapsible-card-head .eyebrow,
+  .simple-ui .explain-page .explain-head.collapsible-card-head h2,
+  .simple-ui .explain-page .explain-head.collapsible-card-head .subtle,
+  .simple-ui .explain-page .explain-head.collapsible-card-head .collapsed-hint{
+    text-align:center !important;
+  }
+  .simple-ui .explain-page .explain-head.collapsible-card-head .collapse-toggle,
+  .simple-ui .explain-page.is-collapsed .explain-head.collapsible-card-head .collapse-toggle,
+  .simple-ui .explain-page:not(.is-collapsed) .explain-head.collapsible-card-head .collapse-toggle{
+    top:auto !important;
+    bottom:0 !important;
+    right:50% !important;
+    transform:translateX(50%) !important;
+  }
+}
+
+
+/* v3.34.0 — Compact matched Ecosystem Path.
+   Presentation-only. Engine and all interaction logic remain unchanged. */
+
+.simple-ui .ecosystem-return.card{
+  width:min(980px, calc(100% - 28px)) !important;
+  margin:0 auto 18px !important;
+  padding:11px 14px !important;
+  border-radius:16px !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  align-items:center !important;
+  gap:14px !important;
+  box-sizing:border-box !important;
+}
+
+.simple-ui .ecosystem-return.card > div{
+  min-width:0 !important;
+}
+
+.simple-ui .ecosystem-return.card .eyebrow{
+  margin:0 0 2px !important;
+  font-size:.66rem !important;
+  letter-spacing:.10em !important;
+}
+
+.simple-ui .ecosystem-return.card h2{
+  margin:0 0 3px !important;
+  font-size:1rem !important;
+  line-height:1.05 !important;
+}
+
+.simple-ui .ecosystem-return.card .subtle{
+  margin:0 !important;
+  font-size:.72rem !important;
+  line-height:1.2 !important;
+}
+
+.simple-ui .ecosystem-return-button{
+  min-width:148px !important;
+  min-height:36px !important;
+  padding:7px 12px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+  border-radius:999px !important;
+  font-size:.76rem !important;
+  line-height:1 !important;
+}
+
+@media(max-width:640px){
+  .simple-ui .ecosystem-return.card{
+    width:min(100% - 12px, 980px) !important;
+    grid-template-columns:1fr !important;
+    text-align:center !important;
+    padding:10px 12px !important;
+    gap:9px !important;
+  }
+
+  .simple-ui .ecosystem-return.card .eyebrow,
+  .simple-ui .ecosystem-return.card h2,
+  .simple-ui .ecosystem-return.card .subtle{
+    text-align:center !important;
+  }
+
+  .simple-ui .ecosystem-return-button{
+    justify-self:center !important;
+    min-width:156px !important;
+  }
+}
+
+
+/* v3.35.0 — visible examples and embedded local QR decoder UI */
+.simple-ui .visible-scan-examples{
+  margin-top:10px;
+  padding:10px 12px;
+  border:1px solid rgba(103,240,167,.25);
+  border-radius:13px;
+  background:rgba(103,240,167,.035);
+}
+
+.simple-ui .visible-examples-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.simple-ui .visible-examples-head strong{
+  color:var(--text);
+  font-size:.82rem;
+}
+
+.simple-ui .visible-examples-head span{
+  color:var(--muted);
+  font-size:.70rem;
+  text-align:right;
+}
+
+.simple-ui .visible-scan-examples .quick-tests{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:0;
+}
+
+.simple-ui .visible-scan-examples .example-pill{
+  min-height:32px;
+  padding:6px 9px;
+  font-size:.72rem;
+}
+
+@media(max-width:640px){
+  .simple-ui .visible-examples-head{
+    display:block;
+  }
+  .simple-ui .visible-examples-head span{
+    display:block;
+    margin-top:3px;
+    text-align:left;
+  }
+  .simple-ui .visible-scan-examples .quick-tests{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .simple-ui .visible-scan-examples .example-pill{
+    width:100%;
+    text-align:center;
+  }
+}
+
+
+/* v3.36.0 — centered section heads + open button polish
+   Presentation-only. Engine, handlers, scoring, consent, RDAP,
+   history, exports, and QR logic remain unchanged. */
+
+/* Center "Try a scan example" section */
+.simple-ui .visible-scan-examples{
+  text-align:center !important;
+}
+.simple-ui .visible-examples-head{
+  display:block !important;
+  text-align:center !important;
+}
+.simple-ui .visible-examples-head strong{
+  display:block !important;
+  margin:0 0 4px !important;
+  font-size:.88rem !important;
+  font-weight:800 !important;
+}
+.simple-ui .visible-examples-head span{
+  display:block !important;
+  text-align:center !important;
+  margin:0 auto 8px !important;
+}
+
+/* Center disclosure/header systems */
+.simple-ui .optional-tools > summary,
+.simple-ui .report-details-disclosure > summary,
+.simple-ui .compact-metrics-disclosure > summary,
+.simple-ui .supporting-evidence-disclosure > summary{
+  text-align:center !important;
+  justify-content:center !important;
+}
+
+.simple-ui .optional-tools > summary span,
+.simple-ui .report-details-disclosure > summary span,
+.simple-ui .compact-metrics-disclosure > summary span,
+.simple-ui .supporting-evidence-disclosure > summary span{
+  display:block !important;
+  text-align:center !important;
+}
+
+.simple-ui .optional-tools > summary strong,
+.simple-ui .report-details-disclosure > summary strong,
+.simple-ui .compact-metrics-disclosure > summary strong,
+.simple-ui .supporting-evidence-disclosure > summary strong{
+  display:block !important;
+  width:100% !important;
+  margin:0 0 3px !important;
+  font-weight:800 !important;
+}
+
+.simple-ui .optional-tools > summary small,
+.simple-ui .report-details-disclosure > summary small,
+.simple-ui .compact-metrics-disclosure > summary small,
+.simple-ui .supporting-evidence-disclosure > summary small{
+  display:block !important;
+  width:100% !important;
+  text-align:center !important;
+  margin:0 auto !important;
+}
+
+/* Center the main report section heads if present */
+.simple-ui .section-head,
+.simple-ui .report-top,
+.simple-ui .drawer-head{
+  text-align:center !important;
+}
+.simple-ui .section-head .eyebrow,
+.simple-ui .section-head h2,
+.simple-ui .section-head .subtle,
+.simple-ui .report-top .eyebrow,
+.simple-ui .report-top h2,
+.simple-ui .report-top .subtle,
+.simple-ui .drawer-head .eyebrow,
+.simple-ui .drawer-head h2,
+.simple-ui .drawer-head .subtle{
+  text-align:center !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+/* Make "Open" buttons stand out with borders */
+.simple-ui .collapse-toggle,
+.simple-ui .open-button,
+.simple-ui button[data-action="open"],
+.simple-ui .example-pill,
+.simple-ui .quick-tests button{
+  border:1px solid rgba(103,240,167,.46) !important;
+  box-shadow:0 0 0 1px rgba(103,240,167,.08) inset, 0 0 10px rgba(103,240,167,.07) !important;
+}
+
+/* Direct emphasis for compact disclosure trigger buttons */
+.simple-ui summary .collapse-toggle,
+.simple-ui .collapsible-card-head .collapse-toggle{
+  border:1px solid rgba(103,240,167,.52) !important;
+  background:linear-gradient(180deg, rgba(103,240,167,.12), rgba(103,240,167,.04)) !important;
+  border-radius:999px !important;
+  font-weight:700 !important;
+  letter-spacing:.01em !important;
+}
+
+/* If there are plain action buttons labeled Open, style them too */
+.simple-ui button,
+.simple-ui .btn{
+  transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+.simple-ui summary .collapse-toggle:hover,
+.simple-ui .collapsible-card-head .collapse-toggle:hover,
+.simple-ui .open-button:hover,
+.simple-ui button[data-action="open"]:hover,
+.simple-ui .example-pill:hover,
+.simple-ui .quick-tests button:hover{
+  border-color:rgba(103,240,167,.70) !important;
+  box-shadow:0 0 0 1px rgba(103,240,167,.14) inset, 0 0 14px rgba(103,240,167,.14) !important;
+}
+
+/* Mobile keeps centered alignment clean */
+@media(max-width:640px){
+  .simple-ui .visible-examples-head strong{
+    font-size:.84rem !important;
+  }
+  .simple-ui .optional-tools > summary strong,
+  .simple-ui .report-details-disclosure > summary strong,
+  .simple-ui .compact-metrics-disclosure > summary strong,
+  .simple-ui .supporting-evidence-disclosure > summary strong{
+    font-size:.84rem !important;
+  }
+}
+
+
+/* v3.37.0 — unified disclosure toggle system */
+.simple-ui .optional-tools > summary,
+.simple-ui .report-details-disclosure > summary,
+.simple-ui .compact-metrics-disclosure > summary,
+.simple-ui .supporting-evidence-disclosure > summary{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:54px !important;
+  padding:8px 126px 8px 14px !important;
+  box-sizing:border-box !important;
+  cursor:pointer !important;
+  list-style:none !important;
+}
+
+.simple-ui .optional-tools > summary > span:first-child,
+.simple-ui .report-details-disclosure > summary > span:first-child,
+.simple-ui .compact-metrics-disclosure > summary > span:first-child,
+.simple-ui .supporting-evidence-disclosure > summary > span:first-child{
+  width:100% !important;
+  max-width:720px !important;
+  margin:0 auto !important;
+  text-align:center !important;
+}
+
+.simple-ui .optional-tools > summary strong,
+.simple-ui .report-details-disclosure > summary strong,
+.simple-ui .compact-metrics-disclosure > summary strong,
+.simple-ui .supporting-evidence-disclosure > summary strong{
+  display:block !important;
+  margin:0 0 3px !important;
+  font-size:.82rem !important;
+  line-height:1.05 !important;
+  font-weight:800 !important;
+}
+
+.simple-ui .optional-tools > summary small,
+.simple-ui .report-details-disclosure > summary small,
+.simple-ui .compact-metrics-disclosure > summary small,
+.simple-ui .supporting-evidence-disclosure > summary small{
+  display:block !important;
+  margin:0 !important;
+  font-size:.70rem !important;
+  line-height:1.18 !important;
+  color:var(--muted) !important;
+  text-align:center !important;
+}
+
+.simple-ui .unified-disclosure-toggle{
+  position:absolute !important;
+  top:50% !important;
+  right:10px !important;
+  transform:translateY(-50%) !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:7px !important;
+  width:104px !important;
+  min-width:104px !important;
+  max-width:104px !important;
+  height:34px !important;
+  min-height:34px !important;
+  padding:6px 10px !important;
+  border:1px solid rgba(103,240,167,.52) !important;
+  border-radius:999px !important;
+  background:linear-gradient(180deg, rgba(103,240,167,.12), rgba(103,240,167,.04)) !important;
+  color:var(--text) !important;
+  box-shadow:0 0 0 1px rgba(103,240,167,.08) inset,0 0 10px rgba(103,240,167,.07) !important;
+  font-size:.72rem !important;
+  font-weight:700 !important;
+  line-height:1 !important;
+  letter-spacing:.01em !important;
+  white-space:nowrap !important;
+  box-sizing:border-box !important;
+  pointer-events:none !important;
+}
+
+.simple-ui .unified-disclosure-toggle .toggle-dot{
+  width:7px !important;
+  height:7px !important;
+  flex:0 0 7px !important;
+  border-radius:50% !important;
+  background:rgba(103,240,167,.88) !important;
+  box-shadow:0 0 8px rgba(103,240,167,.42) !important;
+}
+
+.simple-ui .unified-disclosure-toggle .toggle-copy{
+  min-width:46px !important;
+  text-align:center !important;
+}
+
+.simple-ui details[open] > summary .unified-disclosure-toggle .toggle-copy{
+  font-size:0 !important;
+}
+.simple-ui details[open] > summary .unified-disclosure-toggle .toggle-copy::after{
+  content:"Close";
+  font-size:.72rem !important;
+}
+
+.simple-ui .optional-tools > summary::-webkit-details-marker,
+.simple-ui .report-details-disclosure > summary::-webkit-details-marker,
+.simple-ui .compact-metrics-disclosure > summary::-webkit-details-marker,
+.simple-ui .supporting-evidence-disclosure > summary::-webkit-details-marker{
+  display:none !important;
+}
+
+@media(max-width:640px){
+  .simple-ui .optional-tools > summary,
+  .simple-ui .report-details-disclosure > summary,
+  .simple-ui .compact-metrics-disclosure > summary,
+  .simple-ui .supporting-evidence-disclosure > summary{
+    min-height:82px !important;
+    padding:10px 10px 44px !important;
+  }
+  .simple-ui .unified-disclosure-toggle{
+    top:auto !important;
+    bottom:6px !important;
+    right:50% !important;
+    transform:translateX(50%) !important;
+  }
+}
+
+
+/* v3.39.0 — first-screen UX polish. UI-only. */
+html{scroll-behavior:smooth}
+.simple-ui .site-header.banner-header{margin-bottom:8px}
+.simple-ui .hero.hero-framed{margin-top:8px;margin-bottom:10px}
+.simple-ui .hero.hero-framed .hero-frame-inner{padding:16px 24px}
+.simple-ui .hero.hero-framed h1{margin:.22rem 0 .38rem;font-size:clamp(1.65rem,3.1vw,2.55rem);line-height:1.04}
+.simple-ui .hero.hero-framed .lead{max-width:760px;margin:0 auto;font-size:clamp(.92rem,1.4vw,1.04rem);line-height:1.48}
+.hero-action-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 14px;margin-top:14px}
+.hero-scan-cta{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 18px;border:1px solid rgba(103,240,167,.5);border-radius:12px;background:linear-gradient(180deg,rgba(26,101,71,.92),rgba(14,70,48,.96));color:#f3fff7;text-decoration:none;font-weight:800;letter-spacing:.01em;box-shadow:0 8px 22px rgba(23,115,79,.18),inset 0 0 0 1px rgba(255,255,255,.04)}
+.hero-scan-cta:hover,.hero-scan-cta:focus-visible{transform:translateY(-1px);border-color:rgba(103,240,167,.8);box-shadow:0 10px 26px rgba(23,115,79,.26),0 0 0 3px rgba(103,240,167,.12);outline:none}
+.hero-privacy-note{color:var(--muted);font-size:.82rem}
+.simple-ui .hero-framed .proof-row{margin-top:10px}
+.simple-ui .unified-workspace{scroll-margin-top:12px}
+.input-label-row{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-top:4px}
+.input-label-row .input-label{margin-bottom:8px}
+.detected-input-type{display:inline-flex;align-items:center;min-height:28px;margin-bottom:7px;padding:5px 9px;border:1px solid rgba(103,240,167,.25);border-radius:999px;background:rgba(103,240,167,.06);color:#bdf4d5;font-size:.72rem;line-height:1;white-space:nowrap}
+#scanButton{min-width:150px;display:inline-flex;align-items:center;justify-content:center;gap:5px}
+#scanButton small{font-size:.7em;font-weight:700;opacity:.78}
+.privacy-strip[data-compact="true"]{gap:8px}
+.privacy-strip[data-compact="true"] span{flex:1 1 170px;text-align:center}
+.primary-qr-tool .qr-copy p{max-width:740px}
+:focus-visible{outline:2px solid rgba(103,240,167,.92);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+@media(max-width:760px){
+  .simple-ui .hero.hero-framed .hero-frame-inner{padding:14px 15px}
+  .simple-ui .hero.hero-framed h1{font-size:1.55rem}
+  .hero-action-row{align-items:stretch;flex-direction:column;gap:8px}
+  .hero-scan-cta{width:100%}
+  .hero-privacy-note{text-align:center}
+  .input-label-row{align-items:flex-start;flex-direction:column;gap:0}
+  .detected-input-type{margin-top:-2px;margin-bottom:8px}
+  #scanButton{min-width:0;width:100%;min-height:46px}
+  .privacy-strip[data-compact="true"] span{flex:1 1 100%}
+}
+
+/* v3.40.0 unified lower controls */
+.unified-control-button{
+  --control-accent:rgba(103,240,167,.82);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-width:132px;min-height:42px;padding:8px 13px;
+  border:1px solid rgba(103,240,167,.34)!important;border-radius:12px!important;
+  background:linear-gradient(180deg,rgba(19,38,34,.92),rgba(10,23,21,.96))!important;
+  color:#eafff2!important;font:inherit;font-size:.78rem;font-weight:800;line-height:1;
+  letter-spacing:.015em;text-decoration:none!important;white-space:nowrap;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 6px 16px rgba(0,0,0,.18);
+  transition:border-color .16s ease,background .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+.unified-control-button:hover,.unified-control-button:focus-visible{
+  border-color:rgba(103,240,167,.72)!important;
+  background:linear-gradient(180deg,rgba(24,55,47,.96),rgba(12,32,27,.98))!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),0 8px 20px rgba(0,0,0,.24),0 0 0 3px rgba(103,240,167,.09);
+  transform:translateY(-1px);outline:none;
+}
+.unified-control-button .toggle-dot{
+  flex:0 0 auto;width:8px;height:8px;border-radius:999px;
+  background:var(--control-accent);box-shadow:0 0 9px rgba(103,240,167,.5);
+}
+.unified-control-button .toggle-copy{font-weight:850;line-height:1}
+.unified-control-button small{
+  margin:0;color:rgba(219,244,230,.66);font-size:.67rem;font-weight:650;line-height:1;
+}
+.collapse-toggle.unified-control-button{flex:0 0 auto}
+details .disclosure-action.unified-control-button{
+  position:static!important;right:auto!important;top:auto!important;transform:none!important;
+  align-self:center;pointer-events:none;
+}
+details[open] .disclosure-action.unified-control-button{
+  border-color:rgba(103,240,167,.58)!important;
+  background:linear-gradient(180deg,rgba(24,55,47,.96),rgba(12,32,27,.98))!important;
+}
+.unified-control-section>summary{align-items:center!important;gap:16px}
+.unified-control-section>summary>span:first-child{flex:1 1 auto;min-width:0}
+.ecosystem-return-button.unified-home-control{min-width:160px}
+.ecosystem-return-button.unified-home-control::before{
+  content:"";width:8px;height:8px;border-radius:999px;
+  background:rgba(103,240,167,.82);box-shadow:0 0 9px rgba(103,240,167,.5);
+}
+@media(max-width:760px){
+  .unified-control-section>summary{align-items:stretch!important;flex-direction:column!important;gap:10px!important}
+  details .disclosure-action.unified-control-button,
+  .collapse-toggle.unified-control-button,
+  .ecosystem-return-button.unified-home-control{width:100%;min-width:0;min-height:46px}
+  .section-head.collapsible-card-head{align-items:stretch}
+  .section-head.collapsible-card-head>.unified-control-button{margin-top:10px}
+}

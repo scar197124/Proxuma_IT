@@ -173,3 +173,54 @@ This build wires the existing Online Intel drawer to the Vercel RDAP bridge prot
 ## Proxuma IT v3.29.3 — RDAP Fallback + Host Awareness Polish
 
 This release keeps the consent-gated RDAP wiring from v3.29.2 but improves the user-facing fallback behavior. GitHub Pages and local file previews now explain that `/api/proxuma-rdap` requires a serverless host such as Vercel. No lookup runs automatically, no frontend API keys are exposed, and the offline scanner remains intact.
+
+
+## v3.30.0 Simple UI Shell
+- Simplified the visible workflow without changing the scan engine.
+- Keeps Scan, Result, Risk Heat, Snapshot, and Next Move visible.
+- Moves QR, examples, scan modes, and learning aids into Optional tools.
+- Moves link anatomy, export controls, and report views into More report details.
+- Moves core intelligence cards into Supporting evidence.
+- All existing IDs, controls, handlers, and offline-first logic remain in place.
+
+
+## v3.31.0 Balanced UI
+- Permanently visible QR scanner.
+- Compact hero.
+- Balanced desktop workbench cards.
+- Engine unchanged.
+
+
+## v3.32.0 Unified Single-Card UI
+- One centered workspace card.
+- Internal borders separate all operational sections.
+- No empty side-column space.
+- Engine unchanged.
+
+
+## v3.33.0 Compact Matched Top Row
+- Header, hero, guide, and workspace use one centered width.
+- Header and hero reduced.
+- App Guide tightened.
+- Engine unchanged.
+
+
+## v3.34.0 Compact Matched Ecosystem Path
+- Ecosystem Path now matches the same centered width and compact row styling.
+- Engine unchanged.
+
+## v3.35.0 Local QR Decoder + Visible Examples
+- Full local jsQR 1.4.0 decoder embedded.
+- Scan examples moved beside the primary scanner.
+- Runtime QR decoding stays local/offline.
+- Engine unchanged.
+
+## v3.36.0 Centered Section Heads + Open Button Polish
+- Centered key section titles/subtitles.
+- Added borders/highlight styling for Open-style buttons.
+- Engine unchanged.
+
+
+## v3.37.0 Unified Disclosure Toggle System
+- Standardized all Open/Close disclosure controls.
+- Engine unchanged.
