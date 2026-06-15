@@ -224,3 +224,33 @@ This release keeps the consent-gated RDAP wiring from v3.29.2 but improves the u
 ## v3.37.0 Unified Disclosure Toggle System
 - Standardized all Open/Close disclosure controls.
 - Engine unchanged.
+
+
+## v3.40.2 — Unified UI and Mobile Consistency
+
+This release standardizes card spacing, typography, buttons, active navigation states, focus behavior, and mobile touch targets while preserving the scanner and privacy-first logic.
+
+
+## v3.42.0 disclosure consistency
+All primary Open/Close controls now share one identical component across Optional Tools, More Report Details, Scan Metrics, Supporting Evidence, Deep Analysis, and Case File.
+
+
+## v3.42.0 Report Trust and Action Layer
+- Unified finding cards with verified evidence and suggested actions
+- Remediation statuses stored locally
+- Session comparison for new, resolved, unchanged, and severity-changed findings
+- Printable HTML and structured JSON trust reports
+- Workflow and intelligence layer now loaded by the main page
+
+
+## v3.42.2 Centered Workflow & Trust Card
+
+- Matched the Workflow & Trust card height to the primary fixed-card footprint.
+- Kept the section heading visible while long workflow content scrolls internally.
+- Added keyboard focus and a visible internal-scroll cue.
+
+## v3.42.3 GitHub Release Candidate
+
+This release stabilizes the v3.42.x interface for a GitHub Pages observation window. It aligns standalone card widths, protects against content overflow, standardizes minimum touch targets, respects reduced-motion preferences, and adds release and handoff documentation.
+
+See `RELEASE_CHECKLIST.md` before deployment and `NEXT_HANDOFF.md` for the next planned layer.

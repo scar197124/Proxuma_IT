@@ -9,7 +9,7 @@
   <meta name="color-scheme" content="dark" />
   <meta name="description" content="Proxuma IT explains suspicious links, QR payloads, downloads, and message targets in plain language before you trust them." />
   <link rel="stylesheet" href="styles.css" />
-  <meta name="proxuma-build" content="v3.40.0-github-pages-clean" />
+  <meta name="proxuma-build" content="v3.42.3-github-release-candidate" />
 </head>
 <body class="simple-ui">
   <div class="ambient-grid" aria-hidden="true"></div>
@@ -168,7 +168,7 @@
         </section>
 
         <details class="simple-disclosure optional-tools unified-control-section">
-          <summary>
+          <summary aria-label="Toggle Optional Tools">
             <span><strong>Optional tools</strong><small>Scan modes and learning aids</small></span>
             <span class="disclosure-action unified-disclosure-toggle unified-control-button" aria-hidden="true"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-copy">Open</span></span>
           </summary>
@@ -257,7 +257,7 @@
 
 
         <details class="simple-disclosure report-details-disclosure unified-control-section">
-          <summary>
+          <summary aria-label="Toggle More Report Details">
             <span><strong>More report details</strong><small>Link anatomy, report views, copying, and evidence export</small></span>
             <span class="disclosure-action unified-disclosure-toggle unified-control-button" aria-hidden="true"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-copy">Open</span></span>
           </summary>
@@ -336,7 +336,7 @@
         </div>
 
         <details class="simple-disclosure compact-metrics-disclosure unified-control-section">
-          <summary>
+          <summary aria-label="Toggle Scan Metrics">
             <span><strong>Scan metrics</strong><small>Signal mix, evidence strength, and last scan</small></span>
             <span class="disclosure-action unified-disclosure-toggle unified-control-button" aria-hidden="true"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-copy">Open</span></span>
           </summary>
@@ -350,7 +350,7 @@
     </section>
 
     <details class="simple-disclosure supporting-evidence-disclosure unified-section unified-control-section">
-      <summary>
+      <summary aria-label="Toggle Supporting Evidence">
         <span><strong>Supporting evidence</strong><small>Target identity, confidence, behavior, and optional online expansion</small></span>
         <span class="disclosure-action unified-disclosure-toggle unified-control-button" aria-hidden="true"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-copy">Open</span></span>
       </summary>
@@ -398,7 +398,7 @@
         <button class="collapse-toggle unified-control-button" type="button" aria-expanded="true" aria-controls="intelligenceDrawerBody" data-expanded-label="Close" data-collapsed-label="Open">
           <span class="toggle-dot" aria-hidden="true"></span>
           <span class="toggle-copy">Close</span>
-          <small>Analysis Controls</small>
+          
         </button>
       </div>
 
@@ -654,7 +654,7 @@
         <button class="collapse-toggle unified-control-button" type="button" aria-expanded="true" aria-controls="caseFileBody" data-expanded-label="Close" data-collapsed-label="Open">
           <span class="toggle-dot" aria-hidden="true"></span>
           <span class="toggle-copy">Close</span>
-          <small>Saved Scans</small>
+          
         </button>
       </div>
       <div id="caseFileBody" class="collapsible-card-body">
@@ -673,6 +673,74 @@
 
     </section>
 
+    <section id="workflow" class="card unified-section workflow-layer" aria-labelledby="workflowTitle">
+      <div class="section-heading-row workflow-fixed-head">
+        <div><p class="eyebrow">Workflow &amp; Trust</p><h2 id="workflowTitle">Turn findings into actions</h2><p class="muted">Save scans, review verified evidence, track remediation, compare sessions, and export a clear case report.</p></div>
+      </div>
+      <div class="workflow-scroll-body" tabindex="0" role="region" aria-label="Workflow and trust tools">
+      <div class="workflow-progress" aria-label="Five-step workflow">
+        <div class="workflow-step active" data-step="1" data-workflow-step><b>Scan</b><span>Run local checks</span></div>
+        <div class="workflow-step" data-step="2" data-workflow-step><b>Review</b><span>Read verified findings</span></div>
+        <div class="workflow-step" data-step="3" data-workflow-step><b>Prioritize</b><span>Set action status</span></div>
+        <div class="workflow-step" data-step="4" data-workflow-step><b>Save</b><span>Name the session</span></div>
+        <div class="workflow-step" data-step="5" data-workflow-step><b>Explain</b><span>Generate local guidance</span></div>
+      </div>
+
+      <div class="trust-boundary-grid" aria-label="Report trust boundary">
+        <article class="trust-boundary-card verified"><span class="trust-label">Verified scanner finding</span><p>Direct output from Proxuma’s local rules and visible evidence.</p></article>
+        <article class="trust-boundary-card interpretation"><span class="trust-label">Local interpretation</span><p>Plain-language organization of the visible report; no new lookup.</p></article>
+        <article class="trust-boundary-card action"><span class="trust-label">Suggested next step</span><p>A user-controlled recommendation, never an automatic change.</p></article>
+      </div>
+
+      <div class="workflow-grid">
+        <article class="workflow-card">
+          <h3>Verified findings and remediation</h3>
+          <p class="muted">Each finding keeps its evidence visible and can be tracked as To review, In progress, Resolved, or Accepted risk.</p>
+          <div class="severity-board" aria-label="Severity summary">
+            <div class="severity-chip severity-critical"><em id="sevCritical">0</em>Critical</div>
+            <div class="severity-chip severity-high"><em id="sevHigh">0</em>High</div>
+            <div class="severity-chip severity-medium"><em id="sevMedium">0</em>Medium</div>
+            <div class="severity-chip severity-low"><em id="sevLow">0</em>Low</div>
+            <div class="severity-chip severity-info"><em id="sevInfo">0</em>Info</div>
+          </div>
+          <div class="finding-toolbar" role="group" aria-label="Finding filters">
+            <button type="button" class="finding-filter active" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" class="finding-filter" data-filter="open" aria-pressed="false">Open actions</button>
+            <button type="button" class="finding-filter" data-filter="resolved" aria-pressed="false">Resolved</button>
+          </div>
+          <div id="trustFindingList" class="trust-finding-list" aria-live="polite"><div class="trust-empty">Run a scan to build unified finding cards.</div></div>
+          <p id="trustActionStatus" class="workflow-status" aria-live="polite"></p>
+        </article>
+
+        <article class="workflow-card">
+          <h3>Named scan sessions</h3>
+          <p class="muted">Save the current verified report and remediation state in this browser.</p>
+          <div class="session-toolbar"><input id="sessionNameInput" type="text" maxlength="80" placeholder="Session name"><button id="saveNamedSessionButton" type="button">Save Session</button><button id="exportSessionsButton" class="ghost-button" type="button">Export Library</button></div>
+          <p id="sessionStatus" class="workflow-status" aria-live="polite"></p>
+          <ul id="namedSessionList" class="session-list" aria-label="Saved scan sessions"></ul>
+          <div id="sessionComparison" class="comparison-panel empty" aria-live="polite">Choose Compare on a saved session to see new, resolved, unchanged, and severity-changed findings.</div>
+        </article>
+      </div>
+
+      <div class="workflow-grid">
+        <article class="workflow-card">
+          <h3>Local explanation</h3>
+          <p class="ai-separation-note"><strong>Boundary:</strong> This explanation reorganizes the visible offline report. It does not verify ownership, perform a hidden lookup, or replace the scanner findings.</p>
+          <div class="advisor-toolbar"><button id="explainCurrentButton" type="button">Explain Current Scan</button><button id="copyExplanationButton" class="ghost-button" type="button">Copy Explanation</button></div>
+          <div id="localAdvisorOutput" class="ai-output-panel empty">Run a scan, then generate a plain-language explanation.</div>
+          <p id="advisorStatus" class="workflow-status" aria-live="polite"></p>
+        </article>
+        <article class="workflow-card">
+          <h3>Report actions</h3>
+          <p class="muted">Export a printable HTML report or structured JSON with findings, evidence, notes, and remediation status.</p>
+          <div class="workflow-actions"><button id="exportTrustHtml" type="button">Export HTML Report</button><button id="exportTrustJson" class="ghost-button" type="button">Export JSON Report</button><button id="resetWorkspaceButton" class="ghost-button workflow-reset" type="button">Reset Workspace</button></div>
+          <p id="trustExportStatus" class="workflow-status" aria-live="polite"></p>
+        </article>
+      </div>
+      </div>
+      <p class="workflow-scroll-cue" aria-hidden="true">Scroll inside for more workflow tools</p>
+    </section>
+
     <section class="ecosystem-return card" aria-label="Return to PROXUMA ecosystem">
       <div>
         <p class="eyebrow">Ecosystem path</p>
@@ -682,11 +750,16 @@
       <a class="ecosystem-return-button unified-control-button unified-home-control" href="https://scar197124.github.io/PROXUMA/" aria-label="Return to the main PROXUMA canonical homepage">← PROXUMA Home</a>
     </section>
 
+    <p class="proxuma-release-stamp" aria-label="Proxuma IT release version">Proxuma IT v3.42.3 · GitHub Release Candidate</p>
+
     <section class="hidden-support" aria-hidden="true">
       <span id="summarySupport" hidden></span>
     </section>
   </main>
 
   <script src="proxuma-it.js"></script>
+  <script src="ui-consistency.js"></script>
+  <script src="workflow-intelligence.js"></script>
+  <script src="report-trust-action.js"></script>
 </body>
 </html>

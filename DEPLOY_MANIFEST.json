@@ -1,7 +1,7 @@
 {
   "name": "Proxuma IT",
-  "version": "v3.40.0-github-pages-clean",
-  "source_build": "v3.40.0-unified-lower-controls",
+  "version": "3.42.3",
+  "source_build": "v3.42.3-github-release-candidate",
   "online_layer_enabled": false,
   "deployment_target": "GitHub Pages",
   "entrypoint": "index.html",
@@ -11,5 +11,7 @@
     "build manifests from development versions",
     "temporary files",
     "local development clutter"
-  ]
+  ],
+  "build": "github-release-candidate-stabilization",
+  "entry": "index.html"
 }
