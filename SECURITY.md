@@ -1,30 +1,21 @@
-# Security Policy — Proxuma IT
+# Security Policy
 
-## Supported release
+## Responsible use
 
-The current public baseline is **Proxuma IT v3.19.2**.
+Use Proxuma IT only on systems, domains, accounts, and data that you own or are explicitly authorized to assess.
 
-## Reporting a concern
+## Reporting a vulnerability
 
-Please report security concerns through the GitHub repository issues/discussions for this project, using a clear title such as:
+Please report suspected vulnerabilities privately to the repository owner rather than posting exploit details publicly. Include:
 
-```text
-Security concern: [short description]
-```
+- Affected version
+- Reproduction steps
+- Expected and observed behavior
+- Security impact
+- Suggested mitigation, when available
 
-Avoid posting real passwords, private keys, personal documents, or sensitive account details in public reports.
+Do not include sensitive third-party data in a report.
 
-## Project security boundary
+## Current scope
 
-Proxuma IT v3.19.2 is a static, offline-first browser tool:
-
-- no active online intelligence provider;
-- no telemetry;
-- no hidden API calls;
-- no active `fetch()` calls;
-- camera access only after the user presses **Start QR Scan**;
-- manual QR payload/text paste works without camera access.
-
-## Known limitation
-
-`assets/vendor/jsQR.js` is currently a guardrail placeholder, not the full audited QR decoder bundle. Browsers without native QR support may not support camera QR scanning until a full local decoder is embedded. Manual QR text paste remains the supported fallback.
+Version 3.44.0 is a client-side prototype. Findings and interpretations require validation before being used for security, legal, employment, or enforcement decisions.

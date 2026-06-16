@@ -8494,3 +8494,1218 @@ button,
   letter-spacing:.04em;
   text-align:center;
 }
+
+
+/* Proxuma IT v3.42.4 — Grouped panel controls */
+.panel-selector-card{
+  width:min(100%,1100px);
+  margin:14px auto 10px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  box-shadow:var(--card-shadow,0 12px 30px rgba(0,0,0,.18));
+}
+.panel-selector-copy{min-width:0}
+.panel-selector-copy h2{margin:2px 0 4px;font-size:clamp(1.05rem,2vw,1.28rem)}
+.panel-selector-copy p{margin:0}
+.grouped-panel-selector{position:relative;flex:0 0 min(100%,250px)}
+.grouped-selector-trigger{
+  width:100%;
+  min-height:46px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:9px;
+  padding:9px 12px;
+  text-align:left;
+  white-space:nowrap;
+}
+.grouped-selector-label{font-weight:850;overflow:hidden;text-overflow:ellipsis}
+.selector-chevron{transition:transform .18s ease;font-size:.9rem}
+.grouped-selector-trigger[aria-expanded="true"] .selector-chevron{transform:rotate(180deg)}
+.grouped-selector-menu{
+  position:absolute;
+  z-index:80;
+  inset:calc(100% + 7px) 0 auto;
+  display:grid;
+  gap:6px;
+  padding:7px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--card,#101722);
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+.grouped-selector-menu[hidden]{display:none!important}
+.grouped-selector-menu button{
+  width:100%;
+  min-height:42px;
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:9px 11px;
+  text-align:left;
+  color:var(--text);
+  background:transparent;
+  font:inherit;
+  font-weight:750;
+  cursor:pointer;
+}
+.grouped-selector-menu button:hover,
+.grouped-selector-menu button:focus-visible,
+.grouped-selector-menu button[aria-checked="true"]{
+  border-color:color-mix(in srgb,var(--accent) 60%,var(--border));
+  background:color-mix(in srgb,var(--accent) 15%,transparent);
+  outline:none;
+}
+.grouped-panel-managed[hidden]{display:none!important}
+.grouped-panel-managed > summary,
+.grouped-panel-managed > .collapsible-card-head{display:none!important}
+.grouped-panel-managed.simple-disclosure{
+  width:min(100%,1100px);
+  margin:0 auto 14px;
+}
+.grouped-panel-managed.simple-disclosure > .simple-disclosure-body{padding:14px 16px 16px}
+.grouped-panel-managed.collapsible-card{
+  width:min(100%,1100px);
+  margin:0 auto 16px;
+}
+.grouped-panel-managed.collapsible-card .collapsible-card-body,
+.grouped-panel-managed.collapsible-card.is-collapsed .collapsible-card-body{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  max-height:none!important;
+}
+#details.grouped-panel-managed #intelligenceDrawerBody{display:grid!important}
+#casefile.grouped-panel-managed #caseFileBody{display:block!important}
+@media(max-width:720px){
+  .panel-selector-card{align-items:stretch;flex-direction:column;gap:11px;padding:13px}
+  .grouped-panel-selector{flex-basis:auto;width:100%}
+  .grouped-selector-trigger{min-height:48px}
+  .grouped-selector-menu{position:static;margin-top:7px}
+}
+
+/* Proxuma IT v3.42.5 — compact grouped panels, no legacy disclosure buttons */
+#scan-detail-controls,#investigation-controls{margin-bottom:10px;}
+.grouped-content-card{width:min(100%,1120px);margin:0 auto 14px;min-width:0;overflow:hidden;}
+.grouped-content-card[hidden]{display:none!important;}
+.grouped-content-head{display:block!important;padding:14px 16px 10px;border-bottom:1px solid color-mix(in srgb,var(--border) 80%,transparent);}
+.grouped-content-head>div{width:100%;}
+.grouped-content-head .eyebrow,.grouped-content-head h2,.grouped-content-head .subtle{margin-left:0;margin-right:0;}
+.grouped-panel-scroll-body{display:block!important;max-height:min(58vh,520px);overflow:auto;overscroll-behavior:auto;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable;padding:14px 16px 16px;min-width:0;}
+#scanMetricsPanel .grouped-panel-scroll-body{max-height:240px;}
+#supportingEvidencePanel .grouped-panel-scroll-body{max-height:min(52vh,460px);}
+#details .grouped-panel-scroll-body,#casefile .grouped-panel-scroll-body{max-height:min(62vh,560px);}
+.grouped-content-card .collapse-toggle,.grouped-content-card summary,.grouped-content-card .disclosure-action{display:none!important;}
+.grouped-content-card::after{content:"Scroll inside this panel for more";display:block;padding:7px 14px 9px;text-align:center;color:var(--muted);font-size:.72rem;border-top:1px solid color-mix(in srgb,var(--border) 60%,transparent);background:color-mix(in srgb,var(--panel) 92%,transparent);}
+#scanMetricsPanel::after{display:none;}
+@media(max-width:720px){.panel-selector-card{padding:11px 12px;gap:9px}.panel-selector-copy p.muted{display:none}.grouped-content-card{margin-bottom:10px;border-radius:16px}.grouped-panel-scroll-body{max-height:52vh;padding:12px}#scanMetricsPanel .grouped-panel-scroll-body{max-height:210px}#supportingEvidencePanel .grouped-panel-scroll-body,#details .grouped-panel-scroll-body,#casefile .grouped-panel-scroll-body{max-height:54vh}}
+
+/* Proxuma IT v3.42.6 — centered Investigation selector */
+#investigation-controls{
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:12px;
+}
+#investigation-controls .panel-selector-copy{
+  width:min(100%,720px);
+  margin-inline:auto;
+  text-align:center;
+}
+#investigation-controls .panel-selector-copy .eyebrow,
+#investigation-controls .panel-selector-copy h2,
+#investigation-controls .panel-selector-copy .muted{
+  text-align:center;
+}
+#investigation-controls .grouped-panel-selector{
+  width:min(100%,320px);
+  flex-basis:auto;
+  margin-inline:auto;
+}
+#investigation-controls .grouped-selector-trigger{
+  text-align:left;
+}
+
+/* Proxuma IT v3.42.7 — centered Scan Details selector */
+#scan-detail-controls{
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:12px;
+}
+#scan-detail-controls .panel-selector-copy{
+  width:min(100%,720px);
+  margin-inline:auto;
+  text-align:center;
+}
+#scan-detail-controls .panel-selector-copy .eyebrow,
+#scan-detail-controls .panel-selector-copy h2,
+#scan-detail-controls .panel-selector-copy .muted{
+  text-align:center;
+}
+#scan-detail-controls .grouped-panel-selector{
+  width:min(100%,320px);
+  flex-basis:auto;
+  margin-inline:auto;
+}
+#scan-detail-controls .grouped-selector-trigger{
+  text-align:left;
+}
+
+/* === Proxuma IT v3.43.0 — Simple Unified Workspace === */
+/* One purpose, one control, one place. */
+
+/* Replace dropdown-style panel menus with clear two-choice segmented controls. */
+.grouped-panel-selector{
+  width:min(100%,520px)!important;
+  flex:0 1 520px!important;
+  position:static!important;
+}
+.grouped-panel-selector .grouped-selector-trigger{display:none!important}
+.grouped-panel-selector .grouped-selector-menu{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  position:static!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.grouped-panel-selector .grouped-selector-menu[hidden]{display:grid!important}
+.grouped-panel-selector [data-target-panel]{
+  min-height:44px;
+  width:100%;
+  padding:9px 12px;
+  border:1px solid color-mix(in srgb,var(--accent) 32%,var(--border));
+  border-radius:12px;
+  background:color-mix(in srgb,var(--panel) 92%,var(--accent) 8%);
+  color:var(--text);
+  font:inherit;
+  font-weight:850;
+  cursor:pointer;
+  white-space:normal;
+  text-align:center;
+}
+.grouped-panel-selector [data-target-panel].active,
+.grouped-panel-selector [data-target-panel][aria-pressed="true"]{
+  border-color:var(--accent);
+  background:color-mix(in srgb,var(--accent) 20%,var(--panel));
+  box-shadow:inset 0 0 0 1px var(--accent),0 0 16px color-mix(in srgb,var(--accent) 16%,transparent);
+}
+.grouped-panel-selector [data-target-panel]:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--accent) 70%,#fff 30%);
+  outline-offset:2px;
+}
+
+/* Each group owns one fixed viewing window. Only the chosen panel is visible. */
+#scanMetricsPanel.grouped-panel-managed,
+#supportingEvidencePanel.grouped-panel-managed,
+#details.grouped-panel-managed,
+#casefile.grouped-panel-managed{
+  height:min(58vh,540px)!important;
+  min-height:360px!important;
+  max-height:540px!important;
+  overflow:hidden!important;
+  margin-top:10px!important;
+}
+#scanMetricsPanel .grouped-panel-scroll-body,
+#supportingEvidencePanel .grouped-panel-scroll-body,
+#details .grouped-panel-scroll-body,
+#casefile .grouped-panel-scroll-body{
+  height:100%!important;
+  max-height:none!important;
+  overflow:auto!important;
+  overscroll-behavior:auto!important;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-gutter:stable;
+}
+.grouped-panel-managed[hidden]{display:none!important}
+.grouped-panel-managed > summary,
+.grouped-panel-managed > .collapsible-card-head,
+.grouped-panel-managed .collapse-toggle,
+.grouped-panel-managed .disclosure-action{display:none!important}
+.grouped-panel-managed.collapsible-card .collapsible-card-body,
+.grouped-panel-managed.collapsible-card.is-collapsed .collapsible-card-body{display:block!important}
+
+/* Remove repeated Open/Close button language from remaining secondary disclosures. */
+.simple-disclosure > summary .unified-disclosure-toggle{
+  width:32px!important;
+  min-width:32px!important;
+  height:32px!important;
+  padding:0!important;
+  border-radius:999px!important;
+  font-size:0!important;
+  display:grid!important;
+  place-items:center!important;
+}
+.simple-disclosure > summary .unified-disclosure-toggle .toggle-dot,
+.simple-disclosure > summary .unified-disclosure-toggle .toggle-copy{display:none!important}
+.simple-disclosure > summary .unified-disclosure-toggle::after{
+  content:"⌄"!important;
+  font-size:18px!important;
+  line-height:1!important;
+  color:var(--text)!important;
+  transform:rotate(0deg);
+  transition:transform .16s ease;
+}
+.simple-disclosure[open] > summary .unified-disclosure-toggle::after{
+  content:"⌄"!important;
+  transform:rotate(180deg);
+}
+
+/* The quick orientation card uses the same compact chevron treatment. */
+.explain-page .collapse-toggle{
+  width:34px!important;
+  min-width:34px!important;
+  height:34px!important;
+  padding:0!important;
+  font-size:0!important;
+  border-radius:999px!important;
+}
+.explain-page .collapse-toggle .toggle-dot,
+.explain-page .collapse-toggle .toggle-copy,
+.explain-page .collapse-toggle small{display:none!important}
+.explain-page .collapse-toggle::after{
+  content:"⌄";
+  font-size:18px;
+  color:var(--text);
+  transform:rotate(180deg);
+  transition:transform .16s ease;
+}
+.explain-page.is-collapsed .collapse-toggle::after{transform:rotate(0deg)}
+
+/* Keep headings and choices visually centered and predictable. */
+#scan-detail-controls,
+#investigation-controls{
+  justify-content:center!important;
+  text-align:center!important;
+}
+#scan-detail-controls .panel-selector-copy,
+#investigation-controls .panel-selector-copy{
+  width:100%!important;
+  align-items:center!important;
+  text-align:center!important;
+}
+#scan-detail-controls .grouped-panel-selector,
+#investigation-controls .grouped-panel-selector{margin-inline:auto!important}
+
+@media(max-width:720px){
+  .grouped-panel-selector{width:100%!important;flex-basis:100%!important}
+  .grouped-panel-selector .grouped-selector-menu{grid-template-columns:1fr 1fr;gap:6px}
+  .grouped-panel-selector [data-target-panel]{min-height:42px;padding:8px;font-size:.86rem}
+  #scanMetricsPanel.grouped-panel-managed,
+  #supportingEvidencePanel.grouped-panel-managed,
+  #details.grouped-panel-managed,
+  #casefile.grouped-panel-managed{
+    height:min(54vh,460px)!important;
+    min-height:320px!important;
+    max-height:460px!important;
+  }
+}
+
+/* === Proxuma IT v3.43.1 — Clear disclosures and compact grouped spacing === */
+/* Match Optional Tools and More Report Details to the App Guide Open/Close control. */
+.simple-disclosure > summary .unified-disclosure-toggle{
+  width:auto!important;
+  min-width:92px!important;
+  height:38px!important;
+  padding:7px 12px!important;
+  border-radius:12px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  font-size:.78rem!important;
+  white-space:nowrap!important;
+}
+.simple-disclosure > summary .unified-disclosure-toggle .toggle-dot,
+.simple-disclosure > summary .unified-disclosure-toggle .toggle-copy{
+  display:inline-block!important;
+}
+.simple-disclosure > summary .unified-disclosure-toggle::after{
+  content:none!important;
+  display:none!important;
+}
+.simple-disclosure[open] > summary .unified-disclosure-toggle::after{
+  content:none!important;
+}
+
+/* Restore the App Guide's full Open/Close label instead of the chevron-only treatment. */
+.explain-page .collapse-toggle{
+  width:auto!important;
+  min-width:110px!important;
+  height:auto!important;
+  min-height:40px!important;
+  padding:8px 12px!important;
+  border-radius:12px!important;
+  font-size:.78rem!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+}
+.explain-page .collapse-toggle .toggle-dot,
+.explain-page .collapse-toggle .toggle-copy{
+  display:inline-block!important;
+}
+.explain-page .collapse-toggle small{display:none!important}
+.explain-page .collapse-toggle::after{content:none!important;display:none!important}
+
+/* Remove the oversized blank areas while keeping each group internally scrollable. */
+#scan-detail-controls,
+#investigation-controls{
+  margin-top:10px!important;
+  margin-bottom:6px!important;
+  padding-top:12px!important;
+  padding-bottom:12px!important;
+  gap:8px!important;
+}
+#scan-detail-controls .panel-selector-copy,
+#investigation-controls .panel-selector-copy{
+  margin-bottom:0!important;
+}
+#scan-detail-controls .panel-selector-copy h2,
+#investigation-controls .panel-selector-copy h2{
+  margin-bottom:2px!important;
+}
+#scan-detail-controls .panel-selector-copy .muted,
+#investigation-controls .panel-selector-copy .muted{
+  margin-top:0!important;
+}
+
+/* One compact viewing window per group. */
+#scanMetricsPanel.grouped-panel-managed,
+#supportingEvidencePanel.grouped-panel-managed{
+  height:230px!important;
+  min-height:230px!important;
+  max-height:230px!important;
+  margin-top:0!important;
+  margin-bottom:10px!important;
+}
+#details.grouped-panel-managed,
+#casefile.grouped-panel-managed{
+  height:430px!important;
+  min-height:430px!important;
+  max-height:430px!important;
+  margin-top:0!important;
+  margin-bottom:12px!important;
+}
+#scanMetricsPanel .grouped-panel-scroll-body,
+#supportingEvidencePanel .grouped-panel-scroll-body,
+#details .grouped-panel-scroll-body,
+#casefile .grouped-panel-scroll-body{
+  padding-top:12px!important;
+  padding-bottom:12px!important;
+}
+
+/* Keep the selector directly connected to its active content. */
+#scan-detail-controls + #scanMetricsPanel,
+#scan-detail-controls + #supportingEvidencePanel,
+#investigation-controls + #details,
+#investigation-controls + #casefile{
+  margin-top:0!important;
+}
+
+@media(max-width:720px){
+  .simple-disclosure > summary .unified-disclosure-toggle{
+    min-width:86px!important;
+    height:36px!important;
+    padding:6px 10px!important;
+  }
+  #scanMetricsPanel.grouped-panel-managed,
+  #supportingEvidencePanel.grouped-panel-managed{
+    height:210px!important;
+    min-height:210px!important;
+    max-height:210px!important;
+  }
+  #details.grouped-panel-managed,
+  #casefile.grouped-panel-managed{
+    height:390px!important;
+    min-height:390px!important;
+    max-height:390px!important;
+  }
+}
+
+
+/* === Proxuma IT v3.43.2 — Contained grouped views === */
+/* Each selector owns exactly one compact viewing card. No nested disclosure controls. */
+#scan-detail-controls,
+#investigation-controls{
+  margin:10px 0 6px!important;
+  padding:10px 12px!important;
+  min-height:0!important;
+  gap:6px!important;
+}
+#scan-detail-controls .panel-selector-copy,
+#investigation-controls .panel-selector-copy{gap:1px!important;margin:0!important}
+#scan-detail-controls .panel-selector-copy .eyebrow,
+#investigation-controls .panel-selector-copy .eyebrow{margin:0!important}
+#scan-detail-controls .panel-selector-copy h2,
+#investigation-controls .panel-selector-copy h2{margin:0!important;line-height:1.2!important}
+#scan-detail-controls .grouped-panel-selector,
+#investigation-controls .grouped-panel-selector{margin-top:5px!important}
+
+.grouped-content-card.grouped-panel-managed{
+  box-sizing:border-box!important;
+  display:block;
+  width:100%!important;
+  margin:0 0 10px!important;
+  padding:0!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  contain:layout paint!important;
+  border-radius:16px!important;
+}
+.grouped-content-card.grouped-panel-managed[hidden]{display:none!important}
+.grouped-content-card .grouped-panel-scroll-body{
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:auto!important;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-gutter:stable;
+  padding:12px!important;
+}
+
+/* Short scan window; supporting evidence scrolls inside the same footprint. */
+#scanMetricsPanel.grouped-panel-managed,
+#supportingEvidencePanel.grouped-panel-managed{
+  height:168px!important;
+  min-height:168px!important;
+  max-height:168px!important;
+}
+#scanMetricsPanel .memory-strip{margin:0!important;min-height:100%;align-content:center}
+
+/* Investigation stays contained and cannot overlap the workflow card. */
+#details.grouped-panel-managed,
+#casefile.grouped-panel-managed{
+  height:350px!important;
+  min-height:350px!important;
+  max-height:350px!important;
+  position:relative!important;
+  isolation:isolate!important;
+}
+#details .drawer-tabs{position:sticky;top:0;z-index:3;margin-top:0!important;padding-top:2px;background:var(--panel, #0b1116)}
+#details .drawer-panels,
+#casefile .grouped-panel-scroll-body > *{max-width:100%!important;min-width:0!important}
+#workflow{position:relative!important;z-index:1!important;clear:both!important;margin-top:10px!important}
+
+/* Old grouped-view open/close controls are intentionally absent. */
+#scanMetricsPanel summary,
+#supportingEvidencePanel summary,
+#details .collapse-toggle,
+#casefile .collapse-toggle{display:none!important}
+
+@media(max-width:720px){
+  #scan-detail-controls,#investigation-controls{margin-top:8px!important;margin-bottom:5px!important;padding:9px 10px!important}
+  #scanMetricsPanel.grouped-panel-managed,
+  #supportingEvidencePanel.grouped-panel-managed{
+    height:150px!important;min-height:150px!important;max-height:150px!important;
+  }
+  #details.grouped-panel-managed,
+  #casefile.grouped-panel-managed{
+    height:320px!important;min-height:320px!important;max-height:320px!important;
+  }
+  .grouped-content-card .grouped-panel-scroll-body{padding:10px!important}
+}
+
+/* === Proxuma IT v3.43.3 — Top-aligned scan detail content === */
+/* Keep both scan-detail views anchored at the top of the fixed scroll window. */
+#scanMetricsPanel .grouped-panel-scroll-body,
+#supportingEvidencePanel .grouped-panel-scroll-body{
+  display:block!important;
+  align-content:initial!important;
+  justify-content:flex-start!important;
+  padding-top:10px!important;
+  scroll-padding-top:10px;
+}
+#scanMetricsPanel .memory-strip{
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  align-content:start!important;
+  justify-content:flex-start!important;
+}
+#supportingEvidencePanel .intelligence-grid{
+  margin:0!important;
+  padding:0!important;
+  align-items:start!important;
+  align-content:start!important;
+  min-height:0!important;
+}
+#supportingEvidencePanel .intel-card{
+  min-height:0!important;
+  margin-top:0!important;
+}
+#scanMetricsPanel .grouped-panel-scroll-body > :first-child,
+#supportingEvidencePanel .grouped-panel-scroll-body > :first-child{
+  margin-top:0!important;
+}
+
+/* === Proxuma IT v3.43.4 — Compact visible scan-detail viewport === */
+/* The scan window is intentionally shallow; content begins at the top and scrolls naturally. */
+#scanMetricsPanel.grouped-panel-managed,
+#supportingEvidencePanel.grouped-panel-managed{
+  height:126px!important;
+  min-height:126px!important;
+  max-height:126px!important;
+}
+#scanMetricsPanel .grouped-panel-scroll-body,
+#supportingEvidencePanel .grouped-panel-scroll-body{
+  display:block!important;
+  height:100%!important;
+  min-height:0!important;
+  padding:8px 10px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scroll-padding-top:8px!important;
+  align-content:start!important;
+  justify-content:flex-start!important;
+}
+#supportingEvidencePanel .intelligence-grid{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-auto-rows:max-content!important;
+  gap:8px!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:0!important;
+  height:auto!important;
+  align-items:start!important;
+  align-content:start!important;
+  justify-content:stretch!important;
+}
+#supportingEvidencePanel .intel-card{
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:10px 12px!important;
+  align-self:start!important;
+  justify-self:stretch!important;
+}
+#supportingEvidencePanel .intel-card h3{margin:5px 0 6px!important}
+#supportingEvidencePanel .intel-card p{margin:4px 0!important}
+#supportingEvidencePanel .intel-card strong{margin-bottom:4px!important}
+#scanMetricsPanel .memory-strip{
+  display:grid!important;
+  gap:6px!important;
+  min-height:0!important;
+  height:auto!important;
+  align-content:start!important;
+  justify-content:stretch!important;
+  padding:0!important;
+}
+@media(max-width:720px){
+  #scanMetricsPanel.grouped-panel-managed,
+  #supportingEvidencePanel.grouped-panel-managed{
+    height:118px!important;
+    min-height:118px!important;
+    max-height:118px!important;
+  }
+}
+
+/* === Proxuma IT v3.43.5 — Scan Details structural containment === */
+/* Both scan views are siblings in the same report layer and begin at the top. */
+#scanMetricsPanel.grouped-panel-managed,
+#supportingEvidencePanel.grouped-panel-managed{
+  position:relative!important;
+  inset:auto!important;
+  transform:none!important;
+  float:none!important;
+  clear:both!important;
+  height:164px!important;
+  min-height:164px!important;
+  max-height:164px!important;
+  overflow:hidden!important;
+  margin:0 0 10px!important;
+  padding:0!important;
+}
+#scanMetricsPanel .grouped-panel-scroll-body,
+#supportingEvidencePanel .grouped-panel-scroll-body{
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:none!important;
+  margin:0!important;
+  padding:10px 12px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  scroll-padding-top:10px!important;
+}
+#supportingEvidencePanel .intelligence-grid{
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-auto-flow:row!important;
+  grid-auto-rows:max-content!important;
+  place-content:start stretch!important;
+  place-items:start stretch!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  gap:8px!important;
+}
+#supportingEvidencePanel .intel-card{
+  position:static!important;
+  inset:auto!important;
+  transform:none!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  align-self:start!important;
+}
+#supportingEvidencePanel .intel-card:first-child{margin-top:0!important}
+#investigation-controls{clear:both!important;position:relative!important;margin-top:8px!important}
+@media(max-width:720px){
+  #scanMetricsPanel.grouped-panel-managed,
+  #supportingEvidencePanel.grouped-panel-managed{
+    height:150px!important;
+    min-height:150px!important;
+    max-height:150px!important;
+  }
+}
+
+/* === Proxuma IT v3.43.6 — Flattened Scan Details surface === */
+/* One outer card, one active scroll surface, no card-within-card stack. */
+#scan-detail-workspace.scan-details-workspace{
+  box-sizing:border-box!important;
+  width:100%!important;
+  margin:10px 0!important;
+  padding:12px!important;
+  overflow:hidden!important;
+  border-radius:16px!important;
+}
+#scan-detail-workspace #scan-detail-controls{
+  margin:0!important;
+  padding:0!important;
+  min-height:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#scan-detail-workspace .scan-details-header{
+  display:grid!important;
+  gap:7px!important;
+}
+#scan-detail-workspace .scan-details-view{
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:170px!important;
+  min-height:170px!important;
+  max-height:170px!important;
+  margin:10px 0 0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  contain:layout paint!important;
+}
+#scan-detail-workspace .scan-details-view[hidden]{display:none!important}
+#scan-detail-workspace .grouped-panel-scroll-body{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  margin:0!important;
+  padding:4px 2px 8px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:auto!important;
+  scroll-padding-top:4px!important;
+  -webkit-overflow-scrolling:touch;
+}
+#scan-detail-workspace .scan-metrics-list{
+  display:grid!important;
+  gap:8px!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  align-content:start!important;
+}
+#scan-detail-workspace .evidence-list{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-auto-rows:max-content!important;
+  gap:0!important;
+  width:100%!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  align-content:start!important;
+}
+#scan-detail-workspace .evidence-list .intel-card{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:10px 2px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  position:static!important;
+  transform:none!important;
+}
+#scan-detail-workspace .evidence-list .intel-card + .intel-card{
+  border-top:1px solid color-mix(in srgb, currentColor 14%, transparent)!important;
+}
+#scan-detail-workspace .evidence-list .intel-card:first-child{padding-top:2px!important}
+#scan-detail-workspace .evidence-list h3{margin:4px 0 5px!important}
+#scan-detail-workspace .evidence-list p{margin:4px 0!important}
+#scan-detail-workspace .evidence-list strong{display:block;margin:0 0 4px!important}
+#investigation-controls{margin-top:10px!important}
+@media(max-width:720px){
+  #scan-detail-workspace.scan-details-workspace{padding:10px!important;margin:8px 0!important}
+  #scan-detail-workspace .scan-details-view{
+    height:154px!important;
+    min-height:154px!important;
+    max-height:154px!important;
+  }
+}
+
+/* === Proxuma IT v3.43.7 — Unified flat Scan Details views ===
+   Scan Metrics now uses the same flat, fixed-window behavior as Supporting Evidence. */
+#scan-detail-workspace .scan-details-view{
+  height:148px!important;
+  min-height:148px!important;
+  max-height:148px!important;
+}
+#scan-detail-workspace #scanMetricsPanel .grouped-panel-scroll-body,
+#scan-detail-workspace #supportingEvidencePanel .grouped-panel-scroll-body{
+  height:100%!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  padding:8px 4px!important;
+  align-content:start!important;
+  justify-content:flex-start!important;
+}
+#scan-detail-workspace #scanMetricsPanel .memory-strip,
+#scan-detail-workspace #scanMetricsPanel .scan-metrics-list{
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:0!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  align-content:start!important;
+  justify-content:stretch!important;
+}
+#scan-detail-workspace #scanMetricsPanel .scan-metrics-list > span{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:10px 2px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#scan-detail-workspace #scanMetricsPanel .scan-metrics-list > span + span{
+  border-top:1px solid color-mix(in srgb, currentColor 14%, transparent)!important;
+}
+#scan-detail-workspace #scanMetricsPanel .scan-metrics-list > span:first-child{
+  padding-top:2px!important;
+}
+@media(max-width:720px){
+  #scan-detail-workspace .scan-details-view{
+    height:140px!important;
+    min-height:140px!important;
+    max-height:140px!important;
+  }
+}
+
+/* === Proxuma IT v3.43.8 — Scan Details sticky-header balance ===
+   Slightly taller fixed viewport, clear sticky-header separation,
+   and strict containment before Investigation. */
+#scan-detail-workspace.scan-details-workspace{
+  isolation:isolate!important;
+}
+#scan-detail-workspace .scan-details-header{
+  position:sticky!important;
+  top:0!important;
+  z-index:4!important;
+  padding:0 0 10px!important;
+  margin:0!important;
+  background:var(--panel, #0b1116)!important;
+  border-bottom:1px solid color-mix(in srgb, currentColor 18%, transparent)!important;
+  box-shadow:0 8px 14px -14px rgba(0,0,0,.75)!important;
+}
+#scan-detail-workspace .scan-details-view{
+  height:166px!important;
+  min-height:166px!important;
+  max-height:166px!important;
+  margin-top:8px!important;
+  overflow:hidden!important;
+  contain:layout paint!important;
+}
+#scan-detail-workspace .grouped-panel-scroll-body{
+  scroll-padding-top:8px!important;
+}
+#investigation-controls{
+  position:relative!important;
+  z-index:1!important;
+  clear:both!important;
+  margin-top:12px!important;
+}
+@media(max-width:720px){
+  #scan-detail-workspace .scan-details-view{
+    height:154px!important;
+    min-height:154px!important;
+    max-height:154px!important;
+  }
+  #scan-detail-workspace .scan-details-header{
+    padding-bottom:8px!important;
+  }
+}
+
+/* === Proxuma IT v3.43.9 — Flattened Investigation workspace ===
+   Mirrors Scan Details: one selector, one fixed scroll surface, no nested outer cards,
+   sticky analysis tabs, and strict containment before Workflow & Trust. */
+#investigation-controls{
+  box-sizing:border-box!important;
+  width:100%!important;
+  margin:12px 0 0!important;
+  padding:12px 12px 10px!important;
+  border-radius:16px 16px 0 0!important;
+  border-bottom:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+}
+#investigation-controls .panel-selector-copy{
+  margin:0!important;
+  gap:2px!important;
+}
+#investigation-controls .grouped-panel-selector{
+  margin-top:7px!important;
+}
+
+/* The selected Investigation view is the only content surface. */
+#details.grouped-panel-managed,
+#casefile.grouped-panel-managed{
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:300px!important;
+  min-height:300px!important;
+  max-height:300px!important;
+  margin:0 0 14px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  border-radius:0 0 16px 16px!important;
+  border-top:1px solid color-mix(in srgb,currentColor 16%,transparent)!important;
+  background:var(--panel,#0b1116)!important;
+  box-shadow:none!important;
+  contain:layout paint!important;
+  isolation:isolate!important;
+  clear:both!important;
+}
+#details.grouped-panel-managed[hidden],
+#casefile.grouped-panel-managed[hidden]{display:none!important}
+
+#details .grouped-panel-scroll-body,
+#casefile .grouped-panel-scroll-body{
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-height:none!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0 12px 12px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  scroll-padding-top:54px!important;
+  align-content:start!important;
+  justify-content:flex-start!important;
+}
+
+/* Deep Analysis: flatten the extra stage/card layers. */
+#details .drawer-tabs{
+  position:sticky!important;
+  top:0!important;
+  z-index:5!important;
+  box-sizing:border-box!important;
+  width:calc(100% + 24px)!important;
+  margin:0 -12px 8px!important;
+  padding:10px 12px!important;
+  background:var(--panel,#0b1116)!important;
+  border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent)!important;
+  box-shadow:0 8px 14px -14px rgba(0,0,0,.8)!important;
+}
+#details .drawer-stage,
+#details .drawer-panel{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+  position:static!important;
+}
+#details .drawer-panel[hidden]{display:none!important}
+#details .drawer-panel-head{
+  margin:0 0 8px!important;
+  padding:8px 0!important;
+  border-bottom:1px solid color-mix(in srgb,currentColor 13%,transparent)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#details .drawer-panel > :last-child{margin-bottom:0!important}
+
+/* Case File: natural-height rows in the same fixed scroll window. */
+#casefile .grouped-panel-scroll-body{
+  padding-top:10px!important;
+}
+#casefile .history-privacy-note,
+#casefile .copy-status,
+#casefile textarea,
+#casefile .case-actions,
+#casefile #historyList{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  height:auto!important;
+  min-height:0!important;
+  margin-top:0!important;
+}
+#casefile #historyList{
+  padding-left:0!important;
+  margin-bottom:0!important;
+}
+
+/* Workflow always begins after the contained Investigation surface. */
+#workflow{
+  position:relative!important;
+  z-index:0!important;
+  clear:both!important;
+  margin-top:0!important;
+}
+
+@media(max-width:720px){
+  #investigation-controls{
+    margin-top:10px!important;
+    padding:10px 10px 8px!important;
+  }
+  #details.grouped-panel-managed,
+  #casefile.grouped-panel-managed{
+    height:270px!important;
+    min-height:270px!important;
+    max-height:270px!important;
+    margin-bottom:10px!important;
+  }
+  #details .grouped-panel-scroll-body,
+  #casefile .grouped-panel-scroll-body{
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+  #details .drawer-tabs{
+    width:calc(100% + 20px)!important;
+    margin-left:-10px!important;
+    margin-right:-10px!important;
+    padding:8px 10px!important;
+  }
+}
+
+/* === Proxuma IT v3.43.10 — Compact Investigation handoff ===
+   Remove inherited selector-card vertical space so the active investigation
+   surface begins immediately beneath Deep Analysis / Case File. */
+#investigation-controls{
+  display:block!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  gap:0!important;
+  margin:10px 0 0!important;
+  padding:10px 12px 8px!important;
+  overflow:visible!important;
+}
+#investigation-controls .panel-selector-copy{
+  display:block!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+}
+#investigation-controls .panel-selector-copy > *{
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+#investigation-controls .grouped-panel-selector{
+  display:block!important;
+  width:min(100%,250px)!important;
+  min-height:0!important;
+  height:auto!important;
+  margin:7px auto 0!important;
+  padding:0!important;
+}
+#details.grouped-panel-managed,
+#casefile.grouped-panel-managed{
+  margin-top:0!important;
+  border-top:1px solid color-mix(in srgb,currentColor 18%,transparent)!important;
+}
+@media(max-width:720px){
+  #investigation-controls{
+    margin-top:8px!important;
+    padding:9px 10px 7px!important;
+  }
+  #investigation-controls .grouped-panel-selector{
+    margin-top:6px!important;
+  }
+}
+
+/* === Proxuma IT v3.44.0 — Focused Product Flow ===
+   Product simplification layer: one obvious primary journey, compact secondary
+   tools, consistent disclosures, and no duplicate controls. */
+.product-simplified .top-nav{
+  justify-content:center!important;
+  gap:clamp(8px,2vw,18px)!important;
+}
+.product-simplified .top-nav a{
+  min-width:72px!important;
+  text-align:center!important;
+}
+.product-simplified .unified-workspace{
+  gap:12px!important;
+}
+.product-simplified .unified-section{
+  scroll-margin-top:18px!important;
+}
+.product-simplified .section-head,
+.product-simplified .report-top,
+.product-simplified .panel-selector-copy,
+.product-simplified .workflow-fixed-head{
+  position:relative!important;
+}
+.product-simplified .section-head .eyebrow,
+.product-simplified .report-top .eyebrow,
+.product-simplified .panel-selector-copy .eyebrow,
+.product-simplified .workflow-fixed-head .eyebrow{
+  opacity:.9!important;
+}
+.product-simplified .simple-disclosure>summary,
+.product-simplified .collapsible-card-head{
+  min-height:58px!important;
+}
+.product-simplified .simple-disclosure>summary:hover,
+.product-simplified .collapsible-card-head:hover{
+  background:rgba(255,255,255,.035)!important;
+}
+.product-simplified #scanButton{
+  min-width:132px!important;
+}
+.product-simplified #scanButton small{
+  display:none!important;
+}
+.product-simplified .report-snapshot-card{
+  margin-top:12px!important;
+}
+.product-simplified #scan-detail-workspace,
+.product-simplified #investigation-controls,
+.product-simplified #workflow{
+  scroll-margin-top:16px!important;
+}
+
+/* Workflow is secondary: same explicit Open / Close language as App Guide. */
+.product-simplified #workflow .workflow-fixed-head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:16px!important;
+}
+.product-simplified .workflow-toggle{
+  flex:0 0 auto!important;
+  min-width:104px!important;
+}
+.product-simplified #workflow.workflow-collapsed{
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  overflow:hidden!important;
+}
+.product-simplified #workflow.workflow-collapsed .workflow-scroll-body,
+.product-simplified #workflow.workflow-collapsed .workflow-scroll-cue{
+  display:none!important;
+}
+.product-simplified #workflow.workflow-collapsed .workflow-fixed-head{
+  margin-bottom:0!important;
+}
+.product-simplified #workflow .workflow-scroll-body{
+  margin-top:10px!important;
+}
+
+/* Keep optional systems visually secondary without hiding capability. */
+.product-simplified .optional-tools,
+.product-simplified .report-details-disclosure{
+  margin-top:10px!important;
+}
+.product-simplified .ecosystem-return{
+  padding-top:14px!important;
+  padding-bottom:14px!important;
+}
+
+@media(max-width:720px){
+  .product-simplified .top-nav{
+    overflow-x:auto!important;
+    justify-content:flex-start!important;
+    padding-inline:8px!important;
+  }
+  .product-simplified .top-nav a{
+    min-width:max-content!important;
+  }
+  .product-simplified #workflow .workflow-fixed-head{
+    align-items:flex-start!important;
+  }
+  .product-simplified .workflow-toggle{
+    min-width:92px!important;
+  }
+}

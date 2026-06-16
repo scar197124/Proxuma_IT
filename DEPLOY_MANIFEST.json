@@ -1,17 +1,34 @@
 {
   "name": "Proxuma IT",
-  "version": "3.42.3",
-  "source_build": "v3.42.3-github-release-candidate",
-  "online_layer_enabled": false,
+  "version": "3.44.0",
+  "release_name": "Focused Product Flow",
+  "status": "locked-evening-stable-base",
   "deployment_target": "GitHub Pages",
   "entrypoint": "index.html",
-  "excluded": [
-    "tests/",
-    "audit reports",
-    "build manifests from development versions",
-    "temporary files",
-    "local development clutter"
+  "online_layer_enabled": false,
+  "product_rule": "One purpose, one control, one place.",
+  "included": [
+    "index.html",
+    "styles.css",
+    "proxuma-it.js",
+    "ui-consistency.js",
+    "workflow-intelligence.js",
+    "report-trust-action.js",
+    "grouped-panel-controls.js",
+    "product-simplification.js",
+    ".nojekyll",
+    "README.md",
+    "DEPLOY_README.md",
+    "NEXT_HANDOFF.md",
+    "RELEASE_CHECKLIST.md",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "LICENSE"
   ],
-  "build": "github-release-candidate-stabilization",
-  "entry": "index.html"
+  "excluded": [
+    "temporary files",
+    "development-only test output",
+    "prior release folders",
+    "local editor files"
+  ]
 }

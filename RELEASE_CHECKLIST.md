@@ -1,33 +1,43 @@
-# Proxuma IT v3.42.3 — GitHub Release Checklist
+# Proxuma IT v3.44.0 — Locked Release Checklist
 
-## Before pushing
+## Deployment root
 
-- Confirm `index.html` opens locally.
-- Run one URL scan and one plain-text/message scan.
-- Open and close all six disclosure controls.
-- Save one named session and reopen it.
-- Generate a local explanation.
-- Export one HTML report and one JSON report.
-- Test the Workflow & Trust card internal scrolling.
-- Check the page at mobile width and confirm no horizontal page overflow.
+- [x] `index.html` exists at repository root
+- [x] `.nojekyll` included
+- [x] Referenced local CSS and JavaScript files included
+- [x] Version metadata corrected to 3.44.0
+- [x] No nested distribution folder required
 
-## GitHub Pages
+## Core journey
 
-1. Upload the contents of this folder to the repository root.
-2. Keep `.nojekyll` in the root.
-3. Confirm GitHub Pages points to the correct branch and root folder.
-4. After deployment, hard-refresh the live page.
-5. Test the live scanner, navigation, saved sessions, and exports.
+- [ ] Enter a permitted target
+- [ ] Run analysis
+- [ ] Read result summary
+- [ ] Switch Scan Metrics / Supporting Evidence
+- [ ] Switch Deep Analysis / Case File
+- [ ] Open Workflow & Trust
+- [ ] Save or export
 
-## 24-hour observation
+## UI verification
 
-Watch for:
+- [ ] App Guide Open / Close works
+- [ ] Optional Tools Open / Close works
+- [ ] More Report Details Open / Close works
+- [ ] Scan Details remains contained and internally scrollable
+- [ ] Investigation remains contained and internally scrollable
+- [ ] No content bleeds into Workflow & Trust
+- [ ] Mobile layout has no horizontal overflow
+- [ ] Keyboard focus is visible
 
-- Mobile header or navigation overflow
-- Unexpected card width differences
-- Stored-session migration issues
-- Buttons wrapping or clipping
-- Browser-specific export behavior
-- Any console errors
+## Trust verification
 
-Do not add new features during the observation window. Record issues for the next handoff.
+- [ ] Evidence is distinguished from interpretation
+- [ ] Confidence is not presented as certainty
+- [ ] Empty and unavailable states are clear
+- [ ] No claim exceeds the implemented capability
+- [ ] Authorization language remains visible
+
+## Release lock
+
+- [x] No new features added after lock
+- [x] Next work begins with validation and testing
