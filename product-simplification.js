@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-  const KEY='proxuma-workflow-collapsed-v3440';
+  const KEY='proxuma-review-trust-collapsed-v3441';
 
   function makeToggle(){
     const workflow=document.getElementById('workflow');
@@ -13,7 +13,7 @@
     button.type='button';
     button.className='collapse-toggle unified-control-button workflow-toggle';
     button.setAttribute('aria-controls',body.id);
-    button.innerHTML='<span aria-hidden="true" class="toggle-dot"></span><span class="toggle-copy">Open</span><small>Workflow</small>';
+    button.innerHTML='<span aria-hidden="true" class="toggle-dot"></span><span class="toggle-copy">Open</span><small>Review &amp; Trust</small>';
     head.appendChild(button);
 
     let collapsed=true;

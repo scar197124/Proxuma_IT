@@ -1,32 +1,61 @@
-# Proxuma IT v3.44.0 — Focused Product Flow
+# Proxuma IT v3.46.6
 
-**Status:** Locked stable base for the next development phase.
+Proxuma IT is a browser-based, trust-centered investigation interface for reviewing suspicious links, text, QR content, and related evidence.
 
-Proxuma IT is a browser-based investigation and reporting interface built around a clear product journey:
+## Current workflow
 
-**Scan → Result → Details → Investigation → Workflow**
+**Scan → Result → Scan Details → Investigation → Review & Trust**
 
-## Product rule
+## What works in this build
 
-> One purpose, one control, one place.
+- Local browser-based scanning and evidence presentation
+- Scan Metrics and Supporting Evidence views
+- Deep Analysis and Case File investigation views
+- Focus reading workspaces for detailed review
+- Review & Trust workflow tools
+- Mobile-friendly page scrolling and compact navigation rails
+- QR input support using the bundled local `jsQR` decoder
+- Optional, consent-gated online-intelligence workflow
 
-## Current strengths
+## Capability boundary
 
-- Evidence is separated from interpretation.
-- Confidence and result context are visible.
-- Scan Details provides Metrics and Supporting Evidence in one contained workspace.
-- Investigation provides Deep Analysis and Case File in one contained workspace.
-- Secondary tools remain collapsed until needed.
-- The interface is deployable as a static GitHub Pages site.
+This is a client-side product prototype. Current scans use the local analysis engine. Deep Scan is planned, not active. Online checks are optional and separate from local scanning. Findings should be treated as guidance until the scanner logic, external data sources, and security boundaries receive independent validation.
 
-## Important boundary
+## Run locally
 
-This build is a client-side product prototype. It must not claim capabilities that have not been technically validated. Treat generated findings as guidance until the scanner logic, data sources, and security boundaries receive independent review.
+Open `index.html` in a modern browser. For more reliable browser behavior, serve the folder through a small local web server.
 
-## Deployment
+Example:
 
-Upload the contents of this folder to the root of the GitHub repository used for GitHub Pages. See `DEPLOY_README.md` for the exact steps.
+```bash
+python3 -m http.server 8080
+```
 
-## Next phase
+Then open `http://localhost:8080`.
 
-Do not add features immediately. Follow `NEXT_HANDOFF.md`, beginning with capability validation and first-time-user testing.
+## GitHub Pages
+
+1. Upload the **contents** of this folder to the repository root.
+2. In GitHub, open **Settings → Pages**.
+3. Choose **Deploy from a branch**.
+4. Select the `main` branch and `/ (root)`.
+5. Save and test the published site on desktop and mobile.
+
+GitHub Pages serves the static interface but cannot execute `api/proxuma-rdap.js`. That optional endpoint requires a compatible serverless host such as Vercel.
+
+## Repository structure
+
+- `index.html` — application markup
+- `styles.css` — responsive UI and focus-workspace styling
+- `proxuma-it.js` — primary scanning and application logic
+- Supporting JavaScript modules — workflow, focus, consistency, and grouped-panel behavior
+- `assets/` — required interface and QR-decoder assets
+- `api/proxuma-rdap.js` — optional serverless RDAP bridge
+- `SECURITY.md` — security and responsible-use guidance
+- `CONTRIBUTING.md` — contribution guidance
+
+## Release
+
+**v3.46.6 — Step 4 Single-Surface Focus**
+
+Step 4 now uses one compact investigation selector and one active reading surface. The selected Deep Analysis or Case File view owns the remaining focused workspace, with one reliable content-scrolling layer.

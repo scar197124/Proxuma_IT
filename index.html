@@ -10,31 +10,22 @@
 <meta content="dark" name="color-scheme"/>
 <meta content="Proxuma IT explains suspicious links, QR payloads, downloads, and message targets in plain language before you trust them." name="description"/>
 <link href="styles.css" rel="stylesheet"/>
-<meta content="v3.44.0-focused-product-flow" name="proxuma-build"/>
+<meta content="v3.46.6-step4-safe-focus-parity" name="proxuma-build"/>
 </head>
 <body class="simple-ui product-simplified">
 <div aria-hidden="true" class="ambient-grid"></div>
-<header class="site-header banner-header">
-<div aria-label="Proxuma IT full header banner" class="header-banner" role="img"></div>
-<nav aria-label="Primary navigation" class="top-nav nav-banner">
-<a href="#scan">Scan</a>
-<a href="#report">Result</a>
-<a href="#scan-detail-workspace">Details</a>
-<a href="#workflow">Workflow</a>
-</nav>
+<header class="site-header compact-site-header">
+<a aria-label="Proxuma IT home" class="compact-brand" href="#top">
+<span aria-hidden="true" class="compact-brand-mark"></span>
+<span class="compact-brand-copy"><strong>Proxuma IT</strong><small>Offline link intelligence</small></span>
+</a>
+<span aria-label="Local preview, private by default" class="compact-header-status compact-trust-status">Local preview · Private by default</span>
 </header>
 <main class="page" id="top">
-<!-- Compatibility text retained for regression continuity:
-      Camera QR scanning is optional and browser-dependent.
-      No telemetry
-      No hidden lookups
-      Paste a URL, IP, QR payload, message, or text snippet
-      One input handles links, domains, IPs, decoded QR text, copied SMS/email content, and raw suspicious snippets.
-    -->
-<section class="hero hero-framed">
+<section class="hero hero-framed compact-centered-hero" aria-labelledby="hero-title">
 <div class="hero-frame-inner">
-<p class="eyebrow hero-product-mark">Proxuma IT</p>
-<h1>Check the link before you trust it.</h1>
+<p class="eyebrow hero-product-mark">Proxuma ID</p>
+<h1 id="hero-title">Check the link before you trust it.</h1>
 <p class="lead">Scan a QR code, paste a message, or inspect a URL locally before opening it.</p>
 <div class="hero-action-row">
 <a class="hero-scan-cta" href="#scan">Start a Scan</a>
@@ -47,6 +38,13 @@
 </div>
 </div>
 </section>
+<!-- Compatibility text retained for regression continuity:
+      Camera QR scanning is optional and browser-dependent.
+      No telemetry
+      No hidden lookups
+      Paste a URL, IP, QR payload, message, or text snippet
+      One input handles links, domains, IPs, decoded QR text, copied SMS/email content, and raw suspicious snippets.
+    -->
 <!-- Compatibility marker for v2.89.0 label test: Scan Center · Scan Report · Deep Analysis · Case File -->
 <!-- Compatibility marker for v2.77.6 test: <section id="explain" class="explain-page card" -->
 <section aria-label="Explain Proxuma IT cards" class="explain-page card collapsible-card" data-collapse-key="proxuma-it-explain-guide-collapsed-v1" data-default-collapsed="true" id="explain">
@@ -64,39 +62,23 @@
 </button>
 </div>
 <div class="collapsible-card-body" id="explainGuideBody">
-<div class="explain-grid">
+<div class="explain-grid compact-guide-grid">
 <article class="explain-card">
-<span class="card-kicker">Step 1</span>
-<h3>Paste or scan here</h3>
-<p>Use this card when you have a link, QR code, copied email text, or suspicious message. Paste it into Target, then press Analyze.</p>
+<span class="card-kicker">1</span>
+<h3>Scan</h3>
+<p>Paste a link, message, QR result, or copied email text, then choose Analyze.</p>
 </article>
 <article class="explain-card">
-<span class="card-kicker">Step 2</span>
-<h3>Read the main result</h3>
-<p>This card gives the simple verdict first: risk score, main warning sign, and the safest next move.</p>
+<span class="card-kicker">2</span>
+<h3>Review</h3>
+<p>Read the result first, then use Scan Details or Investigation only when more context is needed.</p>
 </article>
 <article class="explain-card">
-<span class="card-kicker">Step 3</span>
-<h3>Open for details</h3>
-<p>Use Analysis when you want the deeper reasoning, timeline, scenario, and next-move guidance behind the verdict.</p>
-</article>
-<article class="explain-card">
-<span class="card-kicker">Step 4</span>
-<h3>Save notes locally</h3>
-<p>Use this area when you want to keep a local note or saved scan history for later review. Nothing is sent out by this card.</p>
-</article>
-<article class="explain-card">
-<span class="card-kicker">Optional</span>
-<h3>Future online checks</h3>
-<p>Offline scans run first. Online intelligence is only for future live checks that the user clearly chooses.</p>
-</article>
-<article class="explain-card">
-<span class="card-kicker">Optional</span>
-<h3>Camera by choice</h3>
-<p>Camera scanning starts only when you choose it and depends on browser support. Manual QR text paste works offline everywhere.</p>
+<span class="card-kicker">3</span>
+<h3>Save or export</h3>
+<p>Use Review &amp; Trust to track status, preserve a session, explain the result, or export a report.</p>
 </article>
 </div>
-<p aria-hidden="true" class="drawer-scroll-cue">Scroll the selected layer for more</p>
 </div>
 </section>
 <section aria-label="Proxuma unified workspace" class="unified-workspace card">
@@ -126,15 +108,15 @@
 <section aria-label="Visible scan examples" class="visible-scan-examples">
 <div class="visible-examples-head">
 <strong>Try a scan example</strong>
-<span>Loads the sample into the scanner — nothing is sent online.</span>
+<span class="examples-desktop-note">Loads the sample into the scanner — nothing is sent online.</span><span class="examples-mobile-note" aria-hidden="true">Swipe to explore</span>
 </div>
 <div aria-label="Example targets" class="quick-tests">
-<button class="example-pill example-trusted pill-action" data-example="https://www.rbcroyalbank.com/" type="button">Trusted bank</button>
-<button class="example-pill example-danger pill-action" data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button">Leetspeak phish</button>
-<button class="example-pill example-danger pill-action" data-example="https://www.rbcr0yalbank.com/" type="button">Lookalike bank</button>
-<button class="example-pill example-danger pill-action" data-example="javascript:alert(1)" type="button">Script payload</button>
-<button class="example-pill example-review pill-action" data-example="https://example.com/l%30gin" type="button">Encoded login</button>
-<button class="example-pill example-review pill-action" data-example="072890000224" type="button">QR payload</button>
+<button class="example-pill example-trusted pill-action" data-example="https://www.rbcroyalbank.com/" type="button"><span class="example-label-desktop">Trusted bank</span><span class="example-label-mobile" aria-hidden="true">Trusted</span></button>
+<button class="example-pill example-danger pill-action" data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button"><span class="example-label-desktop">Leetspeak phish</span><span class="example-label-mobile" aria-hidden="true">Leetspeak</span></button>
+<button class="example-pill example-danger pill-action" data-example="https://www.rbcr0yalbank.com/" type="button"><span class="example-label-desktop">Lookalike bank</span><span class="example-label-mobile" aria-hidden="true">Lookalike</span></button>
+<button class="example-pill example-danger pill-action" data-example="javascript:alert(1)" type="button"><span class="example-label-desktop">Script payload</span><span class="example-label-mobile" aria-hidden="true">Script</span></button>
+<button class="example-pill example-review pill-action" data-example="https://example.com/l%30gin" type="button"><span class="example-label-desktop">Encoded login</span><span class="example-label-mobile" aria-hidden="true">Encoded</span></button>
+<button class="example-pill example-review pill-action" data-example="072890000224" type="button"><span class="example-label-desktop">QR payload</span><span class="example-label-mobile" aria-hidden="true">QR payload</span></button>
 </div>
 </section>
 <div aria-label="Privacy promise" class="privacy-strip" data-compact="true">
@@ -172,12 +154,12 @@
 <strong>Scan Mode</strong>
 <span class="local-badge pill-status">Local only</span>
 </div>
-<div aria-label="Scan modes" class="scan-mode-row">
-<button aria-pressed="true" class="mode-pill mode-quick active pill-action" type="button">Quick Scan</button>
-<button aria-pressed="false" class="mode-pill mode-deep pill-action" type="button">Deep Local Scan</button>
-<button aria-pressed="false" class="mode-pill mode-online pill-soon" type="button">Optional Online · Preview</button>
+<div aria-label="Current scan capabilities" class="scan-mode-row scan-capability-row" role="list">
+<span class="mode-pill mode-quick active mode-status" role="listitem"><span aria-hidden="true" class="mode-status-dot"></span>Local Scan Active</span>
+<span class="mode-pill mode-deep mode-status" role="listitem">Deep Scan Planned</span>
+<span class="mode-pill mode-online mode-status" role="listitem">Online Checks Optional</span>
 </div>
-<p class="quiet-note">Quick and Deep scans run locally. Optional online checks remain locked until the user chooses them.</p>
+<p class="quiet-note">Every scan currently uses the same local analysis engine. Deep mode is planned. Online checks remain separate, consent-gated, and user-triggered.</p>
 </div>
 <div class="micro-list">
 <span class="pill-signal">True target</span>
@@ -373,6 +355,7 @@
 </div>
 </div>
 </section>
+<section class="investigation-workspace" id="investigation-workspace">
 <section aria-labelledby="investigationSelectorTitle" class="panel-selector-card" id="investigation-controls">
 <div class="panel-selector-copy">
 <p class="eyebrow">Step 4 · Investigation</p>
@@ -638,9 +621,9 @@
 </section>
 <section aria-labelledby="workflowTitle" class="card unified-section workflow-layer" id="workflow">
 <div class="section-heading-row workflow-fixed-head">
-<div><p class="eyebrow">Step 5 · Workflow &amp; Trust</p><h2 id="workflowTitle">Turn findings into actions</h2><p class="muted">Open this workspace only when you need to save, compare, remediate, explain, or export.</p></div>
+<div><p class="eyebrow">Step 5 · Review &amp; Trust</p><h2 id="workflowTitle">Turn findings into actions</h2><p class="muted">Open this workspace to verify evidence boundaries, track review status, save sessions, or export.</p></div>
 </div>
-<div aria-label="Workflow and trust tools" class="workflow-scroll-body" role="region" tabindex="0">
+<div aria-label="Review and trust tools" class="workflow-scroll-body" role="region" tabindex="0">
 <div aria-label="Five-step workflow" class="workflow-progress">
 <div class="workflow-step active" data-step="1" data-workflow-step=""><b>Scan</b><span>Run local checks</span></div>
 <div class="workflow-step" data-step="2" data-workflow-step=""><b>Review</b><span>Read verified findings</span></div>
@@ -697,7 +680,7 @@
 </article>
 </div>
 </div>
-<p aria-hidden="true" class="workflow-scroll-cue">Scroll inside for more workflow tools</p>
+<p aria-hidden="true" class="workflow-scroll-cue">Scroll inside for more review and trust tools</p>
 </section>
 <section aria-label="Return to PROXUMA ecosystem" class="ecosystem-return card">
 <div>
@@ -707,7 +690,7 @@
 </div>
 <a aria-label="Return to the main PROXUMA canonical homepage" class="ecosystem-return-button unified-control-button unified-home-control" href="https://scar197124.github.io/PROXUMA/">← PROXUMA Home</a>
 </section>
-<p aria-label="Proxuma IT release version" class="proxuma-release-stamp">Proxuma IT v3.44.0 · Focused Product Flow</p>
+<p aria-label="Proxuma IT release version" class="proxuma-release-stamp">Proxuma IT v3.46.4 · In-Viewport Focus Controls</p>
 <section aria-hidden="true" class="hidden-support">
 <span hidden="" id="summarySupport"></span>
 </section>
@@ -715,6 +698,7 @@
 <script src="proxuma-it.js"></script>
 <script src="ui-consistency.js"></script>
 <script src="workflow-intelligence.js"></script>
+<script src="focus-reading.js"></script>
 <script src="report-trust-action.js"></script>
 <script src="grouped-panel-controls.js"></script>
 <script src="product-simplification.js"></script>
