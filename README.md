@@ -1,4 +1,4 @@
-# Proxuma IT v3.47.2
+# Proxuma IT v3.47.3
 
 Proxuma IT is a browser-based, trust-centered investigation interface for reviewing suspicious links, text, QR content, and related evidence.
 
@@ -56,6 +56,6 @@ GitHub Pages serves the static interface but cannot execute `api/proxuma-rdap.js
 
 ## Release
 
-**v3.47.2 — Content-First Investigation Restore**
+**v3.47.3 — Content-First Investigation Restore**
 
 Step 4 restores a compact stacked investigation rail beside a larger content-first reading surface. Scan Details gives more room to evidence and metrics, while controls use less vertical space across desktop and mobile.
