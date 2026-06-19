@@ -12981,3 +12981,66 @@ body.focus-reading-active{
     grid-template-columns:1fr!important;
   }
 }
+
+
+/* === Proxuma IT v3.47.4 — Mobile selected investigation panel visibility === */
+@media (max-width:900px){
+  #details.grouped-panel-managed,
+  #details.card,
+  #details.intelligence-drawer{
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  #details > .grouped-panel-scroll-body,
+  #intelligenceDrawerBody{
+    display:flex!important;
+    flex-direction:column!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+  }
+  #details .drawer-tabs{
+    flex:0 0 auto!important;
+  }
+  #details .drawer-stage{
+    display:block!important;
+    flex:0 0 auto!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:12px 8px 8px!important;
+    overflow:visible!important;
+    scroll-margin-top:14px;
+  }
+  #details .drawer-panel:not([hidden]){
+    display:block!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:14px!important;
+    overflow:visible!important;
+  }
+  #details .drawer-panel-head{
+    position:relative!important;
+    top:auto!important;
+  }
+  #details .drawer-panel-mobile-marker{
+    display:block;
+    margin:0 0 8px;
+    color:var(--muted,#9fb0bf);
+    font-size:.74rem;
+    font-weight:800;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+  }
+}
+@media (min-width:901px){
+  #details .drawer-panel-mobile-marker{display:none!important;}
+}

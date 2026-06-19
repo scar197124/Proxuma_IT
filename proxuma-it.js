@@ -5708,11 +5708,26 @@
         tab.classList.toggle("active", isActive);
         tab.setAttribute("aria-selected", isActive ? "true" : "false");
       });
+      let activePanel = null;
       panels.forEach(panel => {
         const isActive = panel.id === targetId;
         panel.classList.toggle("active", isActive);
         panel.hidden = !isActive;
+        if (isActive) activePanel = panel;
       });
+      if (activePanel && window.matchMedia("(max-width: 900px)").matches) {
+        if (!activePanel.querySelector(".drawer-panel-mobile-marker")) {
+          const marker = document.createElement("span");
+          marker.className = "drawer-panel-mobile-marker";
+          marker.textContent = "Selected information";
+          activePanel.insertBefore(marker, activePanel.firstChild);
+        }
+        window.requestAnimationFrame(() => {
+          activePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+          const heading = activePanel.querySelector("h3");
+          if (heading) heading.setAttribute("tabindex", "-1");
+        });
+      }
     }
     tabs.forEach(tab => {
       tab.addEventListener("click", () => activate(tab.getAttribute("data-guidance-target")));
