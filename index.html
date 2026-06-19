@@ -10,7 +10,7 @@
 <meta content="dark" name="color-scheme"/>
 <meta content="Proxuma IT explains suspicious links, QR payloads, downloads, and message targets in plain language before you trust them." name="description"/>
 <link href="styles.css" rel="stylesheet"/>
-<meta content="v3.46.6-step4-safe-focus-parity" name="proxuma-build"/>
+<meta content="v3.47.2-content-first-investigation-restore" name="proxuma-build"/>
 </head>
 <body class="simple-ui product-simplified">
 <div aria-hidden="true" class="ambient-grid"></div>
@@ -360,7 +360,7 @@
 <div class="panel-selector-copy">
 <p class="eyebrow">Step 4 · Investigation</p>
 <h2 id="investigationSelectorTitle">Choose the investigation view</h2>
-
+<p class="investigation-helper">Move between the full analysis workspace and the saved local case record.</p>
 </div>
 <div class="grouped-panel-selector" data-panel-group="investigation">
 <button aria-expanded="false" aria-haspopup="menu" class="grouped-selector-trigger unified-control-button" type="button">
@@ -374,6 +374,24 @@
 </div>
 </div>
 </section>
+<div class="investigation-summary" id="investigation-summary" aria-live="polite">
+  <div class="investigation-summary-item">
+    <span>Risk score</span>
+    <strong id="investigationSummaryScore">--</strong>
+  </div>
+  <div class="investigation-summary-item">
+    <span>Confidence</span>
+    <strong id="investigationSummaryConfidence">Not measured</strong>
+  </div>
+  <div class="investigation-summary-item investigation-summary-wide">
+    <span>Main concern</span>
+    <strong id="investigationSummaryConcern">Run a scan to identify the main concern.</strong>
+  </div>
+  <div class="investigation-summary-item investigation-summary-wide">
+    <span>Recommended action</span>
+    <strong id="investigationSummaryAction">Run a local scan to receive a clear next step.</strong>
+  </div>
+</div>
 <section aria-label="Deep Analysis" class="intelligence-drawer card unified-section grouped-panel-managed grouped-content-card" data-panel-group="investigation" id="details">
 
 <div aria-label="Deep analysis content" class="grouped-panel-scroll-body" id="intelligenceDrawerBody" role="region" tabindex="0">
@@ -690,7 +708,7 @@
 </div>
 <a aria-label="Return to the main PROXUMA canonical homepage" class="ecosystem-return-button unified-control-button unified-home-control" href="https://scar197124.github.io/PROXUMA/">← PROXUMA Home</a>
 </section>
-<p aria-label="Proxuma IT release version" class="proxuma-release-stamp">Proxuma IT v3.46.4 · In-Viewport Focus Controls</p>
+<p aria-label="Proxuma IT release version" class="proxuma-release-stamp">Proxuma IT v3.47.2 · Content-First Investigation Restore</p>
 <section aria-hidden="true" class="hidden-support">
 <span hidden="" id="summarySupport"></span>
 </section>

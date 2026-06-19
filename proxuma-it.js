@@ -5743,6 +5743,30 @@
   }
 
 
+  function setupInvestigationSummary(){
+    const sourceIds = {
+      scoreValue: "investigationSummaryScore",
+      confidenceLabel: "investigationSummaryConfidence",
+      whyScore: "investigationSummaryConcern",
+      actionText: "investigationSummaryAction"
+    };
+    const details = document.getElementById("details");
+    const sync = () => {
+      Object.entries(sourceIds).forEach(([sourceId, targetId]) => {
+        const source = document.getElementById(sourceId);
+        const target = document.getElementById(targetId);
+        if (source && target) target.textContent = (source.textContent || "").trim() || "—";
+      });
+      const score = (document.getElementById("scoreValue")?.textContent || "").trim();
+      if (details) details.classList.toggle("is-analysis-loading", /analyz|scanning|checking/i.test(score));
+    };
+    Object.keys(sourceIds).forEach(id => {
+      const source = document.getElementById(id);
+      if (source) new MutationObserver(sync).observe(source,{subtree:true,childList:true,characterData:true});
+    });
+    sync();
+  }
+
   function setupCollapsibleCards(){
     const cards = Array.from(document.querySelectorAll(".collapsible-card[data-collapse-key]"));
     cards.forEach(card => {
@@ -5776,6 +5800,7 @@
   setupCollapsibleCards();
   setupGuidanceDrawer();
   setupIntelligenceDrawer();
+  setupInvestigationSummary();
   try { audienceView = localStorage.getItem("proxuma-it-audience-view-v1") || "user"; } catch(error) { audienceView = "user"; }
   setAudienceView(audienceView, false);
   renderReport(emptyReport());

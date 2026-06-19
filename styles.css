@@ -12062,3 +12062,798 @@ body.focus-reading-active{
     padding:14px!important;
   }
 }
+
+/* === Proxuma IT v3.46.7 — Balanced Mobile Layout ===
+   One gutter, evenly sized controls, and predictable stacking on phones. */
+@media (max-width:720px){
+  :root{--px-mobile-gutter:9px;--px-mobile-gap:10px;}
+
+  html,body{width:100%;max-width:100%;overflow-x:hidden;}
+
+  .simple-ui .site-header.compact-site-header,
+  .simple-ui .page{
+    width:calc(100% - (var(--px-mobile-gutter) * 2))!important;
+    max-width:980px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .simple-ui .page{margin-top:10px!important;}
+
+  .simple-ui .page > *,
+  .simple-ui .page > .explain-page.card,
+  .simple-ui .hero.compact-centered-hero,
+  .simple-ui .unified-workspace,
+  .simple-ui .ecosystem-return{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+
+  .simple-ui .site-header.compact-site-header{
+    min-height:56px!important;
+    padding:7px 9px!important;
+    gap:10px!important;
+  }
+  .simple-ui .compact-brand{flex:1 1 auto!important;min-width:0!important;}
+  .simple-ui .compact-brand-copy{overflow:hidden!important;}
+  .simple-ui .compact-brand-copy strong{
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    white-space:nowrap!important;
+  }
+  .simple-ui .compact-trust-status{
+    flex:0 1 46%!important;
+    max-width:46%!important;
+    min-height:38px!important;
+    padding:6px 9px!important;
+    white-space:normal!important;
+    line-height:1.2!important;
+    text-align:center!important;
+  }
+
+  .simple-ui .compact-centered-hero .hero-frame-inner{
+    width:100%!important;
+    padding:22px 16px 20px!important;
+  }
+  .simple-ui .compact-centered-hero .hero-action-row{
+    width:100%!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    justify-items:stretch!important;
+    gap:9px!important;
+  }
+  .simple-ui .compact-centered-hero .hero-scan-cta,
+  .simple-ui .compact-centered-hero .hero-privacy-note{
+    width:100%!important;
+    max-width:420px!important;
+    margin-inline:auto!important;
+    text-align:center!important;
+  }
+  .simple-ui .compact-centered-hero .proof-row{
+    width:100%!important;
+    justify-content:flex-start!important;
+  }
+
+  .simple-ui .card,
+  .simple-ui .unified-section,
+  .simple-ui .panel-selector-card{
+    min-width:0!important;
+  }
+
+  .simple-ui .input-row{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:8px!important;
+  }
+  .simple-ui .input-row > input,
+  .simple-ui .input-row > button{
+    width:100%!important;
+    min-width:0!important;
+  }
+  .simple-ui .input-row > button{min-height:46px!important;}
+
+  #scan-detail-controls .grouped-panel-selector,
+  #investigation-controls .grouped-panel-selector{
+    width:100%!important;
+    max-width:none!important;
+  }
+  #scan-detail-controls .grouped-selector-menu,
+  #investigation-controls .grouped-selector-menu{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    width:100%!important;
+  }
+  #scan-detail-controls .grouped-selector-menu button,
+  #investigation-controls .grouped-selector-menu button{
+    width:100%!important;
+    min-width:0!important;
+    white-space:normal!important;
+    text-align:center!important;
+  }
+
+  .snapshot-grid,
+  .link-anatomy-grid,
+  .workflow-grid,
+  .trust-boundary-grid,
+  .memory-stat-grid{
+    grid-template-columns:1fr!important;
+  }
+
+  .section-head,
+  .panel-selector-copy{
+    min-width:0!important;
+  }
+}
+
+@media (max-width:420px){
+  .simple-ui .site-header.compact-site-header{
+    align-items:stretch!important;
+    flex-direction:column!important;
+    gap:7px!important;
+  }
+  .simple-ui .compact-brand{justify-content:center!important;}
+  .simple-ui .compact-trust-status{
+    flex:0 0 auto!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-height:34px!important;
+  }
+  .simple-ui .compact-centered-hero h1{
+    font-size:clamp(1.72rem,9vw,2.2rem)!important;
+  }
+}
+
+/* === Proxuma IT v3.46.8 — Portrait Workflow Repair ===
+   Fixes the Review & Trust / “Turn findings into actions” section on phones.
+   The workflow now reflows instead of relying on a wide horizontal strip. */
+@media (max-width:720px){
+  html,body,main,.page{
+    min-width:0!important;
+    max-width:100%!important;
+  }
+
+  #workflow.workflow-layer{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    padding:12px!important;
+    overflow:visible!important;
+    contain:none!important;
+  }
+
+  #workflow .workflow-fixed-head,
+  #workflow .workflow-scroll-body,
+  #workflow .workflow-grid,
+  #workflow .workflow-card,
+  #workflow .trust-boundary-grid,
+  #workflow .trust-boundary-card{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+
+  #workflow .workflow-scroll-body{
+    padding:0!important;
+    margin-top:8px!important;
+    overflow:visible!important;
+  }
+
+  #workflow .workflow-progress{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important;
+    width:100%!important;
+    max-width:100%!important;
+    overflow:visible!important;
+    padding:0!important;
+  }
+
+  #workflow .workflow-step{
+    width:100%!important;
+    min-width:0!important;
+    padding:10px!important;
+  }
+
+  #workflow .workflow-step:last-child{
+    grid-column:1 / -1!important;
+  }
+
+  #workflow .workflow-grid,
+  #workflow .trust-boundary-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:10px!important;
+  }
+
+  #workflow .severity-board{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  #workflow .severity-chip:last-child{
+    grid-column:1 / -1!important;
+  }
+
+  #workflow .session-toolbar,
+  #workflow .advisor-toolbar,
+  #workflow .workflow-actions,
+  #workflow .finding-toolbar{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    width:100%!important;
+    gap:8px!important;
+  }
+
+  #workflow .session-toolbar > *,
+  #workflow .advisor-toolbar > *,
+  #workflow .workflow-actions > *,
+  #workflow .finding-toolbar > *{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+
+  #workflow .finding-head{
+    grid-template-columns:auto minmax(0,1fr)!important;
+  }
+
+  #workflow .remediation-status{
+    grid-column:1 / -1!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  #workflow .comparison-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+
+  #workflow :is(h2,h3,h4,p,span,strong,label,button,input,select){
+    max-width:100%!important;
+    overflow-wrap:anywhere!important;
+  }
+
+  #workflow .workflow-scroll-cue{
+    display:none!important;
+  }
+}
+
+@media (max-width:390px){
+  #workflow .workflow-progress,
+  #workflow .severity-board,
+  #workflow .comparison-grid{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+
+  #workflow .workflow-step:last-child,
+  #workflow .severity-chip:last-child{
+    grid-column:auto!important;
+  }
+}
+
+/* === Proxuma IT v3.46.9 — Desktop Investigation Workspace Repair ===
+   Converts Step 4 from two stacked card-like blocks into one practical desktop
+   workspace: a compact header/selector bar followed by a full-width analysis
+   canvas with a left navigation rail and a wide content surface. */
+@media (min-width:901px){
+  #investigation-workspace{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    gap:0!important;
+  }
+
+  #investigation-controls{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:center!important;
+    column-gap:24px!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    margin:14px 0 0!important;
+    padding:14px 18px!important;
+    overflow:visible!important;
+  }
+
+  #investigation-controls .panel-selector-copy{
+    display:grid!important;
+    gap:2px!important;
+    justify-items:start!important;
+    text-align:left!important;
+    min-width:0!important;
+  }
+  #investigation-controls .panel-selector-copy :is(.eyebrow,h2,.investigation-helper){
+    margin:0!important;
+    text-align:left!important;
+  }
+  #investigation-controls .panel-selector-copy h2{
+    font-size:clamp(1.08rem,1.35vw,1.32rem)!important;
+  }
+  #investigation-controls .investigation-helper{
+    color:var(--muted,#9fb0bf)!important;
+    font-size:.9rem!important;
+    line-height:1.35!important;
+    max-width:720px!important;
+  }
+
+  /* On desktop the two choices are visible immediately; no oversized dropdown card. */
+  #investigation-controls .grouped-panel-selector{
+    display:block!important;
+    width:auto!important;
+    max-width:none!important;
+    margin:0!important;
+  }
+  #investigation-controls .grouped-selector-trigger{
+    display:none!important;
+  }
+  #investigation-controls .grouped-selector-menu,
+  #investigation-controls .grouped-selector-menu[hidden]{
+    position:static!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(132px,1fr))!important;
+    gap:8px!important;
+    width:auto!important;
+    min-width:280px!important;
+    padding:0!important;
+    margin:0!important;
+    border:0!important;
+    background:transparent!important;
+    box-shadow:none!important;
+  }
+  #investigation-controls .grouped-selector-menu button{
+    width:100%!important;
+    min-width:0!important;
+    min-height:42px!important;
+    padding:9px 14px!important;
+    white-space:nowrap!important;
+  }
+
+  /* The selected investigation view owns the entire available desktop width. */
+  #details.grouped-panel-managed,
+  #casefile.grouped-panel-managed{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    height:clamp(420px,55vh,610px)!important;
+    min-height:420px!important;
+    max-height:610px!important;
+    margin:0 0 16px!important;
+    padding:0!important;
+  }
+
+  #details > .grouped-panel-scroll-body{
+    display:grid!important;
+    grid-template-columns:220px minmax(0,1fr)!important;
+    grid-template-rows:minmax(0,1fr)!important;
+    width:100%!important;
+    max-width:none!important;
+    height:100%!important;
+    padding:0!important;
+    overflow:hidden!important;
+  }
+
+  /* Analysis categories become a useful left rail rather than a second card header. */
+  #details .drawer-tabs{
+    position:static!important;
+    align-content:start!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+    width:220px!important;
+    max-width:none!important;
+    height:100%!important;
+    margin:0!important;
+    padding:14px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    border-right:1px solid rgba(151,196,224,.18)!important;
+    border-bottom:0!important;
+    box-shadow:none!important;
+  }
+  #details .drawer-tab{
+    width:100%!important;
+    min-width:0!important;
+    min-height:40px!important;
+    padding:9px 11px!important;
+    text-align:left!important;
+    justify-content:flex-start!important;
+    border-radius:10px!important;
+    white-space:normal!important;
+  }
+
+  #details .drawer-stage{
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    height:100%!important;
+    margin:0!important;
+    padding:clamp(18px,2vw,30px)!important;
+    overflow:auto!important;
+  }
+  #details .drawer-panel,
+  #details .drawer-panel:not([hidden]){
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    min-height:100%!important;
+    padding:0!important;
+  }
+  #details .drawer-panel > *,
+  #details .drawer-panel :is(p,ul,ol,.card-summary,.drawer-panel-head){
+    width:100%!important;
+    max-width:none!important;
+    box-sizing:border-box!important;
+  }
+
+  #casefile .grouped-panel-scroll-body{
+    width:100%!important;
+    max-width:none!important;
+    padding:20px!important;
+  }
+}
+
+@media (max-width:900px){
+  #investigation-controls .investigation-helper{
+    margin:4px 0 0!important;
+    color:var(--muted,#9fb0bf)!important;
+    font-size:.88rem!important;
+    line-height:1.35!important;
+  }
+}
+
+
+/* === Proxuma IT v3.47.0 — Investigation polish and persistent summary === */
+.investigation-summary{
+  display:grid;
+  grid-template-columns:minmax(110px,.65fr) minmax(150px,.85fr) minmax(220px,1.35fr) minmax(260px,1.6fr);
+  gap:1px;
+  width:100%;
+  margin:0;
+  overflow:hidden;
+  border:1px solid rgba(151,196,224,.18);
+  border-top:0;
+  background:rgba(151,196,224,.18);
+}
+.investigation-summary-item{
+  display:grid;
+  align-content:center;
+  gap:3px;
+  min-width:0;
+  min-height:62px;
+  padding:10px 14px;
+  background:rgba(6,17,27,.94);
+}
+.investigation-summary-item span{
+  color:var(--muted,#9fb0bf);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.investigation-summary-item strong{
+  min-width:0;
+  overflow:hidden;
+  color:var(--text,#eff8ff);
+  font-size:.9rem;
+  line-height:1.3;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+#details .drawer-tab{
+  position:relative;
+  border:1px solid transparent!important;
+  color:var(--muted,#9fb0bf)!important;
+  transition:background-color .16s ease,border-color .16s ease,color .16s ease,transform .16s ease!important;
+}
+#details .drawer-tab:hover{
+  color:var(--text,#eff8ff)!important;
+  background:rgba(151,196,224,.08)!important;
+  border-color:rgba(151,196,224,.18)!important;
+}
+#details .drawer-tab.active,
+#details .drawer-tab[aria-selected="true"]{
+  color:var(--text,#eff8ff)!important;
+  background:linear-gradient(90deg,rgba(82,249,2,.16),rgba(82,249,2,.05))!important;
+  border-color:rgba(82,249,2,.42)!important;
+  box-shadow:inset 3px 0 0 rgba(82,249,2,.95)!important;
+  font-weight:850!important;
+}
+#details .drawer-tab.active::after,
+#details .drawer-tab[aria-selected="true"]::after{
+  content:"Viewing";
+  margin-left:auto;
+  color:rgba(188,255,160,.9);
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+#details .drawer-panel-head{
+  align-items:flex-start!important;
+  padding-bottom:14px!important;
+  margin-bottom:18px!important;
+  border-bottom:1px solid rgba(151,196,224,.16)!important;
+}
+#details .drawer-panel-head h3{
+  margin-top:2px!important;
+  font-size:clamp(1.28rem,1.8vw,1.72rem)!important;
+  line-height:1.15!important;
+}
+#details .drawer-panel .card-summary{
+  font-size:1rem!important;
+  line-height:1.65!important;
+}
+#details .drawer-panel :is(ul,ol):empty::before{
+  content:"Supporting evidence will appear here after a scan.";
+  display:block;
+  padding:16px;
+  border:1px dashed rgba(151,196,224,.24);
+  border-radius:12px;
+  color:var(--muted,#9fb0bf);
+  background:rgba(151,196,224,.035);
+  font-style:normal;
+}
+#details.is-analysis-loading .drawer-stage{
+  opacity:.72;
+  pointer-events:none;
+}
+#details.is-analysis-loading .drawer-panel.active::after{
+  content:"Analyzing local signals…";
+  display:block;
+  width:min(360px,100%);
+  margin:20px 0 0;
+  padding:12px 14px;
+  border:1px solid rgba(151,196,224,.2);
+  border-radius:10px;
+  color:var(--muted,#9fb0bf);
+  background:rgba(151,196,224,.05);
+}
+@media (min-width:901px){
+  #investigation-controls{border-bottom-left-radius:0!important;border-bottom-right-radius:0!important;}
+  #details.grouped-panel-managed,#casefile.grouped-panel-managed{border-top-left-radius:0!important;border-top-right-radius:0!important;}
+}
+@media (max-width:900px){
+  .investigation-summary{grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid rgba(151,196,224,.18);margin:8px 0;}
+  .investigation-summary-wide{grid-column:1/-1;}
+  .investigation-summary-item strong{white-space:normal;}
+}
+@media (max-width:430px){
+  .investigation-summary{grid-template-columns:1fr;}
+  .investigation-summary-wide{grid-column:auto;}
+}
+
+/* === Proxuma IT v3.47.1 — Interface declutter === */
+#details .drawer-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) minmax(150px,.8fr)!important;
+  align-items:start!important;
+  gap:8px!important;
+}
+#details .investigation-primary-tab,
+#details .investigation-more-button{
+  min-height:44px!important;
+  justify-content:center!important;
+}
+#details .investigation-more-button{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted,#9fb0bf)!important;
+  border:1px solid rgba(151,196,224,.18)!important;
+  background:rgba(151,196,224,.045)!important;
+}
+#details .investigation-more-button:hover,
+#details .investigation-more-button[aria-expanded="true"],
+#details .investigation-more-button.has-advanced-selection{
+  color:var(--text,#eff8ff)!important;
+  border-color:rgba(151,196,224,.38)!important;
+  background:rgba(151,196,224,.1)!important;
+}
+#details .investigation-more-chevron{transition:transform .16s ease}
+#details .investigation-more-button[aria-expanded="true"] .investigation-more-chevron{transform:rotate(180deg)}
+#details .investigation-advanced-tools{
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  padding:10px;
+  border:1px solid rgba(151,196,224,.16);
+  border-radius:12px;
+  background:rgba(6,17,27,.76);
+}
+#details .investigation-advanced-tools[hidden]{display:none!important}
+#details .investigation-advanced-tools .drawer-tab{min-height:40px!important}
+#details .investigation-advanced-tools .drawer-tab.active::after,
+#details .investigation-advanced-tools .drawer-tab[aria-selected="true"]::after{content:"Selected"}
+#investigation-controls .panel-selector-copy{max-width:760px}
+#investigation-controls .grouped-panel-selector{flex:0 0 auto}
+@media (max-width:900px){
+  #details .drawer-tabs{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #details .investigation-more-button{grid-column:1/-1}
+  #details .investigation-advanced-tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:520px){
+  #details .drawer-tabs{grid-template-columns:1fr!important}
+  #details .investigation-more-button{grid-column:auto}
+  #details .investigation-advanced-tools{grid-template-columns:1fr}
+}
+
+/* === Proxuma IT v3.47.2 — Content-first Scan Details + restored investigation rail === */
+
+/* Step 3: spend vertical space on results, not controls. */
+#scan-detail-workspace .scan-details-header{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto auto!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-height:0!important;
+  padding:6px 8px!important;
+}
+#scan-detail-controls .panel-selector-copy{
+  display:flex!important;
+  align-items:baseline!important;
+  gap:8px!important;
+  min-width:0!important;
+  padding:0 4px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#scan-detail-controls .panel-selector-copy .eyebrow{
+  flex:0 0 auto!important;
+  margin:0!important;
+  font-size:.62rem!important;
+}
+#scan-detail-controls .panel-selector-copy h2{
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+  font-size:.88rem!important;
+  line-height:1.1!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+#scan-detail-controls .grouped-panel-selector{
+  width:auto!important;
+  max-width:none!important;
+  margin:0!important;
+}
+#scan-detail-controls .grouped-selector-trigger{display:none!important;}
+#scan-detail-controls .grouped-selector-menu,
+#scan-detail-controls .grouped-selector-menu[hidden]{
+  position:static!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(112px,1fr))!important;
+  gap:4px!important;
+  width:auto!important;
+  min-width:236px!important;
+  padding:2px!important;
+  border:1px solid rgba(139,181,216,.25)!important;
+  border-radius:9px!important;
+  background:rgba(16,29,41,.48)!important;
+  box-shadow:none!important;
+}
+#scan-detail-controls .grouped-selector-menu button{
+  min-height:30px!important;
+  padding:4px 8px!important;
+  font-size:.68rem!important;
+}
+#scan-detail-workspace .focus-reading-toolbar{
+  position:static!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+}
+#scan-detail-workspace .focus-reading-toggle{
+  width:32px!important;
+  min-width:32px!important;
+  min-height:30px!important;
+  padding:4px!important;
+}
+#scan-detail-workspace .focus-reading-toggle .focus-reading-label{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+#scan-detail-workspace .scan-details-view{
+  margin-top:2px!important;
+}
+#scan-detail-workspace .grouped-panel-scroll-body{
+  padding-top:10px!important;
+}
+
+/* Step 4: restore the proven stacked left rail and full content canvas. */
+#details > .grouped-panel-scroll-body{
+  display:grid!important;
+  grid-template-columns:220px minmax(0,1fr)!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  height:100%!important;
+  overflow:hidden!important;
+}
+#details .drawer-tabs{
+  position:static!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  align-content:start!important;
+  gap:7px!important;
+  width:220px!important;
+  height:100%!important;
+  margin:0!important;
+  padding:14px!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  border-right:1px solid rgba(151,196,224,.18)!important;
+  border-bottom:0!important;
+  background:rgba(6,17,27,.82)!important;
+  box-shadow:none!important;
+}
+#details .drawer-tab,
+#details .investigation-primary-tab,
+#details .investigation-advanced-tab{
+  display:flex!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:40px!important;
+  padding:9px 11px!important;
+  justify-content:flex-start!important;
+  text-align:left!important;
+  white-space:normal!important;
+}
+#details .investigation-more-button,
+#details .investigation-advanced-tools{display:none!important;}
+#details .drawer-stage{
+  width:100%!important;
+  min-width:0!important;
+  height:100%!important;
+  padding:clamp(18px,2vw,30px)!important;
+  overflow:auto!important;
+}
+#details .drawer-panel,
+#details .drawer-panel:not([hidden]){
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+}
+
+@media (max-width:900px){
+  #scan-detail-workspace .scan-details-header{
+    grid-template-columns:minmax(0,1fr) auto!important;
+  }
+  #scan-detail-controls .panel-selector-copy h2{display:none!important;}
+  #scan-detail-controls .grouped-panel-selector{grid-column:1/-1!important;width:100%!important;}
+  #scan-detail-controls .grouped-selector-menu,
+  #scan-detail-controls .grouped-selector-menu[hidden]{width:100%!important;min-width:0!important;}
+  #details > .grouped-panel-scroll-body{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:auto minmax(0,1fr)!important;
+  }
+  #details .drawer-tabs{
+    display:flex!important;
+    width:100%!important;
+    height:auto!important;
+    padding:8px!important;
+    gap:6px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    border-right:0!important;
+    border-bottom:1px solid rgba(151,196,224,.18)!important;
+  }
+  #details .drawer-tab{
+    flex:0 0 auto!important;
+    width:auto!important;
+    min-height:36px!important;
+    white-space:nowrap!important;
+  }
+}
