@@ -1,93 +1,10 @@
 (function(){
   "use strict";
 
-  // Compatibility markers retained for regression tests: version: "v2.76.0" / version: "v2.75.0" / version: "v2.74.0" / version: "v2.73.0" / version: "v2.72.1" / version: "v2.71.0" / Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1
   const BUILD = {
-    version: "v3.29.4",
-    name: "Encoded Risk Token Alignment",
+    version: "v3.49.0",
+    name: "Stable Code Cleanup",
     privacy: "offline-first engine / local QR decoder path / no runtime CDN dependency",
-    roadmap: [
-      "v2.69.1 Compact Header Pass + QR/API Readiness Map",
-      "v2.70.0 Browser QR Scanner Attachment (camera permission only after user taps scan)",
-      "v2.70.1 Safari QR compatibility fallback with jsQR decoder path",
-      "v2.71.0 Trusted share-wrapper intelligence for Google share links without blind trust",
-      "v2.72.0 Evidence Case Packet Upgrade with copyable professional summary and downloadable local JSON packet",
-      "v2.72.1 Simple Case Controls / Driver Mode with advanced evidence tools tucked under a disclosure",
-      "v2.73.0 Local Pattern Memory that recognizes repeated roots and repeated suspicious signal families on-device",
-      "v2.74.0 Local Memory Dashboard that lets users view, copy, export, and clear local pattern memory",
-      "v2.75.0 Consent-first Online Intel Architecture with local permission gate and no active API calls",
-      "v2.75.x First provider/test backend integration behind explicit user approval",
-      "v2.75.x Privacy, rate-limit, error, and offline fallback hardening",
-      "v2.76.0 Release Candidate Browser Test Package for Safari/Chrome/mobile/GitHub/Vercel validation",
-      "v2.77.0 Deploy Polish / Version Banner to make build identity, offline status, and consent state visible during testing",
-      "v2.77.1 Hero Compression / Command Deck Polish to tighten the hero, shorten the first-screen journey, and make the deploy banner feel like a slim status strip",
-      "v2.77.2 Public UI Garage Cleanup to remove build/debug labels from the public hero, remove the Deploy Identity card from the main page, and keep version detail available in testing/report internals only",
-      "v2.77.3 Drawer + Case File Centering Cleanup to center the drawer and case file headers while simplifying case copy",
-      "v2.77.6 Compact Drawer + Explain Guide to turn closed drawers into slim command bars and add card-by-card user guidance",
-      "v2.77.7 Compact Explain Guide Drawer to tuck the help guide behind a slim command bar and strengthen inner guide-card borders",
-      "v2.77.8 Explain Guide Center + Button Lock to center the guide text and keep the Show/Hide button in one fixed corner",
-      "v2.77.9 Explain Guide Center Stability to keep the guide title/subtitle centered in open and closed states while anchoring the Show/Hide control",
-      "v2.77.10 Analysis + Case File Center Stability to apply the same centered title and fixed button pattern to Analysis Layers and Case File",
-      "v2.77.11 Label Stack Centering to keep Analysis Layers and Case File labels centered directly above their helper lines in collapsed and expanded states",
-      "v2.78.0 Callback Scam Intent Detection to identify phone-first support, refund, banking, delivery, and account-pressure social-engineering patterns in pasted messages, QR payloads, and URLs",
-      "v2.79.0 Attachment / File Trap Intent Detection to identify invoice, shared document, e-signature, cloud-file, macro, and fake attachment lures before the user opens or downloads anything",
-      "v2.80.0 Payment / Invoice Scam Classifier to identify billing, refund, subscription, Interac/e-transfer, unauthorized-charge, overdue-balance, and payment-method update lures",
-      "v2.81.0 Delivery / Customs / Package Scam Classifier to identify delivery-failed, held-package, customs-fee, redelivery, tracking-update, address-confirmation, and carrier impersonation lures",
-      "v2.82.0 Government / Tax / Legal Threat Classifier to identify CRA/IRS-style refunds, benefits, fines, court/legal threats, warrants, penalties, and government impersonation pressure",
-      "v2.83.0 Fake Security Alert / Tech Support Classifier to identify device-infected, account-locked, support-call, antivirus, remote-access, and urgent security alert lures",
-      "v2.84.0 Job / Employment Scam Classifier to identify fake recruiter, remote-work, onboarding, payroll, equipment-check, and interview-payment lures",
-      "v2.85.0 Crypto / Investment Scam Classifier to identify wallet, seed phrase, exchange, fake profit, recovery, trading-bot, liquidity, and guaranteed-return lures",
-      "v2.86.0 Romance / Trust-Building Social Engineering Classifier to identify emotional trust-building, move-off-platform, emergency-money, gift-card, travel-fee, and private-photo leverage lures",
-      "v2.87.0 Engine Evidence Weighting / Dominant Threat Cleanup to choose the main threat more deliberately, reduce overlap noise, and explain the leading scam lane before secondary clues",
-      "v2.88.0 Calm Scoring Explanation / Action Triage to explain why a score landed where it did, separate block/verify/allow decisions, and reduce noisy overlap language without changing offline/API behavior",
-      "v2.90.0 Safe / Trusted Context Relief Pass to reduce false positives on known roots and normal first-party workflows without overriding hard-stop evidence",
-      "v2.91.0 Expanded Regression Test Library / Engine Guardrails to protect the offline scam-intent engine with broader safe, suspicious, and hard-stop test coverage",
-      "v2.92.0 What To Do Next Report Language to provide lane-aware stop, verify, or proceed guidance after local analysis",
-      "v2.94.1 Public Preview Removed / GitHub Cleanup to remove the extra preview UI, preserve v2.93 optional online gate prep, and keep the scanner surface lean for GitHub push",
-      "v2.95.1 Working Continuity Restore to keep manifests, handoff notes, roadmaps, regression files, and version history in the package until final GitHub-slim deployment is explicitly requested",
-      "v2.96.0 Closeout Handoff Lock to add a clear next-session restart file and mark the next recommended moves without changing UI or engine behavior",
-      "v2.97.0 Urgency / Pressure Tactic Classifier to identify countdown, final-notice, act-now, account-action, and fear-pressure language as a cross-lane scam amplifier without adding UI or API calls",
-      "v2.98.0 Authority / Impersonation Voice Classifier to identify official-sounding sender claims, department impersonation, compliance language, case/reference pressure, and approval/review authority tactics without adding UI or API calls",
-      "v2.99.0 MFA / OTP Code Theft Classifier to identify one-time-code, two-factor, authenticator, verification-code, and approval-prompt harvesting lures without adding UI or API calls",
-      "v3.00.0 Account Recovery / Password Reset Takeover Classifier to identify password-reset, account-recovery, email-change, device-change, session-reset, and recovery-link takeover lures without adding UI or API calls",
-      "v3.01.0 Engine Consolidation / Threat Lane Index to organize scam lanes into stable IDs, plain-language labels, dominance priorities, report names, and user actions without adding UI or API calls",
-      "v3.02.0 Report Consistency Pass to use the Threat Lane Index across What happened, Why it matters, What to do next, Safety habit, copied reports, and case packets without adding UI or API calls",
-      "v3.05.0 Parking / Toll / Transit QR Scam Classifier to identify QR/payment lures tied to parking meters, toll roads, transit fares, tickets, citations, plate verification, and violation-payment pressure without adding UI or API calls",
-      "v3.06.0 Money Movement / Payment Rail Scam Classifier to identify refund/deposit, Interac/e-transfer, bank-transfer, recipient-confirmation, payment-verification, and invoice-payment lures without adding UI or API calls",
-      "v3.07.0 Gift Card / Prize / Reward Claim Scam Classifier to identify prize, reward, loyalty-points, gift-card, voucher, cashback, and fee-to-claim lures without adding UI or API calls",
-      "v3.08.0 Subscription / Account Renewal Scam Classifier to identify fake renewal, billing-failed, account-expiry, plan-cancel, storage-full, domain-renewal, and payment-method-update lures without adding UI or API calls",
-      "v3.09.0 Delivery / Parcel / Courier Scam Classifier Upgrade to identify parcel-fee, customs-release, address-correction, tracking-portal, missed-signature, and carrier-impersonation lures without adding UI or API calls",
-      "v3.10.0 Government / Tax / Benefit Scam Classifier Upgrade to identify tax-refund, benefit-payment, identity-verification, license/permit, immigration, court/fine, audit, overpayment, and agency-portal lures without adding UI or API calls",
-      "v3.11.0 Job / Recruitment / Work-from-home Scam Classifier Upgrade to identify fake recruiter, remote-work, task-job, payroll/direct-deposit, equipment-check, reshipping, mystery-shopper, and onboarding identity lures without adding UI or API calls",
-      "v3.12.0 2025/2026 Modern Scam Coverage Pack to identify AI-family emergency, social DM, marketplace, student/school, and fake recovery/report portal lures without adding UI, API calls, fetch, telemetry, or online lookup",
-      "v3.13.0 Regression Confidence Harness / Offline Lane Integrity Lock to prove the major modern scam lanes still route correctly together without adding UI, API calls, fetch, telemetry, or online lookup",
-      "v3.14.0 Evidence Case Packet Hardening / Offline Export Envelope to strengthen local JSON case packets with export metadata, verification hints, preservation steps, and offline integrity seals without adding UI, API calls, fetch, telemetry, or online lookup",
-      "v3.15.0 Browser / Deployment Test Lock to provide a practical Safari/Chrome/mobile/GitHub/Vercel validation checklist, deploy-readiness notes, and offline behavior pass rules without adding UI redesign, API calls, fetch, telemetry, or online lookup",
-      "v3.15.1 Red Team Hardening Pass to close red-team gaps found in spaced OTP/verification-number lures and fake CAPTCHA/Cloudflare login gates while preserving offline-only behavior",
-      "v3.16.0 GitHub Slim Release Candidate to package the tested offline engine for public upload with a clean deploy surface, current docs, current tests, and no old build clutter",
-      "v3.18.0 Public UI Cleanup to keep local sample checks available while removing developer-facing test-bench language from the public interface",
-      "v3.19.2 UI Deduplication Pass to remove repeated visible labels while preserving public clarity, QR honesty, docs, and offline behavior",
-      "v3.19.6 UI Wording Clarity Density Pass to further tighten the hero, collapsed App Guide, collapsed Analysis, card spacing, and mobile vertical rhythm without changing scanner logic",
-      "v3.19.5 Message Trigger Label Tuning to route account-suspension, password, and OTP message text toward credential/MFA takeover language instead of payment-rail labels without changing offline/API behavior",
-      "v3.19.6 UI Wording Clarity Pass to separate plain-language score explanation from analyst signal evidence wording without changing engine behavior",
-      "v3.20.0 Case Packet Export to add a readable local TXT evidence report beside the structured JSON case packet without network calls",
-      "v3.21.0 Local Scan History to automatically preserve recent scan summaries on-device with load, copy, delete, and clear controls without telemetry or hidden network calls",
-      "v3.22.0 QR / Manual Payload UX Upgrade to add a clearer offline paste lane for decoded QR text, copied messages, and raw payloads without adding API calls",
-      "v3.22.1 Unified Scanner Input to remove the second payload box and let one scanner field handle URLs, IPs, QR text, messages, and snippets",
-      "v3.24.2 Red-Team Detection Tuning to correct c0m/c0n payload risk direction and surface base64-hidden URLs without adding new UI cards",
-      "v3.25.1 Online Intel Results Notes to let users record consent-opened external lookup findings inside the existing Online Intel drawer and include them in local TXT/JSON exports without hidden requests or new cards",
-      "v3.26.1 Deep Analysis Drawer Usability Pass to give the existing drawer more usable inner space, remove duplicate Local Check wording, and keep Online Intel provider architecture intact without new public cards",
-      "v3.27.0 Online Intel Readiness Layer to show consent status, provider readiness, serverless bridge status, API key safety, and network activity state inside the existing Online Intel drawer without adding public cards or hidden requests",
-      "v3.29.1 Example Lane Consolidation to keep one public example lane in Scan Center, remove duplicate Sample Lab UI, and preserve serverless RDAP bridge prototype documentation without new cards",
-      "v3.29.3 RDAP Fallback + Host Awareness Polish to make consent-gated RDAP errors explain GitHub Pages/local/Vercel hosting clearly without adding cards",
-      "v3.29.4 Encoded Risk Token Alignment to surface encoded login, encoded redirect, encoded slash, and obfuscated path tokens inside Link Anatomy without adding cards",
-      "v3.24.1 Domain Ending Spoof + Comma Domain Tuning to detect c0m/c0n-style TLD imitation and comma-domain punctuation without adding new UI cards",
-      "v3.23.2 Link Anatomy Card Wrap Polish so all anatomy fields use subtle bordered chip/card containers matching the privacy strip",
-      "v3.29.3 RDAP Fallback + Host Awareness Polish to preserve the user-clicked RDAP bridge while adding clearer unavailable/host-awareness states",
-      "v3.23.0 Link Anatomy Breakdown to show protocol, host, root domain, path, query keys, and local risk tokens without duplicating evidence or examples",
-      "v2.77.4 Scanner + Public Language Cleanup to rename the drawer to Analysis Layers, simplify scanner copy, and tighten the public case wording",
-      "v2.77.5 Public Release Surface Polish to simplify top navigation labels, soften hero proof pills, rename the analysis subtitle, and hide internal browser-RC controls from the public surface"
-    ]
   };
 
   const $ = (id) => document.getElementById(id);
@@ -100,7 +17,7 @@
     explainStatus: $("explainStatus"), explainSummary: $("explainSummary"), trustStatus: $("trustStatus"), trustTrail: $("trustTrail"),
     threatStatus: $("threatStatus"), threatStory: $("threatStory"), timelineStatus: $("timelineStatus"), timelineList: $("timelineList"),
     learningStatus: $("learningStatus"), learningText: $("learningText"), onlinePreview: $("onlinePreview"),
-    severityMix: $("severityMix"), severityNote: $("severityNote"), decisionStatus: $("decisionStatus"), decisionList: $("decisionList"), heatFill: $("heatFill"), heatLabel: $("heatLabel"), primaryTrigger: $("primaryTrigger"), laneQuality: $("laneQuality"), evidenceStrength: $("evidenceStrength"), confidenceBrief: $("confidenceBrief"), whyScore: $("whyScore"), scanMemory: $("scanMemory"), compareLast: $("compareLast"), actionTitle: $("actionTitle"), actionText: $("actionText"), whyMatterTitle: $("whyMatterTitle"), whyMatterText: $("whyMatterText"), safetyTitle: $("safetyTitle"), safetyText: $("safetyText"), inputTypeLabel: $("inputTypeLabel"), reportTimestamp: $("reportTimestamp"), anatomyStatus: $("anatomyStatus"), anatomyProtocol: $("anatomyProtocol"), anatomyHost: $("anatomyHost"), anatomyRoot: $("anatomyRoot"), anatomyPath: $("anatomyPath"), anatomyQuery: $("anatomyQuery"), anatomyTokens: $("anatomyTokens"), anatomyNote: $("anatomyNote"), copyReportButton: $("copyReportButton"), copySummaryButton: $("copySummaryButton"), copyCasePacketButton: $("copyCasePacketButton"), downloadCaseTextButton: $("downloadCaseTextButton"), downloadCasePacketButton: $("downloadCasePacketButton"), explainVerdictButton: $("explainVerdictButton"), copyStatus: $("copyStatus"), userViewButton: $("userViewButton"), analystViewButton: $("analystViewButton"), activeAudienceMode: $("activeAudienceMode"), reportDepthNote: $("reportDepthNote"), analystBriefList: $("analystBriefList"), analystBriefStatus: $("analystBriefStatus"), qrStartButton: $("qrStartButton"), qrStopButton: $("qrStopButton"), qrStatus: $("qrStatus"), qrCameraPanel: $("qrCameraPanel"), qrVideo: $("qrVideo"), memoryDashboardStatus: $("memoryDashboardStatus"), memoryTotalScans: $("memoryTotalScans"), memoryRootCount: $("memoryRootCount"), memoryFamilyCount: $("memoryFamilyCount"), memoryRootList: $("memoryRootList"), memoryFamilyList: $("memoryFamilyList"), copyMemorySummaryButton: $("copyMemorySummaryButton"), downloadMemoryJsonButton: $("downloadMemoryJsonButton"), clearPatternMemoryButton: $("clearPatternMemoryButton"), memoryDashboardNote: $("memoryDashboardNote"), onlineConsentStatus: $("onlineConsentStatus"), onlineConsentDetail: $("onlineConsentDetail"), enableOnlineConsentButton: $("enableOnlineConsentButton"), revokeOnlineConsentButton: $("revokeOnlineConsentButton"), onlineScopeList: $("onlineScopeList"), onlinePrivacyList: $("onlinePrivacyList"), onlineRunPreviewButton: $("onlineRunPreviewButton"), onlineLookupLinksButton: $("onlineLookupLinksButton"), onlineRdapLookupButton: $("onlineRdapLookupButton"), onlineRdapStatus: $("onlineRdapStatus"), onlineRdapResult: $("onlineRdapResult"), onlineArchitectureNote: $("onlineArchitectureNote"), onlineFindingsNotes: $("onlineFindingsNotes"), saveOnlineFindingsButton: $("saveOnlineFindingsButton"), clearOnlineFindingsButton: $("clearOnlineFindingsButton"), onlineFindingsStatus: $("onlineFindingsStatus"), onlineProviderSlotList: $("onlineProviderSlotList"), onlineReadinessList: $("onlineReadinessList"), onlineReadinessStatus: $("onlineReadinessStatus"), browserTestStatus: $("browserTestStatus"), browserChecklistList: $("browserChecklistList"), browserPassRuleList: $("browserPassRuleList"), copyBrowserChecklistButton: $("copyBrowserChecklistButton"), downloadBrowserChecklistButton: $("downloadBrowserChecklistButton"), browserTestNote: $("browserTestNote"), offlineLabStatus: $("offlineLabStatus"), offlineLabList: $("offlineLabList"), offlineLabResults: $("offlineLabResults"), loadOfflineLabSamplesButton: $("loadOfflineLabSamplesButton"), runOfflineLabButton: $("runOfflineLabButton"), copyOfflineLabReportButton: $("copyOfflineLabReportButton"), offlineLabNote: $("offlineLabNote"), buildVersionLabel: $("buildVersionLabel"), buildLayerLabel: $("buildLayerLabel"), buildOfflineStatus: $("buildOfflineStatus"), buildOnlineStatus: $("buildOnlineStatus"), buildRcStatus: $("buildRcStatus"), buildTrustNote: $("buildTrustNote"), copyBuildInfoButton: $("copyBuildInfoButton")
+    severityMix: $("severityMix"), severityNote: $("severityNote"), decisionStatus: $("decisionStatus"), decisionList: $("decisionList"), heatFill: $("heatFill"), heatLabel: $("heatLabel"), primaryTrigger: $("primaryTrigger"), laneQuality: $("laneQuality"), evidenceStrength: $("evidenceStrength"), confidenceBrief: $("confidenceBrief"), whyScore: $("whyScore"), scanMemory: $("scanMemory"), compareLast: $("compareLast"), actionTitle: $("actionTitle"), actionText: $("actionText"), whyMatterTitle: $("whyMatterTitle"), whyMatterText: $("whyMatterText"), safetyTitle: $("safetyTitle"), safetyText: $("safetyText"), inputTypeLabel: $("inputTypeLabel"), reportTimestamp: $("reportTimestamp"), anatomyStatus: $("anatomyStatus"), anatomyProtocol: $("anatomyProtocol"), anatomyHost: $("anatomyHost"), anatomyRoot: $("anatomyRoot"), anatomyPath: $("anatomyPath"), anatomyQuery: $("anatomyQuery"), anatomyTokens: $("anatomyTokens"), anatomyNote: $("anatomyNote"), copyReportButton: $("copyReportButton"), copySummaryButton: $("copySummaryButton"), copyCasePacketButton: $("copyCasePacketButton"), downloadCaseTextButton: $("downloadCaseTextButton"), downloadCasePacketButton: $("downloadCasePacketButton"), explainVerdictButton: $("explainVerdictButton"), copyStatus: $("copyStatus"), userViewButton: $("userViewButton"), analystViewButton: $("analystViewButton"), activeAudienceMode: $("activeAudienceMode"), reportDepthNote: $("reportDepthNote"), analystBriefList: $("analystBriefList"), analystBriefStatus: $("analystBriefStatus"), qrStartButton: $("qrStartButton"), qrStopButton: $("qrStopButton"), qrStatus: $("qrStatus"), qrCameraPanel: $("qrCameraPanel"), qrVideo: $("qrVideo"), memoryDashboardStatus: $("memoryDashboardStatus"), memoryTotalScans: $("memoryTotalScans"), memoryRootCount: $("memoryRootCount"), memoryFamilyCount: $("memoryFamilyCount"), memoryRootList: $("memoryRootList"), memoryFamilyList: $("memoryFamilyList"), copyMemorySummaryButton: $("copyMemorySummaryButton"), downloadMemoryJsonButton: $("downloadMemoryJsonButton"), clearPatternMemoryButton: $("clearPatternMemoryButton"), memoryDashboardNote: $("memoryDashboardNote"), onlineConsentStatus: $("onlineConsentStatus"), onlineConsentDetail: $("onlineConsentDetail"), enableOnlineConsentButton: $("enableOnlineConsentButton"), revokeOnlineConsentButton: $("revokeOnlineConsentButton"), onlineScopeList: $("onlineScopeList"), onlinePrivacyList: $("onlinePrivacyList"), onlineRunPreviewButton: $("onlineRunPreviewButton"), onlineLookupLinksButton: $("onlineLookupLinksButton"), onlineRdapLookupButton: $("onlineRdapLookupButton"), onlineRdapStatus: $("onlineRdapStatus"), onlineRdapResult: $("onlineRdapResult"), onlineArchitectureNote: $("onlineArchitectureNote"), onlineFindingsNotes: $("onlineFindingsNotes"), saveOnlineFindingsButton: $("saveOnlineFindingsButton"), clearOnlineFindingsButton: $("clearOnlineFindingsButton"), onlineFindingsStatus: $("onlineFindingsStatus"), onlineProviderSlotList: $("onlineProviderSlotList"), onlineReadinessList: $("onlineReadinessList"), onlineReadinessStatus: $("onlineReadinessStatus")
   };
 
   const HISTORY_KEY = "proxuma-it-risk-score-cases-v2";
@@ -4706,13 +4623,28 @@
     if (els.anatomyPath) els.anatomyPath.textContent = anatomy.path || "—";
     if (els.anatomyQuery) els.anatomyQuery.textContent = anatomy.query || "—";
     if (els.anatomyTokens) els.anatomyTokens.textContent = anatomy.tokens || "—";
+
+    // Keep Link Anatomy dense: short/absent values should not consume full-width cards.
+    const anatomyValueState = (field, value) => {
+      const row = document.querySelector(`[data-anatomy-field="${field}"]`);
+      if (!row) return;
+      const text = String(value || "—").trim();
+      const isEmpty = text === "—" || /^No (query parameters|obvious structural risk tokens|URL query|URL tokens)$/i.test(text);
+      const isLong = text.length > 46 || text.includes(", ") && text.length > 34;
+      row.classList.toggle("anatomy-value-empty", isEmpty);
+      row.classList.toggle("anatomy-value-long", !isEmpty && isLong);
+      row.classList.toggle("anatomy-value-present", !isEmpty);
+    };
+    anatomyValueState("path", anatomy.path);
+    anatomyValueState("query", anatomy.query);
+    anatomyValueState("tokens", anatomy.tokens);
     if (els.anatomyNote) els.anatomyNote.textContent = anatomy.note || "Structure details appear after a scan.";
     if (anatomyCard) {
       anatomyCard.classList.toggle("anatomy-populated", !!report.raw);
       anatomyCard.classList.toggle("anatomy-empty", !report.raw);
     }
 
-    if (els.copyStatus && !report.raw) els.copyStatus.textContent = "Run a scan, then use Copy Simple Report for the easy version. Signal evidence stays tucked away.";
+    if (els.copyStatus && !report.raw) els.copyStatus.textContent = "Run a scan, then copy the summary or open Export for more formats.";
     if (els.whyScore) { els.whyScore.textContent = report.whyScore || "Waiting for local evidence."; els.whyScore.className = numberClass; }
     if (els.laneQuality) { els.laneQuality.textContent = report.laneQuality || "Standby"; els.laneQuality.className = numberClass; }
     if (els.evidenceStrength) { els.evidenceStrength.textContent = report.evidenceStrength || "Waiting"; els.evidenceStrength.className = numberClass; }
@@ -5289,195 +5221,6 @@
 
 
 
-  function buildDeployInfoText(){
-    const consent = readOnlineConsent();
-    const armed = consent && consent.status === "armed";
-    return [
-      "Proxuma IT " + BUILD.version,
-      "Layer: " + BUILD.name,
-      "Mode: Offline-first active",
-      "Online Intel: " + (armed ? "Consent gate armed; RDAP button available on Vercel only" : "Locked / consent required"),
-      "Release status: v3.29.4 Encoded Risk Token Alignment active",
-      "Privacy: no hidden API calls, no telemetry, no automatic provider lookup; RDAP runs only by user click after consent",
-      "Use: upload the clean release root files to GitHub Pages after local/browser verification; keep working-history archives separate"
-    ].join("\n");
-  }
-
-  function renderBuildBanner(){
-    const consent = readOnlineConsent();
-    const armed = consent && consent.status === "armed";
-    if (els.buildVersionLabel) els.buildVersionLabel.textContent = "Proxuma IT " + BUILD.version;
-    if (els.buildLayerLabel) els.buildLayerLabel.textContent = BUILD.name;
-    if (els.buildOfflineStatus) els.buildOfflineStatus.textContent = "Offline-first active";
-    if (els.buildOnlineStatus) {
-      els.buildOnlineStatus.textContent = armed ? "Online Intel armed / RDAP click-gated" : "Online Intel locked / consent required";
-      els.buildOnlineStatus.className = "status-pill " + (armed ? "status-medium" : "status-low");
-    }
-    if (els.buildRcStatus) els.buildRcStatus.textContent = "v3.29.3 RDAP Fallback";
-    if (els.buildTrustNote) els.buildTrustNote.textContent = "v3.29.4 preserves the offline engine, compact UI, case export, local history, Link Anatomy, consolidated examples, Online Intel notes, provider slots, readiness checks, and serverless bridge prototype. RDAP lookup is user-clicked and consent-gated with host-aware fallback; no hidden API calls, no telemetry, and no automatic provider lookup in " + BUILD.version + ".";
-  }
-
-  function copyBuildInfo(){
-    copyText(buildDeployInfoText(), "Build info");
-  }
-
-  function makeBrowserRcChecklist(){
-    return [
-      "Open index.html locally in Safari on Mac and confirm the app loads without a blank page, white-card regression, or blocked scanner surface.",
-      "Open the same package in Chrome/Edge and confirm the scanner, Analysis Layers drawer, Case File, and buttons initialize without console-breaking errors.",
-      "Run a trusted official login scan such as https://accounts.google.com/signin/v2/identifier and confirm it stays Low Risk.",
-      "Run a normal bank homepage scan such as https://www.rbcroyalbank.com and confirm it remains reasonable, not falsely high-risk.",
-      "Run the Google share wrapper test https://share.google/surgTxHX2kn4OsXsf and confirm it does not receive blind perfect trust.",
-      "Run at least three suspicious samples: parking/toll, delivery/customs, and fake government/refund; confirm the correct lane appears.",
-      "Paste a decoded QR payload manually and confirm Proxuma scans it even if camera scanning is blocked.",
-      "Tap Start QR Scan only after page load. Confirm camera permission is user-triggered. If native QR support is unavailable, confirm manual QR text paste still works.",
-      "Use Copy Simple Report, Copy Full Report, Copy Case Packet, and Download JSON after a scan; confirm the v3.14 export envelope is still present.",
-      "Open Scan Memory, confirm local pattern counts update after repeated scans, then test Copy Memory Summary and Export Local Notes.",
-      "Open Online Intel Gate, arm consent, preview scope, review provider slots, generate lookup links, and run RDAP lookup only on a Vercel preview. Confirm no lookup runs before the user clicks the RDAP button.",
-      "Deploy to GitHub Pages or Vercel preview and repeat one clean scan, one suspicious scan, QR/manual fallback, copy report, and JSON download.",
-      "Final pass rule: no console-breaking errors, no hidden online calls, no layout blocking on mobile, and all offline-first promises remain accurate."
-    ];
-  }
-
-  function makeBrowserPassRules(){
-    return [
-      "Safari, Chrome, and mobile must all load the scanner surface.",
-      "QR camera permission must only request access after the user taps Start QR Scan.",
-      "Browser-dependent QR camera support must not block manual QR text paste scanning.",
-      "Online Intel remains consent-first; RDAP is the only live provider bridge and only runs after explicit user click on a serverless deploy.",
-      "Case packet and memory exports must work after a scan.",
-      "The app must remain usable when localStorage is empty, blocked, or cleared.",
-      "The public page must not show debug/deploy clutter; build/version identity remains available through release/support text."
-    ];
-  }
-
-  function buildBrowserChecklistText(){
-    const checks = makeBrowserRcChecklist();
-    const rules = makeBrowserPassRules();
-    return [
-      "Proxuma IT " + BUILD.version + " " + BUILD.name,
-      "",
-      "Critical browser checks:",
-      ...checks.map((item, index) => (index + 1) + ". " + item),
-      "",
-      "Pass rules:",
-      ...rules.map((item, index) => "- " + item),
-      "",
-      "Privacy note: this checklist is local/human validation. It does not activate online intelligence or send scan targets to providers."
-    ].join("\n");
-  }
-
-  function renderBrowserTestPanel(){
-    const checks = makeBrowserRcChecklist();
-    const rules = makeBrowserPassRules();
-    if (els.browserChecklistList) {
-      els.browserChecklistList.innerHTML = checks.map(item => "<li>" + escapeHtml(item) + "</li>").join("");
-    }
-    if (els.browserPassRuleList) {
-      els.browserPassRuleList.innerHTML = rules.map(item => "<li>" + escapeHtml(item) + "</li>").join("");
-    }
-    if (els.browserTestStatus) els.browserTestStatus.textContent = "Browser checklist ready";
-    if (els.browserTestNote) els.browserTestNote.textContent = "Run this before a public lock. The checklist checks behavior, not hidden cloud calls.";
-  }
-
-  function copyBrowserChecklist(){
-    copyText(buildBrowserChecklistText(), "Browser test checklist");
-  }
-
-  function downloadBrowserChecklist(){
-    const text = buildBrowserChecklistText();
-    try {
-      const blob = new Blob([text], {type:"text/plain"});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "PROXUMA_IT_v3.29.3_RDAP_FALLBACK_HOST_AWARENESS_CHECKLIST.txt";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      if (els.copyStatus) els.copyStatus.textContent = "Browser test checklist downloaded.";
-    } catch(error) {
-      copyText(text, "Browser test checklist fallback");
-    }
-  }
-
-
-  const OFFLINE_LAB_SAMPLES = [
-    { id:"trusted-bank-home", label:"Trusted bank homepage", expected:"Low Risk", input:"https://www.rbcroyalbank.com/", note:"Known official homepage should not be punished by normal banking language." },
-    { id:"leetspeak-bank", label:"Leetspeak bank login", expected:"High Risk", input:"https://secure-l0gin-rbc.verify-account.example/login", note:"Brand impersonation and login pressure should land in a hard-stop lane." },
-    { id:"qr-parking-toll", label:"Parking / toll QR lure", expected:"High Risk", input:"Pay unpaid parking violation today. Scan QR or visit https://pay-parking-ticket.example/plate/verify to avoid penalty.", note:"Parking/toll pressure is covered by the offline QR scam lane." },
-    { id:"otp-code-theft", label:"OTP / verification code lure", expected:"High Risk", input:"Support case 4821: share the 6 digit verification number we sent to your phone to stop account suspension.", note:"One-time-code theft should remain a high-risk social-engineering pattern." },
-    { id:"delivery-customs", label:"Delivery / customs fee", expected:"High Risk", input:"Your parcel is held at customs. Confirm address and pay the release fee at https://parcel-release-fee.example/track", note:"Carrier/customs pressure should trigger the parcel scam classifier." },
-    { id:"safe-docs", label:"Official Google sign-in", expected:"Low Risk", input:"https://accounts.google.com/signin/v2/identifier", note:"Known official roots should stay calm unless hard-stop evidence appears." }
-  ];
-  let lastOfflineLabReport = "";
-
-  function classifyLabMatch(report, expected){
-    if (!report || !expected) return "review";
-    if (report.risk === expected) return "pass";
-    if (expected === "Low Risk" && report.risk === "Needs Review") return "watch";
-    return "check";
-  }
-
-  function buildOfflineLabReport(){
-    const rows = OFFLINE_LAB_SAMPLES.map(sample => {
-      const report = analyze(sample.input);
-      const status = classifyLabMatch(report, sample.expected);
-      return {
-        sample,
-        report,
-        status,
-        line: sample.label + " — expected " + sample.expected + ", got " + report.risk + " / score " + report.score + " / lane " + (report.threatLaneLabel || report.threatLaneId || "n/a") + " / " + status.toUpperCase()
-      };
-    });
-    const passCount = rows.filter(row => row.status === "pass" || row.status === "watch").length;
-    return {
-      rows,
-      text: [
-        "Proxuma IT " + BUILD.version + " Local Sample Check",
-        "Mode: local-only sample analysis; no fetch, API, telemetry, camera, or provider lookup",
-        "Memory boundary: sample checks use local analysis directly and do not save to local scan memory",
-        "Matched results: " + passCount + "/" + rows.length,
-        "",
-        ...rows.map(row => "- " + row.line + "\n  Note: " + row.sample.note),
-        "",
-        "Release rule: review any CHECK result before publishing. WATCH is acceptable only when a trusted sample is cautiously Needs Review instead of falsely High Risk."
-      ].join("\n")
-    };
-  }
-
-  function renderOfflineLabSamples(){
-    if (!els.offlineLabList) return;
-    els.offlineLabList.innerHTML = OFFLINE_LAB_SAMPLES.map(sample => "<li><button class=\"ghost-button compact-copy offline-lab-load\" type=\"button\" data-offline-lab-sample=\"" + escapeHtml(sample.id) + "\">Load</button> <b>" + escapeHtml(sample.label) + "</b><br><small>Expected: " + escapeHtml(sample.expected) + " · " + escapeHtml(sample.note) + "</small></li>").join("");
-    if (typeof els.offlineLabList.querySelectorAll === "function") els.offlineLabList.querySelectorAll("[data-offline-lab-sample]").forEach(button => {
-      button.addEventListener("click", () => {
-        const sample = OFFLINE_LAB_SAMPLES.find(item => item.id === button.getAttribute("data-offline-lab-sample"));
-        if (!sample) return;
-        els.input.value = sample.input;
-        runScan();
-        if (els.copyStatus) els.copyStatus.textContent = "Local sample loaded and scanned: " + sample.label + ".";
-      });
-    });
-    if (els.offlineLabStatus) els.offlineLabStatus.textContent = OFFLINE_LAB_SAMPLES.length + " samples ready";
-  }
-
-  function runOfflineLabBatch(){
-    const lab = buildOfflineLabReport();
-    lastOfflineLabReport = lab.text;
-    if (els.offlineLabResults) {
-      els.offlineLabResults.innerHTML = lab.rows.map(row => "<li class=\"offline-lab-" + escapeHtml(row.status) + "\"><b>" + escapeHtml(row.sample.label) + "</b><br><small>Expected " + escapeHtml(row.sample.expected) + " · Got " + escapeHtml(row.report.risk) + " · Score " + escapeHtml(String(row.report.score)) + " · " + escapeHtml((row.report.threatLaneLabel || row.report.primaryTrigger || "local evidence")) + "</small></li>").join("");
-    }
-    if (els.offlineLabStatus) els.offlineLabStatus.textContent = "Checks complete";
-    if (els.offlineLabNote) els.offlineLabNote.textContent = "Local checks complete. Sample scans were not saved to scan memory and no provider was contacted.";
-    if (els.copyStatus) els.copyStatus.textContent = "Local sample checks completed on this device.";
-  }
-
-  function copyOfflineLabReport(){
-    if (!lastOfflineLabReport) lastOfflineLabReport = buildOfflineLabReport().text;
-    copyText(lastOfflineLabReport, "local sample check summary");
-  }
-
 
   function runScan(){
     const previousScan = readLastScan();
@@ -5672,12 +5415,10 @@
   if (els.onlineRdapLookupButton) els.onlineRdapLookupButton.addEventListener("click", runConsentGatedRdapLookup);
   if (els.saveOnlineFindingsButton) els.saveOnlineFindingsButton.addEventListener("click", saveOnlineFindingsNotes);
   if (els.clearOnlineFindingsButton) els.clearOnlineFindingsButton.addEventListener("click", clearOnlineFindingsNotes);
-  if (els.copyBrowserChecklistButton) els.copyBrowserChecklistButton.addEventListener("click", copyBrowserChecklist);
-  if (els.downloadBrowserChecklistButton) els.downloadBrowserChecklistButton.addEventListener("click", downloadBrowserChecklist);
-  if (els.loadOfflineLabSamplesButton) els.loadOfflineLabSamplesButton.addEventListener("click", renderOfflineLabSamples);
-  if (els.runOfflineLabButton) els.runOfflineLabButton.addEventListener("click", runOfflineLabBatch);
-  if (els.copyOfflineLabReportButton) els.copyOfflineLabReportButton.addEventListener("click", copyOfflineLabReport);
-  if (els.copyBuildInfoButton) els.copyBuildInfoButton.addEventListener("click", copyBuildInfo);
+
+
+
+
   if (els.copyReportButton) els.copyReportButton.addEventListener("click", copyFullReport);
   if (els.copySummaryButton) els.copySummaryButton.addEventListener("click", copyCleanSummary);
   if (els.copyCasePacketButton) els.copyCasePacketButton.addEventListener("click", copyCasePacket);
@@ -5736,25 +5477,90 @@
   }
 
   function setupIntelligenceDrawer(){
-    const tabs = Array.from(document.querySelectorAll(".drawer-tab"));
-    const panels = Array.from(document.querySelectorAll(".drawer-panel"));
-    if (!tabs.length || !panels.length) return;
-    function activate(targetId){
+    const drawer = document.getElementById("details");
+    const tabList = drawer ? drawer.querySelector(".drawer-tabs") : null;
+    const stage = drawer ? drawer.querySelector(".drawer-stage") : null;
+    const tabs = drawer ? Array.from(drawer.querySelectorAll(".drawer-tab")) : [];
+    const panels = drawer ? Array.from(drawer.querySelectorAll(".drawer-panel")) : [];
+    if (!drawer || !tabList || !stage || !tabs.length || !panels.length) return;
+
+    let mobilePicker = drawer.querySelector(".mobile-investigation-picker");
+    let mobileSelect = null;
+    let mobileCurrent = null;
+
+    if (!mobilePicker) {
+      mobilePicker = document.createElement("div");
+      mobilePicker.className = "mobile-investigation-picker";
+      mobilePicker.innerHTML = `
+        <label for="mobileInvestigationSelect">Choose information</label>
+        <select id="mobileInvestigationSelect" aria-label="Choose investigation information"></select>
+        <p class="mobile-investigation-current" aria-live="polite"></p>
+      `;
+      tabList.insertAdjacentElement("afterend", mobilePicker);
+    }
+
+    mobileSelect = mobilePicker.querySelector("select");
+    mobileCurrent = mobilePicker.querySelector(".mobile-investigation-current");
+    mobileSelect.innerHTML = "";
+    tabs.forEach(tab => {
+      if (tab.hidden) return;
+      const option = document.createElement("option");
+      option.value = tab.getAttribute("data-drawer-target") || "";
+      option.textContent = tab.textContent.trim();
+      mobileSelect.appendChild(option);
+    });
+
+    function activate(targetId, options = {}){
+      let activePanel = null;
+      let activeTab = null;
       tabs.forEach(tab => {
         const isActive = tab.getAttribute("data-drawer-target") === targetId;
         tab.classList.toggle("active", isActive);
         tab.setAttribute("aria-selected", isActive ? "true" : "false");
+        if (isActive) activeTab = tab;
       });
       panels.forEach(panel => {
         const isActive = panel.id === targetId;
         panel.classList.toggle("active", isActive);
         panel.hidden = !isActive;
+        if (isActive) activePanel = panel;
       });
+      if (!activePanel || !activeTab) return;
+
+      if (mobileSelect && Array.from(mobileSelect.options).some(option => option.value === targetId)) {
+        mobileSelect.value = targetId;
+      }
+      if (mobileCurrent) {
+        mobileCurrent.textContent = `Showing: ${activeTab.textContent.trim()}`;
+      }
+
+      if (window.matchMedia("(max-width: 900px)").matches) {
+        let marker = activePanel.querySelector(":scope > .drawer-panel-mobile-marker");
+        if (!marker) {
+          marker = document.createElement("span");
+          marker.className = "drawer-panel-mobile-marker";
+          activePanel.insertBefore(marker, activePanel.firstChild);
+        }
+        marker.textContent = `Selected view · ${activeTab.textContent.trim()}`;
+
+        if (options.reveal !== false) {
+          window.requestAnimationFrame(() => {
+            activePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+            const heading = activePanel.querySelector("h3");
+            if (heading) {
+              heading.setAttribute("tabindex", "-1");
+              window.setTimeout(() => heading.focus({ preventScroll: true }), 350);
+            }
+          });
+        }
+      }
     }
+
     tabs.forEach(tab => {
-      tab.addEventListener("click", () => activate(tab.getAttribute("data-drawer-target")));
+      tab.addEventListener("click", () => activate(tab.getAttribute("data-drawer-target"), { reveal: true }));
     });
-    activate("explainPanel");
+    mobileSelect.addEventListener("change", () => activate(mobileSelect.value, { reveal: true }));
+    activate("explainPanel", { reveal: false });
   }
 
 
@@ -5820,7 +5626,6 @@
   setAudienceView(audienceView, false);
   renderReport(emptyReport());
   renderHistory();
-  renderBrowserTestPanel();
-  renderOfflineLabSamples();
-  renderBuildBanner();
+
+
 })();

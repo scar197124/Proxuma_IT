@@ -13044,3 +13044,128 @@ body.focus-reading-active{
 @media (min-width:901px){
   #details .drawer-panel-mobile-marker{display:none!important;}
 }
+
+
+/* === Proxuma IT v3.47.5 — Mobile investigation picker + unmistakable result placement === */
+.mobile-investigation-picker{display:none;}
+@media (max-width:900px){
+  #details .drawer-tabs{display:none!important;}
+  #details .mobile-investigation-picker{
+    display:grid!important;
+    gap:7px!important;
+    width:100%!important;
+    padding:12px!important;
+    border-bottom:1px solid rgba(151,196,224,.18)!important;
+    background:rgba(6,17,27,.94)!important;
+  }
+  #details .mobile-investigation-picker label{
+    margin:0!important;
+    font-size:.75rem!important;
+    font-weight:800!important;
+    letter-spacing:.08em!important;
+    text-transform:uppercase!important;
+    color:var(--muted,#9fb0bf)!important;
+  }
+  #details .mobile-investigation-picker select{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:48px!important;
+    padding:10px 42px 10px 12px!important;
+    border:1px solid rgba(151,196,224,.32)!important;
+    border-radius:10px!important;
+    background:var(--panel,#0b1116)!important;
+    color:var(--text,#f3f7fa)!important;
+    font:inherit!important;
+    font-weight:750!important;
+  }
+  #details .mobile-investigation-current{
+    margin:0!important;
+    color:var(--accent,#7fd7ff)!important;
+    font-size:.82rem!important;
+    font-weight:750!important;
+  }
+  #details .drawer-stage{
+    padding:10px!important;
+    border-top:0!important;
+  }
+  #details .drawer-panel:not([hidden]){
+    scroll-margin-top:12px!important;
+    border:1px solid rgba(151,196,224,.24)!important;
+    border-radius:12px!important;
+    background:rgba(10,22,32,.72)!important;
+    box-shadow:0 10px 28px rgba(0,0,0,.18)!important;
+  }
+  #details .drawer-panel-mobile-marker{
+    padding-bottom:8px!important;
+    border-bottom:1px solid rgba(151,196,224,.16)!important;
+    color:var(--accent,#7fd7ff)!important;
+  }
+}
+
+
+/* v3.48.0 Focused public interface */
+.compact-advanced-disclosure,.export-menu,.privacy-data-controls,.online-advanced-disclosure{width:100%;}
+.compact-advanced-disclosure>summary,.export-menu>summary,.privacy-data-controls>summary,.online-advanced-disclosure>summary{cursor:pointer;font-weight:700;list-style:none;}
+.compact-advanced-disclosure>summary::-webkit-details-marker,.export-menu>summary::-webkit-details-marker,.privacy-data-controls>summary::-webkit-details-marker,.online-advanced-disclosure>summary::-webkit-details-marker{display:none;}
+.focused-report-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.65rem;align-items:start;}
+.export-menu>summary,.privacy-data-controls>summary,.compact-advanced-disclosure>summary,.online-advanced-disclosure>summary{min-height:42px;padding:.65rem .8rem;border:1px solid var(--line,rgba(255,255,255,.15));border-radius:12px;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between;}
+.export-menu>summary::after,.privacy-data-controls>summary::after,.compact-advanced-disclosure>summary::after,.online-advanced-disclosure>summary::after{content:"+";}
+.export-menu[open]>summary::after,.privacy-data-controls[open]>summary::after,.compact-advanced-disclosure[open]>summary::after,.online-advanced-disclosure[open]>summary::after{content:"−";}
+.export-menu .advanced-evidence-actions,.privacy-data-actions{display:grid;gap:.55rem;margin-top:.6rem;}
+.public-secondary-info{margin-top:.8rem;}
+.online-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem;}
+.online-actions .danger-action,.online-actions .online-advanced-disclosure{grid-column:1/-1;}
+@media(max-width:700px){.focused-report-actions,.online-actions{grid-template-columns:1fr}.public-secondary-info{font-size:.94rem}.audience-switch .compact-advanced-disclosure{margin-top:.55rem}.privacy-data-controls{margin-top:.55rem}}
+
+
+/* v3.48.1 — Content-aware Link Anatomy density
+   Keep short/absent Path, Query, and Risk Token values from creating large empty cards. */
+@media (min-width: 761px){
+  .link-anatomy-card.anatomy-populated .link-anatomy-grid{
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    align-items:stretch;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-detail-row{
+    grid-column:span 2;
+    min-height:58px;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-path-row{
+    grid-column:span 3;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-query-row{
+    grid-column:span 3;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-token-row{
+    grid-column:1 / -1;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-detail-row.anatomy-value-empty{
+    grid-column:span 2;
+    min-height:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:7px 10px!important;
+    opacity:.72;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-detail-row.anatomy-value-empty strong{
+    margin-top:0;
+    font-size:.78rem;
+    text-align:right;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-detail-row.anatomy-value-long{
+    grid-column:1 / -1;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-token-row.anatomy-value-present:not(.anatomy-value-long){
+    grid-column:span 4;
+  }
+}
+@media (max-width: 760px){
+  .link-anatomy-card.anatomy-populated .anatomy-detail-row{
+    min-height:0;
+  }
+  .link-anatomy-card.anatomy-populated .anatomy-detail-row.anatomy-value-empty{
+    opacity:.7;
+  }
+}

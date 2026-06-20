@@ -10,7 +10,7 @@
 <meta content="dark" name="color-scheme"/>
 <meta content="Proxuma IT explains suspicious links, QR payloads, downloads, and message targets in plain language before you trust them." name="description"/>
 <link href="styles.css" rel="stylesheet"/>
-<meta content="v3.47.4-mobile-selected-panel-visibility" name="proxuma-build"/>
+<meta content="v3.49.0-stable-code-cleanup" name="proxuma-build"/>
 </head>
 <body class="simple-ui product-simplified">
 <div aria-hidden="true" class="ambient-grid"></div>
@@ -237,38 +237,38 @@
 <div class="anatomy-row"><span>Protocol</span><strong id="anatomyProtocol">—</strong></div>
 <div class="anatomy-row"><span>Host</span><strong id="anatomyHost">—</strong></div>
 <div class="anatomy-row"><span>Root Domain</span><strong id="anatomyRoot">—</strong></div>
-<div class="anatomy-row anatomy-wide"><span>Path</span><strong id="anatomyPath">—</strong></div>
-<div class="anatomy-row anatomy-wide"><span>Query</span><strong id="anatomyQuery">—</strong></div>
-<div class="anatomy-row anatomy-wide"><span>Risk Tokens</span><strong id="anatomyTokens">—</strong></div>
+<div class="anatomy-row anatomy-detail-row anatomy-path-row" data-anatomy-field="path"><span>Path</span><strong id="anatomyPath">—</strong></div>
+<div class="anatomy-row anatomy-detail-row anatomy-query-row" data-anatomy-field="query"><span>Query</span><strong id="anatomyQuery">—</strong></div>
+<div class="anatomy-row anatomy-detail-row anatomy-token-row" data-anatomy-field="tokens"><span>Risk Tokens</span><strong id="anatomyTokens">—</strong></div>
 </div>
 <p class="quiet-note" id="anatomyNote">Proxuma will break the target into readable parts after a scan.</p>
 </div>
 <div aria-label="Report view and copy actions" class="report-tools">
 <div aria-label="Report view selector" class="audience-switch report-meta-card">
 <small>Report View</small>
-<div aria-label="Choose report depth" class="audience-toggle-row" role="group">
-<button aria-pressed="true" class="audience-toggle active" id="userViewButton" type="button">User View</button>
-<button aria-pressed="false" class="audience-toggle" id="analystViewButton" type="button">Analyst View</button>
-</div>
+<button aria-pressed="true" class="audience-toggle active" id="userViewButton" type="button">Standard View</button>
+<details class="compact-advanced-disclosure">
+<summary>Advanced analysis</summary>
+<button aria-pressed="false" class="audience-toggle" id="analystViewButton" type="button">Open Analyst View</button>
+</details>
 <strong id="activeAudienceMode">User View</strong>
 <p class="quiet-note" id="reportDepthNote">Plain-language verdict and next move first.</p>
 </div>
-<div aria-label="Simple case controls" class="report-copy-actions simple-case-controls">
-<button class="ghost-button compact-copy primary-copy" id="copySummaryButton" type="button">Copy Simple Report</button>
+<div aria-label="Report actions" class="report-copy-actions simple-case-controls focused-report-actions">
+<button class="ghost-button compact-copy primary-copy" id="copySummaryButton" type="button">Copy Summary</button>
+<details class="advanced-evidence-tools export-menu">
+<summary>Export</summary>
+<div class="advanced-evidence-actions">
 <button class="ghost-button compact-copy" id="copyReportButton" type="button">Copy Full Report</button>
 <button class="ghost-button compact-copy" id="explainVerdictButton" type="button">Verdict Summary</button>
-<div class="technical-notes-label">Deeper Evidence / Technical Notes</div>
-<details class="advanced-evidence-tools">
-<summary>Signal Evidence</summary>
-<div class="advanced-evidence-actions">
 <button class="ghost-button compact-copy" id="copyCasePacketButton" type="button">Copy Case Packet</button>
 <button class="ghost-button compact-copy" id="downloadCaseTextButton" type="button">Download TXT</button>
 <button class="ghost-button compact-copy" id="downloadCasePacketButton" type="button">Download JSON</button>
 </div>
-<p class="quiet-note">For analyst review, support tickets, saved evidence, or future Proxuma imports. Download TXT for a readable case report; Download JSON for structured local evidence.</p>
+<p class="quiet-note">Choose a readable report, case packet, or structured evidence file.</p>
 </details>
 </div>
-<p aria-live="polite" class="copy-status" id="copyStatus">Run a scan, then use Copy Simple Report for the easy version. Deeper evidence and technical notes stay tucked away.</p>
+<p aria-live="polite" class="copy-status" id="copyStatus">Run a scan, then copy the summary or open Export for more formats.</p>
 </div>
 </div>
 </details>
@@ -405,7 +405,6 @@
 <button aria-selected="false" class="drawer-tab pill-action analyst-only" data-drawer-target="technicalPanel" role="tab" type="button">Details</button>
 <button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="memoryPanel" role="tab" type="button">Scan Memory</button>
 <button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="onlinePanel" role="tab" type="button">Online Intel</button>
-<button aria-selected="false" class="drawer-tab pill-action internal-only" data-drawer-target="browserTestPanel" hidden="" role="tab" type="button">Browser Check</button>
 </div>
 <div class="drawer-stage">
 <article class="drawer-panel active" id="explainPanel" role="tabpanel">
@@ -523,7 +522,7 @@
 <div class="memory-actions">
 <button class="ghost-button compact-copy" id="copyMemorySummaryButton" type="button">Copy Memory Summary</button>
 <button class="ghost-button compact-copy" id="downloadMemoryJsonButton" type="button">Export Local Notes</button>
-<button class="ghost-button compact-copy danger-action" id="clearPatternMemoryButton" type="button">Clear Pattern Memory</button>
+<details class="privacy-data-controls"><summary>Privacy &amp; local data</summary><button class="ghost-button compact-copy danger-action" id="clearPatternMemoryButton" type="button">Clear Pattern Memory</button></details>
 </div>
 <p class="muted" id="memoryDashboardNote">Memory stays in this browser only. It stores compact roots and signal families, not full browsing history.</p>
 </div>
@@ -532,21 +531,21 @@
 <div class="drawer-panel-head" data-tone="orange">
 <div>
 <p class="eyebrow">Optional Online Layer</p>
-<h3>Consent-first provider architecture</h3>
+<h3>Online intelligence</h3>
 </div>
 <span class="status-pill status-low" id="onlineConsentStatus">Offline locked</span>
 </div>
-<p class="card-summary status-low" id="onlinePreview">Offline result first. Provider slots are mapped and the serverless bridge blueprint is ready, but online intelligence is still consent-gated, user-opened only, and no hidden background requests run.</p>
+<p class="card-summary status-low" id="onlinePreview">Optional online checks remain off until you choose to enable them. No hidden background requests run.</p>
 <div aria-label="Consent-first online controls" class="online-consent-card">
-<p class="muted" id="onlineConsentDetail">No online checks can run from this build. The scanner, memory, QR, case packet, and serverless bridge blueprint remain local documentation only.</p>
+<p class="muted" id="onlineConsentDetail">Online checks are optional. Your local scan remains available without enabling them.</p>
 <div class="online-actions">
-<button class="ghost-button compact-copy" id="enableOnlineConsentButton" type="button">Enable Online Preview</button>
-<button class="ghost-button compact-copy" id="onlineRunPreviewButton" type="button">View Online Boundaries</button>
-<button class="ghost-button compact-copy" id="onlineLookupLinksButton" type="button">Generate Lookup Links</button>
-<button class="ghost-button compact-copy" id="onlineRdapLookupButton" type="button">Run RDAP Lookup</button>
-<button class="ghost-button compact-copy danger-action" id="revokeOnlineConsentButton" type="button">Clear Online Choice</button>
+<button class="ghost-button compact-copy" id="enableOnlineConsentButton" type="button">Enable Online Lookup</button>
+<details class="online-advanced-disclosure"><summary>How online checks work</summary><button class="ghost-button compact-copy" id="onlineRunPreviewButton" type="button">View Privacy Boundaries</button></details>
+<button class="ghost-button compact-copy" id="onlineLookupLinksButton" type="button">Check Online Sources</button>
+<button class="ghost-button compact-copy" id="onlineRdapLookupButton" type="button">Run Domain Check</button>
+<button class="ghost-button compact-copy danger-action" id="revokeOnlineConsentButton" type="button">Reset Online Permission</button>
 </div>
-<div aria-label="Online Intel readiness status" class="online-readiness-card">
+<div aria-label="Online Intel readiness status" class="online-readiness-card public-secondary-info">
 <div class="readiness-head">
 <h4>Online readiness</h4>
 <span class="status-pill status-low" id="onlineReadinessStatus">Offline / locked</span>
@@ -555,7 +554,7 @@
 <li>Readiness checks load locally. No provider is contacted.</li>
 </ul>
 </div>
-<div aria-label="Consent-gated RDAP result" class="online-rdap-result">
+<div aria-label="Consent-gated RDAP result" class="online-rdap-result public-secondary-info">
 <div class="readiness-head">
 <h4>RDAP bridge result</h4>
 <span class="status-pill status-low" id="onlineRdapStatus">Not run</span>
@@ -563,7 +562,7 @@
 <ul class="memory-list" id="onlineRdapResult"><li>No RDAP result saved for this scan yet.</li></ul>
 <p class="muted">Runs only after online consent is armed and the user clicks Run RDAP Lookup. If this page is on GitHub Pages or opened as a local file, RDAP will show a host-aware fallback. Deploy through Vercel for live bridge results.</p>
 </div>
-<div class="online-columns">
+<div class="online-columns public-secondary-info">
 <div>
 <h4>Online lookup launchpad</h4>
 <ul class="memory-list" id="onlineScopeList"><li>Arm consent and generate user-opened lookup links for the current scanned root.</li></ul>
@@ -590,33 +589,6 @@
 <p class="muted" id="onlineArchitectureNote">Optional online intelligence stays locked off until the user deliberately arms the explicit choice. External lookup links open only when the user clicks them; future automatic checks require the documented serverless bridge.</p>
 </div>
 </article>
-<article class="drawer-panel internal-only" hidden="" id="browserTestPanel" role="tabpanel">
-<div class="drawer-panel-head" data-tone="green">
-<div>
-<p class="eyebrow">Release Check</p>
-<h3>Browser and release check</h3>
-</div>
-<span class="status-pill" id="browserTestStatus">Ready to test</span>
-</div>
-<p class="card-summary" id="browserTestIntro">Use this checklist to confirm the public page works cleanly before release. v3.19 keeps the package clean, privacy-first, and honest about browser-dependent QR camera support.</p>
-<div aria-label="Browser check controls" class="browser-test-card">
-<div class="browser-test-actions">
-<button class="ghost-button compact-copy" id="copyBrowserChecklistButton" type="button">Copy Test Checklist</button>
-<button class="ghost-button compact-copy" id="downloadBrowserChecklistButton" type="button">Export Checklist</button>
-</div>
-<div class="online-columns">
-<div>
-<h4>Critical browser checks</h4>
-<ul class="memory-list" id="browserChecklistList"><li>Checklist loads after the app initializes.</li></ul>
-</div>
-<div>
-<h4>Pass rule</h4>
-<ul class="memory-list" id="browserPassRuleList"><li>Offline scans, QR fallback, memory, explicit choice, copy, and JSON export must all behave consistently before release.</li></ul>
-</div>
-</div>
-<p class="muted" id="browserTestNote">This panel does not run network tests. It gives a repeatable human test route so deployment issues are easier to catch, reproduce, and describe before public lock.</p>
-</div>
-</article>
 </div>
 
 </div>
@@ -629,8 +601,7 @@
 <textarea id="caseNotes" placeholder="Optional: add a private note to the current scan before saving it again." rows="4"></textarea>
 <div class="case-actions">
 <button id="saveCaseButton" type="button">Save Current Scan</button>
-<button class="ghost-button" id="clearHistoryButton" type="button">Clear Local History</button>
-<button class="ghost-button danger-action" id="clearAllLocalDataButton" type="button">Clear All Local Data</button>
+<details class="privacy-data-controls"><summary>Privacy &amp; local data</summary><div class="privacy-data-actions"><button class="ghost-button" id="clearHistoryButton" type="button">Clear Local History</button><button class="ghost-button danger-action" id="clearAllLocalDataButton" type="button">Clear All Local Data</button></div></details>
 </div>
 <ul aria-label="Local scan history" id="historyList"></ul>
 </div>
@@ -708,7 +679,7 @@
 </div>
 <a aria-label="Return to the main PROXUMA canonical homepage" class="ecosystem-return-button unified-control-button unified-home-control" href="https://scar197124.github.io/PROXUMA/">← PROXUMA Home</a>
 </section>
-<p aria-label="Proxuma IT release version" class="proxuma-release-stamp">Proxuma IT v3.47.4 · Mobile Investigation + Browser Check Fix</p>
+<p aria-label="Proxuma IT product statement" class="proxuma-release-stamp">Proxuma IT · Private by default</p>
 <section aria-hidden="true" class="hidden-support">
 <span hidden="" id="summarySupport"></span>
 </section>
