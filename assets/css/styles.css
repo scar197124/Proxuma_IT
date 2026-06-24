@@ -835,7 +835,7 @@ button:hover{border-color:rgba(103,240,167,.42)}
 .banner-header .header-banner{
   width:100%;
   aspect-ratio:3 / 1;
-  background-image:url('assets/proxuma-header-banner.png');
+  background-image:url('../images/proxuma-header-banner.png');
   background-size:cover;
   background-position:center center;
   background-repeat:no-repeat;
@@ -11619,7 +11619,7 @@ body.focus-reading-active{
   width:42px;
   height:42px;
   border-radius:11px;
-  background-image:url('assets/proxuma-header-banner.png');
+  background-image:url('../images/proxuma-header-banner.png');
   background-size:130px auto;
   background-position:left center;
   background-repeat:no-repeat;
@@ -13244,3 +13244,29 @@ button,a[role="button"],summary{touch-action:manipulation;}
 @media(max-width:820px){.guided-boundary-grid{grid-template-columns:1fr}.guided-result-heading{align-items:stretch}.guided-confidence-badge{align-self:flex-start}.guided-next-action{grid-template-columns:1fr;gap:.25rem}}
 
 .finding-confidence{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin:.55rem 0;padding:.55rem .7rem;border-radius:11px;background:rgba(255,255,255,.035);font-size:.8rem}.finding-confidence span{font-weight:900;color:#baffd7}.finding-evidence-details{margin-top:.65rem}.finding-evidence-details summary{cursor:pointer;font-weight:800;color:#bfd1db}.finding-evidence-details[open] summary{margin-bottom:.5rem}
+
+
+/* === Proxuma IT v3.52.3 — Reliable Header Navigation === */
+.simple-ui .compact-nav a:focus-visible,
+.simple-ui .compact-brand:focus-visible{
+  outline:2px solid #67f0a7;
+  outline-offset:3px;
+}
+@media(max-width:760px){
+  .simple-ui .site-header.compact-site-header{
+    grid-template-columns:minmax(0,1fr) auto;
+  }
+  .simple-ui .compact-nav{
+    grid-column:1 / -1;
+    width:100%;
+    justify-content:flex-start;
+    overflow-x:auto;
+    padding:2px 0 4px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .simple-ui .compact-nav a{
+    flex:0 0 auto;
+    background:rgba(255,255,255,.025);
+    border-color:rgba(111,141,171,.22);
+  }
+}
