@@ -1,4 +1,4 @@
-# Proxuma IT v3.49.0
+# Proxuma IT v3.52.2
 
 Proxuma IT is a browser-based, trust-centered investigation interface for reviewing suspicious links, text, QR content, and related evidence.
 
@@ -46,18 +46,34 @@ GitHub Pages serves the static interface but cannot execute `api/proxuma-rdap.js
 ## Repository structure
 
 - `index.html` — application markup
-- `styles.css` — responsive UI and focus-workspace styling
-- `proxuma-it.js` — primary scanning and application logic
-- Supporting JavaScript modules — workflow, focus, consistency, and grouped-panel behavior
-- `assets/` — required interface and QR-decoder assets
+- `assets/css/styles.css` — responsive UI and focus-workspace styling
+- `assets/js/proxuma-it.js` — primary scanning and application logic
+- `assets/js/` — supporting workflow, focus, consistency, and grouped-panel modules
+- `assets/images/` — required interface images
+- `assets/vendor/` — bundled local QR decoder and its license
 - `api/proxuma-rdap.js` — optional serverless RDAP bridge
 - `SECURITY.md` — security and responsible-use guidance
+- `CAPABILITY_MATRIX.md` — truthful capability, evidence, privacy, and limitation map
 - `CONTRIBUTING.md` — contribution guidance
+- `docs/` — current deployment and architecture documentation
+- `tests/` — current release regression test
 
 ## Release
 
-**v3.49.0 — Stable Code Cleanup**
+**v3.52.2 — Guided Results + Indexing Foundation**
 
-This release removes dead developer-only production code and stale DOM references while preserving the v3.48.1 public interface and scanner behavior.
+This release adds a guided result summary, explicit Observed / Interpreted / Not verified boundaries, confidence and recommended-action cues, collapsible technical evidence, canonical metadata, robots.txt, and sitemap.xml without changing the local analysis engine.
 
-Step 4 restores a compact stacked investigation rail beside a larger content-first reading surface. Scan Details gives more room to evidence and metrics, while controls use less vertical space across desktop and mobile.
+The interface remains offline-first. Optional online intelligence is still explicit, consent-gated, and deployment-dependent.
+
+
+## Search indexing
+
+The build includes `robots.txt`, `sitemap.xml`, canonical metadata, and social preview metadata for `https://scar197124.github.io/Proxuma_IT/`. If the repository slug changes, update that base URL in `index.html`, `robots.txt`, and `sitemap.xml` before deployment.
+
+
+## Clean repository policy
+
+This public package intentionally excludes legacy tests, superseded build manifests, old handoff notes, archived release notes, and nested deployment archives. Preserve historical material in Git history or in a separate archival release rather than in the active repository tree.
+
+Do not upload the ZIP file into the repository. Extract it, then commit the files with GitHub Desktop, Git, or a Git client.

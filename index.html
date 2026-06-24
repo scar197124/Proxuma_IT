@@ -8,23 +8,34 @@
 <!-- Compatibility markers: Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.74.0 / Proxuma IT v2.73.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1 -->
 <meta content="#070a0d" name="theme-color"/>
 <meta content="dark" name="color-scheme"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
 <meta content="Proxuma IT explains suspicious links, QR payloads, downloads, and message targets in plain language before you trust them." name="description"/>
-<link href="styles.css" rel="stylesheet"/>
-<meta content="v3.49.0-stable-code-cleanup" name="proxuma-build"/>
+<link rel="canonical" href="https://scar197124.github.io/Proxuma_IT/"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="Proxuma IT | Offline Link Intelligence Before You Click"/>
+<meta property="og:description" content="Check suspicious links, QR payloads, downloads, and message targets locally before you trust them."/>
+<meta property="og:url" content="https://scar197124.github.io/Proxuma_IT/"/>
+<meta property="og:image" content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-it-logo.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link href="assets/css/styles.css" rel="stylesheet"/>
+<meta content="v3.52.2-learning-clarity" name="proxuma-build"/>
 </head>
 <body class="simple-ui product-simplified">
+<noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
+<a class="skip-link" href="#main-content">Skip to scanner</a>
 <div aria-hidden="true" class="ambient-grid"></div>
 <header class="site-header compact-site-header">
-<a aria-label="Proxuma IT home" class="compact-brand" href="#top">
+<a aria-label="Proxuma IT home" class="compact-brand" href="#main-content">
 <span aria-hidden="true" class="compact-brand-mark"></span>
 <span class="compact-brand-copy"><strong>Proxuma IT</strong><small>Offline link intelligence</small></span>
 </a>
 <span aria-label="Local preview, private by default" class="compact-header-status compact-trust-status">Local preview · Private by default</span>
 </header>
-<main class="page" id="top">
+<main class="page" id="main-content" tabindex="-1">
 <section class="hero hero-framed compact-centered-hero" aria-labelledby="hero-title">
 <div class="hero-frame-inner">
-<p class="eyebrow hero-product-mark">Proxuma ID</p>
+<p class="eyebrow hero-product-mark">Proxuma IT</p>
 <h1 id="hero-title">Check the link before you trust it.</h1>
 <p class="lead">Scan a QR code, paste a message, or inspect a URL locally before opening it.</p>
 <div class="hero-action-row">
@@ -94,10 +105,10 @@
 <span aria-live="polite" class="detected-input-type" id="detectedInputType">Detected: waiting for input</span>
 </div>
 <div class="input-row">
-<input autocomplete="off" id="targetInput" placeholder="Paste a suspicious link, message, QR result, or copied email text" spellcheck="false" type="text"/>
+<input autocomplete="off" aria-describedby="scannerInputHelp detectedInputType" enterkeyhint="go" id="targetInput" placeholder="Paste a suspicious link, message, QR result, or copied email text" spellcheck="false" type="text"/>
 <button id="scanButton" type="button"><span>Analyze</span><small>Safely</small></button>
 </div>
-<p class="unified-input-note">Paste the full message when possible. Context helps Proxuma explain the safest next move.</p>
+<p class="unified-input-note" id="scannerInputHelp">Paste the full message when possible. Context helps Proxuma explain the safest next move.</p>
 <div aria-label="Accepted input types" class="input-type-chips">
 <span>URL</span>
 <span>IP</span>
@@ -146,8 +157,8 @@
 </summary>
 <div class="simple-disclosure-body">
 <div aria-label="Teaching mode guidance" class="teaching-card">
-<strong>Learning Mode</strong>
-<p>Proxuma explains the strongest signal and safest next move in plain language.</p>
+<strong>Plain-language guidance</strong>
+<p>Proxuma keeps scan explanations readable without changing how the local scanner evaluates evidence.</p>
 </div>
 <div class="mode-card">
 <div class="mini-head">
@@ -219,6 +230,36 @@
 </div>
 </div>
 </div>
+<section class="guided-result-card" aria-labelledby="guidedResultTitle" id="guidedResultSummary">
+  <div class="guided-result-heading">
+    <div>
+      <p class="eyebrow">Guided Result</p>
+      <h3 id="guidedResultTitle">What this scan means</h3>
+    </div>
+    <span class="guided-confidence-badge" id="guidedConfidenceBadge">Confidence: waiting</span>
+  </div>
+  <p class="guided-result-lead" id="guidedResultLead">Run a scan to receive a plain-language result and one recommended next action.</p>
+  <div class="guided-boundary-grid">
+    <article class="guided-boundary observed">
+      <span>Observed</span>
+      <strong id="guidedObservedTitle">No local evidence yet</strong>
+      <p id="guidedObservedText">Proxuma will list evidence directly visible to the local scanner.</p>
+    </article>
+    <article class="guided-boundary unverified">
+      <span>Not verified</span>
+      <strong>External ownership and reputation</strong>
+      <p id="guidedUnverifiedText">Domain ownership, live reputation, redirects, and certificates are not checked unless you separately choose an available online tool.</p>
+    </article>
+  </div>
+  <div class="guided-next-action">
+    <span>Recommended next action</span>
+    <strong id="guidedNextAction">Scan first</strong>
+  </div>
+  <details class="guided-evidence-details">
+    <summary>Review supporting evidence</summary>
+    <ul id="guidedEvidenceList"><li>Evidence will appear after a scan.</li></ul>
+  </details>
+</section>
 <details class="simple-disclosure report-details-disclosure unified-control-section">
 <summary aria-label="Toggle More Report Details">
 <span><strong>More report details</strong><small>Link anatomy, report views, copying, and evidence export</small></span>
@@ -400,7 +441,7 @@
 <button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="timelinePanel" role="tab" type="button">Trust Timeline</button>
 <button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="threatPanel" role="tab" type="button">Threat Story</button>
 <button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="decisionPanel" role="tab" type="button">Decision Guide</button>
-<button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="learningPanel" role="tab" type="button">Learning Note</button>
+<button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="learningPanel" role="tab" type="button">Safety Takeaway</button>
 <button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="analystBriefPanel" role="tab" type="button">Brief</button>
 <button aria-selected="false" class="drawer-tab pill-action analyst-only" data-drawer-target="technicalPanel" role="tab" type="button">Details</button>
 <button aria-selected="false" class="drawer-tab pill-action" data-drawer-target="memoryPanel" role="tab" type="button">Scan Memory</button>
@@ -456,12 +497,12 @@
 <article class="drawer-panel" hidden="" id="learningPanel" role="tabpanel">
 <div class="drawer-panel-head" data-tone="green">
 <div>
-<p class="eyebrow">Learning Note</p>
-<h3>Pattern memory</h3>
+<p class="eyebrow">Safety Takeaway</p>
+<h3>What to remember next time</h3>
 </div>
 <span class="status-pill" id="learningStatus">Training ready</span>
 </div>
-<p class="card-summary" id="learningText">The learning note will show what to look for next time.</p>
+<p class="card-summary" id="learningText">A scan-specific safety takeaway will appear here.</p>
 </article>
 <article class="drawer-panel" hidden="" id="analystBriefPanel" role="tabpanel">
 <div class="drawer-panel-head" data-tone="green">
@@ -679,17 +720,18 @@
 </div>
 <a aria-label="Return to the main PROXUMA canonical homepage" class="ecosystem-return-button unified-control-button unified-home-control" href="https://scar197124.github.io/PROXUMA/">← PROXUMA Home</a>
 </section>
-<p aria-label="Proxuma IT product statement" class="proxuma-release-stamp">Proxuma IT · Private by default</p>
+<p aria-label="Proxuma IT product statement" class="proxuma-release-stamp">Proxuma IT v3.52.2 · Private by default · Guided results</p>
 <section aria-hidden="true" class="hidden-support">
 <span hidden="" id="summarySupport"></span>
 </section>
 </main>
-<script src="proxuma-it.js"></script>
-<script src="ui-consistency.js"></script>
-<script src="workflow-intelligence.js"></script>
-<script src="focus-reading.js"></script>
-<script src="report-trust-action.js"></script>
-<script src="grouped-panel-controls.js"></script>
-<script src="product-simplification.js"></script>
+<script src="assets/js/proxuma-it.js"></script>
+<script src="assets/js/ui-consistency.js"></script>
+<script src="assets/js/workflow-intelligence.js"></script>
+<script src="assets/js/focus-reading.js"></script>
+<script src="assets/js/report-trust-action.js"></script>
+<script src="assets/js/guided-results.js"></script>
+<script src="assets/js/grouped-panel-controls.js"></script>
+<script src="assets/js/product-simplification.js"></script>
 </body>
 </html>
