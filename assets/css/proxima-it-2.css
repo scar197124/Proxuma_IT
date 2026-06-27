@@ -1,0 +1,701 @@
+/* Proxima IT 2.0 UI Simplification Layer
+   Purpose: keep the existing scanner engine intact while reducing first-screen clutter. */
+:root {
+  --p2-bg: #06090d;
+  --p2-panel: rgba(12, 18, 26, 0.86);
+  --p2-panel-soft: rgba(255, 255, 255, 0.045);
+  --p2-line: rgba(255, 255, 255, 0.11);
+  --p2-text: #eef5ff;
+  --p2-muted: #9ca9b7;
+  --p2-accent: #74f5bd;
+  --p2-radius: 28px;
+}
+
+body.proxima-it-2 {
+  background: radial-gradient(circle at 50% -10%, rgba(116, 245, 189, 0.16), transparent 34%), var(--p2-bg);
+  color: var(--p2-text);
+}
+
+.proxima-it-2 .site-header {
+  max-width: 1180px;
+  margin: 18px auto 0;
+  border: 1px solid var(--p2-line);
+  border-radius: 999px;
+  background: rgba(6, 9, 13, 0.78);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
+}
+
+.proxima-it-2 .compact-nav {
+  gap: 6px;
+}
+
+.proxima-it-2 .compact-nav a,
+.proxima-it-2 .compact-header-status {
+  border-radius: 999px;
+}
+
+.proxima-it-2 .page {
+  max-width: 1120px;
+  padding-top: 34px;
+}
+
+.proxima-it-2 .hero {
+  min-height: unset;
+  padding: 74px 28px 46px;
+  border: 1px solid var(--p2-line);
+  border-radius: 36px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    var(--p2-panel);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+}
+
+.proxima-it-2 .hero-frame-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.proxima-it-2 .hero h1 {
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  letter-spacing: -0.07em;
+  line-height: 0.92;
+  margin-bottom: 18px;
+}
+
+.proxima-it-2 .lead {
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--p2-muted);
+  font-size: clamp(1.02rem, 2vw, 1.28rem);
+}
+
+.proxima-it-2 .hero-action-row {
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.proxima-it-2 .hero-scan-cta,
+.proxima-it-2 #scanButton,
+.proxima-it-2 button:not(.ghost-button):not(.collapse-toggle):not(.finding-filter) {
+  border-radius: 999px;
+}
+
+.proxima-it-2 .proof-row {
+  justify-content: center;
+  opacity: 0.92;
+}
+
+.proxima-it-2 #explain {
+  display: none;
+}
+
+.proxima-it-2 .unified-workspace {
+  margin-top: 26px;
+  border: 1px solid var(--p2-line);
+  border-radius: var(--p2-radius);
+  background: transparent;
+  box-shadow: none;
+}
+
+.proxima-it-2 .unified-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.proxima-it-2 .card,
+.proxima-it-2 .scanner-panel,
+.proxima-it-2 .report-panel,
+.proxima-it-2 .workflow-card,
+.proxima-it-2 .ecosystem-return {
+  border: 1px solid var(--p2-line);
+  border-radius: var(--p2-radius);
+  background: var(--p2-panel);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
+}
+
+.proxima-it-2 .section-head h2,
+.proxima-it-2 .report-top h2 {
+  letter-spacing: -0.035em;
+}
+
+.proxima-it-2 .input-row {
+  border-radius: 24px;
+  background: var(--p2-panel-soft);
+  border: 1px solid var(--p2-line);
+  padding: 8px;
+}
+
+.proxima-it-2 #targetInput,
+.proxima-it-2 #sessionNameInput {
+  border-radius: 18px;
+}
+
+.proxima-it-2 .input-type-chips,
+.proxima-it-2 .privacy-strip,
+.proxima-it-2 .visible-scan-examples,
+.proxima-it-2 .primary-qr-tool,
+.proxima-it-2 .optional-tools {
+  margin-top: 14px;
+}
+
+.proxima-it-2 .input-type-chips span:nth-child(n+4),
+.proxima-it-2 .quick-tests button:nth-child(n+4) {
+  display: none;
+}
+
+.proxima-it-2 .visible-scan-examples {
+  padding: 16px;
+  border-radius: 22px;
+  background: var(--p2-panel-soft);
+}
+
+.proxima-it-2 .report-panel {
+  position: sticky;
+  top: 92px;
+}
+
+.proxima-it-2 .score-ring {
+  transform: scale(0.92);
+}
+
+.proxima-it-2 #investigation-workspace,
+.proxima-it-2 #workflow {
+  margin-top: 22px;
+}
+
+.proxima-it-2 .workflow-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.proxima-it-2 .ecosystem-return {
+  margin-top: 22px;
+}
+
+.proxima-it-2 .proxuma-release-stamp::before {
+  content: "Proxima IT 2.0 UI · ";
+}
+
+@media (max-width: 860px) {
+  .proxima-it-2 .site-header {
+    margin-inline: 12px;
+    border-radius: 24px;
+  }
+
+  .proxima-it-2 .compact-nav {
+    display: none;
+  }
+
+  .proxima-it-2 .page {
+    padding-inline: 12px;
+  }
+
+  .proxima-it-2 .hero {
+    padding: 54px 18px 32px;
+    border-radius: 28px;
+  }
+
+  .proxima-it-2 .unified-stack,
+  .proxima-it-2 .workflow-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proxima-it-2 .report-panel {
+    position: static;
+  }
+
+  .proxima-it-2 .hero-action-row {
+    align-items: stretch;
+  }
+}
+
+/* Workspace build layer — Proxima IT 2.0 Sprint 2 */
+.proxima-it-2 .workspace-command-deck {
+  margin-top: 24px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  gap: 22px;
+  align-items: center;
+}
+
+.proxima-it-2 .workspace-command-copy h2 {
+  margin: 4px 0 10px;
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.proxima-it-2 .workspace-flow-rail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.proxima-it-2 .workspace-flow-step {
+  min-height: 126px;
+  padding: 16px 14px;
+  border: 1px solid var(--p2-line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--p2-text);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.proxima-it-2 .workspace-flow-step:hover,
+.proxima-it-2 .workspace-flow-step:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(116, 245, 189, 0.5);
+  background: rgba(116, 245, 189, 0.08);
+}
+
+.proxima-it-2 .workspace-flow-step span {
+  color: var(--p2-accent);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proxima-it-2 .workspace-flow-step strong {
+  font-size: 1.02rem;
+}
+
+.proxima-it-2 .workspace-flow-step small {
+  color: var(--p2-muted);
+  line-height: 1.35;
+}
+
+.proxima-it-2 .workspace-flow-step.active {
+  border-color: rgba(116, 245, 189, 0.58);
+  background: linear-gradient(180deg, rgba(116, 245, 189, 0.13), rgba(255,255,255,0.035));
+}
+
+.proxima-it-2 .workspace-shell-head {
+  padding: 20px 22px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.proxima-it-2 .workspace-shell-head h2 {
+  margin: 2px 0 0;
+  letter-spacing: -0.04em;
+}
+
+.proxima-it-2 .workspace-mode-pill {
+  border: 1px solid var(--p2-line);
+  border-radius: 999px;
+  padding: 9px 12px;
+  color: var(--p2-muted);
+  background: rgba(255, 255, 255, 0.04);
+  white-space: nowrap;
+}
+
+.proxima-it-2 .unified-workspace {
+  padding-bottom: 18px;
+}
+
+.proxima-it-2 .unified-stack {
+  padding: 18px;
+}
+
+@media (max-width: 920px) {
+  .proxima-it-2 .workspace-command-deck,
+  .proxima-it-2 .workspace-flow-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .proxima-it-2 .workspace-flow-step {
+    min-height: auto;
+  }
+
+  .proxima-it-2 .workspace-shell-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* Proxima IT 2.0 Command Center wiring layer */
+.command-center-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+  gap: 1rem;
+  align-items: stretch;
+  margin-block: 1rem;
+}
+.command-center-main,
+.command-center-activity {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(9, 14, 22, .72);
+  border-radius: 24px;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  box-shadow: 0 18px 60px rgba(0,0,0,.24);
+}
+.command-center-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.command-center-status {
+  white-space: nowrap;
+  border: 1px solid rgba(102, 255, 191, .22);
+  background: rgba(102, 255, 191, .08);
+  border-radius: 999px;
+  padding: .45rem .7rem;
+  font-size: .78rem;
+  color: rgba(226,255,242,.9);
+}
+.command-center-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: .75rem;
+}
+#commandInput {
+  width: 100%;
+  min-height: 58px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.22);
+  color: inherit;
+  padding: 0 1rem;
+  font: inherit;
+  outline: none;
+}
+#commandInput:focus {
+  border-color: rgba(102, 255, 191, .55);
+  box-shadow: 0 0 0 4px rgba(102,255,191,.08);
+}
+#commandRunButton {
+  min-width: 150px;
+}
+.command-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-top: 1rem;
+}
+.command-chip {
+  border: 1px solid rgba(255,255,255,.13);
+  background: rgba(255,255,255,.05);
+  color: inherit;
+  border-radius: 999px;
+  padding: .7rem .9rem;
+  cursor: pointer;
+}
+.command-chip:hover,
+.command-chip:focus-visible {
+  border-color: rgba(102,255,191,.42);
+}
+.command-helper {
+  margin-top: .9rem;
+  color: rgba(238,245,255,.72);
+  font-size: .92rem;
+}
+.activity-feed {
+  list-style: none;
+  padding: 0;
+  margin: .8rem 0 0;
+  display: grid;
+  gap: .55rem;
+}
+.activity-feed li {
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr);
+  gap: .65rem;
+  color: rgba(238,245,255,.78);
+  font-size: .88rem;
+}
+.activity-feed time {
+  color: rgba(102,255,191,.82);
+  font-variant-numeric: tabular-nums;
+}
+.command-next-action {
+  margin-top: 1rem;
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+.command-next-action .ghost-button {
+  min-height: 42px;
+}
+@media (max-width: 860px) {
+  .command-center-panel { grid-template-columns: 1fr; }
+  .command-center-input-row { grid-template-columns: 1fr; }
+  #commandRunButton { width: 100%; }
+}
+
+/* Proxima IT 2.0 Balance Pass — desktop + mobile scale correction
+   Goal: keep Command Center and Workspace visually equal to the existing UI. */
+:root {
+  --p2-radius: 22px;
+  --p2-card-pad: clamp(0.9rem, 1.45vw, 1.15rem);
+}
+
+.proxima-it-2 .page {
+  max-width: 1080px;
+}
+
+.proxima-it-2 .hero {
+  padding: clamp(42px, 6vw, 62px) clamp(18px, 3vw, 26px) clamp(28px, 4vw, 38px);
+  border-radius: 30px;
+}
+
+.proxima-it-2 .hero h1 {
+  font-size: clamp(2.25rem, 5.6vw, 4.6rem);
+}
+
+.proxima-it-2 .workspace-command-deck {
+  margin-top: 18px;
+  padding: var(--p2-card-pad);
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
+  gap: 14px;
+}
+
+.proxima-it-2 .workspace-command-copy h2 {
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  margin-bottom: 8px;
+}
+
+.proxima-it-2 .workspace-flow-rail {
+  gap: 8px;
+}
+
+.proxima-it-2 .workspace-flow-step {
+  min-height: 96px;
+  padding: 12px;
+  border-radius: 18px;
+  gap: 5px;
+}
+
+.proxima-it-2 .workspace-flow-step strong {
+  font-size: 0.94rem;
+}
+
+.proxima-it-2 .workspace-flow-step small {
+  font-size: 0.78rem;
+}
+
+.proxima-it-2 .workspace-shell-head {
+  padding: 16px 18px 0;
+}
+
+.proxima-it-2 .unified-stack {
+  padding: 14px;
+  gap: 14px;
+}
+
+.command-center-panel {
+  grid-template-columns: minmax(0, 1.15fr) minmax(245px, 0.85fr);
+  gap: 0.85rem;
+  margin-block: 0.85rem;
+}
+
+.command-center-main,
+.command-center-activity {
+  border-radius: 20px;
+  padding: var(--p2-card-pad);
+  box-shadow: 0 14px 42px rgba(0,0,0,.2);
+}
+
+.command-center-title {
+  margin-bottom: 0.75rem;
+}
+
+.command-center-title h2,
+.command-center-activity h3 {
+  margin-top: 0;
+  line-height: 1.05;
+}
+
+#commandInput {
+  min-height: 48px;
+  border-radius: 15px;
+}
+
+#commandRunButton {
+  min-width: 128px;
+  min-height: 48px;
+}
+
+.command-chip {
+  padding: .55rem .74rem;
+  font-size: .88rem;
+}
+
+.command-helper {
+  margin-top: .7rem;
+  font-size: .86rem;
+}
+
+.activity-feed {
+  gap: .42rem;
+}
+
+.activity-feed li {
+  grid-template-columns: 3.7rem minmax(0, 1fr);
+  font-size: .82rem;
+}
+
+.command-next-action .ghost-button {
+  min-height: 38px;
+}
+
+@media (max-width: 920px) {
+  .proxima-it-2 .workspace-command-deck,
+  .proxima-it-2 .workspace-flow-rail,
+  .command-center-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .proxima-it-2 .workspace-command-deck,
+  .command-center-main,
+  .command-center-activity {
+    padding: 1rem;
+  }
+
+  .proxima-it-2 .workspace-flow-step {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .proxima-it-2 .page {
+    padding-inline: 10px;
+    padding-top: 18px;
+  }
+
+  .proxima-it-2 .hero {
+    padding: 38px 14px 24px;
+    border-radius: 22px;
+  }
+
+  .proxima-it-2 .hero h1 {
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+
+  .proxima-it-2 .workspace-shell-head {
+    padding: 14px 14px 0;
+  }
+
+  .command-center-title,
+  .proxima-it-2 .workspace-shell-head {
+    gap: .55rem;
+  }
+
+  .command-center-status,
+  .proxima-it-2 .workspace-mode-pill {
+    white-space: normal;
+    font-size: .74rem;
+  }
+
+  .command-center-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  #commandRunButton {
+    width: 100%;
+  }
+
+  .command-suggestions {
+    gap: .45rem;
+  }
+
+  .command-chip {
+    flex: 1 1 calc(50% - .45rem);
+    text-align: center;
+  }
+
+  .activity-feed li {
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+  }
+}
+
+/* Proxima IT 2.0 Alignment Pass — Command Center + Workspace
+   Captain note: lock the two newer sections to the same visual lane as the
+   hero, guide, and active workspace so nothing feels wider on desktop.
+   Mobile remains single-column and touch-friendly. */
+.proxima-it-2 .workspace-command-deck,
+.proxima-it-2 .command-center-panel {
+  width: min(100%, 1032px);
+  max-width: 1032px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.proxima-it-2 .workspace-command-deck {
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+}
+
+.proxima-it-2 .command-center-panel {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.proxima-it-2 .workspace-flow-rail,
+.proxima-it-2 .command-suggestions,
+.proxima-it-2 .command-center-main,
+.proxima-it-2 .command-center-activity {
+  min-width: 0;
+}
+
+.proxima-it-2 .workspace-flow-step,
+.proxima-it-2 .command-chip {
+  min-width: 0;
+}
+
+.proxima-it-2 .command-chip {
+  max-width: 100%;
+}
+
+.proxima-it-2 .workspace-flow-step small,
+.proxima-it-2 .command-helper,
+.proxima-it-2 .activity-feed span {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1100px) {
+  .proxima-it-2 .workspace-command-deck,
+  .proxima-it-2 .command-center-panel {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+  }
+}
+
+@media (max-width: 920px) {
+  .proxima-it-2 .workspace-command-deck,
+  .proxima-it-2 .command-center-panel {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .proxima-it-2 .workspace-flow-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .proxima-it-2 .workspace-command-deck,
+  .proxima-it-2 .command-center-panel {
+    border-radius: 20px;
+  }
+
+  .proxima-it-2 .workspace-flow-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .proxima-it-2 .command-chip {
+    flex: 1 1 100%;
+  }
+}

@@ -4,12 +4,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Proxuma IT 2.0 | Simple Link Intelligence Workspace</title>
+<title>Proxuma IT | Offline Link Intelligence Before You Click</title>
 <!-- Compatibility markers: Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.74.0 / Proxuma IT v2.73.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1 -->
 <meta content="#070a0d" name="theme-color"/>
 <meta content="dark" name="color-scheme"/>
 <meta content="strict-origin-when-cross-origin" name="referrer"/>
-<meta content="Proxuma IT 2.0 gives users a simpler private workspace to inspect suspicious links, QR payloads, IPs, and messages before they trust them." name="description"/>
+<meta content="Proxuma IT explains suspicious links, QR payloads, downloads, and message targets in plain language before you trust them." name="description"/>
 <link rel="canonical" href="https://scar197124.github.io/Proxuma_IT/"/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta property="og:type" content="website"/>
@@ -19,41 +19,40 @@
 <meta property="og:image" content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-it-logo.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link href="assets/css/styles.css" rel="stylesheet"/>
-<link href="assets/css/proxima-it-2.css" rel="stylesheet"/>
 <meta content="v3.52.2-learning-clarity" name="proxuma-build"/>
 </head>
-<body class="simple-ui product-simplified proxima-it-2">
+<body class="simple-ui product-simplified">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
 <a class="skip-link" href="#main-content">Skip to scanner</a>
 <div aria-hidden="true" class="ambient-grid"></div>
 <header class="site-header compact-site-header">
 <a aria-label="Return to the main PROXUMA homepage" class="compact-brand" href="https://scar197124.github.io/PROXUMA/index.html?v=20260624">
 <span aria-hidden="true" class="compact-brand-mark"></span>
-<span class="compact-brand-copy"><strong>Proxuma IT</strong><small>Simple private scanner</small></span>
+<span class="compact-brand-copy"><strong>Proxuma IT</strong><small>Offline link intelligence</small></span>
 </a>
 <nav aria-label="Primary navigation" class="compact-nav">
-<a href="#main-content">Home</a>
-<a href="#workspace">Workspace</a>
+<a href="https://scar197124.github.io/PROXUMA/index.html?v=20260624">PROXUMA Home</a>
 <a href="#scan">Scan</a>
 <a href="#report">Result</a>
+<a href="#investigation-workspace">Investigation</a>
 <a href="#workflow">Review</a>
 </nav>
-<span aria-label="Local preview, private by default" class="compact-header-status compact-trust-status">Private by default</span>
+<span aria-label="Local preview, private by default" class="compact-header-status compact-trust-status">Local preview · Private by default</span>
 </header>
 <main class="page" id="main-content" tabindex="-1">
 <section class="hero hero-framed compact-centered-hero" aria-labelledby="hero-title">
 <div class="hero-frame-inner">
-<p class="eyebrow hero-product-mark">Proxuma IT 2.0</p>
-<h1 id="hero-title">Your private security workspace.</h1>
-<p class="lead">Scan links, QR payloads, IPs, and suspicious messages from one focused workspace.</p>
+<p class="eyebrow hero-product-mark">Proxuma IT</p>
+<h1 id="hero-title">Check the link before you trust it.</h1>
+<p class="lead">Scan a QR code, paste a message, or inspect a URL locally before opening it.</p>
 <div class="hero-action-row">
-<a class="hero-scan-cta" href="#scan">Start Scan</a>
-<span class="hero-privacy-note">Local-first · No account required</span>
+<a class="hero-scan-cta" href="#scan">Start a Scan</a>
+<span class="hero-privacy-note">Analyzed locally · Nothing is uploaded</span>
 </div>
 <div aria-label="Core promises" class="proof-row">
 <span class="proof-pill proof-local pill-status">Local analysis</span>
-<span class="proof-pill proof-balanced pill-status">Guided result</span>
-<span class="proof-pill proof-consent pill-status">Simple next step</span>
+<span class="proof-pill proof-balanced pill-status">No account required</span>
+<span class="proof-pill proof-consent pill-status">Works offline</span>
 </div>
 </div>
 </section>
@@ -100,73 +99,20 @@
 </div>
 </div>
 </section>
-<section aria-labelledby="workspaceTitle" class="workspace-command-deck card" id="workspace">
-<div class="workspace-command-copy">
-<p class="eyebrow">Workspace</p>
-<h2 id="workspaceTitle">Start with one action, then review only what matters.</h2>
-<p class="subtle">Proxima IT now follows a simple flow: scan the target, read the guided result, then open deeper evidence only when needed.</p>
-</div>
-<div aria-label="Workspace flow" class="workspace-flow-rail">
-<a class="workspace-flow-step active" href="#scan"><span>01</span><strong>Scan</strong><small>Paste the suspicious target</small></a>
-<a class="workspace-flow-step" href="#report"><span>02</span><strong>Result</strong><small>Read the verdict and next step</small></a>
-<a class="workspace-flow-step" href="#scan-detail-workspace"><span>03</span><strong>Evidence</strong><small>Open details only if needed</small></a>
-<a class="workspace-flow-step" href="#workflow"><span>04</span><strong>Act</strong><small>Save, explain, or export</small></a>
-</div>
-</section>
-
-<section aria-labelledby="commandCenterTitle" class="command-center-panel card" id="command-center">
-  <article class="command-center-main">
-    <div class="command-center-title">
-      <div>
-        <p class="eyebrow">Command Center</p>
-        <h2 id="commandCenterTitle">Tell Proxima IT what to inspect.</h2>
-        <p class="subtle">Use one command box to start the scanner, load examples, or move to the next review step.</p>
-      </div>
-      <span class="command-center-status" id="commandStatus">Ready</span>
-    </div>
-    <div class="command-center-input-row">
-      <input autocomplete="off" id="commandInput" placeholder="Example: scan https://example.com/login or review current findings" spellcheck="false" type="text"/>
-      <button id="commandRunButton" type="button"><span>Run Command</span><small>Workspace</small></button>
-    </div>
-    <div aria-label="Suggested commands" class="command-suggestions">
-      <button class="command-chip" data-command="scan https://www.rbcroyalbank.com/" type="button">Scan trusted sample</button>
-      <button class="command-chip" data-command="scan https://secure-l0gin-rbc.verify-account.example/login" type="button">Scan risky sample</button>
-      <button class="command-chip" data-command="review findings" type="button">Review findings</button>
-      <button class="command-chip" data-command="open evidence" type="button">Open evidence</button>
-      <button class="command-chip" data-command="generate report" type="button">Generate report</button>
-    </div>
-    <p class="command-helper" id="commandHelper">Commands stay local. If you paste a URL, IP, QR payload, or message, Proxima IT moves it into the scanner and runs the local analysis.</p>
-  </article>
-  <aside class="command-center-activity" aria-labelledby="activityTitle">
-    <p class="eyebrow">Live Activity</p>
-    <h3 id="activityTitle">Workspace feed</h3>
-    <ul class="activity-feed" id="activityFeed" aria-live="polite">
-      <li><time>Now</time><span>Command Center ready.</span></li>
-    </ul>
-    <div class="command-next-action">
-      <button class="ghost-button" id="reviewFindingsButton" type="button">Review Findings</button>
-      <button class="ghost-button" id="openEvidenceButton" type="button">Open Evidence</button>
-    </div>
-  </aside>
-</section>
 <section aria-label="Proxuma unified workspace" class="unified-workspace card">
-<div class="workspace-shell-head">
-  <div><p class="eyebrow">Active Workspace</p><h2>Link Intelligence</h2></div>
-  <span class="workspace-mode-pill">Local-first scan engine</span>
-</div>
 <section class="workbench unified-stack" id="scan">
 <article class="scanner-panel card unified-section unified-scan-section">
 <div class="section-head">
 <p class="eyebrow">Step 1 · Scan</p>
-<h2>Paste the target</h2>
-<p class="subtle">One input for links, IPs, QR text, and copied messages.</p>
+<h2>Paste, scan, or inspect</h2>
+<p class="subtle">One local workspace for links, messages, and QR payloads.</p>
 </div>
 <div class="input-label-row">
-<label class="input-label" for="targetInput">Scanner input</label>
+<label class="input-label" for="targetInput">Universal scanner input</label>
 <span aria-live="polite" class="detected-input-type" id="detectedInputType">Detected: waiting for input</span>
 </div>
 <div class="input-row">
-<input autocomplete="off" aria-describedby="scannerInputHelp detectedInputType" enterkeyhint="go" id="targetInput" placeholder="Paste a link, IP, QR result, or suspicious message" spellcheck="false" type="text"/>
+<input autocomplete="off" aria-describedby="scannerInputHelp detectedInputType" enterkeyhint="go" id="targetInput" placeholder="Paste a suspicious link, message, QR result, or copied email text" spellcheck="false" type="text"/>
 <button id="scanButton" type="button"><span>Analyze</span><small>Safely</small></button>
 </div>
 <p class="unified-input-note" id="scannerInputHelp">Paste the full message when possible. Context helps Proxuma explain the safest next move.</p>
@@ -257,7 +203,7 @@
 <small>risk score</small>
 </div>
 </div>
-<p class="report-summary" id="summaryText">Enter a target to see the risk level, evidence, and safest next step.</p>
+<p class="report-summary" id="summaryText">Enter a target to generate a readable explanation, evidence signals, and a safe next step.</p>
 <div aria-label="Intel heat bar" class="heat-zone">
 <div class="heat-meta">
 <span>Risk Heat</span>
@@ -789,7 +735,6 @@
 <script src="assets/js/proxuma-it.js"></script>
 <script src="assets/js/ui-consistency.js"></script>
 <script src="assets/js/workflow-intelligence.js"></script>
-<script src="assets/js/proxima-command-center.js"></script>
 <script src="assets/js/focus-reading.js"></script>
 <script src="assets/js/report-trust-action.js"></script>
 <script src="assets/js/guided-results.js"></script>
