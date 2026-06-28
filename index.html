@@ -120,7 +120,7 @@
       <div>
         <p class="eyebrow">Command Center</p>
         <h2 id="commandCenterTitle">Tell Proxima IT what to inspect.</h2>
-        <p class="subtle">Use one command box to start the scanner, load examples, or move to the next review step.</p>
+        <p class="subtle">Use one command box to start the scanner or load a safe testing example. Later review actions appear only after the scan flow needs them.</p>
       </div>
       <span class="command-center-status" id="commandStatus">Ready</span>
     </div>
@@ -128,14 +128,31 @@
       <input autocomplete="off" id="commandInput" placeholder="Example: scan https://example.com/login or review current findings" spellcheck="false" type="text"/>
       <button id="commandRunButton" type="button"><span>Run Command</span><small>Workspace</small></button>
     </div>
-    <div aria-label="Suggested commands" class="command-suggestions">
-      <button class="command-chip" data-command="scan https://www.rbcroyalbank.com/" type="button">Scan trusted sample</button>
-      <button class="command-chip" data-command="scan https://secure-l0gin-rbc.verify-account.example/login" type="button">Scan risky sample</button>
-      <button class="command-chip" data-command="review findings" type="button">Review findings</button>
-      <button class="command-chip" data-command="open evidence" type="button">Open evidence</button>
-      <button class="command-chip" data-command="generate report" type="button">Generate report</button>
+    <div class="command-example-block" aria-labelledby="commandExamplesTitle">
+      <div class="command-example-head">
+        <strong id="commandExamplesTitle">Try an example</strong>
+        <span>Use these to test the local engine quickly.</span>
+      </div>
+      <div aria-label="Grouped example scan commands" class="command-example-groups">
+        <div class="command-example-group">
+          <span>Trusted baseline</span>
+          <button class="command-chip" data-command="scan https://www.rbcroyalbank.com/" type="button">Trusted bank sample</button>
+        </div>
+        <div class="command-example-group">
+          <span>Login risk</span>
+          <button class="command-chip" data-command="scan https://secure-l0gin-rbc.verify-account.example/login" type="button">Risky login sample</button>
+        </div>
+        <div class="command-example-group">
+          <span>Lookalike domain</span>
+          <button class="command-chip" data-command="scan https://www.rbcr0yalbank.com/" type="button">Lookalike domain</button>
+        </div>
+        <div class="command-example-group">
+          <span>Unsafe payload</span>
+          <button class="command-chip" data-command="scan javascript:alert(1)" type="button">Script payload</button>
+        </div>
+      </div>
     </div>
-    <p class="command-helper" id="commandHelper">Commands stay local. If you paste a URL, IP, QR payload, or message, Proxima IT moves it into the scanner and runs the local analysis.</p>
+    <p class="command-helper" id="commandHelper">Commands stay local. Examples start scans; review, evidence, and report actions appear later in the workflow when they are needed.</p>
   </article>
   <aside class="command-center-activity" aria-labelledby="activityTitle">
     <p class="eyebrow">Live Activity</p>
@@ -143,9 +160,9 @@
     <ul class="activity-feed" id="activityFeed" aria-live="polite">
       <li><time>Now</time><span>Command Center ready.</span></li>
     </ul>
-    <div class="command-next-action">
-      <button class="ghost-button" id="reviewFindingsButton" type="button">Review Findings</button>
-      <button class="ghost-button" id="openEvidenceButton" type="button">Open Evidence</button>
+    <div class="command-next-action command-next-note" aria-live="polite">
+      <strong>Next action appears after scan.</strong>
+      <span>Review, evidence, and report controls stay in the Focus workflow so the Command Center remains clean.</span>
     </div>
   </aside>
 </section>
@@ -291,6 +308,86 @@
 </div>
 </div>
 </div>
+
+<section class="operation-flow-panel" aria-labelledby="operationFlowTitle">
+  <div class="operation-flow-head">
+    <div>
+      <p class="eyebrow">Operation Flow</p>
+      <h3 id="operationFlowTitle">Scan journey</h3>
+    </div>
+    <span class="flow-state-pill" id="flowStatePill">Waiting for scan</span>
+  </div>
+  <div class="flow-journey" aria-label="Current scan journey">
+    <span class="flow-node active" data-flow-node="command">Command</span>
+    <span class="flow-node" data-flow-node="scan">Scan</span>
+    <span class="flow-node" data-flow-node="result">Result</span>
+    <span class="flow-node" data-flow-node="evidence">Evidence</span>
+    <span class="flow-node" data-flow-node="action">Action</span>
+  </div>
+  <div class="flow-result-summary" aria-label="Scan result summary">
+    <article>
+      <small>Risk</small>
+      <strong id="flowRiskLevel">Ready</strong>
+    </article>
+    <article>
+      <small>Score</small>
+      <strong id="flowRiskScore">--</strong>
+    </article>
+    <article>
+      <small>Signals</small>
+      <strong id="flowSignalCount">0</strong>
+    </article>
+    <article>
+      <small>Next</small>
+      <strong id="flowNextShort">Scan first</strong>
+    </article>
+  </div>
+  <div class="flow-recommended-action">
+    <span>Recommended next action</span>
+    <strong id="flowRecommendedText">Paste a target and run a local scan.</strong>
+    <div class="flow-action-row">
+      <button class="ghost-button" id="flowReviewButton" type="button">Review Result</button>
+      <button class="ghost-button" id="flowEvidenceButton" type="button">Open Evidence</button>
+      <button class="ghost-button" id="flowExportButton" type="button">Report Actions</button>
+    </div>
+  </div>
+</section>
+<section class="operation-focus-panel" aria-labelledby="operationFocusTitle" id="operation-focus">
+  <div class="operation-focus-head">
+    <div>
+      <p class="eyebrow">Operation Focus</p>
+      <h3 id="operationFocusTitle">Finish the scan with clarity</h3>
+      <p class="subtle">A compact decision layer that turns each scan into a result, evidence review, and report action without adding another crowded screen.</p>
+    </div>
+    <span class="focus-readiness-pill" id="focusReadinessPill">Awaiting scan</span>
+  </div>
+  <div class="focus-grid" aria-label="Focused scan follow-up">
+    <article class="focus-card primary">
+      <span>1</span>
+      <strong>Result Summary</strong>
+      <p id="focusResultText">Run a scan to see the current risk level, score, and signal count in one place.</p>
+    </article>
+    <article class="focus-card">
+      <span>2</span>
+      <strong>Evidence Panel</strong>
+      <p id="focusEvidenceText">Open supporting evidence only when the user needs the reason behind the verdict.</p>
+    </article>
+    <article class="focus-card">
+      <span>3</span>
+      <strong>Report Center</strong>
+      <p id="focusReportText">Move from findings to exportable guidance when the review is ready.</p>
+    </article>
+  </div>
+  <div class="focus-next-action" aria-live="polite">
+    <span>Recommended next action</span>
+    <strong id="focusNextActionText">Paste a target and run the local scan.</strong>
+    <div class="focus-action-row">
+      <button class="ghost-button" id="focusReviewButton" type="button">Review Result</button>
+      <button class="ghost-button" id="focusEvidenceButton" type="button">Open Evidence</button>
+      <button class="ghost-button" id="focusReportButton" type="button">Open Report Tools</button>
+    </div>
+  </div>
+</section>
 <section class="guided-result-card" aria-labelledby="guidedResultTitle" id="guidedResultSummary">
   <div class="guided-result-heading">
     <div>
@@ -790,6 +887,8 @@
 <script src="assets/js/ui-consistency.js"></script>
 <script src="assets/js/workflow-intelligence.js"></script>
 <script src="assets/js/proxima-command-center.js"></script>
+<script src="assets/js/operation-flow.js"></script>
+<script src="assets/js/operation-focus.js"></script>
 <script src="assets/js/focus-reading.js"></script>
 <script src="assets/js/report-trust-action.js"></script>
 <script src="assets/js/guided-results.js"></script>

@@ -1,3 +1,18 @@
+
+## Proxima IT 2.0 — Context Command Center
+- Kept testing examples inside the Command Center for fast local engine checks.
+- Removed Review Findings, Open Evidence, and Generate Report from the initial Command Center card.
+- Preserved those workflow actions downstream in the Focus / results flow where they match the user's stage.
+- Added helper copy explaining that examples start scans while review actions appear later.
+
+# Operation Flow Build
+
+- Added guided scan journey: Command → Scan → Result → Evidence → Action.
+- Added compact results summary inside the report area.
+- Added recommended next action controls for review, evidence, and report actions.
+- Added Operation Flow script to sync summary state with the existing local scanner.
+- Preserved the existing scanner engine and Harmony design system.
+
 # Changelog
 
 ## v3.52.2 — Learning Clarity
@@ -41,3 +56,33 @@
 - Aligned current release metadata across the app, documentation, exports, and optional RDAP bridge.
 - Preserved storage keys and case-packet schema identifiers for backward compatibility.
 - Preserved the working v3.48.1 responsive layout and scan behavior.
+
+## Proxima IT 2.0 — Operation Harmony
+- Standardized the main content lane across header, hero, guide, command center, workspace, active workspace, and lower panels.
+- Unified card radius, padding, shadow, section spacing, and button height through shared CSS tokens.
+- Tightened mobile behavior to prevent horizontal overflow and keep command/action controls touch-friendly.
+- Scanner engine preserved.
+
+
+
+## Proxima IT 2.0 — Operation Flow Footer Trim
+- Trimmed unused real estate beneath the ecosystem path footer.
+- Made the ecosystem return/footer the visual endpoint of the UI.
+- Hid the maintainer release stamp from the user-facing bottom flow.
+- Preserved Operation Flow, Harmony layout, mobile behavior, and scanner engine.
+
+## Proxima IT 2.0 — Operation Focus
+- Added focused post-scan decision layer for result, evidence, and report actions.
+- Added push-readiness checklist near the visual footer endpoint.
+- Preserved Operation Flow footer trim and existing scanner engine.
+- Added mobile-safe stacking for Focus cards and action buttons.
+
+## Proxima IT 2.0 Clean Handoff
+
+- Removed backup HTML files from the GitHub-ready package.
+- Restored compact footer trim so the ecosystem return path is the visual endpoint.
+- Kept Command Center examples and grouped them for easier engine testing.
+- Kept Review, Evidence, and Report controls in the downstream workflow rather than the Command Center card.
+- Added NEXT_STEP.md for continuation in the next chatroom.
+- Preserved the existing local scanner engine.
+
