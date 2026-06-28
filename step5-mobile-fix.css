@@ -1,0 +1,65 @@
+/* Step 5 — Turn findings into action
+   Mobile overflow fix for Proxima IT
+
+   Add the class `step-five-card` to the Step 5 card wrapper, or rename
+   this selector to match the existing Step 5 card class in your project.
+*/
+
+.step-five-card,
+.step-five-card * {
+  box-sizing: border-box;
+}
+
+.step-five-card {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.step-five-card h1,
+.step-five-card h2,
+.step-five-card h3,
+.step-five-card h4,
+.step-five-card p,
+.step-five-card span,
+.step-five-card label,
+.step-five-card li {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.step-five-card input,
+.step-five-card textarea,
+.step-five-card select,
+.step-five-card button {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.step-five-card .action-row,
+.step-five-card .input-row,
+.step-five-card .form-row,
+.step-five-card .button-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
+  gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .step-five-card {
+    padding: 1rem;
+  }
+
+  .step-five-card .action-row,
+  .step-five-card .input-row,
+  .step-five-card .form-row,
+  .step-five-card .button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
