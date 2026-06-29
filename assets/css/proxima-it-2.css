@@ -1394,3 +1394,33 @@ body.proxima-it-2 main.page::before {
     grid-template-columns: 1fr;
   }
 }
+
+/* Operation Convergence — one visible command input and one example area. */
+body.proxima-it-2 .unified-scan-section {
+  display: none !important;
+}
+
+body.proxima-it-2 .command-center-panel {
+  margin-bottom: var(--section-gap, 1.25rem) !important;
+}
+
+body.proxima-it-2 .command-center-main .command-helper {
+  margin-bottom: 0 !important;
+}
+
+body.proxima-it-2 .command-example-block {
+  margin-top: 0.85rem !important;
+}
+
+body.proxima-it-2 .command-center-input-row input {
+  min-width: 0 !important;
+}
+
+@media (max-width: 680px) {
+  body.proxima-it-2 .command-center-input-row {
+    grid-template-columns: 1fr !important;
+  }
+  body.proxima-it-2 .command-center-input-row button {
+    width: 100% !important;
+  }
+}

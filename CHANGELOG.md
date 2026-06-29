@@ -86,3 +86,10 @@
 - Added NEXT_STEP.md for continuation in the next chatroom.
 - Preserved the existing local scanner engine.
 
+## Proxima IT 2.0 — Operation Convergence
+
+- Promoted Command Center to the only visible primary input.
+- Kept grouped testing examples inside Command Center.
+- Hid the legacy scanner input/example card as an engine bridge to avoid duplicate fields.
+- Preserved Context Command Center behavior and footer trim.
+- Added next-chatroom handoff notes for First Success / Results & Evidence.
