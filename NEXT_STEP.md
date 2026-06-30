@@ -1,25 +1,30 @@
-# NEXT STEP — Proxima IT 2.0 RC1 Stabilization
+# Proxima IT 2.0 RC1 — Handoff
 
-Current package: **RC1 Stabilization Pass 2**
+## Current state
+This package is the Release Candidate for the stabilized Proxima IT 2.0 interface.
 
-## What changed
-- One visible input only: the Command Center.
-- One visible examples area only.
-- Legacy scan / QR / optional controls are removed from the visible UI.
-- The hidden scan-engine bridge is preserved only so existing JavaScript can keep working.
-- Footer trim is locked: the ecosystem return is the visual endpoint.
+## What RC1 locks
+- One visible Command Center input.
+- One visible grouped examples area.
+- Legacy QR / Optional Tools UI removed from the visible interface.
+- Footer / Proxima Home path acts as the visual endpoint.
+- No backup HTML clutter in the GitHub-ready package.
+- Existing local scanner engine preserved.
 
-## Test before push
-1. Desktop full width: no duplicate input fields.
-2. Desktop half width: no cut-off cards or horizontal scroll.
-3. Mobile: command input and examples stack cleanly.
-4. Footer: no large empty real estate below PROXUMA Home.
-5. Scan: example buttons still start the engine.
+## Testing checklist before push
+- Desktop: no duplicate input fields.
+- Desktop: no cut-off QR scan or Optional Tools area.
+- Desktop: footer ends cleanly with no unnecessary empty land underneath.
+- Mobile: no horizontal scrolling.
+- Mobile: Command Center stacks cleanly.
+- Examples: clicking an example populates/runs the command flow.
+- Scanner: scan result updates the report area.
 
-## If this passes
-Push as RC1 stabilization candidate and let it breathe before starting Operation Results.
+## Recommended next move after push
+Let RC1 breathe for 24 hours before adding anything new.
 
-## Proposed commit message
-```bash
-git commit -m "Stabilize Proxima IT RC1 command workflow"
-```
+After the pause, the next build should be **Operation Results**:
+- Improve findings summary.
+- Improve evidence review.
+- Improve report path.
+- Keep the UI stable; do not add duplicate entry points.

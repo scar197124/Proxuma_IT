@@ -1424,3 +1424,30 @@ body.proxima-it-2 .command-center-input-row input {
     width: 100% !important;
   }
 }
+
+
+/* Operation Convergence Repair — legacy scan UI removed, engine bridge stays hidden. */
+body.proxima-it-2 .scanner-engine-bridge,
+body.proxima-it-2 .scanner-engine-bridge *,
+body.proxima-it-2 .unified-scan-section,
+body.proxima-it-2 .primary-qr-tool,
+body.proxima-it-2 .optional-tools,
+body.proxima-it-2 .visible-scan-examples {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body.proxima-it-2 #scan.workbench {
+  padding-top: 0 !important;
+}
+
+body.proxima-it-2 .unified-workspace {
+  overflow: visible !important;
+}

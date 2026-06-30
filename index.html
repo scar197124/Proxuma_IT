@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Proxuma IT 2.0 RC1 Pass 2 | Stabilized Command Workspace</title>
+<title>Proxuma IT 2.0 RC1 | Stabilized Command Workspace</title>
 <!-- Compatibility markers: Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.74.0 / Proxuma IT v2.73.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1 -->
 <meta content="#070a0d" name="theme-color"/>
 <meta content="dark" name="color-scheme"/>
@@ -43,58 +43,12 @@ body.proxima-it-2 main.page { padding-bottom: 0 !important; margin-bottom: 0 !im
 body.proxima-it-2 .ecosystem-return { margin-bottom: 0 !important; }
 body.proxima-it-2 .proxuma-release-stamp { display: none !important; }
 
-/* RC1 Pass 2 guard: footer is the endpoint, legacy/optional scan controls stay out of the visual UI. */
-html, body { overflow-x: hidden !important; }
+/* RC1 guard: footer is the endpoint, legacy/optional scan controls stay out of the visual UI. */
 body.proxima-it-2 { min-height: 0 !important; }
-body.proxima-it-2 .page { padding-bottom: 0 !important; margin-bottom: 0 !important; }
 body.proxima-it-2 .page > *:last-child { margin-bottom: 0 !important; }
-body.proxima-it-2 .ecosystem-return { margin-bottom: 0 !important; }
-body.proxima-it-2 #scan .scanner-engine-bridge {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transform: translate(-9999px, -9999px) !important;
-}
-/* Remove old optional/online drawers from the visible RC1 interface. */
-body.proxima-it-2 #onlinePanel,
-body.proxima-it-2 .online-consent-card,
-body.proxima-it-2 .online-actions,
-body.proxima-it-2 .optional-tools,
-body.proxima-it-2 .primary-qr-tool {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-}
-/* Keep the single Command Center as the only user-facing entry point. */
-body.proxima-it-2 #targetInput,
-body.proxima-it-2 #scanButton,
-body.proxima-it-2 #detectedInputType {
-  position: absolute !important;
-  left: -9999px !important;
-  width: 1px !important;
-  height: 1px !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-@media (max-width: 720px) {
-  body.proxima-it-2 .command-center-input-row,
-  body.proxima-it-2 .command-example-groups {
-    grid-template-columns: 1fr !important;
-  }
-  body.proxima-it-2 .command-center-input-row button,
-  body.proxima-it-2 .command-chip {
-    width: 100% !important;
-  }
-}
+body.proxima-it-2 #scan .scanner-engine-bridge { position: absolute !important; width: 0 !important; height: 0 !important; opacity: 0 !important; pointer-events: none !important; }
 </style>
-<meta content="v3.52.3-proxima-it-2-rc1-pass2" name="proxuma-build"/>
+<meta content="v3.52.2-proxima-it-2-rc1" name="proxuma-build"/>
 </head>
 <body class="simple-ui product-simplified proxima-it-2">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
