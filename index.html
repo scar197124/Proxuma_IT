@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Proxuma IT 2.0 | Simple Link Intelligence Workspace</title>
+<title>Proxuma IT 2.0 RC1 Pass 2 | Stabilized Command Workspace</title>
 <!-- Compatibility markers: Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.74.0 / Proxuma IT v2.73.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1 -->
 <meta content="#070a0d" name="theme-color"/>
 <meta content="dark" name="color-scheme"/>
@@ -20,7 +20,81 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link href="assets/css/styles.css" rel="stylesheet"/>
 <link href="assets/css/proxima-it-2.css" rel="stylesheet"/>
-<meta content="v3.52.2-learning-clarity" name="proxuma-build"/>
+<style id="proxima-stabilize-guard">
+/* Operation Stabilize: the Command Center is the only visible scan entry point. */
+.scanner-engine-bridge,
+.scanner-engine-bridge *,
+.unified-scan-section,
+.primary-qr-tool,
+.optional-tools,
+.visible-scan-examples {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+body.proxima-it-2 { min-height: auto !important; }
+body.proxima-it-2 main.page { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+body.proxima-it-2 .ecosystem-return { margin-bottom: 0 !important; }
+body.proxima-it-2 .proxuma-release-stamp { display: none !important; }
+
+/* RC1 Pass 2 guard: footer is the endpoint, legacy/optional scan controls stay out of the visual UI. */
+html, body { overflow-x: hidden !important; }
+body.proxima-it-2 { min-height: 0 !important; }
+body.proxima-it-2 .page { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+body.proxima-it-2 .page > *:last-child { margin-bottom: 0 !important; }
+body.proxima-it-2 .ecosystem-return { margin-bottom: 0 !important; }
+body.proxima-it-2 #scan .scanner-engine-bridge {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translate(-9999px, -9999px) !important;
+}
+/* Remove old optional/online drawers from the visible RC1 interface. */
+body.proxima-it-2 #onlinePanel,
+body.proxima-it-2 .online-consent-card,
+body.proxima-it-2 .online-actions,
+body.proxima-it-2 .optional-tools,
+body.proxima-it-2 .primary-qr-tool {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+/* Keep the single Command Center as the only user-facing entry point. */
+body.proxima-it-2 #targetInput,
+body.proxima-it-2 #scanButton,
+body.proxima-it-2 #detectedInputType {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+@media (max-width: 720px) {
+  body.proxima-it-2 .command-center-input-row,
+  body.proxima-it-2 .command-example-groups {
+    grid-template-columns: 1fr !important;
+  }
+  body.proxima-it-2 .command-center-input-row button,
+  body.proxima-it-2 .command-chip {
+    width: 100% !important;
+  }
+}
+</style>
+<meta content="v3.52.3-proxima-it-2-rc1-pass2" name="proxuma-build"/>
 </head>
 <body class="simple-ui product-simplified proxima-it-2">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
@@ -34,7 +108,7 @@
 <nav aria-label="Primary navigation" class="compact-nav">
 <a href="#main-content">Home</a>
 <a href="#workspace">Workspace</a>
-<a href="#scan">Scan</a>
+<a href="#command-center">Scan</a>
 <a href="#report">Result</a>
 <a href="#workflow">Review</a>
 </nav>
@@ -172,97 +246,11 @@
   <span class="workspace-mode-pill">Local-first scan engine</span>
 </div>
 <section class="workbench unified-stack" id="scan">
-<article class="scanner-panel card unified-section unified-scan-section">
-<div class="section-head">
-<p class="eyebrow">Step 1 · Scan</p>
-<h2>Paste the target</h2>
-<p class="subtle">One input for links, IPs, QR text, and copied messages.</p>
+<div aria-hidden="true" class="scanner-engine-bridge" hidden style="display:none!important;height:0!important;overflow:hidden!important;visibility:hidden!important;">
+<input autocomplete="off" id="targetInput" spellcheck="false" style="display:none!important;" tabindex="-1" type="text"/>
+<button id="scanButton" style="display:none!important;" tabindex="-1" type="button">Analyze</button>
+<span aria-live="polite" id="detectedInputType" style="display:none!important;">Detected: waiting for input</span>
 </div>
-<div class="input-label-row">
-<label class="input-label" for="targetInput">Scanner input</label>
-<span aria-live="polite" class="detected-input-type" id="detectedInputType">Detected: waiting for input</span>
-</div>
-<div class="input-row">
-<input autocomplete="off" aria-describedby="scannerInputHelp detectedInputType" enterkeyhint="go" id="targetInput" placeholder="Paste a link, IP, QR result, or suspicious message" spellcheck="false" type="text"/>
-<button id="scanButton" type="button"><span>Analyze</span><small>Safely</small></button>
-</div>
-<p class="unified-input-note" id="scannerInputHelp">Paste the full message when possible. Context helps Proxuma explain the safest next move.</p>
-<div aria-label="Accepted input types" class="input-type-chips">
-<span>URL</span>
-<span>IP</span>
-<span>QR text</span>
-<span>Message</span>
-<span>Snippet</span>
-</div>
-<section aria-label="Visible scan examples" class="visible-scan-examples">
-<div class="visible-examples-head">
-<strong>Try a scan example</strong>
-<span class="examples-desktop-note">Loads the sample into the scanner — nothing is sent online.</span><span class="examples-mobile-note" aria-hidden="true">Swipe to explore</span>
-</div>
-<div aria-label="Example targets" class="quick-tests">
-<button class="example-pill example-trusted pill-action" data-example="https://www.rbcroyalbank.com/" type="button"><span class="example-label-desktop">Trusted bank</span><span class="example-label-mobile" aria-hidden="true">Trusted</span></button>
-<button class="example-pill example-danger pill-action" data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button"><span class="example-label-desktop">Leetspeak phish</span><span class="example-label-mobile" aria-hidden="true">Leetspeak</span></button>
-<button class="example-pill example-danger pill-action" data-example="https://www.rbcr0yalbank.com/" type="button"><span class="example-label-desktop">Lookalike bank</span><span class="example-label-mobile" aria-hidden="true">Lookalike</span></button>
-<button class="example-pill example-danger pill-action" data-example="javascript:alert(1)" type="button"><span class="example-label-desktop">Script payload</span><span class="example-label-mobile" aria-hidden="true">Script</span></button>
-<button class="example-pill example-review pill-action" data-example="https://example.com/l%30gin" type="button"><span class="example-label-desktop">Encoded login</span><span class="example-label-mobile" aria-hidden="true">Encoded</span></button>
-<button class="example-pill example-review pill-action" data-example="072890000224" type="button"><span class="example-label-desktop">QR payload</span><span class="example-label-mobile" aria-hidden="true">QR payload</span></button>
-</div>
-</section>
-<div aria-label="Privacy promise" class="privacy-strip" data-compact="true">
-<span>Analyzed locally</span>
-<span>Nothing is uploaded</span>
-<span>Online checks remain off unless chosen</span>
-</div>
-<section aria-label="Primary QR scanner" class="primary-qr-tool">
-<div aria-label="Browser QR scanner" class="qr-slot qr-scanner-ready">
-<div class="qr-copy">
-<strong>QR Scanner</strong>
-<p id="qrStatus">Camera ready when you choose it. Processing stays on this device.</p>
-</div>
-<div class="qr-actions">
-<button class="ghost-button" id="qrStartButton" type="button">Start QR Scan</button>
-<button class="ghost-button qr-stop" hidden="" id="qrStopButton" type="button">Stop</button>
-</div>
-<div class="qr-camera-panel" hidden="" id="qrCameraPanel">
-<video autoplay="" class="qr-video" id="qrVideo" muted="" playsinline=""></video>
-</div>
-</div>
-</section>
-<details class="simple-disclosure optional-tools unified-control-section">
-<summary aria-label="Toggle Optional Tools">
-<span><strong>Optional tools</strong><small>Scan modes and learning aids</small></span>
-<span aria-hidden="true" class="disclosure-action unified-disclosure-toggle unified-control-button"><span aria-hidden="true" class="toggle-dot"></span><span class="toggle-copy">Open</span></span>
-</summary>
-<div class="simple-disclosure-body">
-<div aria-label="Teaching mode guidance" class="teaching-card">
-<strong>Plain-language guidance</strong>
-<p>Proxuma keeps scan explanations readable without changing how the local scanner evaluates evidence.</p>
-</div>
-<div class="mode-card">
-<div class="mini-head">
-<strong>Scan Mode</strong>
-<span class="local-badge pill-status">Local only</span>
-</div>
-<div aria-label="Current scan capabilities" class="scan-mode-row scan-capability-row" role="list">
-<span class="mode-pill mode-quick active mode-status" role="listitem"><span aria-hidden="true" class="mode-status-dot"></span>Local Scan Active</span>
-<span class="mode-pill mode-deep mode-status" role="listitem">Deep Scan Planned</span>
-<span class="mode-pill mode-online mode-status" role="listitem">Online Checks Optional</span>
-</div>
-<p class="quiet-note">Every scan currently uses the same local analysis engine. Deep mode is planned. Online checks remain separate, consent-gated, and user-triggered.</p>
-</div>
-<div class="micro-list">
-<span class="pill-signal">True target</span>
-<span class="pill-signal">Shortener check</span>
-<span class="pill-signal">Brand lookalike</span>
-<span class="pill-signal">Pressure words</span>
-<span class="pill-signal">Risky file types</span>
-<span class="pill-signal">IP / port clues</span>
-<span class="pill-signal">Lookalike words</span>
-<span class="pill-signal">Institution aliases</span>
-</div>
-</div>
-</details>
-</article>
 <article aria-live="polite" class="report-panel card unified-section unified-report-section" id="report">
 <div class="report-top">
 <div>

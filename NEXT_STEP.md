@@ -1,28 +1,25 @@
-# Proxima IT — Next Chatroom Handoff
+# NEXT STEP — Proxima IT 2.0 RC1 Stabilization
 
-## Current package
-Operation Convergence: one visible Command Center input, one grouped example area, no duplicate scan input/example field, footer trim preserved, scanner engine preserved.
+Current package: **RC1 Stabilization Pass 2**
 
-## What changed in this handoff
-- Command Center is now the only visible primary input.
-- Grouped examples remain inside Command Center so users can test the engine quickly.
-- Legacy scanner input and legacy example pills remain in the DOM as a hidden engine bridge so existing JavaScript keeps working.
-- Review / Evidence / Report remain part of the workflow after scan, not inside the Command Center starter card.
-- Footer / ecosystem return path remains the visual endpoint. Do not reintroduce blank space below it.
-- Backup HTML files are not included in this clean GitHub-ready package.
+## What changed
+- One visible input only: the Command Center.
+- One visible examples area only.
+- Legacy scan / QR / optional controls are removed from the visible UI.
+- The hidden scan-engine bridge is preserved only so existing JavaScript can keep working.
+- Footer trim is locked: the ecosystem return is the visual endpoint.
 
-## Next implementation target
-Operation First Success / Results & Evidence:
-1. Make scan completion feel clearer.
-2. Improve the result summary cards.
-3. Make the evidence panel easier to understand.
-4. Guide the user from result → evidence → report with one clear next action.
-5. Keep the UI compact on desktop and mobile.
+## Test before push
+1. Desktop full width: no duplicate input fields.
+2. Desktop half width: no cut-off cards or horizontal scroll.
+3. Mobile: command input and examples stack cleanly.
+4. Footer: no large empty real estate below PROXUMA Home.
+5. Scan: example buttons still start the engine.
 
-## Permanent polish rules
-- One visible input field.
-- One visible examples area.
-- One content width.
-- Footer ends cleanly.
-- Mobile must have no horizontal scroll.
-- Do not add new cards unless they reduce confusion or improve the scan workflow.
+## If this passes
+Push as RC1 stabilization candidate and let it breathe before starting Operation Results.
+
+## Proposed commit message
+```bash
+git commit -m "Stabilize Proxima IT RC1 command workflow"
+```

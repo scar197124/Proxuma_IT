@@ -1,3 +1,21 @@
+# Changelog
+
+## Proxima IT 2.0 RC1 — Stabilized Release Candidate
+- Locked one visible Command Center input as the primary entry point.
+- Preserved one grouped examples area for safe engine testing.
+- Removed visible duplicate scanner, QR, and Optional Tools remnants.
+- Preserved footer trim so the Proxima Home path is the visual endpoint.
+- Removed backup HTML clutter from the GitHub-ready package.
+- Preserved the existing local scanner engine.
+
+# Operation Stabilize
+
+- Stabilized Proxima IT around a single Command Center input.
+- Removed visible legacy scanner/QR/Optional Tools remnants from the active UI.
+- Preserved grouped examples for safe engine testing.
+- Preserved footer trim so the ecosystem path ends the page cleanly.
+- Prepared next handoff for First Success / Results & Evidence.
+
 
 ## Proxima IT 2.0 — Context Command Center
 - Kept testing examples inside the Command Center for fast local engine checks.
@@ -93,3 +111,11 @@
 - Hid the legacy scanner input/example card as an engine bridge to avoid duplicate fields.
 - Preserved Context Command Center behavior and footer trim.
 - Added next-chatroom handoff notes for First Success / Results & Evidence.
+
+## Proxima IT 2.0 RC1 Stabilization Pass 2
+- Reinforced one visible Command Center input only.
+- Removed old optional/online drawer controls from the visible interface.
+- Preserved hidden scan-engine bridge without allowing cut-off legacy UI to appear.
+- Re-locked footer trim so the ecosystem return is the page endpoint.
+- Added mobile guards for command and example stacking.
+
