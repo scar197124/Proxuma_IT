@@ -1,6 +1,13 @@
 # Changelog
 
-## v3.53.0 — Simple Action Workspace
+## v3.53.2 — Desktop Width Balance
+
+- Expanded the primary Findings workspace across the full Step 5 card on desktop.
+- Kept Save and Explain in balanced secondary columns.
+- Let Export use the full row for clearer report actions.
+- Preserved the v3.53.1 iPhone portrait accordion and width constraints.
+
+## v3.53.1 — iPhone Portrait Repair
 
 - Rebuilt Step 5 around a simple-by-default, powerful-on-demand model.
 - Added mobile accordions for Findings, Save or Compare, Explain, and Export or Reset.

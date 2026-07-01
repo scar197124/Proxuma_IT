@@ -1,6 +1,6 @@
 # Proxuma IT Capability Matrix
 
-Current release: **v3.53.0 — Simple Action Workspace**
+Current release: **v3.53.2 — Desktop Width Balance**
 
 This matrix states what the product actually inspects, where the evidence comes from, and where users should remain cautious.
 
