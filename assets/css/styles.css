@@ -13219,7 +13219,7 @@ button,a[role="button"],summary{touch-action:manipulation;}
 }
 
 
-/* v3.52.2 — guided results deduplication patch */
+/* v3.53.0 — guided results deduplication patch */
 .guided-result-card{
   margin-top:1rem;padding:1rem;border:1px solid rgba(103,240,167,.24);border-radius:18px;
   background:linear-gradient(145deg,rgba(10,24,19,.92),rgba(7,12,16,.94));
@@ -13246,7 +13246,7 @@ button,a[role="button"],summary{touch-action:manipulation;}
 .finding-confidence{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin:.55rem 0;padding:.55rem .7rem;border-radius:11px;background:rgba(255,255,255,.035);font-size:.8rem}.finding-confidence span{font-weight:900;color:#baffd7}.finding-evidence-details{margin-top:.65rem}.finding-evidence-details summary{cursor:pointer;font-weight:800;color:#bfd1db}.finding-evidence-details[open] summary{margin-bottom:.5rem}
 
 
-/* === Proxuma IT v3.52.3 — Reliable Header Navigation === */
+/* === Proxuma IT v3.53.0 — Reliable Header Navigation === */
 .simple-ui .compact-nav a:focus-visible,
 .simple-ui .compact-brand:focus-visible{
   outline:2px solid #67f0a7;
@@ -13269,4 +13269,45 @@ button,a[role="button"],summary{touch-action:manipulation;}
     background:rgba(255,255,255,.025);
     border-color:rgba(111,141,171,.22);
   }
+}
+
+/* === Proxuma IT v3.53.0 — Simple-by-default action workspace === */
+.mobile-workflow-nav{display:none}
+.workflow-accordion{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.workflow-disclosure{min-width:0}
+.workflow-disclosure>summary{display:none}
+.workflow-disclosure:not([open])>:not(summary){display:block}
+.workflow-disclosure .workflow-card{height:100%}
+.trust-explainer{margin-top:12px}
+@media(max-width:720px){
+  #workflow{padding:14px!important}
+  #workflow .workflow-fixed-head .muted{font-size:14px;line-height:1.5}
+  .mobile-workflow-nav{position:sticky;top:8px;z-index:7;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:10px 0;padding:6px;border:1px solid var(--border,rgba(255,255,255,.18));border-radius:14px;background:var(--panel,#0b1116);box-shadow:0 8px 24px rgba(0,0,0,.24)}
+  .mobile-workflow-nav a{min-width:0;padding:9px 4px;border-radius:9px;text-align:center;text-decoration:none;font-size:12px;font-weight:850;color:var(--text,#fff);background:rgba(255,255,255,.04)}
+  #workflow .workflow-progress{display:flex!important;gap:6px!important;overflow-x:auto!important;scroll-snap-type:x proximity;padding:2px 0 8px!important}
+  #workflow .workflow-step{flex:0 0 auto!important;width:auto!important;min-width:92px!important;padding:8px 9px!important;scroll-snap-align:start}
+  #workflow .workflow-step span{display:none}
+  #workflow .workflow-step b{font-size:12px}
+  .workflow-accordion{display:grid;grid-template-columns:1fr;gap:9px;margin-top:10px}
+  .workflow-disclosure{border:1px solid var(--border,rgba(255,255,255,.18));border-radius:14px;background:var(--surface-soft,rgba(255,255,255,.035));overflow:hidden;scroll-margin-top:76px}
+  .workflow-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px;cursor:pointer;list-style:none}
+  .workflow-disclosure>summary::-webkit-details-marker{display:none}
+  .workflow-disclosure>summary span{display:grid;gap:3px;min-width:0}
+  .workflow-disclosure>summary b{font-size:15px}
+  .workflow-disclosure>summary small{font-size:12px;line-height:1.35;opacity:.72}
+  .workflow-disclosure>summary::after{content:'+';display:grid;place-items:center;flex:0 0 30px;width:30px;height:30px;border-radius:50%;font-size:20px;background:rgba(255,255,255,.07)}
+  .workflow-disclosure[open]>summary::after{content:'−'}
+  .workflow-disclosure:not([open])>:not(summary){display:none}
+  .workflow-disclosure .workflow-card{border:0;border-top:1px solid var(--border,rgba(255,255,255,.18));border-radius:0;padding:13px!important;background:transparent;box-shadow:none;height:auto}
+  .desktop-workflow-heading{display:none}
+  .trust-explainer{margin-top:8px}
+  .trust-explainer .trust-boundary-grid{padding:0 12px 12px}
+  #workflow .severity-board{display:flex!important;grid-template-columns:none!important;gap:7px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:thin}
+  #workflow .severity-chip{flex:0 0 auto;min-width:78px;padding:8px!important}
+  #workflow .severity-chip:last-child{grid-column:auto!important}
+  #workflow .finding-toolbar{display:flex!important;grid-template-columns:none!important;flex-wrap:nowrap!important;gap:7px!important;overflow-x:auto;padding-bottom:4px}
+  #workflow .finding-toolbar>*{flex:0 0 auto!important;width:auto!important;min-width:88px!important;white-space:nowrap}
+  #workflow .trust-finding-list{max-height:none;overflow:visible;padding-right:0}
+  #workflow .session-toolbar,#workflow .advisor-toolbar,#workflow .workflow-actions{display:grid!important;grid-template-columns:1fr!important}
+  #workflow .finding-block{padding:9px}
 }

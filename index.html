@@ -4,12 +4,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Proxuma IT 2.0 RC1 | Stabilized Command Workspace</title>
+<title>Proxuma IT | Offline Link Intelligence Before You Click</title>
 <!-- Compatibility markers: Proxuma IT v2.76.0 / Proxuma IT v2.75.0 / Proxuma IT v2.74.0 / Proxuma IT v2.73.0 / Proxuma IT v2.72.1 / Proxuma IT v2.71.0 / Proxuma IT v2.70.1 -->
 <meta content="#070a0d" name="theme-color"/>
 <meta content="dark" name="color-scheme"/>
 <meta content="strict-origin-when-cross-origin" name="referrer"/>
-<meta content="Proxuma IT 2.0 gives users a simpler private workspace to inspect suspicious links, QR payloads, IPs, and messages before they trust them." name="description"/>
+<meta content="Proxuma IT explains suspicious links, QR payloads, downloads, and message targets in plain language before you trust them." name="description"/>
 <link rel="canonical" href="https://scar197124.github.io/Proxuma_IT/"/>
 <meta name="robots" content="index,follow,max-image-preview:large"/>
 <meta property="og:type" content="website"/>
@@ -19,69 +19,40 @@
 <meta property="og:image" content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-it-logo.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link href="assets/css/styles.css" rel="stylesheet"/>
-<link href="assets/css/proxima-it-2.css" rel="stylesheet"/>
-<style id="proxima-stabilize-guard">
-/* Operation Stabilize: the Command Center is the only visible scan entry point. */
-.scanner-engine-bridge,
-.scanner-engine-bridge *,
-.unified-scan-section,
-.primary-qr-tool,
-.optional-tools,
-.visible-scan-examples {
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  overflow: hidden !important;
-}
-body.proxima-it-2 { min-height: auto !important; }
-body.proxima-it-2 main.page { padding-bottom: 0 !important; margin-bottom: 0 !important; }
-body.proxima-it-2 .ecosystem-return { margin-bottom: 0 !important; }
-body.proxima-it-2 .proxuma-release-stamp { display: none !important; }
-
-/* RC1 guard: footer is the endpoint, legacy/optional scan controls stay out of the visual UI. */
-body.proxima-it-2 { min-height: 0 !important; }
-body.proxima-it-2 .page > *:last-child { margin-bottom: 0 !important; }
-body.proxima-it-2 #scan .scanner-engine-bridge { position: absolute !important; width: 0 !important; height: 0 !important; opacity: 0 !important; pointer-events: none !important; }
-</style>
-<meta content="v3.52.2-proxima-it-2-rc1" name="proxuma-build"/>
+<meta content="v3.53.0-simple-action-workspace" name="proxuma-build"/>
 </head>
-<body class="simple-ui product-simplified proxima-it-2">
+<body class="simple-ui product-simplified">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
 <a class="skip-link" href="#main-content">Skip to scanner</a>
 <div aria-hidden="true" class="ambient-grid"></div>
 <header class="site-header compact-site-header">
 <a aria-label="Return to the main PROXUMA homepage" class="compact-brand" href="https://scar197124.github.io/PROXUMA/index.html?v=20260624">
 <span aria-hidden="true" class="compact-brand-mark"></span>
-<span class="compact-brand-copy"><strong>Proxuma IT</strong><small>Simple private scanner</small></span>
+<span class="compact-brand-copy"><strong>Proxuma IT</strong><small>Offline link intelligence</small></span>
 </a>
 <nav aria-label="Primary navigation" class="compact-nav">
-<a href="#main-content">Home</a>
-<a href="#workspace">Workspace</a>
-<a href="#command-center">Scan</a>
+<a href="https://scar197124.github.io/PROXUMA/index.html?v=20260624">PROXUMA Home</a>
+<a href="#scan">Scan</a>
 <a href="#report">Result</a>
+<a href="#investigation-workspace">Investigation</a>
 <a href="#workflow">Review</a>
 </nav>
-<span aria-label="Local preview, private by default" class="compact-header-status compact-trust-status">Private by default</span>
+<span aria-label="Local preview, private by default" class="compact-header-status compact-trust-status">Local preview · Private by default</span>
 </header>
 <main class="page" id="main-content" tabindex="-1">
 <section class="hero hero-framed compact-centered-hero" aria-labelledby="hero-title">
 <div class="hero-frame-inner">
-<p class="eyebrow hero-product-mark">Proxuma IT 2.0</p>
-<h1 id="hero-title">Your private security workspace.</h1>
-<p class="lead">Scan links, QR payloads, IPs, and suspicious messages from one focused workspace.</p>
+<p class="eyebrow hero-product-mark">Proxuma IT</p>
+<h1 id="hero-title">Check the link before you trust it.</h1>
+<p class="lead">Scan a QR code, paste a message, or inspect a URL locally before opening it.</p>
 <div class="hero-action-row">
-<a class="hero-scan-cta" href="#scan">Start Scan</a>
-<span class="hero-privacy-note">Local-first · No account required</span>
+<a class="hero-scan-cta" href="#scan">Start a Scan</a>
+<span class="hero-privacy-note">Analyzed locally · Nothing is uploaded</span>
 </div>
 <div aria-label="Core promises" class="proof-row">
 <span class="proof-pill proof-local pill-status">Local analysis</span>
-<span class="proof-pill proof-balanced pill-status">Guided result</span>
-<span class="proof-pill proof-consent pill-status">Simple next step</span>
+<span class="proof-pill proof-balanced pill-status">No account required</span>
+<span class="proof-pill proof-consent pill-status">Works offline</span>
 </div>
 </div>
 </section>
@@ -128,83 +99,99 @@ body.proxima-it-2 #scan .scanner-engine-bridge { position: absolute !important; 
 </div>
 </div>
 </section>
-<section aria-labelledby="workspaceTitle" class="workspace-command-deck card" id="workspace">
-<div class="workspace-command-copy">
-<p class="eyebrow">Workspace</p>
-<h2 id="workspaceTitle">Start with one action, then review only what matters.</h2>
-<p class="subtle">Proxima IT now follows a simple flow: scan the target, read the guided result, then open deeper evidence only when needed.</p>
-</div>
-<div aria-label="Workspace flow" class="workspace-flow-rail">
-<a class="workspace-flow-step active" href="#scan"><span>01</span><strong>Scan</strong><small>Paste the suspicious target</small></a>
-<a class="workspace-flow-step" href="#report"><span>02</span><strong>Result</strong><small>Read the verdict and next step</small></a>
-<a class="workspace-flow-step" href="#scan-detail-workspace"><span>03</span><strong>Evidence</strong><small>Open details only if needed</small></a>
-<a class="workspace-flow-step" href="#workflow"><span>04</span><strong>Act</strong><small>Save, explain, or export</small></a>
-</div>
-</section>
-
-<section aria-labelledby="commandCenterTitle" class="command-center-panel card" id="command-center">
-  <article class="command-center-main">
-    <div class="command-center-title">
-      <div>
-        <p class="eyebrow">Command Center</p>
-        <h2 id="commandCenterTitle">Tell Proxima IT what to inspect.</h2>
-        <p class="subtle">Use one command box to start the scanner or load a safe testing example. Later review actions appear only after the scan flow needs them.</p>
-      </div>
-      <span class="command-center-status" id="commandStatus">Ready</span>
-    </div>
-    <div class="command-center-input-row">
-      <input autocomplete="off" id="commandInput" placeholder="Example: scan https://example.com/login or review current findings" spellcheck="false" type="text"/>
-      <button id="commandRunButton" type="button"><span>Run Command</span><small>Workspace</small></button>
-    </div>
-    <div class="command-example-block" aria-labelledby="commandExamplesTitle">
-      <div class="command-example-head">
-        <strong id="commandExamplesTitle">Try an example</strong>
-        <span>Use these to test the local engine quickly.</span>
-      </div>
-      <div aria-label="Grouped example scan commands" class="command-example-groups">
-        <div class="command-example-group">
-          <span>Trusted baseline</span>
-          <button class="command-chip" data-command="scan https://www.rbcroyalbank.com/" type="button">Trusted bank sample</button>
-        </div>
-        <div class="command-example-group">
-          <span>Login risk</span>
-          <button class="command-chip" data-command="scan https://secure-l0gin-rbc.verify-account.example/login" type="button">Risky login sample</button>
-        </div>
-        <div class="command-example-group">
-          <span>Lookalike domain</span>
-          <button class="command-chip" data-command="scan https://www.rbcr0yalbank.com/" type="button">Lookalike domain</button>
-        </div>
-        <div class="command-example-group">
-          <span>Unsafe payload</span>
-          <button class="command-chip" data-command="scan javascript:alert(1)" type="button">Script payload</button>
-        </div>
-      </div>
-    </div>
-    <p class="command-helper" id="commandHelper">Commands stay local. Examples start scans; review, evidence, and report actions appear later in the workflow when they are needed.</p>
-  </article>
-  <aside class="command-center-activity" aria-labelledby="activityTitle">
-    <p class="eyebrow">Live Activity</p>
-    <h3 id="activityTitle">Workspace feed</h3>
-    <ul class="activity-feed" id="activityFeed" aria-live="polite">
-      <li><time>Now</time><span>Command Center ready.</span></li>
-    </ul>
-    <div class="command-next-action command-next-note" aria-live="polite">
-      <strong>Next action appears after scan.</strong>
-      <span>Review, evidence, and report controls stay in the Focus workflow so the Command Center remains clean.</span>
-    </div>
-  </aside>
-</section>
 <section aria-label="Proxuma unified workspace" class="unified-workspace card">
-<div class="workspace-shell-head">
-  <div><p class="eyebrow">Active Workspace</p><h2>Link Intelligence</h2></div>
-  <span class="workspace-mode-pill">Local-first scan engine</span>
-</div>
 <section class="workbench unified-stack" id="scan">
-<div aria-hidden="true" class="scanner-engine-bridge" hidden style="display:none!important;height:0!important;overflow:hidden!important;visibility:hidden!important;">
-<input autocomplete="off" id="targetInput" spellcheck="false" style="display:none!important;" tabindex="-1" type="text"/>
-<button id="scanButton" style="display:none!important;" tabindex="-1" type="button">Analyze</button>
-<span aria-live="polite" id="detectedInputType" style="display:none!important;">Detected: waiting for input</span>
+<article class="scanner-panel card unified-section unified-scan-section">
+<div class="section-head">
+<p class="eyebrow">Step 1 · Scan</p>
+<h2>Paste, scan, or inspect</h2>
+<p class="subtle">One local workspace for links, messages, and QR payloads.</p>
 </div>
+<div class="input-label-row">
+<label class="input-label" for="targetInput">Universal scanner input</label>
+<span aria-live="polite" class="detected-input-type" id="detectedInputType">Detected: waiting for input</span>
+</div>
+<div class="input-row">
+<input autocomplete="off" aria-describedby="scannerInputHelp detectedInputType" enterkeyhint="go" id="targetInput" placeholder="Paste a suspicious link, message, QR result, or copied email text" spellcheck="false" type="text"/>
+<button id="scanButton" type="button"><span>Analyze</span><small>Safely</small></button>
+</div>
+<p class="unified-input-note" id="scannerInputHelp">Paste the full message when possible. Context helps Proxuma explain the safest next move.</p>
+<div aria-label="Accepted input types" class="input-type-chips">
+<span>URL</span>
+<span>IP</span>
+<span>QR text</span>
+<span>Message</span>
+<span>Snippet</span>
+</div>
+<section aria-label="Visible scan examples" class="visible-scan-examples">
+<div class="visible-examples-head">
+<strong>Try a scan example</strong>
+<span class="examples-desktop-note">Loads the sample into the scanner — nothing is sent online.</span><span class="examples-mobile-note" aria-hidden="true">Swipe to explore</span>
+</div>
+<div aria-label="Example targets" class="quick-tests">
+<button class="example-pill example-trusted pill-action" data-example="https://www.rbcroyalbank.com/" type="button"><span class="example-label-desktop">Trusted bank</span><span class="example-label-mobile" aria-hidden="true">Trusted</span></button>
+<button class="example-pill example-danger pill-action" data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button"><span class="example-label-desktop">Leetspeak phish</span><span class="example-label-mobile" aria-hidden="true">Leetspeak</span></button>
+<button class="example-pill example-danger pill-action" data-example="https://www.rbcr0yalbank.com/" type="button"><span class="example-label-desktop">Lookalike bank</span><span class="example-label-mobile" aria-hidden="true">Lookalike</span></button>
+<button class="example-pill example-danger pill-action" data-example="javascript:alert(1)" type="button"><span class="example-label-desktop">Script payload</span><span class="example-label-mobile" aria-hidden="true">Script</span></button>
+<button class="example-pill example-review pill-action" data-example="https://example.com/l%30gin" type="button"><span class="example-label-desktop">Encoded login</span><span class="example-label-mobile" aria-hidden="true">Encoded</span></button>
+<button class="example-pill example-review pill-action" data-example="072890000224" type="button"><span class="example-label-desktop">QR payload</span><span class="example-label-mobile" aria-hidden="true">QR payload</span></button>
+</div>
+</section>
+<div aria-label="Privacy promise" class="privacy-strip" data-compact="true">
+<span>Analyzed locally</span>
+<span>Nothing is uploaded</span>
+<span>Online checks remain off unless chosen</span>
+</div>
+<section aria-label="Primary QR scanner" class="primary-qr-tool">
+<div aria-label="Browser QR scanner" class="qr-slot qr-scanner-ready">
+<div class="qr-copy">
+<strong>QR Scanner</strong>
+<p id="qrStatus">Camera ready when you choose it. Processing stays on this device.</p>
+</div>
+<div class="qr-actions">
+<button class="ghost-button" id="qrStartButton" type="button">Start QR Scan</button>
+<button class="ghost-button qr-stop" hidden="" id="qrStopButton" type="button">Stop</button>
+</div>
+<div class="qr-camera-panel" hidden="" id="qrCameraPanel">
+<video autoplay="" class="qr-video" id="qrVideo" muted="" playsinline=""></video>
+</div>
+</div>
+</section>
+<details class="simple-disclosure optional-tools unified-control-section">
+<summary aria-label="Toggle Optional Tools">
+<span><strong>Optional tools</strong><small>Scan modes and learning aids</small></span>
+<span aria-hidden="true" class="disclosure-action unified-disclosure-toggle unified-control-button"><span aria-hidden="true" class="toggle-dot"></span><span class="toggle-copy">Open</span></span>
+</summary>
+<div class="simple-disclosure-body">
+<div aria-label="Teaching mode guidance" class="teaching-card">
+<strong>Plain-language guidance</strong>
+<p>Proxuma keeps scan explanations readable without changing how the local scanner evaluates evidence.</p>
+</div>
+<div class="mode-card">
+<div class="mini-head">
+<strong>Scan Mode</strong>
+<span class="local-badge pill-status">Local only</span>
+</div>
+<div aria-label="Current scan capabilities" class="scan-mode-row scan-capability-row" role="list">
+<span class="mode-pill mode-quick active mode-status" role="listitem"><span aria-hidden="true" class="mode-status-dot"></span>Local Scan Active</span>
+<span class="mode-pill mode-deep mode-status" role="listitem">Deep Scan Planned</span>
+<span class="mode-pill mode-online mode-status" role="listitem">Online Checks Optional</span>
+</div>
+<p class="quiet-note">Every scan currently uses the same local analysis engine. Deep mode is planned. Online checks remain separate, consent-gated, and user-triggered.</p>
+</div>
+<div class="micro-list">
+<span class="pill-signal">True target</span>
+<span class="pill-signal">Shortener check</span>
+<span class="pill-signal">Brand lookalike</span>
+<span class="pill-signal">Pressure words</span>
+<span class="pill-signal">Risky file types</span>
+<span class="pill-signal">IP / port clues</span>
+<span class="pill-signal">Lookalike words</span>
+<span class="pill-signal">Institution aliases</span>
+</div>
+</div>
+</details>
+</article>
 <article aria-live="polite" class="report-panel card unified-section unified-report-section" id="report">
 <div class="report-top">
 <div>
@@ -216,7 +203,7 @@ body.proxima-it-2 #scan .scanner-engine-bridge { position: absolute !important; 
 <small>risk score</small>
 </div>
 </div>
-<p class="report-summary" id="summaryText">Enter a target to see the risk level, evidence, and safest next step.</p>
+<p class="report-summary" id="summaryText">Enter a target to generate a readable explanation, evidence signals, and a safe next step.</p>
 <div aria-label="Intel heat bar" class="heat-zone">
 <div class="heat-meta">
 <span>Risk Heat</span>
@@ -250,86 +237,6 @@ body.proxima-it-2 #scan .scanner-engine-bridge { position: absolute !important; 
 </div>
 </div>
 </div>
-
-<section class="operation-flow-panel" aria-labelledby="operationFlowTitle">
-  <div class="operation-flow-head">
-    <div>
-      <p class="eyebrow">Operation Flow</p>
-      <h3 id="operationFlowTitle">Scan journey</h3>
-    </div>
-    <span class="flow-state-pill" id="flowStatePill">Waiting for scan</span>
-  </div>
-  <div class="flow-journey" aria-label="Current scan journey">
-    <span class="flow-node active" data-flow-node="command">Command</span>
-    <span class="flow-node" data-flow-node="scan">Scan</span>
-    <span class="flow-node" data-flow-node="result">Result</span>
-    <span class="flow-node" data-flow-node="evidence">Evidence</span>
-    <span class="flow-node" data-flow-node="action">Action</span>
-  </div>
-  <div class="flow-result-summary" aria-label="Scan result summary">
-    <article>
-      <small>Risk</small>
-      <strong id="flowRiskLevel">Ready</strong>
-    </article>
-    <article>
-      <small>Score</small>
-      <strong id="flowRiskScore">--</strong>
-    </article>
-    <article>
-      <small>Signals</small>
-      <strong id="flowSignalCount">0</strong>
-    </article>
-    <article>
-      <small>Next</small>
-      <strong id="flowNextShort">Scan first</strong>
-    </article>
-  </div>
-  <div class="flow-recommended-action">
-    <span>Recommended next action</span>
-    <strong id="flowRecommendedText">Paste a target and run a local scan.</strong>
-    <div class="flow-action-row">
-      <button class="ghost-button" id="flowReviewButton" type="button">Review Result</button>
-      <button class="ghost-button" id="flowEvidenceButton" type="button">Open Evidence</button>
-      <button class="ghost-button" id="flowExportButton" type="button">Report Actions</button>
-    </div>
-  </div>
-</section>
-<section class="operation-focus-panel" aria-labelledby="operationFocusTitle" id="operation-focus">
-  <div class="operation-focus-head">
-    <div>
-      <p class="eyebrow">Operation Focus</p>
-      <h3 id="operationFocusTitle">Finish the scan with clarity</h3>
-      <p class="subtle">A compact decision layer that turns each scan into a result, evidence review, and report action without adding another crowded screen.</p>
-    </div>
-    <span class="focus-readiness-pill" id="focusReadinessPill">Awaiting scan</span>
-  </div>
-  <div class="focus-grid" aria-label="Focused scan follow-up">
-    <article class="focus-card primary">
-      <span>1</span>
-      <strong>Result Summary</strong>
-      <p id="focusResultText">Run a scan to see the current risk level, score, and signal count in one place.</p>
-    </article>
-    <article class="focus-card">
-      <span>2</span>
-      <strong>Evidence Panel</strong>
-      <p id="focusEvidenceText">Open supporting evidence only when the user needs the reason behind the verdict.</p>
-    </article>
-    <article class="focus-card">
-      <span>3</span>
-      <strong>Report Center</strong>
-      <p id="focusReportText">Move from findings to exportable guidance when the review is ready.</p>
-    </article>
-  </div>
-  <div class="focus-next-action" aria-live="polite">
-    <span>Recommended next action</span>
-    <strong id="focusNextActionText">Paste a target and run the local scan.</strong>
-    <div class="focus-action-row">
-      <button class="ghost-button" id="focusReviewButton" type="button">Review Result</button>
-      <button class="ghost-button" id="focusEvidenceButton" type="button">Open Evidence</button>
-      <button class="ghost-button" id="focusReportButton" type="button">Open Report Tools</button>
-    </div>
-  </div>
-</section>
 <section class="guided-result-card" aria-labelledby="guidedResultTitle" id="guidedResultSummary">
   <div class="guided-result-heading">
     <div>
@@ -751,66 +658,55 @@ body.proxima-it-2 #scan .scanner-engine-bridge { position: absolute !important; 
 </section>
 <section aria-labelledby="workflowTitle" class="card unified-section workflow-layer" id="workflow">
 <div class="section-heading-row workflow-fixed-head">
-<div><p class="eyebrow">Step 5 · Review &amp; Trust</p><h2 id="workflowTitle">Turn findings into actions</h2><p class="muted">Open this workspace to verify evidence boundaries, track review status, save sessions, or export.</p></div>
+<div><p class="eyebrow">Step 5 · What to do next</p><h2 id="workflowTitle">Turn findings into actions</h2><p class="muted">Start with the important findings. Open the other tools only when you need them.</p></div>
 </div>
+<nav aria-label="Action workspace shortcuts" class="mobile-workflow-nav">
+<a href="#workflowFindings">Findings</a><a href="#workflowSessions">Save</a><a href="#workflowExplain">Explain</a><a href="#workflowExport">Export</a>
+</nav>
 <div aria-label="Review and trust tools" class="workflow-scroll-body" role="region" tabindex="0">
 <div aria-label="Five-step workflow" class="workflow-progress">
-<div class="workflow-step active" data-step="1" data-workflow-step=""><b>Scan</b><span>Run local checks</span></div>
-<div class="workflow-step" data-step="2" data-workflow-step=""><b>Review</b><span>Read verified findings</span></div>
-<div class="workflow-step" data-step="3" data-workflow-step=""><b>Prioritize</b><span>Set action status</span></div>
-<div class="workflow-step" data-step="4" data-workflow-step=""><b>Save</b><span>Name the session</span></div>
-<div class="workflow-step" data-step="5" data-workflow-step=""><b>Explain</b><span>Generate local guidance</span></div>
+<div class="workflow-step" data-step="1" data-workflow-step=""><b>1 · Scan</b><span>Check the item</span></div>
+<div class="workflow-step active" data-step="2" data-workflow-step=""><b>2 · Review</b><span>See what matters</span></div>
+<div class="workflow-step" data-step="3" data-workflow-step=""><b>3 · Act</b><span>Choose a response</span></div>
+<div class="workflow-step" data-step="4" data-workflow-step=""><b>4 · Save</b><span>Keep a private copy</span></div>
+<div class="workflow-step" data-step="5" data-workflow-step=""><b>5 · Explain</b><span>Get plain language</span></div>
 </div>
+<details class="workflow-disclosure trust-explainer">
+<summary><span><b>How Proxuma uses your results</b><small>Scanner facts, plain-language help, and suggested actions</small></span></summary>
 <div aria-label="Report trust boundary" class="trust-boundary-grid">
-<article class="trust-boundary-card verified"><span class="trust-label">Verified scanner finding</span><p>Direct output from Proxuma’s local rules and visible evidence.</p></article>
-<article class="trust-boundary-card interpretation"><span class="trust-label">Local interpretation</span><p>Plain-language organization of the visible report; no new lookup.</p></article>
-<article class="trust-boundary-card action"><span class="trust-label">Suggested next step</span><p>A user-controlled recommendation, never an automatic change.</p></article>
+<article class="trust-boundary-card verified"><span class="trust-label">What Proxuma found</span><p>Direct output from local checks and visible evidence.</p></article>
+<article class="trust-boundary-card interpretation"><span class="trust-label">What it means</span><p>A simpler explanation of the report. It does not add a hidden lookup.</p></article>
+<article class="trust-boundary-card action"><span class="trust-label">What you can do</span><p>A recommendation that you control. Proxuma never changes anything automatically.</p></article>
 </div>
-<div class="workflow-grid">
+</details>
+<div class="workflow-accordion">
+<details class="workflow-disclosure primary" id="workflowFindings" open>
+<summary><span><b>Findings</b><small>See the most important issues and the safest next step</small></span></summary>
 <article class="workflow-card">
-<h3>Verified findings and remediation</h3>
-<p class="muted">Each finding keeps its evidence visible and can be tracked as To review, In progress, Resolved, or Accepted risk.</p>
+<h3 class="desktop-workflow-heading">Findings and next steps</h3>
+<p class="muted">Review each item, follow the recommended action, and mark it when finished.</p>
 <div aria-label="Severity summary" class="severity-board">
-<div class="severity-chip severity-critical"><em id="sevCritical">0</em>Critical</div>
-<div class="severity-chip severity-high"><em id="sevHigh">0</em>High</div>
-<div class="severity-chip severity-medium"><em id="sevMedium">0</em>Medium</div>
-<div class="severity-chip severity-low"><em id="sevLow">0</em>Low</div>
-<div class="severity-chip severity-info"><em id="sevInfo">0</em>Info</div>
+<div class="severity-chip severity-critical"><em id="sevCritical">0</em>Critical</div><div class="severity-chip severity-high"><em id="sevHigh">0</em>High</div><div class="severity-chip severity-medium"><em id="sevMedium">0</em>Medium</div><div class="severity-chip severity-low"><em id="sevLow">0</em>Low</div><div class="severity-chip severity-info"><em id="sevInfo">0</em>Info</div>
 </div>
-<div aria-label="Finding filters" class="finding-toolbar" role="group">
-<button aria-pressed="true" class="finding-filter active" data-filter="all" type="button">All</button>
-<button aria-pressed="false" class="finding-filter" data-filter="open" type="button">Open actions</button>
-<button aria-pressed="false" class="finding-filter" data-filter="resolved" type="button">Resolved</button>
-</div>
-<div aria-live="polite" class="trust-finding-list" id="trustFindingList"><div class="trust-empty">Run a scan to build unified finding cards.</div></div>
+<div aria-label="Finding filters" class="finding-toolbar" role="group"><button aria-pressed="true" class="finding-filter active" data-filter="all" type="button">All</button><button aria-pressed="false" class="finding-filter" data-filter="open" type="button">Needs action</button><button aria-pressed="false" class="finding-filter" data-filter="resolved" type="button">Finished</button></div>
+<div aria-live="polite" class="trust-finding-list" id="trustFindingList"><div class="trust-empty">Run a scan to see clear findings and next steps.</div></div>
 <p aria-live="polite" class="workflow-status" id="trustActionStatus"></p>
 </article>
-<article class="workflow-card">
-<h3>Named scan sessions</h3>
-<p class="muted">Save the current verified report and remediation state in this browser.</p>
-<div class="session-toolbar"><input id="sessionNameInput" maxlength="80" placeholder="Session name" type="text"/><button id="saveNamedSessionButton" type="button">Save Session</button><button class="ghost-button" id="exportSessionsButton" type="button">Export Library</button></div>
-<p aria-live="polite" class="workflow-status" id="sessionStatus"></p>
-<ul aria-label="Saved scan sessions" class="session-list" id="namedSessionList"></ul>
-<div aria-live="polite" class="comparison-panel empty" id="sessionComparison">Choose Compare on a saved session to see new, resolved, unchanged, and severity-changed findings.</div>
-</article>
-</div>
-<div class="workflow-grid">
-<article class="workflow-card">
-<h3>Local explanation</h3>
-<p class="ai-separation-note"><strong>Boundary:</strong> This explanation reorganizes the visible offline report. It does not verify ownership, perform a hidden lookup, or replace the scanner findings.</p>
-<div class="advisor-toolbar"><button id="explainCurrentButton" type="button">Explain Current Scan</button><button class="ghost-button" id="copyExplanationButton" type="button">Copy Explanation</button></div>
-<div class="ai-output-panel empty" id="localAdvisorOutput">Run a scan, then generate a plain-language explanation.</div>
-<p aria-live="polite" class="workflow-status" id="advisorStatus"></p>
-</article>
-<article class="workflow-card">
-<h3>Report actions</h3>
-<p class="muted">Export a printable HTML report or structured JSON with findings, evidence, notes, and remediation status.</p>
-<div class="workflow-actions"><button id="exportTrustHtml" type="button">Export HTML Report</button><button class="ghost-button" id="exportTrustJson" type="button">Export JSON Report</button><button class="ghost-button workflow-reset" id="resetWorkspaceButton" type="button">Reset Workspace</button></div>
-<p aria-live="polite" class="workflow-status" id="trustExportStatus"></p>
-</article>
+</details>
+<details class="workflow-disclosure" id="workflowSessions">
+<summary><span><b>Save or compare</b><small>Keep private scan sessions on this device</small></span></summary>
+<article class="workflow-card"><h3 class="desktop-workflow-heading">Saved scans</h3><p class="muted">Give this scan a name so you can return to it or compare it later.</p><div class="session-toolbar"><input id="sessionNameInput" maxlength="80" placeholder="Name this scan" type="text"/><button id="saveNamedSessionButton" type="button">Save scan</button><button class="ghost-button" id="exportSessionsButton" type="button">Export saved scans</button></div><p aria-live="polite" class="workflow-status" id="sessionStatus"></p><ul aria-label="Saved scan sessions" class="session-list" id="namedSessionList"></ul><div aria-live="polite" class="comparison-panel empty" id="sessionComparison">Choose Compare on a saved scan to see what changed.</div></article>
+</details>
+<details class="workflow-disclosure" id="workflowExplain">
+<summary><span><b>Explain this scan</b><small>Turn technical findings into everyday language</small></span></summary>
+<article class="workflow-card"><h3 class="desktop-workflow-heading">Plain-language explanation</h3><p class="ai-separation-note"><strong>Good to know:</strong> This organizes the visible offline report. It does not perform a hidden online lookup or replace the scanner findings.</p><div class="advisor-toolbar"><button id="explainCurrentButton" type="button">Explain my results</button><button class="ghost-button" id="copyExplanationButton" type="button">Copy explanation</button></div><div class="ai-output-panel empty" id="localAdvisorOutput">Run a scan, then choose “Explain my results.”</div><p aria-live="polite" class="workflow-status" id="advisorStatus"></p></article>
+</details>
+<details class="workflow-disclosure" id="workflowExport">
+<summary><span><b>Export or reset</b><small>Download a report or clear this workspace</small></span></summary>
+<article class="workflow-card"><h3 class="desktop-workflow-heading">Report tools</h3><p class="muted">Download an easy-to-read report or a structured data file.</p><div class="workflow-actions"><button id="exportTrustHtml" type="button">Download readable report</button><button class="ghost-button" id="exportTrustJson" type="button">Download data file</button><button class="ghost-button workflow-reset" id="resetWorkspaceButton" type="button">Clear this workspace</button></div><p aria-live="polite" class="workflow-status" id="trustExportStatus"></p></article>
+</details>
 </div>
 </div>
-<p aria-hidden="true" class="workflow-scroll-cue">Scroll inside for more review and trust tools</p>
 </section>
 <section aria-label="Return to PROXUMA ecosystem" class="ecosystem-return card">
 <div>
@@ -820,7 +716,7 @@ body.proxima-it-2 #scan .scanner-engine-bridge { position: absolute !important; 
 </div>
 <a aria-label="Return to the main PROXUMA canonical homepage" class="ecosystem-return-button unified-control-button unified-home-control" href="https://scar197124.github.io/PROXUMA/index.html?v=20260624">← PROXUMA Home</a>
 </section>
-<p aria-label="Proxuma IT product statement" class="proxuma-release-stamp">Proxuma IT v3.52.2 · Private by default · Guided results</p>
+<p aria-label="Proxuma IT product statement" class="proxuma-release-stamp">Proxuma IT v3.53.0 · Private by default · Guided results</p>
 <section aria-hidden="true" class="hidden-support">
 <span hidden="" id="summarySupport"></span>
 </section>
@@ -828,13 +724,11 @@ body.proxima-it-2 #scan .scanner-engine-bridge { position: absolute !important; 
 <script src="assets/js/proxuma-it.js"></script>
 <script src="assets/js/ui-consistency.js"></script>
 <script src="assets/js/workflow-intelligence.js"></script>
-<script src="assets/js/proxima-command-center.js"></script>
-<script src="assets/js/operation-flow.js"></script>
-<script src="assets/js/operation-focus.js"></script>
 <script src="assets/js/focus-reading.js"></script>
 <script src="assets/js/report-trust-action.js"></script>
 <script src="assets/js/guided-results.js"></script>
 <script src="assets/js/grouped-panel-controls.js"></script>
 <script src="assets/js/product-simplification.js"></script>
+<script src="assets/js/mobile-simplification.js"></script>
 </body>
 </html>

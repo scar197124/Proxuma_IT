@@ -1,4 +1,4 @@
-# Proxuma IT v3.52.2
+# Proxuma IT v3.53.0
 
 Proxuma IT is a browser-based, trust-centered investigation interface for reviewing suspicious links, text, QR content, and related evidence.
 
@@ -12,7 +12,8 @@ Proxuma IT is a browser-based, trust-centered investigation interface for review
 - Scan Metrics and Supporting Evidence views
 - Deep Analysis and Case File investigation views
 - Focus reading workspaces for detailed review
-- Review & Trust workflow tools
+- Simple-by-default action workspace with mobile accordions
+- Review, save, explain, and export tools preserved behind progressive disclosure
 - Mobile-friendly page scrolling and compact navigation rails
 - QR input support using the bundled local `jsQR` decoder
 - Optional, consent-gated online-intelligence workflow
@@ -60,9 +61,9 @@ GitHub Pages serves the static interface but cannot execute `api/proxuma-rdap.js
 
 ## Release
 
-**v3.52.2 — Guided Results + Indexing Foundation**
+**v3.53.0 — Simple Action Workspace**
 
-This release adds a guided result summary, explicit Observed / Interpreted / Not verified boundaries, confidence and recommended-action cues, collapsible technical evidence, canonical metadata, robots.txt, and sitemap.xml without changing the local analysis engine.
+This release clarifies the guided-results language introduced in v3.52.0. It renames the static “Learning Mode” description to “Plain-language guidance,” renames “Learning Note” to “Safety Takeaway,” removes a duplicated interpretation card, and preserves the existing confidence, recommended-action, evidence, indexing, and local-analysis behavior.
 
 The interface remains offline-first. Optional online intelligence is still explicit, consent-gated, and deployment-dependent.
 
