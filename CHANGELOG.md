@@ -1,5 +1,12 @@
 # Changelog
 
+## v3.54.0 — Unified Mobile Findings
+
+- Removed the separate Step 5 Focus control so Open/Close is the only section interaction.
+- Added a portrait swipe rail for colored finding cards with scroll snapping.
+- Compacted finding cards in phone landscape so more can fit across one row.
+- Preserved desktop full-width Findings and all scanner, session, explanation, and export behavior.
+
 ## v3.53.3 — Mobile Viewport Containment
 
 - Removed the Step 5 Focus control from phone layouts at the JavaScript source.

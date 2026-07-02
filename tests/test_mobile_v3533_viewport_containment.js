@@ -5,6 +5,6 @@ const js = fs.readFileSync('assets/js/focus-reading.js','utf8');
 assert(css.includes('v3.53.3 — hard mobile viewport containment'));
 assert(css.includes('#workflow .focus-reading-toolbar'));
 assert(css.includes('overflow-x:hidden'));
-assert(js.includes("target.id === 'workflow' && window.matchMedia('(max-width: 720px)').matches"));
-assert(js.includes('syncWorkflowFocusForViewport'));
+assert(!js.includes("{ id:'workflow', label:'Review & Trust' }"));
+assert(!js.includes('syncWorkflowFocusForViewport'));
 console.log('PASS mobile v3.53.3 viewport containment');

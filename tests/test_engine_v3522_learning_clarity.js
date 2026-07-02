@@ -4,7 +4,7 @@ const root=path.resolve(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const js=fs.readFileSync(path.join(root,'assets','js','proxuma-it.js'),'utf8');
 const checks=[
- ['version marker',html.includes('v3.53.3-mobile-viewport-containment')],
+ ['version marker',html.includes('v3.54.0-unified-mobile-findings')],
  ['plain-language guidance label',html.includes('Plain-language guidance')],
  ['safety takeaway tab',html.includes('>Safety Takeaway</button>')],
  ['takeaway heading',html.includes('What to remember next time')],

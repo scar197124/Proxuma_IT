@@ -1,6 +1,6 @@
 # Proxuma IT Capability Matrix
 
-Current release: **v3.53.3 — Mobile Viewport Containment**
+Current release: **v3.54.0 — Unified Mobile Findings**
 
 This matrix states what the product actually inspects, where the evidence comes from, and where users should remain cautious.
 

@@ -2,7 +2,7 @@
   "use strict";
 
   const BUILD = {
-    version: "v3.53.3",
+    version: "v3.54.0",
     name: "Release Hardening",
     privacy: "offline-first engine / local QR decoder path / no runtime CDN dependency",
   };

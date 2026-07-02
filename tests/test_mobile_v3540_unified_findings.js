@@ -1,0 +1,12 @@
+const fs = require('fs');
+const assert = require('assert');
+const css = fs.readFileSync('assets/css/styles.css','utf8');
+const js = fs.readFileSync('assets/js/focus-reading.js','utf8');
+assert(css.includes('v3.54.0 — Unified Step 5 controls and responsive finding rail'));
+assert(css.includes('(orientation:portrait)'));
+assert(css.includes('scroll-snap-type:x mandatory'));
+assert(css.includes('(orientation:landscape)'));
+assert(css.includes('min-width:210px'));
+assert(!js.includes("{ id:'workflow', label:'Review & Trust' }"));
+assert(!js.includes('syncWorkflowFocusForViewport'));
+console.log('PASS mobile v3.54.0 unified findings');

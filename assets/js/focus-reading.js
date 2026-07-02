@@ -6,8 +6,7 @@
 
   const targets = [
     { id:'scan-detail-workspace', label:'Scan Details' },
-    { id:'investigation-workspace', label:'Investigation' },
-    { id:'workflow', label:'Review & Trust' }
+    { id:'investigation-workspace', label:'Investigation' }
   ];
 
   let active = null;
@@ -51,10 +50,6 @@
       else target.prepend(toolbar);
     } else if(target.id === 'investigation-workspace'){
       const head = target.querySelector('#investigation-controls');
-      if(head) head.appendChild(toolbar);
-      else target.prepend(toolbar);
-    } else if(target.id === 'workflow'){
-      const head = target.querySelector('.workflow-fixed-head');
       if(head) head.appendChild(toolbar);
       else target.prepend(toolbar);
     } else {
@@ -144,21 +139,6 @@
   window.addEventListener('pagehide', () => {
     if(active) exitFocus(false);
   });
-
-  function syncWorkflowFocusForViewport(){
-    const workflow = document.getElementById('workflow');
-    if(!workflow) return;
-    const toolbar = workflow.querySelector('.focus-reading-toolbar');
-    if(window.matchMedia('(max-width: 720px)').matches){
-      if(active === workflow) exitFocus(false);
-      if(toolbar) toolbar.remove();
-    } else if(!toolbar){
-      addToolbar(workflow, 'Review & Trust');
-    }
-  }
-
-  window.addEventListener('resize', syncWorkflowFocusForViewport, {passive:true});
-  window.addEventListener('orientationchange', syncWorkflowFocusForViewport, {passive:true});
 
   targets.forEach(({id,label}) => {
     const target = document.getElementById(id);

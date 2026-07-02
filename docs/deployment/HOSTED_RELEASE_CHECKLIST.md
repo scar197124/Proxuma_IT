@@ -1,4 +1,4 @@
-# Proxuma IT v3.53.3 Hosted Release Checklist
+# Proxuma IT v3.54.0 Hosted Release Checklist
 
 Use the deployed HTTPS URL, not a local ZIP preview.
 

@@ -1,6 +1,6 @@
-# Proxuma IT v3.53.3
+# Proxuma IT v3.54.0
 
-**v3.53.3 — Mobile Viewport Containment**
+**v3.54.0 — Unified Mobile Findings**
 
 Proxuma IT is a browser-based, trust-centered investigation interface for reviewing suspicious links, text, QR content, and related evidence.
 
