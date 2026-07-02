@@ -1,6 +1,14 @@
 # Changelog
 
-## v3.53.2 — Desktop Width Balance
+## v3.53.3 — Mobile Viewport Containment
+
+- Removed the Step 5 Focus control from phone layouts at the JavaScript source.
+- Added hard viewport containment for all Step 5 cards and controls.
+- Prevented inherited desktop positioning, transforms, and widths from shifting the mobile workspace.
+- Preserved desktop Focus mode and the full-width desktop Findings layout.
+
+
+## v3.53.3 — Desktop Width Balance
 
 - Expanded the primary Findings workspace across the full Step 5 card on desktop.
 - Kept Save and Explain in balanced secondary columns.

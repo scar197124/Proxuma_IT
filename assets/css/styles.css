@@ -13313,7 +13313,7 @@ button,a[role="button"],summary{touch-action:manipulation;}
 }
 
 
-/* === Proxuma IT v3.53.2 — iPhone portrait Step 5 alignment repair ===
+/* === Proxuma IT v3.53.3 — iPhone portrait Step 5 alignment repair ===
    Prevents the legacy Focus toolbar and mobile action navigation from competing
    for horizontal space. Step 5 uses one natural-width column in portrait. */
 @media (max-width:720px){
@@ -13384,7 +13384,7 @@ button,a[role="button"],summary{touch-action:manipulation;}
   #workflow .workflow-disclosure .workflow-card{padding:11px!important;}
 }
 
-/* === Proxuma IT v3.53.2 — Desktop Step 5 width balance ===
+/* === Proxuma IT v3.53.3 — Desktop Step 5 width balance ===
    Findings is the primary task and uses the full desktop workspace.
    Secondary tools remain compact below it; mobile accordion behavior is unchanged. */
 @media (min-width:721px){
@@ -13406,4 +13406,50 @@ button,a[role="button"],summary{touch-action:manipulation;}
   #workflowExport{
     grid-column:1 / -1;
   }
+}
+
+/* === Proxuma IT v3.53.3 — hard mobile viewport containment ===
+   Step 5 owns one natural-width column on phones. Desktop focus controls and
+   inherited card widths cannot create horizontal drift or phantom whitespace. */
+@media (max-width:720px){
+  html,body{max-width:100%;overflow-x:hidden;}
+  #workflow,
+  #workflow *,
+  #workflow *::before,
+  #workflow *::after{box-sizing:border-box;}
+  #workflow{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow:hidden!important;
+  }
+  #workflow > .workflow-fixed-head,
+  #workflow > .mobile-workflow-nav,
+  #workflow > .workflow-scroll-body,
+  #workflow .workflow-progress,
+  #workflow .trust-explainer,
+  #workflow .workflow-accordion,
+  #workflow .workflow-disclosure,
+  #workflow .workflow-card{
+    position:static!important;
+    inset:auto!important;
+    transform:none!important;
+    float:none!important;
+    clear:both!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  #workflow .focus-reading-toolbar,
+  #workflow .focus-reading-toggle{display:none!important;}
+  #workflow .mobile-workflow-nav{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  #workflow .workflow-progress{display:flex!important;overflow-x:auto!important;overflow-y:hidden!important;}
+  #workflow .workflow-accordion{display:block!important;}
+  #workflow .workflow-disclosure + .workflow-disclosure{margin-top:9px!important;}
+  #workflow img,#workflow svg,#workflow canvas,#workflow table,#workflow pre{max-width:100%!important;}
+  #workflow input,#workflow textarea,#workflow select,#workflow button{max-width:100%!important;min-width:0!important;}
+  #workflow .trust-finding-list,#workflow .finding-block{overflow-wrap:anywhere!important;word-break:normal!important;}
 }

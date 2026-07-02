@@ -1,4 +1,6 @@
-# Proxuma IT v3.53.2
+# Proxuma IT v3.53.3
+
+**v3.53.3 — Mobile Viewport Containment**
 
 Proxuma IT is a browser-based, trust-centered investigation interface for reviewing suspicious links, text, QR content, and related evidence.
 
@@ -61,7 +63,7 @@ GitHub Pages serves the static interface but cannot execute `api/proxuma-rdap.js
 
 ## Release
 
-**v3.53.2 — Desktop Width Balance**
+**v3.53.3 — Desktop Width Balance**
 
 This release clarifies the guided-results language introduced in v3.52.0. It renames the static “Learning Mode” description to “Plain-language guidance,” renames “Learning Note” to “Safety Takeaway,” removes a duplicated interpretation card, and preserves the existing confidence, recommended-action, evidence, indexing, and local-analysis behavior.
 

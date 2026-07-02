@@ -39,6 +39,7 @@
   }
 
   function addToolbar(target, label){
+    if(target.id === 'workflow' && window.matchMedia('(max-width: 720px)').matches) return;
     if(target.querySelector('.focus-reading-toolbar')) return;
     const toolbar = document.createElement('div');
     toolbar.className = 'focus-reading-toolbar';
@@ -143,6 +144,21 @@
   window.addEventListener('pagehide', () => {
     if(active) exitFocus(false);
   });
+
+  function syncWorkflowFocusForViewport(){
+    const workflow = document.getElementById('workflow');
+    if(!workflow) return;
+    const toolbar = workflow.querySelector('.focus-reading-toolbar');
+    if(window.matchMedia('(max-width: 720px)').matches){
+      if(active === workflow) exitFocus(false);
+      if(toolbar) toolbar.remove();
+    } else if(!toolbar){
+      addToolbar(workflow, 'Review & Trust');
+    }
+  }
+
+  window.addEventListener('resize', syncWorkflowFocusForViewport, {passive:true});
+  window.addEventListener('orientationchange', syncWorkflowFocusForViewport, {passive:true});
 
   targets.forEach(({id,label}) => {
     const target = document.getElementById(id);

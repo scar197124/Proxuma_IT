@@ -8,15 +8,15 @@ const files = {
   report: read('assets','js','report-trust-action.js')
 };
 const checks = [
-  ['README release title', files.readme.includes('**v3.53.2 — Desktop Width Balance**')],
-  ['capability matrix release', files.matrix.includes('Current release: **v3.53.2 — Desktop Width Balance**')],
+  ['README release title', files.readme.includes('**v3.53.3 — Mobile Viewport Containment**')],
+  ['capability matrix release', files.matrix.includes('Current release: **v3.53.3 — Mobile Viewport Containment**')],
   ['single changelog heading', (files.changelog.match(/^# Changelog$/gm) || []).length === 1],
-  ['single v3.53.2 changelog entry', (files.changelog.match(/^## v3\.53\.1/gm) || []).length === 1],
-  ['HTML build marker', files.html.includes('v3.53.2-desktop-width-balance')],
-  ['UI release stamp', files.html.includes('Proxuma IT v3.53.2')],
-  ['primary JS version', files.js.includes('version: "v3.53.2"')],
-  ['report export version', files.report.includes("version:'3.53.2'")],
-  ['desktop width balance CSS marker', files.css.includes('v3.53.2 — Desktop Step 5 width balance')]
+  ['single v3.53.3 changelog entry', (files.changelog.match(/^## v3\.53\.1/gm) || []).length === 1],
+  ['HTML build marker', files.html.includes('v3.53.3-mobile-viewport-containment')],
+  ['UI release stamp', files.html.includes('Proxuma IT v3.53.3')],
+  ['primary JS version', files.js.includes('version: "v3.53.3"')],
+  ['report export version', files.report.includes("version:'3.53.3'")],
+  ['desktop width balance CSS marker', files.css.includes('v3.53.3 — Desktop Step 5 width balance')]
 ];
 for (const [name, ok] of checks) {
   console.log(ok ? 'PASS' : 'FAIL', name);
