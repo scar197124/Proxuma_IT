@@ -13520,3 +13520,100 @@ button,a[role="button"],summary{touch-action:manipulation;}
   #workflow .finding-block p{font-size:12px!important;line-height:1.35!important;}
   #workflow .remediation-status{min-width:108px!important;font-size:12px!important;}
 }
+
+/* === Proxuma IT v3.54.1 — Step 5 mobile portrait side-scroll repair ===
+   Stops Step 5 labels from collapsing into one-letter columns on narrow phones.
+   The workflow keeps readable word wrapping, while the Step 5 workspace itself
+   becomes side-scrollable when the available portrait viewport is too narrow. */
+@media (max-width:720px) and (orientation:portrait){
+  #workflow{
+    overflow:hidden!important;
+  }
+
+  #workflow .workflow-fixed-head,
+  #workflow .workflow-fixed-head *,
+  #workflow .mobile-workflow-nav,
+  #workflow .mobile-workflow-nav *,
+  #workflow .workflow-disclosure>summary,
+  #workflow .workflow-disclosure>summary *,
+  #workflow .workflow-card,
+  #workflow .workflow-card *,
+  #workflow .workflow-progress,
+  #workflow .workflow-progress *{
+    writing-mode:horizontal-tb!important;
+    text-orientation:mixed!important;
+    word-break:normal!important;
+    overflow-wrap:break-word!important;
+    hyphens:none!important;
+  }
+
+  #workflow .workflow-fixed-head h2,
+  #workflow .workflow-disclosure>summary b,
+  #workflow .workflow-disclosure>summary small,
+  #workflow .workflow-step b,
+  #workflow .workflow-step span,
+  #workflow .finding-toolbar button,
+  #workflow .severity-chip,
+  #workflow .workflow-card h3,
+  #workflow .workflow-card p,
+  #workflow .trust-empty{
+    white-space:normal!important;
+    min-width:0!important;
+    max-width:100%!important;
+  }
+
+  #workflow .workflow-scroll-body{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    overscroll-behavior-inline:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    padding-bottom:8px!important;
+  }
+
+  #workflow .workflow-progress,
+  #workflow .trust-explainer,
+  #workflow .workflow-accordion{
+    width:max(100%,360px)!important;
+    max-width:none!important;
+  }
+
+  #workflow .workflow-disclosure,
+  #workflow .workflow-card{
+    max-width:none!important;
+  }
+
+  #workflow .mobile-workflow-nav{
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  #workflow .trust-finding-list{
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+
+  #workflow .finding-block,
+  #workflow .finding-block p,
+  #workflow .finding-head h4,
+  #workflow .finding-confidence,
+  #workflow .finding-evidence-details,
+  #workflow .finding-evidence-details *{
+    overflow-wrap:break-word!important;
+    word-break:normal!important;
+    white-space:normal!important;
+  }
+}
+
+@media (max-width:360px) and (orientation:portrait){
+  #workflow .workflow-progress,
+  #workflow .trust-explainer,
+  #workflow .workflow-accordion{
+    width:372px!important;
+  }
+}

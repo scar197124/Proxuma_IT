@@ -1,3 +1,9 @@
+# v3.54.1 — Step 5 mobile side-scroll repair
+
+- Fixed mobile portrait Step 5 text collapsing into stacked one-letter columns.
+- Added horizontal side-scroll containment for the Step 5 workflow workspace on narrow phones.
+- Preserved existing scanner logic and GitHub Pages deployment structure.
+
 # Changelog
 
 ## v3.54.0 — Unified Mobile Findings
