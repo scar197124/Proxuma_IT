@@ -13731,3 +13731,140 @@ button,a[role="button"],summary{touch-action:manipulation;}
     min-width:376px!important;
   }
 }
+
+
+/* === Proxuma IT v3.54.3 — Step 5 portrait readable side-scroll ===
+   Portrait phones were still squeezing the Step 5 heading and intro copy into
+   letter-stacked columns. This makes the whole Step 5 workspace use one
+   readable minimum width inside a horizontal scroll area, while landscape keeps
+   the friendly responsive layout. */
+@media (max-width:720px) and (orientation:portrait){
+  #workflow.workflow-layer{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-inline:contain;
+    scrollbar-width:thin;
+  }
+
+  #workflow > .workflow-fixed-head,
+  #workflow > .mobile-workflow-nav,
+  #workflow > .workflow-scroll-body{
+    width:max(100%,430px)!important;
+    max-width:none!important;
+    min-width:430px!important;
+    flex:0 0 auto!important;
+  }
+
+  #workflow .workflow-fixed-head,
+  #workflow .workflow-fixed-head > div,
+  #workflow .workflow-fixed-head .eyebrow,
+  #workflow .workflow-fixed-head h2,
+  #workflow .workflow-fixed-head .muted{
+    writing-mode:horizontal-tb!important;
+    text-orientation:mixed!important;
+    white-space:normal!important;
+    word-break:normal!important;
+    overflow-wrap:break-word!important;
+    hyphens:none!important;
+    max-width:none!important;
+  }
+
+  #workflow .workflow-fixed-head > div{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+
+  #workflow .workflow-fixed-head .eyebrow{
+    display:block!important;
+    min-width:0!important;
+    letter-spacing:.08em!important;
+  }
+
+  #workflow .workflow-fixed-head h2{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    font-size:clamp(1.45rem,6vw,1.85rem)!important;
+    line-height:1.14!important;
+  }
+
+  #workflow .workflow-fixed-head .muted{
+    display:block!important;
+    width:100%!important;
+    min-width:0!important;
+    font-size:13px!important;
+    line-height:1.45!important;
+  }
+
+  #workflow .mobile-workflow-nav{
+    display:flex!important;
+    gap:8px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    padding-bottom:6px!important;
+  }
+
+  #workflow .mobile-workflow-nav a{
+    flex:0 0 auto!important;
+    min-width:96px!important;
+    white-space:nowrap!important;
+  }
+
+  #workflow .workflow-scroll-body{
+    overflow-x:visible!important;
+    overflow-y:visible!important;
+  }
+
+  #workflow .workflow-progress,
+  #workflow .trust-explainer,
+  #workflow .workflow-accordion,
+  #workflow .workflow-disclosure,
+  #workflow .workflow-card{
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+  }
+
+  #workflowFindings .workflow-card{
+    min-width:0!important;
+    grid-template-columns:minmax(205px,1fr) minmax(205px,1fr)!important;
+  }
+
+  #workflowFindings .workflow-card > .desktop-workflow-heading,
+  #workflowFindings .workflow-card > .desktop-workflow-heading + .muted,
+  #workflowFindings .finding-toolbar button,
+  #workflowFindings .severity-chip,
+  #workflowFindings .trust-empty{
+    writing-mode:horizontal-tb!important;
+    text-orientation:mixed!important;
+    white-space:normal!important;
+    word-break:normal!important;
+    overflow-wrap:break-word!important;
+    hyphens:none!important;
+  }
+
+  #workflowFindings .trust-finding-card{
+    flex:0 0 390px!important;
+    width:390px!important;
+    max-width:390px!important;
+    min-width:390px!important;
+  }
+}
+
+@media (max-width:900px) and (orientation:landscape){
+  #workflow.workflow-layer{
+    overflow-x:hidden!important;
+  }
+  #workflow > .workflow-fixed-head,
+  #workflow > .mobile-workflow-nav,
+  #workflow > .workflow-scroll-body{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+  }
+}
