@@ -80,4 +80,3 @@ The build includes `robots.txt`, `sitemap.xml`, canonical metadata, and social p
 This public package intentionally excludes legacy tests, superseded build manifests, old handoff notes, archived release notes, and nested deployment archives. Preserve historical material in Git history or in a separate archival release rather than in the active repository tree.
 
 Do not upload the ZIP file into the repository. Extract it, then commit the files with GitHub Desktop, Git, or a Git client.
- 

@@ -13617,3 +13617,117 @@ button,a[role="button"],summary{touch-action:manipulation;}
     width:372px!important;
   }
 }
+
+/* === Proxuma IT v3.54.2 — Step 5 Findings card space repair ===
+   Uses the unused right-side space in the Step 5 Findings and next steps card.
+   The mobile portrait workspace keeps side-scroll, but the card content now forms
+   a practical two-column action layout instead of stacking everything down the left. */
+@media (max-width:720px) and (orientation:portrait){
+  #workflowFindings .workflow-card{
+    display:grid!important;
+    grid-template-columns:minmax(168px,.95fr) minmax(168px,1.05fr)!important;
+    column-gap:10px!important;
+    row-gap:9px!important;
+    align-items:start!important;
+    min-width:360px!important;
+  }
+
+  #workflowFindings .workflow-card > .desktop-workflow-heading{
+    grid-column:1!important;
+    margin:0!important;
+    align-self:center!important;
+  }
+
+  #workflowFindings .workflow-card > .desktop-workflow-heading + .muted{
+    grid-column:2!important;
+    margin:0!important;
+    font-size:12.5px!important;
+    line-height:1.38!important;
+    align-self:center!important;
+  }
+
+  #workflowFindings .severity-board{
+    grid-column:1!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:6px!important;
+    margin:0!important;
+    overflow:visible!important;
+    padding:0!important;
+  }
+
+  #workflowFindings .severity-chip{
+    min-height:42px!important;
+    padding:8px!important;
+    white-space:normal!important;
+  }
+
+  #workflowFindings .severity-chip:last-child{
+    grid-column:1 / -1!important;
+  }
+
+  #workflowFindings .finding-toolbar{
+    grid-column:2!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:7px!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+
+  #workflowFindings .finding-toolbar > *{
+    width:100%!important;
+    min-width:0!important;
+    white-space:normal!important;
+  }
+
+  #workflowFindings .trust-finding-list,
+  #workflowFindings .workflow-status{
+    grid-column:1 / -1!important;
+    width:100%!important;
+  }
+
+  #workflowFindings .trust-finding-card{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    column-gap:9px!important;
+    row-gap:8px!important;
+    align-items:start!important;
+    padding:10px!important;
+  }
+
+  #workflowFindings .trust-finding-card .finding-head,
+  #workflowFindings .trust-finding-card .finding-evidence-details{
+    grid-column:1 / -1!important;
+  }
+
+  #workflowFindings .trust-finding-card .finding-confidence,
+  #workflowFindings .trust-finding-card .finding-block{
+    margin-top:0!important;
+    min-width:0!important;
+  }
+
+  #workflowFindings .trust-finding-card .finding-confidence{
+    grid-column:1 / -1!important;
+    display:flex!important;
+    justify-content:space-between!important;
+    gap:8px!important;
+    padding:8px 10px!important;
+    border:1px solid var(--border,rgba(255,255,255,.18))!important;
+    border-radius:10px!important;
+    color:var(--text,#fff)!important;
+    background:rgba(255,255,255,.03)!important;
+  }
+
+  #workflowFindings .trust-finding-card .finding-block p{
+    font-size:12.25px!important;
+    line-height:1.38!important;
+  }
+}
+
+@media (max-width:360px) and (orientation:portrait){
+  #workflowFindings .workflow-card{
+    min-width:376px!important;
+  }
+}
