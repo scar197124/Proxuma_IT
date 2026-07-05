@@ -80,3 +80,7 @@ The build includes `robots.txt`, `sitemap.xml`, canonical metadata, and social p
 This public package intentionally excludes legacy tests, superseded build manifests, old handoff notes, archived release notes, and nested deployment archives. Preserve historical material in Git history or in a separate archival release rather than in the active repository tree.
 
 Do not upload the ZIP file into the repository. Extract it, then commit the files with GitHub Desktop, Git, or a Git client.
+
+
+## v3.54.4
+Mobile portrait UI consistency repair: adds a readable horizontal rail for the main app workspace and fixes Step 5 letter-stacking.

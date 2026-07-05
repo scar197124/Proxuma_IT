@@ -13868,3 +13868,275 @@ button,a[role="button"],summary{touch-action:manipulation;}
     min-width:0!important;
   }
 }
+
+
+/* === Proxuma IT v3.54.4 — Portrait-wide UI consistency rail ===
+   Repair goal: portrait phones should not squeeze cards until labels and copy
+   stack letter-by-letter. The main Proxuma workspace now becomes one readable
+   horizontal rail in portrait mode. Landscape remains responsive and friendly. */
+@media (max-width:720px) and (orientation:portrait){
+  html,
+  body{
+    overflow-x:auto!important;
+  }
+
+  .simple-ui .site-header.banner-header,
+  .simple-ui .page{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+
+  .simple-ui .unified-workspace{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior-inline:contain!important;
+    scrollbar-width:thin!important;
+    padding-bottom:12px!important;
+  }
+
+  .simple-ui .unified-workspace::after{
+    content:"Swipe sideways to view full tool layout";
+    display:block;
+    margin:8px 2px 0;
+    color:var(--muted,#9fb0bf);
+    font-size:12px;
+    text-align:center;
+  }
+
+  .simple-ui .unified-workspace > .unified-stack,
+  .simple-ui .workbench.unified-stack{
+    width:448px!important;
+    min-width:448px!important;
+    max-width:none!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:10px!important;
+    align-items:start!important;
+    box-sizing:border-box!important;
+  }
+
+  .simple-ui .unified-workspace :is(.scanner-panel,.report-panel,.scan-details-workspace,.panel-selector-card,.intelligence-drawer,.casefile,.workflow-layer,.ecosystem-return){
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    box-sizing:border-box!important;
+  }
+
+  .simple-ui .section-head,
+  .simple-ui .report-top,
+  .simple-ui .drawer-head,
+  .simple-ui .section-heading-row,
+  .simple-ui .collapsible-card-head{
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:flex-start!important;
+    justify-content:space-between!important;
+    gap:10px!important;
+    min-width:0!important;
+  }
+
+  .simple-ui .section-head > div:first-child,
+  .simple-ui .report-top > div:first-child,
+  .simple-ui .drawer-head > div:first-child,
+  .simple-ui .section-heading-row > div:first-child{
+    min-width:0!important;
+    width:auto!important;
+    max-width:none!important;
+  }
+
+  .simple-ui .input-row{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(124px,auto)!important;
+    gap:9px!important;
+    align-items:stretch!important;
+  }
+
+  .simple-ui #scanButton,
+  .simple-ui .input-row button{
+    width:auto!important;
+    min-width:124px!important;
+    white-space:nowrap!important;
+  }
+
+  .simple-ui .visible-scan-examples,
+  .simple-ui .quick-tests,
+  .simple-ui .scan-mode-row,
+  .simple-ui .qr-slot,
+  .simple-ui .qr-actions,
+  .simple-ui .report-strip,
+  .simple-ui .snapshot-grid,
+  .simple-ui .guided-boundary-grid,
+  .simple-ui .grouped-panel-selector,
+  .simple-ui .browser-test-actions,
+  .simple-ui .case-actions,
+  .simple-ui .workflow-progress{
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+
+  .simple-ui .quick-tests,
+  .simple-ui .scan-mode-row,
+  .simple-ui .qr-actions,
+  .simple-ui .browser-test-actions{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:8px!important;
+  }
+
+  .simple-ui .quick-tests button,
+  .simple-ui .scan-mode-row button,
+  .simple-ui .qr-actions button,
+  .simple-ui .browser-test-actions button{
+    flex:1 1 138px!important;
+    width:auto!important;
+    min-width:138px!important;
+    white-space:normal!important;
+  }
+
+  .simple-ui .qr-slot{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:10px!important;
+    align-items:start!important;
+  }
+
+  .simple-ui .report-strip,
+  .simple-ui .snapshot-grid,
+  .simple-ui .guided-boundary-grid{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:9px!important;
+  }
+
+  .simple-ui .guided-next-action,
+  .simple-ui .guided-evidence-details{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+  }
+
+  .simple-ui .grouped-panel-selector{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:7px!important;
+    width:100%!important;
+  }
+
+  .simple-ui .grouped-panel-selector button{
+    flex:1 1 128px!important;
+    min-width:128px!important;
+    white-space:normal!important;
+  }
+
+  .simple-ui .workflow-progress{
+    display:grid!important;
+    grid-template-columns:repeat(5,minmax(78px,1fr))!important;
+    gap:7px!important;
+  }
+
+  .simple-ui #workflow.workflow-layer,
+  .simple-ui #workflow > .workflow-fixed-head,
+  .simple-ui #workflow > .mobile-workflow-nav,
+  .simple-ui #workflow > .workflow-scroll-body{
+    width:100%!important;
+    min-width:0!important;
+    max-width:none!important;
+    overflow:visible!important;
+  }
+
+  .simple-ui #workflow .workflow-fixed-head{
+    display:block!important;
+  }
+
+  .simple-ui #workflow .workflow-fixed-head > div{
+    display:block!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  .simple-ui #workflowFindings .workflow-card{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    gap:10px!important;
+    min-width:0!important;
+    width:100%!important;
+    max-width:100%!important;
+  }
+
+  .simple-ui #workflowFindings .workflow-card > .desktop-workflow-heading,
+  .simple-ui #workflowFindings .workflow-card > .desktop-workflow-heading + .muted{
+    grid-column:1 / -1!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+  }
+
+  .simple-ui #workflowFindings .severity-board{
+    grid-column:1!important;
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:7px!important;
+    min-width:0!important;
+  }
+
+  .simple-ui #workflowFindings .finding-toolbar{
+    grid-column:2!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:7px!important;
+    min-width:0!important;
+  }
+
+  .simple-ui #workflowFindings .trust-finding-list,
+  .simple-ui #workflowFindings .workflow-status{
+    grid-column:1 / -1!important;
+    width:100%!important;
+  }
+
+  .simple-ui #workflowFindings .trust-finding-card{
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    flex:1 1 auto!important;
+  }
+
+  .simple-ui .unified-workspace :is(h1,h2,h3,h4,p,span,strong,small,b,label,button,a,summary,li,td,th),
+  .simple-ui #workflow :is(.eyebrow,h2,.muted,.desktop-workflow-heading,.trust-empty,.severity-chip,button,small,b,span,p){
+    writing-mode:horizontal-tb!important;
+    text-orientation:mixed!important;
+    word-break:normal!important;
+    overflow-wrap:break-word!important;
+    hyphens:none!important;
+    white-space:normal!important;
+  }
+
+  .simple-ui button,
+  .simple-ui a,
+  .simple-ui summary{
+    overflow:hidden!important;
+    text-overflow:clip!important;
+  }
+}
+
+@media (max-width:900px) and (orientation:landscape){
+  .simple-ui .unified-workspace{
+    overflow-x:hidden!important;
+  }
+  .simple-ui .unified-workspace > .unified-stack,
+  .simple-ui .workbench.unified-stack{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+  }
+  .simple-ui #workflowFindings .workflow-card > .desktop-workflow-heading,
+  .simple-ui #workflowFindings .workflow-card > .desktop-workflow-heading + .muted{
+    writing-mode:horizontal-tb!important;
+    word-break:normal!important;
+  }
+}
