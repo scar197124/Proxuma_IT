@@ -44,12 +44,14 @@
     toolbar.className = 'focus-reading-toolbar';
     toolbar.appendChild(makeButton(target, label));
 
-    if(target.id === 'scan-detail-workspace'){
-      const head = target.querySelector('.scan-details-header');
+    /* Sprint 10: both visible card Focus buttons live in the same place
+       and use the same compact control style. */
+    if(target.id === 'scan-detail-workspace' || target.id === 'investigation-workspace'){
+      const head = target.querySelector('.lane-compact-head');
       if(head) head.appendChild(toolbar);
       else target.prepend(toolbar);
-    } else if(target.id === 'investigation-workspace'){
-      const head = target.querySelector('#investigation-controls');
+    } else if(target.id === 'workflow'){
+      const head = target.querySelector('.workflow-fixed-head');
       if(head) head.appendChild(toolbar);
       else target.prepend(toolbar);
     } else {
@@ -143,5 +145,41 @@
   targets.forEach(({id,label}) => {
     const target = document.getElementById(id);
     if(target) addToolbar(target,label);
+  });
+})();
+
+/* === Proxuma IT UI 1.0 RC Wired Sprint 11 — Focus Exit Safety === */
+(function(){
+  'use strict';
+  if(window.__proxumaSprint11FocusExitSafety) return;
+  window.__proxumaSprint11FocusExitSafety = true;
+  function ensureExit(){
+    var layer=document.querySelector('.focus-reading-viewport');
+    if(!layer) return;
+    var btn=layer.querySelector('.focus-reading-emergency-exit');
+    if(!btn){
+      btn=document.createElement('button');
+      btn.type='button';
+      btn.className='focus-reading-emergency-exit unified-control-button';
+      btn.setAttribute('aria-label','Exit focus mode');
+      btn.innerHTML='<span aria-hidden="true">×</span><span>Exit Focus</span>';
+      layer.appendChild(btn);
+    }
+    btn.addEventListener('click',function(){
+      var active=layer.querySelector('.is-focus-reading');
+      var inside=active&&active.querySelector('.focus-reading-toggle');
+      if(inside){inside.click();return;}
+      document.body.classList.remove('focus-reading-active');
+      layer.hidden=true;
+      layer.setAttribute('aria-hidden','true');
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',ensureExit); else ensureExit();
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){
+      var layer=document.querySelector('.focus-reading-viewport:not([hidden])');
+      var btn=layer&&layer.querySelector('.focus-reading-emergency-exit');
+      if(btn) btn.click();
+    }
   });
 })();

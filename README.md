@@ -84,3 +84,13 @@ Do not upload the ZIP file into the repository. Extract it, then commit the file
 
 ## v3.54.4
 Mobile portrait UI consistency repair: adds a readable horizontal rail for the main app workspace and fixes Step 5 letter-stacking.
+
+
+## UI 1.0 RC Wired
+This package starts Sprint 2: wiring placeholders to live rescue-engine behavior while keeping the UI freeze layout intact. See CAPTAIN_UI_1_0_RC_WIRED_NOTES.md.
+
+## Sprint 11 — Public Ready Polish
+- Focus mode now has an obvious Exit control.
+- Investigation and Supporting Evidence Focus buttons are visually identical.
+- App Guide open/close behavior is wired.
+- Light Mode contrast and nested-card visibility improved.

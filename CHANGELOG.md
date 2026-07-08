@@ -1,3 +1,16 @@
+
+## Sprint 19 — Light Mode Full Visibility
+- Fixed disappearing text in Light Mode for Analysis Results, Captain Summary, and App Guide.
+- Compacted Analysis Results snapshot cards so Time does not overflow.
+- Raised borders slightly on dark cockpit cards while preserving dark mode.
+
+# Sprint 15 — Matched Analysis + Action Heights
+
+- Locked Analysis Views and Step 5 cards to the same desktop height.
+- Added internal scrolling for long content.
+- Preserved tablet/mobile responsive behavior.
+- No scan-engine changes.
+
 # v3.54.1 — Step 5 mobile side-scroll repair
 
 - Fixed mobile portrait Step 5 text collapsing into stacked one-letter columns.
@@ -74,3 +87,9 @@
 - Aligned current release metadata across the app, documentation, exports, and optional RDAP bridge.
 - Preserved storage keys and case-packet schema identifiers for backward compatibility.
 - Preserved the working v3.48.1 responsive layout and scan behavior.
+
+
+## UI 1.0 RC Wired Sprint 13 — Dashboard Balance
+- Balanced the Analysis Views drawer with a full-width segmented toolbar.
+- Kept buttons compact while reducing dead space.
+- Preserved layout freeze and Sprint 12 dashboard sync fixes.
