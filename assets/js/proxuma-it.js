@@ -4655,9 +4655,16 @@
     const heatBar = document.querySelector(".heat-bar");
     if (heatBar) heatBar.setAttribute("aria-valuenow", String(report.heatPercent || 0));
 
-    els.scanMode.textContent = report.scanMode;
-    els.scanMode.className = report.raw && report.scanMode === "Payload lane" ? "value-medium" : "value-low";
-    els.scanModeNote.textContent = report.raw ? (audienceView === "analyst" ? "Analyst View is showing deeper local evidence. No external request was made." : "User View is showing the safest plain-language read. Analysis stayed local on this device.") : "Waiting for a target.";
+    // RC-4 compatibility fuse: these legacy fields are optional in the compact dashboard.
+    // Never allow a missing presentation-only element to abort the scan render before
+    // Analysis View, evidence, timeline, and action panels receive their data.
+    if (els.scanMode) {
+      els.scanMode.textContent = report.scanMode;
+      els.scanMode.className = report.raw && report.scanMode === "Payload lane" ? "value-medium" : "value-low";
+    }
+    if (els.scanModeNote) {
+      els.scanModeNote.textContent = report.raw ? (audienceView === "analyst" ? "Analyst View is showing deeper local evidence. No external request was made." : "User View is showing the safest plain-language read. Analysis stayed local on this device.") : "Waiting for a target.";
+    }
     els.rootDomain.textContent = report.root;
     els.rootDomainNote.textContent = report.raw ? "True target extracted from the submitted input." : "The root is the part attackers try to hide.";
     els.confidenceLabel.textContent = report.confidence;
@@ -5120,7 +5127,9 @@
     els.input.value = clean;
     setQrStatus("QR decoded locally. The payload was loaded into the scanner and analyzed on this device.");
     stopQrScanner();
-    runScan();
+    window.ProxumaPendingScanSource = "qr-scanner";
+    if (els.scanButton && typeof els.scanButton.click === "function") els.scanButton.click();
+    else runScan("qr-scanner");
     return true;
   }
 
@@ -5222,7 +5231,9 @@
 
 
 
-  function runScan(){
+  function runScan(source){
+    const scanSource = (typeof source === "string" && source) || window.ProxumaPendingScanSource || "analyze-button";
+    window.ProxumaPendingScanSource = "";
     const previousScan = readLastScan();
     lastReport = analyze(els.input.value);
     lastReport = applyLocalPatternMemory(lastReport);
@@ -5234,6 +5245,17 @@
     writeLastScan(lastReport);
     rememberPattern(lastReport);
     addScanToHistory(lastReport, "auto");
+
+    // RC-2: publish one authoritative completion signal only after the legacy
+    // engine has finished rendering and persisting the complete report.
+    // Every dashboard surface can now refresh from the same completed scan.
+    window.ProxumaLegacyLastReport = lastReport;
+    const completedDetail = { report: lastReport, source: scanSource, completedAt: Date.now() };
+    document.dispatchEvent(new CustomEvent("proxuma:legacy-scan-complete", { detail: completedDetail }));
+    // Direct integration hook: avoids timing/order differences between browsers.
+    if (typeof window.ProxumaApplyLegacyScanReport === "function") {
+      try { window.ProxumaApplyLegacyScanReport(lastReport, scanSource); } catch (error) { console.error("Dashboard sync hook failed", error); }
+    }
   }
 
   function readHistory(){
@@ -5383,12 +5405,23 @@
   }
 
   document.querySelectorAll("[data-example]").forEach(button => {
-    button.addEventListener("click", () => { els.input.value = button.getAttribute("data-example") || ""; runScan(); });
+    button.addEventListener("click", () => {
+      els.input.value = button.getAttribute("data-example") || "";
+      els.input.dispatchEvent(new Event("input", { bubbles: true }));
+      window.ProxumaPendingScanSource = "example-button";
+      els.scanButton.click();
+    });
   });
-  els.scanButton.addEventListener("click", runScan);
+  els.scanButton.addEventListener("click", () => runScan(window.ProxumaPendingScanSource || "analyze-button"));
   if (els.input) els.input.addEventListener("input", updateDetectedInputType);
   updateDetectedInputType();
-  els.input.addEventListener("keydown", event => { if (event.key === "Enter") runScan(); });
+  els.input.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      window.ProxumaPendingScanSource = "keyboard-enter";
+      els.scanButton.click();
+    }
+  });
   els.saveCaseButton.addEventListener("click", saveCase);
   els.clearHistoryButton.addEventListener("click", () => { localStorage.removeItem(HISTORY_KEY); renderHistory(); if (els.copyStatus) els.copyStatus.textContent = "Local scan history cleared. Pattern memory was left alone."; });
   if (els.clearAllLocalDataButton) els.clearAllLocalDataButton.addEventListener("click", () => {

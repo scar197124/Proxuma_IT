@@ -16807,3 +16807,268 @@ body.simple-ui .technical-value{
     font-size:.82rem!important;
   }
 }
+\n\n/* RC-5: Risk Color Intelligence — one live risk tone across the scan dashboard. */\n:root {\n  --proxuma-live-risk-accent: #7f8ea3;\n  --proxuma-live-risk-soft: rgba(127, 142, 163, .14);\n  --proxuma-live-risk-line: rgba(127, 142, 163, .62);\n  --proxuma-live-risk-glow: rgba(127, 142, 163, .24);\n}\nhtml[data-risk-tone="minimal"] { --proxuma-live-risk-accent:#35c97b; --proxuma-live-risk-soft:rgba(53,201,123,.14); --proxuma-live-risk-line:rgba(53,201,123,.68); --proxuma-live-risk-glow:rgba(53,201,123,.25); }\nhtml[data-risk-tone="low"] { --proxuma-live-risk-accent:#b88955; --proxuma-live-risk-soft:rgba(184,137,85,.16); --proxuma-live-risk-line:rgba(184,137,85,.72); --proxuma-live-risk-glow:rgba(184,137,85,.26); }\nhtml[data-risk-tone="guarded"] { --proxuma-live-risk-accent:#d8a23d; --proxuma-live-risk-soft:rgba(216,162,61,.16); --proxuma-live-risk-line:rgba(216,162,61,.74); --proxuma-live-risk-glow:rgba(216,162,61,.27); }\nhtml[data-risk-tone="elevated"] { --proxuma-live-risk-accent:#f47b20; --proxuma-live-risk-soft:rgba(244,123,32,.16); --proxuma-live-risk-line:rgba(244,123,32,.76); --proxuma-live-risk-glow:rgba(244,123,32,.28); }\nhtml[data-risk-tone="high"] { --proxuma-live-risk-accent:#ef4444; --proxuma-live-risk-soft:rgba(239,68,68,.16); --proxuma-live-risk-line:rgba(239,68,68,.78); --proxuma-live-risk-glow:rgba(239,68,68,.30); }\nhtml[data-risk-tone="critical"] { --proxuma-live-risk-accent:#ff3b7a; --proxuma-live-risk-soft:rgba(255,59,122,.17); --proxuma-live-risk-line:rgba(255,59,122,.80); --proxuma-live-risk-glow:rgba(255,59,122,.32); }\n\n#report[data-risk-tone],\n#captain-summary[data-risk-tone],\n#details[data-risk-tone],\n#investigation-workspace[data-risk-tone],\n#scan-detail-workspace[data-risk-tone],\n#workflow[data-risk-tone] {\n  border-color: var(--proxuma-live-risk-line) !important;\n  box-shadow: inset 0 3px 0 var(--proxuma-live-risk-accent), 0 0 0 1px var(--proxuma-live-risk-soft), 0 12px 30px rgba(0,0,0,.14) !important;\n  transition: border-color .22s ease, box-shadow .22s ease;\n}\n#riskLabel, #captainSummaryVerdict, #captainSummaryRisk,\n#details .analysis-view-head .eyebrow, #details .drawer-panel > h3,\n#investigationSummaryScore, #evidenceStrength {\n  color: var(--proxuma-live-risk-accent) !important;\n}\n#details .analysis-view-status, #details #explainStatus {\n  color: var(--proxuma-live-risk-accent) !important;\n  border: 1px solid var(--proxuma-live-risk-line) !important;\n  background: var(--proxuma-live-risk-soft) !important;\n  box-shadow: 0 0 16px var(--proxuma-live-risk-glow);\n}\n#details .drawer-tab.active {\n  color: #07110c !important;\n  background: var(--proxuma-live-risk-accent) !important;\n  border-color: var(--proxuma-live-risk-accent) !important;\n  box-shadow: 0 0 16px var(--proxuma-live-risk-glow);\n}\n#details .drawer-panel {\n  border-left: 3px solid var(--proxuma-live-risk-accent);\n  background-image: linear-gradient(90deg, var(--proxuma-live-risk-soft), transparent 32%);\n}\n#report .score-ring {\n  border-color: var(--proxuma-live-risk-line) !important;\n  box-shadow: 0 0 24px var(--proxuma-live-risk-glow), inset 0 0 18px var(--proxuma-live-risk-soft) !important;\n}\n#report #heatFill { background: var(--proxuma-live-risk-accent) !important; box-shadow: 0 0 14px var(--proxuma-live-risk-glow); }\n#workflow .workflow-fixed-head, #scan-detail-workspace .lane-compact-head, #investigation-workspace .lane-compact-head { border-bottom-color: var(--proxuma-live-risk-line) !important; }\n\n/* Keep live risk accents legible in the light theme while dark dashboard cards remain dark. */\nhtml[data-theme="light"] #report[data-risk-tone],\nhtml[data-theme="light"] #captain-summary[data-risk-tone],\nhtml[data-theme="light"] #details[data-risk-tone],\nhtml[data-theme="light"] #investigation-workspace[data-risk-tone],\nhtml[data-theme="light"] #scan-detail-workspace[data-risk-tone],\nhtml[data-theme="light"] #workflow[data-risk-tone],\nbody.light-theme #report[data-risk-tone],\nbody.light-theme #captain-summary[data-risk-tone],\nbody.light-theme #details[data-risk-tone],\nbody.light-theme #investigation-workspace[data-risk-tone],\nbody.light-theme #scan-detail-workspace[data-risk-tone],\nbody.light-theme #workflow[data-risk-tone] {\n  border-color: var(--proxuma-live-risk-line) !important;\n}\n@media (prefers-reduced-motion: no-preference) {\n  html[data-risk-tone]:not([data-risk-tone="standby"]) #details .analysis-view-status { animation: proxumaRiskPulse 1.8s ease-out 1; }\n  @keyframes proxumaRiskPulse { 0% { box-shadow:0 0 0 0 var(--proxuma-live-risk-glow); } 70% { box-shadow:0 0 0 12px transparent; } 100% { box-shadow:0 0 16px var(--proxuma-live-risk-glow); } }\n}\n
+
+/* === RC-6: Fixed Captain Summary + discoverable internal Investigation scroll === */
+@media (min-width: 761px) {
+  .captain-wire-ui #captain-summary.captain-summary-panel {
+    height: 188px;
+    min-height: 188px;
+    max-height: 188px;
+    grid-template-columns: minmax(0, 1.08fr) minmax(430px, .92fr);
+    padding: 14px 16px;
+    overflow: hidden;
+    align-items: stretch;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-main {
+    min-height: 0;
+    overflow: auto;
+    padding-right: 7px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--proxuma-live-risk-line, rgba(127,142,163,.62)) transparent;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-main .eyebrow {
+    margin-bottom: 2px;
+    font-size: .68rem;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-main h2 {
+    margin: 0 0 4px;
+    font-size: clamp(1.25rem, 1.65vw, 1.9rem);
+    line-height: 1.02;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-main p:last-child {
+    font-size: .82rem;
+    line-height: 1.28;
+    margin: 0;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics {
+    min-height: 0;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 6px;
+    align-content: stretch;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics div {
+    padding: 8px 7px;
+    min-height: 0;
+    overflow: auto;
+    justify-content: center;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics small {
+    font-size: .61rem;
+    letter-spacing: .055em;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics strong {
+    margin-top: 2px;
+    font-size: clamp(.86rem, 1.05vw, 1.06rem);
+    line-height: 1.08;
+  }
+}
+@media (min-width: 761px) and (max-width: 1200px) {
+  .captain-wire-ui #captain-summary.captain-summary-panel {
+    grid-template-columns: minmax(0,1fr) minmax(370px,.9fr);
+  }
+}
+@media (max-width: 760px) {
+  .captain-wire-ui #captain-summary.captain-summary-panel {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics div {
+    padding: 9px;
+  }
+}
+
+.captain-wire-ui .investigation-scroll-shell {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  margin-top: .3rem;
+}
+.captain-wire-ui .investigation-scroll-shell .wired-investigation-body {
+  width: 100%;
+  height: 100%;
+  margin-top: 0 !important;
+  padding: 4px 8px 30px 0;
+  overflow: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--proxuma-live-risk-line, rgba(127,142,163,.62)) rgba(4,12,18,.2);
+}
+.captain-wire-ui .investigation-scroll-shell .wired-investigation-body::-webkit-scrollbar { width: 8px; }
+.captain-wire-ui .investigation-scroll-shell .wired-investigation-body::-webkit-scrollbar-track { background: rgba(4,12,18,.22); border-radius: 999px; }
+.captain-wire-ui .investigation-scroll-shell .wired-investigation-body::-webkit-scrollbar-thumb { background: var(--proxuma-live-risk-line, rgba(127,142,163,.62)); border-radius: 999px; }
+.captain-wire-ui .internal-scroll-cue {
+  position: absolute;
+  right: 9px;
+  bottom: 5px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border: 1px solid var(--proxuma-live-risk-line, rgba(127,142,163,.58));
+  border-radius: 999px;
+  color: #eaf5ff;
+  background: rgba(6,16,24,.9);
+  box-shadow: 0 5px 18px rgba(0,0,0,.32);
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .025em;
+  pointer-events: none;
+  opacity: .92;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.captain-wire-ui .internal-scroll-cue.is-hidden {
+  opacity: 0;
+  transform: translateY(4px);
+}
+.theme-light.captain-wire-ui .internal-scroll-cue {
+  color: #f6fbff;
+  background: rgba(10,25,38,.94);
+}
+@media (max-width: 1200px) {
+  .captain-wire-ui .investigation-scroll-shell {
+    min-height: 180px;
+    max-height: 300px;
+  }
+}
+
+/* === RC-7: Hard-locked Captain Summary + Focus restoration repair === */
+/* The summary must never grow after analysis. Content scrolls inside the fixed shell. */
+.captain-wire-ui #captain-summary.captain-summary-panel{
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-main,
+.captain-wire-ui #captain-summary .captain-summary-metrics,
+.captain-wire-ui #captain-summary .captain-summary-metrics > div{
+  min-height:0!important;
+  min-width:0!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-metrics > div{
+  overflow:auto!important;
+  scrollbar-width:thin;
+  scrollbar-color:var(--proxuma-live-risk-line,rgba(127,142,163,.62)) transparent;
+}
+.captain-wire-ui #captain-summary .captain-summary-metrics > div::-webkit-scrollbar{width:5px;height:5px}
+.captain-wire-ui #captain-summary .captain-summary-metrics > div::-webkit-scrollbar-thumb{background:var(--proxuma-live-risk-line,rgba(127,142,163,.62));border-radius:999px}
+
+@media (min-width:1201px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:176px!important;
+    min-height:176px!important;
+    max-height:176px!important;
+    grid-template-columns:minmax(0,1.04fr) minmax(500px,.96fr)!important;
+    padding:12px 14px!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics > div{
+    padding:7px 6px!important;
+  }
+}
+@media (min-width:761px) and (max-width:1200px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:184px!important;
+    min-height:184px!important;
+    max-height:184px!important;
+    grid-template-columns:minmax(0,1fr) minmax(430px,.94fr)!important;
+    padding:12px 14px!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics > div{padding:7px 6px!important}
+}
+@media (max-width:760px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:222px!important;
+    min-height:222px!important;
+    max-height:222px!important;
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    grid-template-rows:68px minmax(0,1fr)!important;
+    gap:7px!important;
+    padding:10px!important;
+    overflow:hidden!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-main{
+    overflow:auto!important;
+    padding-right:4px!important;
+    justify-content:flex-start!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-main .eyebrow{
+    margin:0 0 1px!important;
+    font-size:.61rem!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-main h2{
+    margin:0 0 2px!important;
+    font-size:1.14rem!important;
+    line-height:1!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-main p:last-child{
+    margin:0!important;
+    font-size:.7rem!important;
+    line-height:1.18!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:repeat(2,minmax(0,1fr))!important;
+    gap:5px!important;
+    min-height:0!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics > div{
+    padding:5px 6px!important;
+    justify-content:flex-start!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics small{
+    font-size:.55rem!important;
+    line-height:1!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics strong{
+    margin-top:2px!important;
+    font-size:.77rem!important;
+    line-height:1.08!important;
+  }
+}
+
+/* Investigation card: keep the complete scan/case status readable and restore normal content after Focus exit. */
+.captain-wire-ui #investigation-workspace .fine-print{
+  display:block!important;
+  max-height:40px!important;
+  overflow:auto!important;
+  padding-right:4px!important;
+  scrollbar-width:thin;
+}
+.captain-wire-ui #investigation-workspace .investigation-scroll-shell{
+  min-height:110px!important;
+}
+.captain-wire-ui #investigation-workspace:not(.is-focus-reading) #visibleInvestigationBody{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  min-height:96px!important;
+  height:100%!important;
+  max-height:none!important;
+}
+.captain-wire-ui #investigation-workspace:not(.is-focus-reading) .investigation-scroll-shell{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+@media(max-width:1200px){
+  .captain-wire-ui #investigation-workspace .investigation-scroll-shell{
+    min-height:150px!important;
+    max-height:260px!important;
+  }
+}

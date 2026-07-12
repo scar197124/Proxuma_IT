@@ -1,4 +1,9 @@
 
+## RC-2 — Master Dashboard Sync
+- Added an authoritative scan-complete event at the end of the legacy analysis pipeline.
+- Synchronized every visible dashboard card immediately after example, pasted URL, history, and QR-triggered scans.
+- Removed the need to click another Analysis View tab before current scan data appears.
+
 ## Sprint 19 — Light Mode Full Visibility
 - Fixed disappearing text in Light Mode for Analysis Results, Captain Summary, and App Guide.
 - Compacted Analysis Results snapshot cards so Time does not overflow.
@@ -93,3 +98,32 @@
 - Balanced the Analysis Views drawer with a full-width segmented toolbar.
 - Kept buttons compact while reducing dead space.
 - Preserved layout freeze and Sprint 12 dashboard sync fixes.
+
+## RC-3 — Unified Scan Entry + Analysis Sync
+- Routed examples, Analyze Link, Enter, and QR decode through one scan entry path.
+- Added a direct completed-report integration hook between the legacy engine and dashboard.
+- Removed reliance on a later tab click to populate Analysis Views.
+- Preserved frozen layout, themes, ecosystem links, and responsive behavior.
+
+## RC-4 — Analysis Render Fuse Fix
+- Prevented missing optional legacy fields from aborting `renderReport()`.
+- Restored immediate Analysis View population after every completed scan.
+- Added compatibility relay fields and cache-busting script version.
+
+## RC-5 — Risk Color Intelligence
+- Added dynamic scan-driven risk color mapping across the live dashboard.
+- Added six distinct visual risk tones from Minimal through Critical.
+- Added Analysis Views band/score status and synchronized active-tab accents.
+- Preserved RC-4 render fuse fix, layout, themes, and ecosystem navigation.
+
+
+## RC-6 — Fixed Summary & Scroll Discovery
+- Locked Captain Summary to a stable desktop/tablet height with compact metrics and internal overflow.
+- Added an automatic Investigation scroll cue and clearer scrollbar styling.
+- Preserved mobile auto-height behavior, scan synchronization, and risk color intelligence.
+
+## RC-7 — Hard-Locked Summary + Focus Restoration
+- Strict fixed Captain Summary heights across desktop, tablet, and mobile.
+- Compact internal metric scrolling instead of card growth.
+- Investigation status readability improvements.
+- Fixed Investigation content disappearing after exiting Focus mode.

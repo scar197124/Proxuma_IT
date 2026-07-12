@@ -116,6 +116,28 @@
 
     viewportLayer.hidden = true;
     viewportLayer.setAttribute('aria-hidden', 'true');
+
+    /* RC-7: restoring a moved investigation card can leave its scroll canvas
+       collapsed in some browsers. Re-run the active view after the card is
+       back in its original grid so all case data becomes visible again. */
+    if(exitingTarget && exitingTarget.id === 'investigation-workspace'){
+      requestAnimationFrame(() => {
+        const shell = exitingTarget.querySelector('.investigation-scroll-shell');
+        const body = exitingTarget.querySelector('#visibleInvestigationBody');
+        if(shell){ shell.style.removeProperty('height'); shell.style.removeProperty('display'); }
+        if(body){
+          body.style.removeProperty('height');
+          body.style.removeProperty('display');
+          body.style.removeProperty('visibility');
+          body.style.removeProperty('opacity');
+          body.scrollTop = 0;
+        }
+        const activeTab = exitingTarget.querySelector('#investigation-controls button.active') || exitingTarget.querySelector('#investigation-controls button');
+        if(activeTab) activeTab.click();
+        document.dispatchEvent(new CustomEvent('proxuma:focus-restored', {detail:{target:'investigation-workspace'}}));
+      });
+    }
+
     active = null;
     placeholder = null;
     originalParent = null;

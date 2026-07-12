@@ -96,7 +96,10 @@
         <div id="investigation-controls" class="tab-row"><button type="button" class="active" data-investigation-view="overview">Overview</button><button type="button" data-investigation-view="evidence">Evidence</button><button type="button" data-investigation-view="deep">Deep Analysis</button><button type="button" data-investigation-view="case">Case File</button></div>
         <div id="investigation-summary" class="mini-grid"><span>Risk <b id="investigationSummaryScore">0</b></span><span>Confidence <b id="investigationSummaryConfidence">Not measured</b></span><span>Main concern <b id="investigationSummaryConcern">Waiting</b></span><span>Action <b id="investigationSummaryAction">Paste a target</b></span></div>
         <p class="fine-print"><b>Case:</b> <span id="visibleCaseId">No case yet</span> · <span id="visibleCaseStatus">Waiting for scan</span></p>
-        <div id="visibleInvestigationBody" class="wired-investigation-body"><strong>Overview</strong><p>Run a scan to populate this investigation lane.</p></div>
+        <div class="investigation-scroll-shell">
+          <div id="visibleInvestigationBody" class="wired-investigation-body" tabindex="0" aria-describedby="investigationScrollCue"><strong>Overview</strong><p>Run a scan to populate this investigation lane.</p></div>
+          <div id="investigationScrollCue" class="internal-scroll-cue" aria-live="polite">More investigation details ↓</div>
+        </div>
         <div class="wired-footer-actions"><button id="visibleSaveCase" class="secondary-action" type="button">Save Case</button><button id="visibleCopyCase" class="secondary-action" type="button">Copy Case Packet</button></div>
       </article>
       <article id="scan-detail-workspace" class="wire-card scan-details-workspace">
@@ -160,6 +163,7 @@
   </section>
 </main>
 <script src="assets/js/proxuma-it.js"></script>
+<div id="legacyCompatibilityFields" hidden aria-hidden="true"><span id="scanMode">Standby</span><span id="scanModeNote">Waiting for a target.</span></div>
 <script src="assets/js/ui-consistency.js"></script>
 <script src="assets/js/workflow-intelligence.js"></script>
 <script src="assets/js/focus-reading.js"></script>
@@ -168,7 +172,7 @@
 <script src="assets/js/grouped-panel-controls.js"></script>
 <script src="assets/js/product-simplification.js"></script>
 <script src="assets/js/mobile-simplification.js"></script>
-<script src="assets/js/proxuma-ui-wiring.js?v=sprint16-one-scan-sync"></script>
+<script src="assets/js/proxuma-ui-wiring.js?v=rc6-fixed-summary-scroll-cue"></script>
 
 <script id="captainSummarySyncScript">
 (function(){

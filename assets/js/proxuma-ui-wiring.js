@@ -40,6 +40,38 @@
   }
   window.ProxumaForceDashboardSync = forceDashboardSync;
 
+
+  function getRiskTone(r){
+    if (!r || !r.scanned) return { key:"standby", label:"Ready", accent:"#7f8ea3" };
+    const score = Number(r.riskScore || 0);
+    if (score >= 80) return { key:"critical", label:"Critical", accent:"#ff3b7a" };
+    if (score >= 60) return { key:"high", label:"High Risk", accent:"#ef4444" };
+    if (score >= 40) return { key:"elevated", label:"Elevated", accent:"#f47b20" };
+    if (score >= 20) return { key:"guarded", label:"Needs Review", accent:"#d8a23d" };
+    if (score >= 10) return { key:"low", label:"Low Risk", accent:"#b88955" };
+    return { key:"minimal", label:"Minimal Risk", accent:"#35c97b" };
+  }
+
+  function applyRiskColorIntelligence(r){
+    const tone = getRiskTone(r);
+    const root = document.documentElement;
+    root.setAttribute("data-risk-tone", tone.key);
+    root.style.setProperty("--proxuma-live-risk-accent", tone.accent);
+    ["report","captain-summary","details","investigation-workspace","scan-detail-workspace","workflow"].forEach((id) => {
+      const el = $(id);
+      if (el) el.setAttribute("data-risk-tone", tone.key);
+    });
+    const status = $("analysisViewStatus");
+    if (status) {
+      status.textContent = r && r.scanned ? `${tone.label} · ${Number(r.riskScore || 0)}/100` : "Ready";
+      status.setAttribute("data-risk-tone", tone.key);
+    }
+    const explain = $("explainStatus");
+    if (explain) explain.setAttribute("data-risk-tone", tone.key);
+    const scoreRing = $("scoreValue") && $("scoreValue").closest ? $("scoreValue").closest(".score-ring") : null;
+    if (scoreRing) scoreRing.setAttribute("data-risk-tone", tone.key);
+  }
+
   function riskBand(score){
     if (score >= 80) return "High";
     if (score >= 50) return "Medium";
@@ -173,6 +205,51 @@
     const el = $(id); if (!el) return;
     el.innerHTML = Object.entries(groups).map(([name, items]) => `<details class="evidence-node" open><summary>${esc(name)} <span>${items.length}</span></summary><ul>${items.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></details>`).join("");
   }
+  function resultFromLegacyReport(report){
+    if (!report || typeof report !== "object") return null;
+    const target = String(report.target || report.raw || (($("targetInput") && $("targetInput").value) || "Waiting")).trim() || "Waiting";
+    const timestamp = String(report.displayTime || report.time || text("reportTimestamp", "Not scanned")).trim() || "Not scanned";
+    const score = Number(report.score || 0) || 0;
+    const scanned = Boolean(report.raw || target !== "Waiting" || timestamp !== "Not scanned" || score > 0);
+    const r = {
+      caseId: report.caseReference || report.casePacketId || makeCaseId(target, timestamp),
+      scanned,
+      target,
+      input: String(report.raw || (($("targetInput") && $("targetInput").value) || "")).trim(),
+      timestamp,
+      riskLabel: report.risk || "Ready to scan",
+      riskScore: score,
+      riskBand: riskBand(score),
+      confidence: report.confidence || "Not measured",
+      confidenceNote: report.confidenceNote || "",
+      summary: report.quickSummary || report.summary || "Enter a target to generate a report.",
+      reason: report.explain || report.primaryReason || report.whyScore || report.summary || "Run a scan to see the strongest reason behind the verdict.",
+      action: report.reportWhatToDoNext || report.whatHappened || report.next || report.actionTitle || "Scan first",
+      nextStep: report.reportWhatToDoNext || report.next || "Scan first",
+      signalCount: String(report.count ?? 0),
+      primaryTrigger: report.primaryTrigger || "Waiting",
+      severity: report.severityNote || "Not scanned",
+      severityMix: report.severityMix || "0 high · 0 medium · 0 low",
+      rootDomain: report.root || "Waiting",
+      heatLabel: report.heatLabel || "Standby",
+      evidenceStrength: report.evidenceStrength || "Waiting",
+      timeline: Array.isArray(report.timeline) ? report.timeline.slice() : [],
+      trustTrail: Array.isArray(report.trust) ? report.trust.slice() : [],
+      decisionSteps: Array.isArray(report.decision) ? report.decision.slice() : [],
+      technical: Array.isArray(report.technical) ? report.technical.slice() : [],
+      threatStory: report.threat || "Paste a target and Proxuma will explain what could be happening.",
+      scanMemory: report.scanMemory || "No previous scan",
+      compareLast: report.compareLast || "Waiting for the first scan.",
+      safeMove: report.reportWhatToDoNext || report.next || "Scan first"
+    };
+    r.evidence = Array.isArray(report.evidence) && report.evidence.length ? report.evidence.slice() : buildEvidence(r);
+    r.scoreContributors = buildScoreContributors(r);
+    r.livingTimeline = buildLivingTimeline(r);
+    r.evidenceGroups = buildEvidenceGroups(r);
+    r.report = { title:"Proxuma IT Captain Case Packet", generatedAt:new Date().toISOString(), privacy:"Local-first scan. Optional online checks remain off unless chosen.", legacyReport:report, result:r };
+    return normalizeVisibleResult(r);
+  }
+
   function buildScanResult(){
     const scoreRaw = text("scoreValue", "0");
     const score = Number(scoreRaw.replace(/[^0-9.]/g,"")) || 0;
@@ -297,8 +374,9 @@
     }
   }
 
-  function renderCaptainWiring(state){
-    const r = normalizeVisibleResult(buildScanResult());
+  function renderCaptainWiring(state, explicitResult){
+    const r = explicitResult ? normalizeVisibleResult(explicitResult) : normalizeVisibleResult(buildScanResult());
+    applyRiskColorIntelligence(r);
     set("captainSummaryVerdict", r.riskLabel);
     set("captainSummaryRisk", String(r.riskScore));
     set("captainSummaryConfidence", r.confidence || "Waiting");
@@ -327,6 +405,20 @@
       document.dispatchEvent(new CustomEvent("proxuma:scan-result", { detail: r }));
     }
   }
+
+  window.ProxumaApplyLegacyScanReport = function(report, source){
+    const r = resultFromLegacyReport(report);
+    if (!r) return;
+    window.ProxumaLegacyLastReport = report;
+    investigationState = "INVESTIGATION_ACTIVE";
+    investigationDirty = true;
+    updateMissionStatus("Investigation Active");
+    setScanningState("Complete");
+    set("visibleCaseStatus", "Scan complete. Unsaved case packet ready.");
+    renderCaptainWiring("Complete", r);
+    requestAnimationFrame(() => renderCaptainWiring("Complete", r));
+    document.dispatchEvent(new CustomEvent("proxuma:dashboard-synced", { detail:{ source:source || "legacy-engine", completedAt:Date.now() } }));
+  };
 
   function setScanningState(label){
     set("captainScanState", label);
@@ -390,6 +482,7 @@
     document.querySelectorAll("#investigation-controls button").forEach((b) => b.classList.toggle("active", b.getAttribute("data-investigation-view") === "overview"));
     document.querySelectorAll(".drawer-tab[data-drawer-target]").forEach((b,i) => b.classList.toggle("active", i === 0));
     document.querySelectorAll(".drawer-panel").forEach((panel,i) => { panel.classList.toggle("active", i === 0); panel.hidden = i !== 0; });
+    applyRiskColorIntelligence({ scanned:false, riskScore:0 });
     window.ProxumaScanResult = null;
     window.ProxumaCaseFile = null;
     investigationState = "MISSION_READY";
@@ -590,6 +683,13 @@
       setTimeout(() => { investigationState = "INVESTIGATION_ACTIVE"; investigationDirty = true; updateMissionStatus("Investigation Active"); set("visibleCaseStatus", "Scan complete. Unsaved case packet ready."); forceDashboardSync("Complete"); }, 1450);
     });
     $("targetInput")?.addEventListener("input", () => { scheduleCaptainRender("Ready", 80); set("visibleCaseStatus", "Ready to scan"); });
+
+    // RC-2 master synchronization: this event is emitted by the legacy engine
+    // only after renderReport(), persistence, memory, and history are complete.
+    // A single event refreshes every visible dashboard surface immediately.
+    document.addEventListener("proxuma:legacy-scan-complete", (event) => {
+      window.ProxumaApplyLegacyScanReport?.(event?.detail?.report || window.ProxumaLegacyLastReport, event?.detail?.source || "legacy-engine");
+    });
   });
 })();
 
@@ -619,5 +719,27 @@
     card.querySelectorAll('.guide-actions a').forEach(function(a){
       a.addEventListener('click',function(){ set(false); });
     });
+  });
+})();
+
+
+/* === RC-6: Investigation internal-scroll affordance === */
+(function(){
+  'use strict';
+  function ready(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fn); else fn(); }
+  ready(function(){
+    var body=document.getElementById('visibleInvestigationBody');
+    var cue=document.getElementById('investigationScrollCue');
+    if(!body || !cue) return;
+    function refreshCue(){
+      var overflow=body.scrollHeight > body.clientHeight + 4;
+      var atEnd=body.scrollTop + body.clientHeight >= body.scrollHeight - 8;
+      cue.classList.toggle('is-hidden', !overflow || atEnd);
+      cue.textContent = overflow ? 'More investigation details ↓' : 'All details visible';
+    }
+    body.addEventListener('scroll', refreshCue, {passive:true});
+    window.addEventListener('resize', refreshCue, {passive:true});
+    new MutationObserver(function(){ requestAnimationFrame(refreshCue); }).observe(body,{childList:true,subtree:true,characterData:true});
+    requestAnimationFrame(refreshCue);
   });
 })();
