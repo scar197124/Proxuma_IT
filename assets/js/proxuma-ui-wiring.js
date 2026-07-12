@@ -27,29 +27,31 @@
   let bypassInvestigationManager = false;
   let pendingInvestigationAction = null;
   let renderTimer = null;
+  let lastAuthoritativeResult = null;
+  let authoritativeScanActive = false;
+  let lastAppliedLegacyReport = null;
   function scheduleCaptainRender(state="Complete", delay=120){
     clearTimeout(renderTimer);
-    renderTimer = setTimeout(() => renderCaptainWiring(state), delay);
+    renderTimer = setTimeout(() => renderCaptainWiring(state, authoritativeScanActive ? lastAuthoritativeResult : undefined), delay);
   }
-  function scheduleScanSettledRenders(){
-    [80, 180, 350, 700, 1200, 2000].forEach((delay) => setTimeout(() => renderCaptainWiring("Complete"), delay));
+  function scheduleScanSettledRenders(explicitResult){
+    // Scan completion is already rendered synchronously. Do not issue a second
+    // paint pass: self-observed summary fields can turn that into a feedback loop.
+    return;
   }
-  function forceDashboardSync(reason="Complete"){
-    renderCaptainWiring(reason);
-    scheduleScanSettledRenders();
+  function forceDashboardSync(reason="Complete", explicitResult){
+    const authoritative = explicitResult || lastAuthoritativeResult || window.ProxumaScanResult || undefined;
+    renderCaptainWiring(reason, authoritative);
   }
   window.ProxumaForceDashboardSync = forceDashboardSync;
 
 
   function getRiskTone(r){
-    if (!r || !r.scanned) return { key:"standby", label:"Ready", accent:"#7f8ea3" };
+    if (!r || !r.scanned) return { key:"standby", label:"Ready", accent:"#9aa8b8" };
     const score = Number(r.riskScore || 0);
-    if (score >= 80) return { key:"critical", label:"Critical", accent:"#ff3b7a" };
-    if (score >= 60) return { key:"high", label:"High Risk", accent:"#ef4444" };
-    if (score >= 40) return { key:"elevated", label:"Elevated", accent:"#f47b20" };
-    if (score >= 20) return { key:"guarded", label:"Needs Review", accent:"#d8a23d" };
-    if (score >= 10) return { key:"low", label:"Low Risk", accent:"#b88955" };
-    return { key:"minimal", label:"Minimal Risk", accent:"#35c97b" };
+    if (score >= 60) return { key:"high", label:"High Risk", accent:"#ff4d57" };
+    if (score >= 20) return { key:"moderate", label:"Moderate", accent:"#ff9f2f" };
+    return { key:"good", label:"Good to Go", accent:"#39ff88" };
   }
 
   function applyRiskColorIntelligence(r){
@@ -57,7 +59,7 @@
     const root = document.documentElement;
     root.setAttribute("data-risk-tone", tone.key);
     root.style.setProperty("--proxuma-live-risk-accent", tone.accent);
-    ["report","captain-summary","details","investigation-workspace","scan-detail-workspace","workflow"].forEach((id) => {
+    ["report","details","investigation-workspace","scan-detail-workspace","workflow"].forEach((id) => {
       const el = $(id);
       if (el) el.setAttribute("data-risk-tone", tone.key);
     });
@@ -198,6 +200,33 @@
     if (r.scanned && (!r.reason || /run a scan|paste a target/i.test(r.reason))) {
       r.reason = r.riskScore >= 50 ? "Local scan found caution signals that should be reviewed before continuing." : "Local scan did not find a strong immediate danger signal.";
     }
+    // Heavy-fuse Supporting Evidence normalization. Some legacy/example scan
+    // reports carry a score and evidence but omit high/medium/low buckets.
+    // Derive a stable visible mix once so later renderers cannot overwrite the
+    // card with 0/0/0 or Waiting.
+    let high = Number(r.high || 0) || 0;
+    let medium = Number(r.medium || 0) || 0;
+    let low = Number(r.low || 0) || 0;
+    const evidenceTotal = Array.isArray(r.evidence) ? r.evidence.filter(Boolean).length : 0;
+    const signalTotal = Math.max(Number(r.signalCount || 0) || 0, evidenceTotal, r.scanned && Number(r.riskScore || 0) > 0 ? 1 : 0);
+    const suppliedClassifiedTotal = high + medium + low;
+    let unclassified = Math.max(Number(r.unclassified || 0) || 0, signalTotal - suppliedClassifiedTotal, 0);
+    // Conservative compatibility fallback: the overall score does not make
+    // every detected clue individually high severity. When old/example
+    // reports omit buckets, classify only the leading signal and keep the
+    // remaining detections explicitly unclassified.
+    if (r.scanned && suppliedClassifiedTotal === 0 && signalTotal > 0) {
+      if (r.riskLabel === "High Risk" || Number(r.riskScore || 0) >= 70) high = 1;
+      else if (r.riskLabel === "Needs Review" || Number(r.riskScore || 0) >= 35) medium = 1;
+      else low = 1;
+      unclassified = Math.max(signalTotal - 1, 0);
+    }
+    r.high = high; r.medium = medium; r.low = low; r.unclassified = unclassified;
+    r.severityMix = `${high} high · ${medium} medium · ${low} low${unclassified ? ` · ${unclassified} unclassified` : ""}`;
+    if (r.scanned && (!r.evidenceStrength || /waiting/i.test(r.evidenceStrength))) {
+      const weighted = high * 3 + medium * 2 + low;
+      r.evidenceStrength = weighted >= 6 ? "Strong evidence" : weighted >= 3 ? "Moderate evidence" : "Light evidence";
+    }
     return r;
   }
 
@@ -233,6 +262,9 @@
       rootDomain: report.root || "Waiting",
       heatLabel: report.heatLabel || "Standby",
       evidenceStrength: report.evidenceStrength || "Waiting",
+      high: Number(report.high || 0) || 0,
+      medium: Number(report.medium || 0) || 0,
+      low: Number(report.low || 0) || 0,
       timeline: Array.isArray(report.timeline) ? report.timeline.slice() : [],
       trustTrail: Array.isArray(report.trust) ? report.trust.slice() : [],
       decisionSteps: Array.isArray(report.decision) ? report.decision.slice() : [],
@@ -265,7 +297,7 @@
       riskLabel: text("riskLabel", "Ready to scan"),
       riskScore: score,
       riskBand: riskBand(score),
-      confidence: text("confidenceLabel", text("captainSummaryConfidence", "Waiting")),
+      confidence: text("confidenceLabel", "Waiting"),
       confidenceNote: text("confidenceNote", ""),
       summary: text("summaryText", "Enter a target to generate a report."),
       reason: text("explainSummary", "Run a scan to see the strongest reason behind the verdict."),
@@ -329,10 +361,19 @@
     else finish();
   }
 
+  function cleanThreatScoreReason(value){
+    let out = String(value || "").trim();
+    // Remove any score prefix left by an earlier UI render. This keeps the
+    // formatter idempotent even when legacy data was read back from the DOM.
+    out = out.replace(/^(?:Threat\s+Score\s+\d+(?:\/100)?[.:]?\s*)+/i, "").trim();
+    return out;
+  }
+
   function renderDrawerPanels(r){
     set("explainStatus", r.scanned ? `${r.riskBand} risk · ${r.confidence}` : "Awaiting scan");
     const contributorLines = r.scoreContributors.map(c => `${c.impact === "positive" ? "✓" : c.impact === "negative" ? "⚠" : "•"} ${c.label}: ${c.detail}`);
-    set("explainSummary", r.scanned ? `Threat Score ${r.riskScore}/100. ${r.reason && !/^run a scan/i.test(r.reason) ? r.reason : r.summary}` : "Run a scan to see the strongest reason behind the verdict.");
+    const cleanReason = cleanThreatScoreReason(r.reason && !/^run a scan/i.test(r.reason) ? r.reason : r.summary);
+    set("explainSummary", r.scanned ? `Threat Score ${r.riskScore}/100.${cleanReason ? ` ${cleanReason}` : ""}` : "Run a scan to see the strongest reason behind the verdict.");
     htmlList("evidenceList", contributorLines);
 
     set("timelineStatus", r.scanned ? `${r.livingTimeline.length} steps` : "0 steps");
@@ -366,7 +407,7 @@
     if (activeInvestigationView === "overview") {
       el.innerHTML = `<strong>Overview</strong><p><b>${esc(r.caseId)}</b> is ${esc(r.riskLabel)} with ${esc(r.confidence)} confidence.</p><ul><li>Target: ${esc(r.target)}</li><li>Main concern: ${esc(r.primaryTrigger)}</li><li>Recommended action: ${esc(r.action || r.nextStep)}</li></ul>`;
     } else if (activeInvestigationView === "evidence") {
-      el.innerHTML = `<strong>Evidence Explorer</strong><p>Grouped proof behind the Captain Summary.</p>${evidenceTree}`;
+      el.innerHTML = `<strong>Evidence Explorer</strong><p>Grouped proof behind the analysis result.</p>${evidenceTree}`;
     } else if (activeInvestigationView === "case") {
       el.innerHTML = `<strong>Case File</strong><p><b>${esc(r.caseId)}</b> · ${esc(r.riskLabel)} · ${esc(r.target)}</p><ul><li>Timestamp: ${esc(r.timestamp)}</li><li>Confidence: ${esc(r.confidence)}</li><li>Action: ${esc(r.action || r.nextStep)}</li><li>Timeline steps: ${esc(r.livingTimeline.length)}</li><li>Evidence groups: ${esc(Object.keys(r.evidenceGroups).length)}</li></ul>`;
     } else {
@@ -375,18 +416,14 @@
   }
 
   function renderCaptainWiring(state, explicitResult){
-    const r = explicitResult ? normalizeVisibleResult(explicitResult) : normalizeVisibleResult(buildScanResult());
+    const sourceResult = explicitResult || (authoritativeScanActive ? lastAuthoritativeResult : null);
+    const r = sourceResult ? normalizeVisibleResult(sourceResult) : normalizeVisibleResult(buildScanResult());
     applyRiskColorIntelligence(r);
-    set("captainSummaryVerdict", r.riskLabel);
-    set("captainSummaryRisk", String(r.riskScore));
-    set("captainSummaryConfidence", r.confidence || "Waiting");
-    set("captainSummaryAction", r.action || r.nextStep || "Scan first");
     if (r.scanned) { investigationState = "INVESTIGATION_ACTIVE"; investigationDirty = true; }
-    let reason = r.reason;
-    if (!reason || reason === "Run a scan to see the strongest reason behind the verdict.") reason = r.summary;
-    set("captainSummaryReason", reason);
     if (r.scanned) { set("confidenceLabel", r.confidence); set("actionTitle", r.action); set("nextStep", r.action); set("primaryTrigger", r.primaryTrigger); }
     if (state) set("captainScanState", state);
+    set("casePacketBadge", r.scanned ? "Case packet ready ✓" : "Mission ready");
+    set("casePacketMeta", r.scanned ? `${r.caseId} · ${r.riskLabel} · ${r.confidence}` : "Run a scan to build a case packet.");
 
     set("investigationSummaryScore", String(r.riskScore));
     set("investigationSummaryConfidence", r.confidence || "Not measured");
@@ -394,11 +431,44 @@
     set("investigationSummaryAction", r.action || "Paste a target");
     set("visibleCaseId", r.caseId);
     if (r.scanned && text("visibleCaseStatus", "").match(/waiting for scan/i)) set("visibleCaseStatus", "Scan complete. Case packet ready.");
+    // Supporting Evidence is a visible summary surface, separate from the
+    // legacy hidden severity field. Refresh it directly from the completed
+    // authoritative report so it cannot remain at 0 / Waiting after a scan.
+    const signalMix = document.querySelector("#scan-detail-workspace .severity-breakdown");
+    if (signalMix) {
+      const high = Number(r.high || 0) || 0;
+      const medium = Number(r.medium || 0) || 0;
+      const low = Number(r.low || 0) || 0;
+      const unclassified = Number(r.unclassified || 0) || 0;
+      signalMix.innerHTML = `<em class="sev-high">${high} high</em> <em class="sev-medium">${medium} medium</em> <em class="sev-low">${low} low</em>${unclassified ? ` <em class="sev-unclassified">${unclassified} unclassified</em>` : ""}`;
+      signalMix.setAttribute("aria-label", `${high} high, ${medium} medium, ${low} low${unclassified ? `, ${unclassified} unclassified` : ""} signals`);
+    }
+    set("evidenceStrength", r.scanned ? ((r.evidenceStrength && !/waiting/i.test(r.evidenceStrength)) ? r.evidenceStrength : "Light evidence") : "Waiting");
+    set("scanMemory", r.scanMemory || "No previous scan");
     htmlList("visibleEvidenceList", r.evidence);
     renderDrawerPanels(r);
     renderInvestigationBody(r);
 
-    const serialized = JSON.stringify(r.report, null, 2);
+    // Build a cycle-safe debug snapshot. The case packet points back to the
+    // normalized result, so plain JSON.stringify can throw during the automatic
+    // completion pass and interrupt the dashboard wake-up sequence.
+    let serialized = "";
+    try {
+      const seen = new WeakSet();
+      serialized = JSON.stringify(r.report, function(key, value){
+        if (value && typeof value === "object") {
+          if (seen.has(value)) return "[Circular]";
+          seen.add(value);
+        }
+        return value;
+      }, 2);
+    } catch (error) {
+      serialized = JSON.stringify({
+        caseId:r.caseId, scanned:r.scanned, target:r.target, riskLabel:r.riskLabel,
+        riskScore:r.riskScore, confidence:r.confidence, primaryTrigger:r.primaryTrigger,
+        action:r.action, timestamp:r.timestamp
+      }, null, 2);
+    }
     if (serialized !== lastSerialized) {
       lastSerialized = serialized;
       set("scanResultDebug", serialized);
@@ -407,21 +477,43 @@
   }
 
   window.ProxumaApplyLegacyScanReport = function(report, source){
+    if (!report || report === lastAppliedLegacyReport) return;
     const r = resultFromLegacyReport(report);
     if (!r) return;
+    lastAppliedLegacyReport = report;
     window.ProxumaLegacyLastReport = report;
+    lastAuthoritativeResult = r;
+    authoritativeScanActive = true;
+    window.ProxumaScanResult = r;
     investigationState = "INVESTIGATION_ACTIVE";
     investigationDirty = true;
     updateMissionStatus("Investigation Active");
     setScanningState("Complete");
     set("visibleCaseStatus", "Scan complete. Unsaved case packet ready.");
     renderCaptainWiring("Complete", r);
-    requestAnimationFrame(() => renderCaptainWiring("Complete", r));
+    scheduleScanSettledRenders(r);
+    const analysisCard = $("details");
+    if (analysisCard) {
+      analysisCard.classList.remove("dashboard-certified-update");
+      void analysisCard.offsetWidth;
+      analysisCard.classList.add("dashboard-certified-update");
+      setTimeout(() => analysisCard.classList.remove("dashboard-certified-update"), 650);
+    }
     document.dispatchEvent(new CustomEvent("proxuma:dashboard-synced", { detail:{ source:source || "legacy-engine", completedAt:Date.now() } }));
   };
 
   function setScanningState(label){
     set("captainScanState", label);
+    const lifecycle = $("scanLifecycleStatus");
+    if (lifecycle) {
+      const copy = label === "Analyzing" ? "Analyzing…" : label === "Complete" ? "Report complete" : label;
+      lifecycle.textContent = copy;
+      lifecycle.setAttribute("data-state", label === "Analyzing" ? "working" : "complete");
+    }
+    if (label === "Analyzing") {
+      set("casePacketBadge", "Building evidence…");
+      set("casePacketMeta", "Collecting signals and preparing the case packet.");
+    }
     const btn = $("scanButton");
     if (btn) btn.setAttribute("aria-busy", label === "Analyzing" ? "true" : "false");
   }
@@ -460,8 +552,7 @@
       ["heatLabel","Standby"],["signalCount","0"],["inputTypeLabel","Standby"],["primaryTrigger","Waiting"],["reportTimestamp","Not scanned"],
       ["nextStep","Enter a target"],["severityNote","Not scanned"],["severityMix","0 high · 0 medium · 0 low"],["rootDomain","Waiting"],
       ["actionTitle","Scan first"],["trueTarget","Waiting"],["confidenceLabel","Not measured"],["confidenceNote",""],["evidenceStrength","Waiting"],
-      ["scanMemory","No previous scan"],["captainSummaryVerdict","Ready to scan"],["captainSummaryRisk","0"],["captainSummaryConfidence","Waiting"],
-      ["captainSummaryAction","Scan first"],["captainSummaryReason","Paste a link, QR payload, or message to get one clear trust decision."],
+      ["scanMemory","No previous scan"],
       ["captainScanState","Idle"],["visibleCaseId","No case yet"],["visibleCaseStatus","Mission ready. Paste a target to begin."],
       ["investigationSummaryScore","0"],["investigationSummaryConfidence","Not measured"],["investigationSummaryConcern","Waiting"],["investigationSummaryAction","Paste a target"],
       ["visibleWireStatus","New investigation ready."],["toolActionStatus","Tools now report whether they are wired or planned instead of showing fake output."],
@@ -570,6 +661,8 @@
   }
 
   function resetMissionForNextScan(){
+    authoritativeScanActive = false;
+    lastAuthoritativeResult = null;
     clickHidden("resetWorkspaceButton");
     clearVisibleMissionState();
     setScanningState("Idle");
@@ -601,10 +694,10 @@
   }
 
   function wireVisibleControls(){
-    $("visibleCopySummary")?.addEventListener("click", () => {
+    $("visibleCopyReport")?.addEventListener("click", () => {
       const r = buildScanResult();
-      const summary = `Proxuma IT Captain Summary\nCase: ${r.caseId}\nTarget: ${r.target}\nRisk: ${r.riskLabel} (${r.riskScore})\nConfidence: ${r.confidence}\nReason: ${r.reason}\nAction: ${r.action}`;
-      copyText(summary, "visibleWireStatus", "Captain Summary copied.");
+      const summary = `Proxuma IT Scan Report\nCase: ${r.caseId}\nTarget: ${r.target}\nRisk: ${r.riskLabel} (${r.riskScore})\nConfidence: ${r.confidence}\nReason: ${r.reason}\nAction: ${r.action}`;
+      copyText(summary, "visibleWireStatus", "Scan report copied.");
     });
     $("visibleExportJson")?.addEventListener("click", () => {
       if (clickHidden("exportTrustJson")) set("visibleWireStatus", "Structured JSON export started.");
@@ -642,9 +735,15 @@
     if (actions && !document.getElementById("investigationStatePill")) { const pill = document.createElement("span"); pill.id="investigationStatePill"; pill.className="wire-pill investigation-state-pill"; pill.textContent="Mission Ready"; actions.appendChild(pill); }
     ensureInvestigationDialog();
     renderCaptainWiring("Idle");
-    const observed = ["riskLabel","scoreValue","confidenceLabel","confidenceNote","actionTitle","nextStep","explainSummary","summaryText","signalCount","primaryTrigger","severityNote","severityMix","rootDomain","evidenceStrength","reportTimestamp","trueTarget","inputTypeLabel","heatLabel","scanMemory"];
-    observed.forEach((id) => { const el = $(id); if (el) new MutationObserver(() => scheduleCaptainRender("Complete", 180)).observe(el,{childList:true,subtree:true,characterData:true}); });
-    ["evidenceList","trustTrail","timelineList","decisionList","technicalList"].forEach((id)=>{ const el=$(id); if(el) new MutationObserver(()=>scheduleCaptainRender("Complete", 180)).observe(el,{childList:true,subtree:true}); });
+    const observed = ["riskLabel","scoreValue","confidenceLabel","confidenceNote","actionTitle","nextStep","summaryText","signalCount","primaryTrigger","severityNote","severityMix","rootDomain","evidenceStrength","reportTimestamp","trueTarget","inputTypeLabel","heatLabel","scanMemory"];
+    const scheduleLegacyObservation = () => {
+      // Once a completed report is authoritative, UI mutations are output—not
+      // new scan input. Observing them would make the renderer call itself.
+      if (authoritativeScanActive) return;
+      scheduleCaptainRender("Complete", 180);
+    };
+    observed.forEach((id) => { const el = $(id); if (el) new MutationObserver(scheduleLegacyObservation).observe(el,{childList:true,subtree:true,characterData:true}); });
+    ["evidenceList","trustTrail","timelineList","decisionList","technicalList"].forEach((id)=>{ const el=$(id); if(el) new MutationObserver(scheduleLegacyObservation).observe(el,{childList:true,subtree:true}); });
     // Investigation Manager intercepts all new-scan attempts before legacy handlers can replace the current case.
     document.addEventListener("click", (event) => {
       const exampleButton = event.target.closest ? event.target.closest("[data-example]") : null;
@@ -671,56 +770,40 @@
       setScanningState("Analyzing");
       set("visibleCaseStatus", "Building case packet...");
       setTimeout(() => { investigationState = "INVESTIGATION_ACTIVE"; investigationDirty = true; updateMissionStatus("Investigation Active"); }, 250);
-      forceDashboardSync("Complete");
+      // Final dashboard rendering is driven only by proxuma:legacy-scan-complete.
     }, false);
 
     $("scanButton")?.addEventListener("click", () => {
+      // Enter a fresh loading phase. Do not render result panels from transitional
+      // DOM fields; the legacy completion event will publish the finished report.
+      authoritativeScanActive = false;
+      lastAuthoritativeResult = null;
       setScanningState("Analyzing");
       set("visibleCaseStatus", "Building case packet...");
-      // Legacy scan handlers update several DOM fields in sequence. Wait for the scan to settle,
-      // then refresh every dashboard panel from one normalized ProxumaScanResult.
-      forceDashboardSync("Complete");
-      setTimeout(() => { investigationState = "INVESTIGATION_ACTIVE"; investigationDirty = true; updateMissionStatus("Investigation Active"); set("visibleCaseStatus", "Scan complete. Unsaved case packet ready."); forceDashboardSync("Complete"); }, 1450);
     });
-    $("targetInput")?.addEventListener("input", () => { scheduleCaptainRender("Ready", 80); set("visibleCaseStatus", "Ready to scan"); });
+    $("targetInput")?.addEventListener("input", () => {
+      authoritativeScanActive = false;
+      lastAuthoritativeResult = null;
+      lastAppliedLegacyReport = null;
+      scheduleCaptainRender("Ready", 80);
+      set("visibleCaseStatus", "Ready to scan");
+    });
 
-    // RC-2 master synchronization: this event is emitted by the legacy engine
+    // RC-3 authoritative completion synchronization: this event is emitted by the legacy engine
     // only after renderReport(), persistence, memory, and history are complete.
     // A single event refreshes every visible dashboard surface immediately.
     document.addEventListener("proxuma:legacy-scan-complete", (event) => {
-      window.ProxumaApplyLegacyScanReport?.(event?.detail?.report || window.ProxumaLegacyLastReport, event?.detail?.source || "legacy-engine");
+      const report = event?.detail?.report || window.ProxumaLegacyLastReport;
+      window.ProxumaApplyLegacyScanReport?.(report, event?.detail?.source || "legacy-engine");
     });
+
+    // RC-9 single-pulse synchronization: scan completion itself is the only
+    // wake signal. Duplicate report objects are ignored by
+    // ProxumaApplyLegacyScanReport, preventing repeated score rendering.
   });
 })();
 
-/* === Sprint 11 — App Guide Wiring === */
-(function(){
-  'use strict';
-  if(window.__proxumaSprint11GuideWired) return;
-  window.__proxumaSprint11GuideWired = true;
-  function ready(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fn); else fn(); }
-  ready(function(){
-    var card=document.getElementById('explain');
-    if(!card) return;
-    var btn=card.querySelector('.collapse-toggle');
-    var body=document.getElementById('explainGuideBody') || card.querySelector('.collapsible-card-body');
-    var copy=btn&&btn.querySelector('.toggle-copy');
-    if(!btn || !body) return;
-    function set(open){
-      body.hidden=!open;
-      btn.setAttribute('aria-expanded',String(open));
-      if(copy) copy.textContent=open?'Close':'Open';
-      card.classList.toggle('is-open',open);
-      try{localStorage.setItem('proxuma-it-app-guide-open-v1',open?'1':'0');}catch(e){}
-    }
-    var saved='0'; try{saved=localStorage.getItem('proxuma-it-app-guide-open-v1')||'0';}catch(e){}
-    set(saved==='1');
-    btn.addEventListener('click',function(e){e.preventDefault();set(body.hidden);});
-    card.querySelectorAll('.guide-actions a').forEach(function(a){
-      a.addEventListener('click',function(){ set(false); });
-    });
-  });
-})();
+/* App Guide uses the single shared collapsible-card controller in proxuma-it.js. */
 
 
 /* === RC-6: Investigation internal-scroll affordance === */
@@ -741,5 +824,76 @@
     window.addEventListener('resize', refreshCue, {passive:true});
     new MutationObserver(function(){ requestAnimationFrame(refreshCue); }).observe(body,{childList:true,subtree:true,characterData:true});
     requestAnimationFrame(refreshCue);
+  });
+})();
+
+/* === RC-8: Unified scroll discovery for internally scrollable cards === */
+(function(){
+  'use strict';
+  function ready(fn){ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fn); else fn(); }
+  ready(function(){
+    var configs=[
+      {card:'#investigation-workspace', targets:['#visibleInvestigationBody'], label:'More investigation details'},
+      {card:'#scan-detail-workspace', targets:['#visibleEvidenceList'], label:'More evidence'},
+      {card:'#details', targets:['.drawer-stage','.drawer-panel.active'], label:'More analysis details'},
+      {card:'#workflow', targets:['.trust-finding-list'], label:'More action details'}
+    ];
+
+    function firstOverflowing(card, selectors){
+      var candidates=[];
+      selectors.forEach(function(sel){ card.querySelectorAll(sel).forEach(function(el){ candidates.push(el); }); });
+      return candidates.find(function(el){ return el.scrollHeight > el.clientHeight + 6; }) || candidates[0] || null;
+    }
+
+    configs.forEach(function(cfg){
+      var card=document.querySelector(cfg.card);
+      if(!card) return;
+      card.classList.add('scroll-discovery-card');
+      var fade=document.createElement('div');
+      fade.className='scroll-discovery-fade';
+      fade.setAttribute('aria-hidden','true');
+      var cue=document.createElement('button');
+      cue.type='button';
+      cue.className='scroll-discovery-cue';
+      cue.innerHTML='<span>'+cfg.label+'</span><span aria-hidden="true">↓</span>';
+      cue.setAttribute('aria-label',cfg.label+'. Scroll for more.');
+      card.appendChild(fade);
+      card.appendChild(cue);
+
+      var activeTarget=null;
+      function bindTarget(target){
+        if(activeTarget===target) return;
+        if(activeTarget) activeTarget.removeEventListener('scroll',refresh);
+        activeTarget=target;
+        if(activeTarget){
+          activeTarget.classList.add('scroll-discovery-target');
+          activeTarget.addEventListener('scroll',refresh,{passive:true});
+        }
+      }
+      function refresh(){
+        var target=firstOverflowing(card,cfg.targets);
+        bindTarget(target);
+        if(!target){
+          card.classList.remove('has-hidden-content','is-at-scroll-end');
+          return;
+        }
+        var overflow=target.scrollHeight > target.clientHeight + 6;
+        var atEnd=target.scrollTop + target.clientHeight >= target.scrollHeight - 10;
+        card.classList.toggle('has-hidden-content',overflow);
+        card.classList.toggle('is-at-scroll-end',overflow && atEnd);
+        cue.hidden=!overflow;
+      }
+      cue.addEventListener('click',function(){
+        var target=firstOverflowing(card,cfg.targets);
+        if(!target) return;
+        target.scrollBy({top:Math.max(90,target.clientHeight*.68),behavior:'smooth'});
+        try{ target.focus({preventScroll:true}); }catch(e){}
+      });
+      new MutationObserver(function(){ requestAnimationFrame(refresh); }).observe(card,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
+      window.addEventListener('resize',refresh,{passive:true});
+      requestAnimationFrame(refresh);
+      setTimeout(refresh,350);
+      setTimeout(refresh,1300);
+    });
   });
 })();

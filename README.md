@@ -1,96 +1,38 @@
-# Proxuma IT v3.54.0
+# Proxuma IT — RC10 UI & API Foundation
 
-**v3.54.0 — Unified Mobile Findings**
+Proxuma IT is a browser-based, offline-first interface for reviewing suspicious links, QR content, messages, and related evidence.
 
-Proxuma IT is a browser-based, trust-centered investigation interface for reviewing suspicious links, text, QR content, and related evidence.
+## Current build
 
-## Current workflow
+This clean package includes:
 
-**Scan → Result → Scan Details → Investigation → Review & Trust**
+- Responsive desktop, tablet, and mobile interface
+- Dark and light themes
+- Full focus-style App Guide
+- Local scan workflow and investigation views
+- Supporting Evidence, Offline Checks, Analysis View, and Optional Tools
+- RC10 centralized scan-state and API-adapter foundation
+- Optional serverless RDAP bridge for compatible hosts
 
-## What works in this build
+## GitHub Pages deployment
 
-- Local browser-based scanning and evidence presentation
-- Scan Metrics and Supporting Evidence views
-- Deep Analysis and Case File investigation views
-- Focus reading workspaces for detailed review
-- Simple-by-default action workspace with mobile accordions
-- Review, save, explain, and export tools preserved behind progressive disclosure
-- Mobile-friendly page scrolling and compact navigation rails
-- QR input support using the bundled local `jsQR` decoder
-- Optional, consent-gated online-intelligence workflow
+1. Extract this ZIP.
+2. Upload the **contents** of the extracted folder to the repository root.
+3. Do not upload the ZIP itself.
+4. In GitHub, open **Settings → Pages**.
+5. Choose **Deploy from a branch**, select `main`, and choose `/ (root)`.
 
-## Capability boundary
+GitHub Pages serves the static application. The optional `api/proxuma-rdap.js` endpoint requires a compatible serverless deployment such as Vercel.
 
-This is a client-side product prototype. Current scans use the local analysis engine. Deep Scan is planned, not active. Online checks are optional and separate from local scanning. Findings should be treated as guidance until the scanner logic, external data sources, and security boundaries receive independent validation.
+## Main files
 
-## Run locally
-
-Open `index.html` in a modern browser. For more reliable browser behavior, serve the folder through a small local web server.
-
-Example:
-
-```bash
-python3 -m http.server 8080
-```
-
-Then open `http://localhost:8080`.
-
-## GitHub Pages
-
-1. Upload the **contents** of this folder to the repository root.
-2. In GitHub, open **Settings → Pages**.
-3. Choose **Deploy from a branch**.
-4. Select the `main` branch and `/ (root)`.
-5. Save and test the published site on desktop and mobile.
-
-GitHub Pages serves the static interface but cannot execute `api/proxuma-rdap.js`. That optional endpoint requires a compatible serverless host such as Vercel.
-
-## Repository structure
-
-- `index.html` — application markup
-- `assets/css/styles.css` — responsive UI and focus-workspace styling
-- `assets/js/proxuma-it.js` — primary scanning and application logic
-- `assets/js/` — supporting workflow, focus, consistency, and grouped-panel modules
-- `assets/images/` — required interface images
-- `assets/vendor/` — bundled local QR decoder and its license
+- `index.html` — application
+- `404.html` — GitHub Pages fallback
+- `assets/` — styles, scripts, images, and bundled QR decoder
 - `api/proxuma-rdap.js` — optional serverless RDAP bridge
+- `robots.txt` and `sitemap.xml` — search indexing files
 - `SECURITY.md` — security and responsible-use guidance
-- `CAPABILITY_MATRIX.md` — truthful capability, evidence, privacy, and limitation map
-- `CONTRIBUTING.md` — contribution guidance
-- `docs/` — current deployment and architecture documentation
-- `tests/` — current release regression test
 
-## Release
+## Capability note
 
-**v3.53.3 — Desktop Width Balance**
-
-This release clarifies the guided-results language introduced in v3.52.0. It renames the static “Learning Mode” description to “Plain-language guidance,” renames “Learning Note” to “Safety Takeaway,” removes a duplicated interpretation card, and preserves the existing confidence, recommended-action, evidence, indexing, and local-analysis behavior.
-
-The interface remains offline-first. Optional online intelligence is still explicit, consent-gated, and deployment-dependent.
-
-
-## Search indexing
-
-The build includes `robots.txt`, `sitemap.xml`, canonical metadata, and social preview metadata for `https://scar197124.github.io/Proxuma_IT/`. If the repository slug changes, update that base URL in `index.html`, `robots.txt`, and `sitemap.xml` before deployment.
-
-
-## Clean repository policy
-
-This public package intentionally excludes legacy tests, superseded build manifests, old handoff notes, archived release notes, and nested deployment archives. Preserve historical material in Git history or in a separate archival release rather than in the active repository tree.
-
-Do not upload the ZIP file into the repository. Extract it, then commit the files with GitHub Desktop, Git, or a Git client.
-
-
-## v3.54.4
-Mobile portrait UI consistency repair: adds a readable horizontal rail for the main app workspace and fixes Step 5 letter-stacking.
-
-
-## UI 1.0 RC Wired
-This package starts Sprint 2: wiring placeholders to live rescue-engine behavior while keeping the UI freeze layout intact. See CAPTAIN_UI_1_0_RC_WIRED_NOTES.md.
-
-## Sprint 11 — Public Ready Polish
-- Focus mode now has an obvious Exit control.
-- Investigation and Supporting Evidence Focus buttons are visually identical.
-- App Guide open/close behavior is wired.
-- Light Mode contrast and nested-card visibility improved.
+The current scanner is an evolving local analysis system. Results should be treated as guidance, not as a substitute for independent security verification.

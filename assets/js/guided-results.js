@@ -47,6 +47,7 @@
   }
   ['riskLabel','summaryText','confidenceLabel','confidenceBrief','primaryTrigger','actionText','nextStep','evidenceList']
     .forEach(id=>{const el=$(id);if(el)new MutationObserver(update).observe(el,{childList:true,subtree:true,characterData:true});});
-  $('scanButton')?.addEventListener('click',()=>setTimeout(update,260));
+  document.addEventListener('proxuma:scan-result', update);
+  document.addEventListener('proxuma:dashboard-synced', update);
   update();
 })();

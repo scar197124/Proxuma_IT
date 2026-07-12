@@ -63,7 +63,8 @@
     ].join('\n');
     const out=$('localAdvisorOutput'); out.textContent=text; out.classList.remove('empty'); setStatus('advisorStatus','Explanation generated locally.'); workflowState('export');
   }
-  $('scanButton')?.addEventListener('click',()=>{workflowState('review');setTimeout(()=>{updateSeverity();workflowState('prioritize');},120);});
+  $('scanButton')?.addEventListener('click',()=>workflowState('review'));
+  document.addEventListener('proxuma:dashboard-synced',()=>{updateSeverity();workflowState('prioritize');});
   $('saveNamedSessionButton')?.addEventListener('click',()=>{
     const snap=currentSnapshot(); if(!snap.target){setStatus('sessionStatus','Run a scan before saving a session.');return;}
     const items=read(); items.unshift(snap); write(items); renderSessions(); setStatus('sessionStatus',`Saved “${snap.name}” locally.`); workflowState('save');

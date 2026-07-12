@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#070a0d" />
 <meta name="color-scheme" content="dark light" />
 <meta name="description" content="Check suspicious links, QR payloads, and messages locally before you trust them." />
-<link rel="stylesheet" href="assets/css/styles.css?v=ui-1.0-rc-sprint19-light-visibility" />
+<link rel="stylesheet" href="assets/css/styles.css?v=rc10-hero-badge-anchor" />
 <meta name="proxuma-build" content="ui-1.0-rc-github-ready-ecosystem-link" />
 </head>
 <body class="theme-dark captain-wire-ui">
@@ -33,15 +33,11 @@
       <p>Scan a QR code, paste a message, or inspect a URL locally before opening it.</p>
       <div class="proof-row"><span>Local analysis</span><span>No account required</span><span>Works offline</span></div>
     </div>
-    <section id="explain" class="wire-guide collapsible-card" data-collapse-key="proxuma-it-explain-guide-collapsed-v1" data-default-collapsed="true" aria-label="App guide">
-      <div class="guide-title"><strong>📖 App Guide</strong><button class="collapse-toggle wire-button" type="button" aria-controls="explainGuideBody" aria-expanded="false"><span class="toggle-copy">Open</span></button></div>
-      <div id="explainGuideBody" class="collapsible-card-body" hidden>
-        <p><strong>How to use Proxuma IT:</strong> paste a suspicious link, scan a QR code, or choose an example. Proxuma IT gives you a Captain Summary, supporting evidence, and a recommended next action.</p>
-        <div class="guide-actions" aria-label="App guide shortcuts"><a href="#scan">Start Scan</a><a href="#captain-summary">Captain Summary</a><a href="#optional-tools">Tools</a></div>
-        <p class="fine-print">Tip: after a scan, starting another scan will ask whether to save or discard the current investigation.</p>
-      </div>
+    <section id="explain" class="wire-guide app-guide-launcher" aria-label="App guide">
+      <div class="guide-title"><strong>📖 App Guide</strong><button id="openAppGuide" class="wire-button" type="button" aria-haspopup="dialog" aria-controls="appGuideOverlay">Open Full Guide</button></div>
+      <p class="fine-print">A complete walkthrough of scanning, evidence, investigation, actions, tools, and live intelligence.</p>
     </section>
-    <div class="wire-steps" aria-label="Simple workflow"><span><b>1</b>Scan<br><small>Check the item</small></span><span><b>2</b>Review<br><small>See what matters</small></span><span><b>3</b>Act<br><small>Choose response</small></span></div>
+    <div class="wire-steps" aria-label="Simple workflow"><button type="button" data-guide-step="scan"><b>1</b>Scan<br><small>Check the item</small></button><button type="button" data-guide-step="review"><b>2</b>Review<br><small>See what matters</small></button><button type="button" data-guide-step="act"><b>3</b>Act<br><small>Choose response</small></button></div>
   </section>
 
   <section id="scan" class="wire-workspace" aria-label="Scan center">
@@ -70,29 +66,9 @@
       </article>
     </div>
 
-    <section class="analysis-strip" aria-label="Safety snapshot">
-      <div><strong id="nextStep">Enter a target</strong><small>Next step</small></div><div><strong>Risk Level</strong><small id="severityNote">Not scanned</small></div><div><strong>Threats Detected</strong><small id="severityMix">0 high · 0 medium · 0 low</small></div><div><strong>Domain Info</strong><small id="rootDomain">Waiting</small></div><div><strong>Recommendation</strong><small id="actionTitle">Scan first</small></div><div class="privacy-box">🔒 Your privacy is our priority. We do not store or share your data.</div>
-    </section>
-
-
-
-    <section id="captain-summary" class="wire-card captain-summary-panel" aria-label="Captain summary" aria-live="polite">
-      <div class="captain-summary-main">
-        <p class="eyebrow">Captain Summary</p>
-        <h2 id="captainSummaryVerdict">Ready to scan</h2>
-        <p id="captainSummaryReason">Paste a link, QR payload, or message to get one clear trust decision.</p>
-      </div>
-      <div class="captain-summary-metrics" aria-label="Trust metrics">
-        <div><small>Risk</small><strong id="captainSummaryRisk">0</strong></div>
-        <div><small>Confidence</small><strong id="captainSummaryConfidence">Waiting</strong></div>
-        <div><small>Action</small><strong id="captainSummaryAction">Scan first</strong></div>
-        <div><small>State</small><strong id="captainScanState">Idle</strong></div>
-      </div>
-    </section>
-
     <section class="mid-lanes" aria-label="Investigation, evidence, and offline controls">
       <article class="wire-card investigation-workspace" id="investigation-workspace">
-        <div class="lane-compact-head"><h3>🔎 Investigation</h3><p>Choose view</p></div>
+        <div class="lane-compact-head"><h3>🔎 Investigation</h3><p>Choose view</p></div><div class="case-packet-status" aria-live="polite"><span id="casePacketBadge">Mission ready</span><span id="casePacketMeta">Run a scan to build a case packet.</span></div>
         <div id="investigation-controls" class="tab-row"><button type="button" class="active" data-investigation-view="overview">Overview</button><button type="button" data-investigation-view="evidence">Evidence</button><button type="button" data-investigation-view="deep">Deep Analysis</button><button type="button" data-investigation-view="case">Case File</button></div>
         <div id="investigation-summary" class="mini-grid"><span>Risk <b id="investigationSummaryScore">0</b></span><span>Confidence <b id="investigationSummaryConfidence">Not measured</b></span><span>Main concern <b id="investigationSummaryConcern">Waiting</b></span><span>Action <b id="investigationSummaryAction">Paste a target</b></span></div>
         <p class="fine-print"><b>Case:</b> <span id="visibleCaseId">No case yet</span> · <span id="visibleCaseStatus">Waiting for scan</span></p>
@@ -141,7 +117,7 @@
       <div class="tool-grid wired-tools"><button data-tool-action="ip">Check IP<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="domain">Lookup Domain<br><small>Enable online checks first</small></button><button data-tool-action="file">Upload File<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="capture">Capture<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="dns">Lookup DNS<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="cert">View Certificate<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="headers">View Headers<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="unshorten">Unshorten URL<br><small>Uses current pasted target</small></button></div><p id="toolActionStatus" class="fine-print">Tools now report whether they are wired or planned instead of showing fake output.</p><div class="wired-history-strip"><strong>Recent Cases</strong><ul id="visibleCaseHistory"><li>No saved cases yet.</li></ul></div>
     </section>
 
-    <footer class="wire-footer"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the Captain Summary, or clear this workspace.</p><div class="wired-footer-actions"><button id="visibleCopySummary" class="secondary-action" type="button">Copy Summary</button><button id="visibleExportJson" class="secondary-action" type="button">Export JSON</button><button id="visibleNewInvestigation" class="primary-action" type="button">New Investigation</button><button id="visibleResetWorkspace" class="secondary-action" type="button">Reset</button></div><p id="visibleWireStatus" class="fine-print"></p></div></footer>
+    <footer class="wire-footer"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the scan report, or clear this workspace.</p><div class="wired-footer-actions"><button id="visibleCopyReport" class="secondary-action" type="button">Copy Report</button><button id="visibleExportJson" class="secondary-action" type="button">Export JSON</button><button id="visibleNewInvestigation" class="primary-action" type="button">New Investigation</button><button id="visibleResetWorkspace" class="secondary-action" type="button">Reset</button></div><p id="visibleWireStatus" class="fine-print"></p></div></footer>
   </section>
 
     <details id="developerWirePanel" class="wire-card developer-wire-panel">
@@ -162,45 +138,51 @@
     <button id="copyExplanationButton" type="button"></button><button id="explainCurrentButton" type="button"></button><div id="localAdvisorOutput"></div><span id="advisorStatus"></span><input id="sessionNameInput" /><button id="saveNamedSessionButton" type="button"></button><button id="exportSessionsButton" type="button"></button><span id="sessionStatus"></span><ul id="namedSessionList"></ul><div id="sessionComparison"></div><button id="exportTrustHtml" type="button"></button><button id="exportTrustJson" type="button"></button><button id="resetWorkspaceButton" type="button"></button><span id="trustExportStatus"></span>
   </section>
 </main>
-<script src="assets/js/proxuma-it.js"></script>
-<div id="legacyCompatibilityFields" hidden aria-hidden="true"><span id="scanMode">Standby</span><span id="scanModeNote">Waiting for a target.</span></div>
-<script src="assets/js/ui-consistency.js"></script>
-<script src="assets/js/workflow-intelligence.js"></script>
-<script src="assets/js/focus-reading.js"></script>
-<script src="assets/js/report-trust-action.js"></script>
-<script src="assets/js/guided-results.js"></script>
-<script src="assets/js/grouped-panel-controls.js"></script>
-<script src="assets/js/product-simplification.js"></script>
-<script src="assets/js/mobile-simplification.js"></script>
-<script src="assets/js/proxuma-ui-wiring.js?v=rc6-fixed-summary-scroll-cue"></script>
+<script src="assets/js/proxuma-api-foundation.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/proxuma-it.js?v=rc10-hero-badge-anchor"></script>
+<div id="legacyCompatibilityFields" hidden aria-hidden="true">
+  <span id="scanMode">Standby</span><span id="scanModeNote">Waiting for a target.</span>
+  <span id="nextStep">Enter a target</span><span id="rootDomain">Waiting</span>
+  <span id="severityMix">0 high · 0 medium · 0 low</span><span id="severityNote">Not scanned</span>
+  <span id="actionTitle">Scan first</span>
+</div>
+<script src="assets/js/ui-consistency.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/workflow-intelligence.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/focus-reading.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/report-trust-action.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/guided-results.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/grouped-panel-controls.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/product-simplification.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/mobile-simplification.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/proxuma-ui-wiring.js?v=rc10-hero-badge-anchor"></script>
 
-<script id="captainSummarySyncScript">
-(function(){
-  function text(id, fallback){var el=document.getElementById(id);return (el&&el.textContent.trim())||fallback;}
-  function set(id, value){var el=document.getElementById(id);if(el){el.textContent=value;}}
-  function sync(){
-    set('captainSummaryVerdict', text('riskLabel','Ready to scan'));
-    set('captainSummaryRisk', text('scoreValue','0'));
-    var r=window.ProxumaScanResult||{};
-    var confidence=text('confidenceLabel','Waiting');
-    if(r.scanned && (/not measured|waiting/i.test(confidence))) confidence=r.confidence||'Measured locally';
-    var action=text('actionTitle', text('nextStep','Scan first'));
-    if(r.scanned && (/scan first|enter a target|paste a target/i.test(action))) action=r.action||r.nextStep||'Review result';
-    set('captainSummaryConfidence', confidence);
-    set('captainSummaryAction', action);
-    var reason=text('explainSummary','Paste a link, QR payload, or message to get one clear trust decision.');
-    if(reason==='Run a scan to see the strongest reason behind the verdict.'){reason=text('summaryText',reason);}
-    set('captainSummaryReason', reason);
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    sync();
-    var targets=['riskLabel','scoreValue','confidenceLabel','actionTitle','nextStep','explainSummary','summaryText'];
-    targets.forEach(function(id){var el=document.getElementById(id);if(el){new MutationObserver(sync).observe(el,{childList:true,subtree:true,characterData:true});}});
-    var input=document.getElementById('targetInput'); if(input){input.addEventListener('input', sync);}
-  });
-})();
-</script>
 <script id="proxumaThemeToggleScript">
 (function(){var k='proxuma-it-theme-v1',b=document.body,m=document.querySelector('meta[name="theme-color"]'),t=document.getElementById('themeToggle');function a(x){var l=x==='light';b.classList.toggle('theme-light',l);b.classList.toggle('theme-dark',!l);if(t){t.setAttribute('aria-pressed',String(l));t.textContent=l?'🌙 Dark Mode':'☀️ Light Mode';}if(m){m.setAttribute('content',l?'#f7fbff':'#070a0d');}}var s='dark';try{s=localStorage.getItem(k)||'dark'}catch(e){}a(s);if(t){t.addEventListener('click',function(){var n=b.classList.contains('theme-light')?'dark':'light';try{localStorage.setItem(k,n)}catch(e){}a(n);});}})();
 </script>
+
+<div id="appGuideOverlay" class="app-guide-overlay" hidden aria-hidden="true">
+  <div class="app-guide-backdrop" data-guide-close></div>
+  <section class="app-guide-dialog" role="dialog" aria-modal="true" aria-labelledby="appGuideTitle" tabindex="-1">
+    <header class="app-guide-dialog-head">
+      <div><p class="eyebrow">Proxuma IT Manual</p><h2 id="appGuideTitle">How the entire app works</h2><p>Follow the workflow from first scan to final action. Each section can take you directly to the matching workspace.</p></div>
+      <button id="closeAppGuide" class="wire-button app-guide-close" type="button" aria-label="Close app guide">Close Guide ✕</button>
+    </header>
+    <nav class="app-guide-index" aria-label="Guide sections">
+      <button data-guide-jump="guide-scan">1 Scan</button><button data-guide-jump="guide-score">2 Score</button><button data-guide-jump="guide-analysis">3 Analysis</button><button data-guide-jump="guide-investigation">4 Investigation</button><button data-guide-jump="guide-evidence">5 Evidence</button><button data-guide-jump="guide-checks">6 Checks</button><button data-guide-jump="guide-actions">7 Actions</button><button data-guide-jump="guide-tools">8 Tools</button><button data-guide-jump="guide-status">9 Data Status</button>
+    </nav>
+    <div class="app-guide-content">
+      <article id="guide-scan" class="app-guide-section"><span class="guide-number">1</span><div><h3>Start a scan</h3><p>Paste a URL, domain, message, or QR payload, use the camera scanner, upload supported content, or choose an example target. Proxuma first performs local analysis without visiting the target.</p><button data-guide-target="#scan">Take Me to Scan Center</button></div></article>
+      <article id="guide-score" class="app-guide-section"><span class="guide-number">2</span><div><h3>Read the risk score</h3><p>The main result combines detected signals into an overall risk level. High Risk appears red, Moderate appears orange, and Good to Go appears green. The score is a combined judgment, not a count of individual high-severity findings.</p><button data-guide-target="#report">Take Me to Results</button></div></article>
+      <article id="guide-analysis" class="app-guide-section"><span class="guide-number">3</span><div><h3>Use Analysis View</h3><p>Why This Score explains the decision, Trust Timeline shows how confidence developed, Threat Story connects the signals, and Decision Guide turns the result into a clear response.</p><button data-guide-target="#details">Take Me to Analysis View</button></div></article>
+      <article id="guide-investigation" class="app-guide-section"><span class="guide-number">4</span><div><h3>Open the Investigation layer</h3><p>Overview summarizes the case. Deep Analysis expands the reasoning. Evidence organizes supporting details. Case File prepares a reusable packet that can be saved or copied.</p><button data-guide-target="#investigation-workspace">Take Me to Investigation</button></div></article>
+      <article id="guide-evidence" class="app-guide-section"><span class="guide-number">5</span><div><h3>Review Supporting Evidence</h3><p>This card shows the signal mix, evidence strength, previous-scan context, and the facts behind the current result. Classified and unclassified signals should be treated separately.</p><button data-guide-target="#scan-detail-workspace">Take Me to Supporting Evidence</button></div></article>
+      <article id="guide-checks" class="app-guide-section"><span class="guide-number">6</span><div><h3>Understand Local and Online Checks</h3><p>Local checks inspect the target on the device. Online intelligence can later add live domain, DNS, IP, certificate, reputation, and threat-database results. A failed online source should never erase the local result.</p><button data-guide-target="#scan-detail-workspace">Take Me to Checks</button></div></article>
+      <article id="guide-actions" class="app-guide-section"><span class="guide-number">7</span><div><h3>Turn findings into action</h3><p>Current Findings & Actions organizes what was detected, what matters most, and the safest next response. Use it as the operational conclusion rather than repeating instructions across multiple cards.</p><button data-guide-target="#workflow">Take Me to Findings & Actions</button></div></article>
+      <article id="guide-tools" class="app-guide-section"><span class="guide-number">8</span><div><h3>Use Optional Tools</h3><p>Check IP, Lookup Domain, Upload File, CAPTCHA, Lookup DNS, Verify Certificate, View Headers, and Unshorten URL provide focused investigations outside the main scan flow.</p><button data-guide-target="#optional-tools">Take Me to Optional Tools</button></div></article>
+      <article id="guide-status" class="app-guide-section"><span class="guide-number">9</span><div><h3>Know the data status</h3><p>Local means processed on the device. Live means returned by an external source. Cached means previously retrieved. Partial means some sources succeeded and others did not. Unavailable means a specific source failed while the rest of the report can continue.</p><button data-guide-target="#scan">Return to Scan Center</button></div></article>
+    </div>
+  </section>
+</div>
+
+<script src="assets/js/app-guide-overlay.js?v=rc10-hero-badge-anchor"></script>
 </body></html>

@@ -17072,3 +17072,1406 @@ body.simple-ui .technical-value{
     max-height:260px!important;
   }
 }
+
+/* === RC-8: Unified internal-scroll discovery === */
+.captain-wire-ui .scroll-discovery-card{
+  position:relative!important;
+}
+.captain-wire-ui .scroll-discovery-target{
+  scrollbar-width:thin;
+  scrollbar-color:var(--proxuma-live-risk-line,rgba(127,142,163,.72)) rgba(4,12,18,.24);
+}
+.captain-wire-ui .scroll-discovery-target::-webkit-scrollbar{width:8px;height:8px}
+.captain-wire-ui .scroll-discovery-target::-webkit-scrollbar-track{background:rgba(4,12,18,.22);border-radius:999px}
+.captain-wire-ui .scroll-discovery-target::-webkit-scrollbar-thumb{
+  background:var(--proxuma-live-risk-line,rgba(127,142,163,.72));
+  border:2px solid rgba(4,12,18,.22);
+  border-radius:999px;
+}
+.captain-wire-ui .scroll-discovery-fade{
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:8px;
+  z-index:5;
+  height:42px;
+  border-radius:0 0 12px 12px;
+  background:linear-gradient(180deg,rgba(7,17,28,0),rgba(7,17,28,.88) 72%);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .18s ease;
+}
+.captain-wire-ui .scroll-discovery-cue{
+  position:absolute;
+  right:14px;
+  bottom:12px;
+  z-index:6;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  min-height:28px;
+  padding:5px 10px;
+  border:1px solid var(--proxuma-live-risk-line,rgba(127,142,163,.72));
+  border-radius:999px;
+  background:rgba(6,16,24,.94);
+  color:#f3f8ff;
+  box-shadow:0 6px 20px rgba(0,0,0,.34);
+  font-size:.66rem;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.02em;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(4px);
+  pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease;
+}
+.captain-wire-ui .scroll-discovery-card.has-hidden-content > .scroll-discovery-fade,
+.captain-wire-ui .scroll-discovery-card.has-hidden-content > .scroll-discovery-cue{
+  opacity:1;
+  transform:translateY(0);
+}
+.captain-wire-ui .scroll-discovery-card.has-hidden-content > .scroll-discovery-cue{
+  pointer-events:auto;
+}
+.captain-wire-ui .scroll-discovery-card.is-at-scroll-end > .scroll-discovery-fade,
+.captain-wire-ui .scroll-discovery-card.is-at-scroll-end > .scroll-discovery-cue{
+  opacity:0;
+  pointer-events:none;
+}
+.theme-light.captain-wire-ui .scroll-discovery-fade{
+  background:linear-gradient(180deg,rgba(255,255,255,0),rgba(236,246,255,.96) 72%);
+}
+.theme-light.captain-wire-ui .scroll-discovery-cue{
+  background:rgba(9,24,38,.96);
+  color:#f7fbff;
+}
+/* Keep content clear of the discovery cue. */
+.captain-wire-ui #captain-summary .captain-summary-main,
+.captain-wire-ui #captain-summary .captain-summary-metrics > div,
+.captain-wire-ui #visibleInvestigationBody,
+.captain-wire-ui #visibleEvidenceList,
+.captain-wire-ui #details .drawer-stage,
+.captain-wire-ui #workflow .trust-finding-list{
+  padding-bottom:34px!important;
+}
+/* The original investigation-only cue is replaced by the unified cue. */
+.captain-wire-ui #investigationScrollCue{display:none!important}
+@media(max-width:760px){
+  .captain-wire-ui .scroll-discovery-cue{right:10px;bottom:9px;font-size:.62rem;padding:5px 8px}
+  .captain-wire-ui .scroll-discovery-fade{left:7px;right:7px;bottom:6px;height:38px}
+}
+
+
+/* === RC-9: Engineering Certification polish === */
+.captain-wire-ui #captain-summary .captain-summary-kicker{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;
+}
+.captain-wire-ui #captain-summary .captain-summary-kicker .eyebrow{margin:0!important}
+.captain-wire-ui .scan-lifecycle-status,
+.captain-wire-ui .case-packet-status span:first-child{
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  border:1px solid var(--proxuma-live-risk-line,rgba(127,142,163,.55));
+  border-radius:999px;padding:4px 8px;background:rgba(7,18,28,.74);
+  color:#eef7ff;font-size:.62rem;font-weight:900;letter-spacing:.03em;
+}
+.captain-wire-ui .scan-lifecycle-status::before,
+.captain-wire-ui .case-packet-status span:first-child::before{
+  content:"";width:7px;height:7px;border-radius:50%;background:var(--proxuma-live-risk-accent,#7f8ea3);
+  box-shadow:0 0 10px var(--proxuma-live-risk-accent,#7f8ea3);
+}
+.captain-wire-ui .scan-lifecycle-status[data-state="working"]::before{animation:proxumaRc9Pulse 1s ease-in-out infinite}
+@keyframes proxumaRc9Pulse{50%{opacity:.35;transform:scale(.72)}}
+.captain-wire-ui .case-packet-status{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  min-height:30px;padding:4px 6px;margin:0 0 5px;border-radius:10px;
+  background:rgba(7,18,28,.42);border:1px solid rgba(127,142,163,.18);
+}
+.captain-wire-ui .case-packet-status #casePacketMeta{
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:#b9c8d6;font-size:.65rem;font-weight:700;
+}
+.theme-light.captain-wire-ui .scan-lifecycle-status,
+.theme-light.captain-wire-ui .case-packet-status span:first-child{background:rgba(8,25,39,.94);color:#f7fbff}
+.theme-light.captain-wire-ui .case-packet-status{background:rgba(225,239,249,.78);border-color:rgba(25,65,91,.22)}
+.theme-light.captain-wire-ui .case-packet-status #casePacketMeta{color:#24445b}
+
+/* Certified fixed-height summary: stable on every viewport. */
+@media (min-width:1201px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{height:164px!important;min-height:164px!important;max-height:164px!important}
+}
+@media (min-width:761px) and (max-width:1200px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{height:174px!important;min-height:174px!important;max-height:174px!important}
+}
+@media (max-width:760px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{height:206px!important;min-height:206px!important;max-height:206px!important;grid-template-rows:61px minmax(0,1fr)!important}
+  .captain-wire-ui #captain-summary .captain-summary-kicker{gap:5px}
+  .captain-wire-ui .scan-lifecycle-status{font-size:.54rem;padding:3px 6px}
+  .captain-wire-ui .case-packet-status{align-items:flex-start;flex-direction:column;gap:3px}
+  .captain-wire-ui .case-packet-status #casePacketMeta{white-space:normal;line-height:1.15}
+}
+
+/* Analysis view certification marker and a brief completion glow. */
+.captain-wire-ui #details.dashboard-certified-update{animation:proxumaRc9Certified .55s ease-out}
+@keyframes proxumaRc9Certified{
+  0%{box-shadow:0 0 0 0 var(--proxuma-live-risk-accent,rgba(103,240,167,.5))}
+  45%{box-shadow:0 0 0 4px color-mix(in srgb,var(--proxuma-live-risk-accent,#67f0a7) 28%,transparent)}
+  100%{box-shadow:var(--proxuma-card-shadow,0 12px 30px rgba(0,0,0,.22))}
+}
+
+/* === RC-9 hotfix: merge the growing safety snapshot into Captain Summary === */
+.captain-wire-ui .visually-hidden{
+  position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
+  overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+}
+.captain-wire-ui .analysis-strip{display:none!important}
+.captain-wire-ui #captain-summary .captain-summary-metrics{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-template-rows:repeat(2,minmax(0,1fr))!important;
+  align-content:stretch!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-metrics > div{
+  position:relative;
+  overflow:auto!important;
+  padding:6px!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-metrics > div strong{
+  display:block;
+  max-width:100%;
+  overflow-wrap:anywhere;
+}
+.captain-wire-ui #captain-summary .captain-summary-metrics .captain-snapshot-item{
+  border-color:color-mix(in srgb,var(--proxuma-live-risk-line,rgba(127,142,163,.62)) 70%,transparent)!important;
+  background:linear-gradient(180deg,var(--proxuma-live-risk-soft,rgba(127,142,163,.12)),rgba(7,18,28,.24))!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-metrics .captain-snapshot-item small{
+  color:var(--proxuma-live-risk-accent,#9fb1c5)!important;
+}
+.theme-light.captain-wire-ui #captain-summary .captain-summary-metrics .captain-snapshot-item{
+  background:linear-gradient(180deg,var(--proxuma-live-risk-soft,rgba(127,142,163,.12)),rgba(232,243,251,.88))!important;
+}
+@media (min-width:1201px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:184px!important;min-height:184px!important;max-height:184px!important;
+    grid-template-columns:minmax(0,1fr) minmax(620px,1.18fr)!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics strong{
+    font-size:clamp(.72rem,.82vw,.91rem)!important;line-height:1.08!important;
+  }
+}
+@media (min-width:761px) and (max-width:1200px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:202px!important;min-height:202px!important;max-height:202px!important;
+    grid-template-columns:minmax(0,.86fr) minmax(500px,1.14fr)!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics strong{
+    font-size:.76rem!important;line-height:1.08!important;
+  }
+}
+@media (max-width:760px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:330px!important;min-height:330px!important;max-height:330px!important;
+    grid-template-rows:64px minmax(0,1fr)!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:repeat(4,minmax(0,1fr))!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-metrics > div{padding:5px 6px!important}
+  .captain-wire-ui #captain-summary .captain-summary-metrics strong{font-size:.72rem!important;line-height:1.08!important}
+}
+
+/* === RC-9 refinement: full-width decision rows with compact status stack === */
+.captain-wire-ui #captain-summary .captain-summary-dashboard{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(150px,.30fr)!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  gap:8px!important;
+  min-width:0;
+  min-height:0;
+}
+.captain-wire-ui #captain-summary .captain-summary-primary-rows{
+  display:grid;
+  grid-template-rows:repeat(3,minmax(0,1fr));
+  gap:6px;
+  min-width:0;
+  min-height:0;
+}
+.captain-wire-ui #captain-summary .captain-summary-row{
+  display:grid;
+  grid-template-columns:minmax(82px,.20fr) minmax(0,1fr);
+  align-items:start;
+  gap:8px;
+  min-width:0;
+  min-height:0;
+  overflow:auto!important;
+  padding:7px 9px!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-row small{
+  position:sticky;
+  top:0;
+  align-self:start;
+}
+.captain-wire-ui #captain-summary .captain-summary-row strong{
+  min-width:0;
+  font-size:clamp(.76rem,.9vw,.94rem)!important;
+  line-height:1.2!important;
+  overflow-wrap:anywhere;
+}
+.captain-wire-ui #captain-summary .captain-summary-compact-stack{
+  display:grid;
+  grid-template-rows:repeat(4,minmax(0,1fr));
+  gap:5px;
+  min-width:0;
+  min-height:0;
+}
+.captain-wire-ui #captain-summary .captain-summary-compact-stack > div{
+  min-width:0;
+  min-height:0;
+  overflow:auto!important;
+  padding:5px 7px!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-compact-stack small{
+  font-size:.58rem!important;
+  line-height:1!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-compact-stack strong{
+  display:block;
+  font-size:.71rem!important;
+  line-height:1.08!important;
+  overflow-wrap:anywhere;
+}
+@media (min-width:1201px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:196px!important;min-height:196px!important;max-height:196px!important;
+    grid-template-columns:minmax(0,.78fr) minmax(650px,1.22fr)!important;
+  }
+}
+@media (min-width:761px) and (max-width:1200px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:218px!important;min-height:218px!important;max-height:218px!important;
+    grid-template-columns:minmax(0,.72fr) minmax(520px,1.28fr)!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-dashboard{
+    grid-template-columns:minmax(0,1fr) minmax(132px,.32fr)!important;
+  }
+}
+@media (max-width:760px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:390px!important;min-height:390px!important;max-height:390px!important;
+    grid-template-rows:64px minmax(0,1fr)!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-dashboard{
+    grid-template-columns:minmax(0,1fr)!important;
+    grid-template-rows:minmax(0,1.65fr) minmax(0,.95fr)!important;
+    gap:6px!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-compact-stack{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:repeat(2,minmax(0,1fr));
+  }
+  .captain-wire-ui #captain-summary .captain-summary-row{
+    grid-template-columns:76px minmax(0,1fr);
+    padding:6px 7px!important;
+  }
+  .captain-wire-ui #captain-summary .captain-summary-row strong{font-size:.73rem!important}
+}
+
+/* === RC-9 stability fix: anchored mission status + one unified action === */
+.captain-wire-ui #captain-summary.captain-summary-panel{
+  overflow:hidden!important;
+  contain:layout paint;
+}
+.captain-wire-ui #captain-summary .captain-summary-main{
+  display:grid!important;
+  grid-template-rows:auto auto minmax(0,1fr)!important;
+  align-content:stretch!important;
+  min-width:0!important;
+  min-height:0!important;
+  overflow:hidden!important;
+  padding-bottom:8px!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-kicker{
+  min-height:27px;
+  flex:0 0 auto;
+  overflow:visible!important;
+}
+.captain-wire-ui #captain-summary .scan-lifecycle-status{
+  flex:0 0 auto!important;
+  flex-shrink:0!important;
+  max-width:48%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  position:relative;
+  z-index:2;
+}
+.captain-wire-ui #captain-summary #captainSummaryVerdict{
+  min-width:0;
+  margin:2px 0 3px!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.captain-wire-ui #captain-summary #captainSummaryReason{
+  min-width:0;
+  min-height:0;
+  max-height:none!important;
+  margin:0!important;
+  overflow:auto!important;
+  overscroll-behavior:contain;
+  overflow-wrap:anywhere;
+  padding:0 5px 2px 0!important;
+  scrollbar-width:thin;
+}
+.captain-wire-ui #captain-summary .captain-summary-primary-rows{
+  grid-template-rows:minmax(0,1fr)!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-row{
+  grid-template-columns:minmax(110px,.24fr) minmax(0,1fr)!important;
+  height:100%;
+}
+@media (max-width:760px){
+  .captain-wire-ui #captain-summary .scan-lifecycle-status{max-width:52%;font-size:.52rem!important}
+  .captain-wire-ui #captain-summary #captainSummaryVerdict{font-size:1rem!important;line-height:1.08!important}
+  .captain-wire-ui #captain-summary #captainSummaryReason{font-size:.69rem!important;line-height:1.15!important}
+  .captain-wire-ui #captain-summary .captain-summary-row{grid-template-columns:92px minmax(0,1fr)!important}
+}
+
+
+/* === RC-9 Captain Summary cleanup: one authoritative action set === */
+.captain-wire-ui #captain-summary .captain-summary-clean{
+  grid-template-rows:auto auto minmax(0,auto) minmax(0,1fr)!important;
+  gap:3px!important;
+  overflow:hidden!important;
+}
+.captain-wire-ui #captain-summary .captain-action-label{
+  display:block;
+  margin-top:1px;
+  color:var(--proxuma-live-risk-accent,#9fb1c5)!important;
+  font-size:.61rem!important;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.captain-wire-ui #captain-summary #captainSummaryAction{
+  margin:0!important;
+  min-width:0;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:var(--proxuma-live-risk-accent,#eef7ff)!important;
+  font-size:clamp(1rem,1.25vw,1.34rem)!important;
+  line-height:1.08!important;
+}
+.captain-wire-ui #captain-summary #captainSummaryReason{
+  min-height:0!important;
+  overflow:auto!important;
+  margin:2px 0 0!important;
+  padding:0 5px 22px 0!important;
+  color:#c7d4df!important;
+  font-size:.75rem!important;
+  line-height:1.24!important;
+}
+.theme-light.captain-wire-ui #captain-summary #captainSummaryReason{color:#24445b!important}
+.captain-wire-ui #captain-summary .captain-summary-status-only{
+  display:block!important;
+  min-width:0;
+  min-height:0;
+  overflow:hidden!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-status-only .captain-summary-compact-stack{
+  height:100%;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-template-rows:repeat(2,minmax(0,1fr))!important;
+  gap:7px!important;
+}
+.captain-wire-ui #captain-summary .captain-summary-primary-rows{display:none!important}
+@media (min-width:1201px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:176px!important;min-height:176px!important;max-height:176px!important;
+    grid-template-columns:minmax(0,1.12fr) minmax(360px,.88fr)!important;
+  }
+}
+@media (min-width:761px) and (max-width:1200px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:190px!important;min-height:190px!important;max-height:190px!important;
+    grid-template-columns:minmax(0,1fr) minmax(310px,.84fr)!important;
+  }
+}
+@media (max-width:760px){
+  .captain-wire-ui #captain-summary.captain-summary-panel{
+    height:286px!important;min-height:286px!important;max-height:286px!important;
+    grid-template-rows:126px minmax(0,1fr)!important;
+  }
+  .captain-wire-ui #captain-summary #captainSummaryAction{
+    font-size:.95rem!important;
+  }
+  .captain-wire-ui #captain-summary #captainSummaryReason{
+    font-size:.69rem!important;
+  }
+}
+
+/* RC9 Captain Summary single-message cleanup */
+.captain-wire-ui #captain-summary #captainSummaryReason.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* === RC9 Captain lane-height expansion ===
+   Gives Investigation, Supporting Evidence, and Offline Checks more reading
+   room while keeping all three aligned and their controls inside the cards. */
+@media (min-width:1201px){
+  .captain-wire-ui .mid-lanes{
+    grid-auto-rows:520px!important;
+    align-items:stretch!important;
+  }
+  .captain-wire-ui .mid-lanes > .wire-card{
+    height:520px!important;
+    min-height:520px!important;
+    max-height:520px!important;
+    overflow:hidden!important;
+  }
+  .captain-wire-ui #investigation-workspace .investigation-scroll-shell{
+    flex:1 1 auto!important;
+    min-height:190px!important;
+  }
+  .captain-wire-ui #investigation-workspace .wired-footer-actions{
+    flex:0 0 auto!important;
+    margin-top:10px!important;
+    padding-top:8px!important;
+    border-top:1px solid rgba(170,184,200,.16);
+  }
+  .captain-wire-ui #scan-detail-workspace #visibleEvidenceList,
+  .captain-wire-ui .offline-card ul{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    overflow:auto!important;
+  }
+}
+
+/* Improve reading comfort now that the lanes have more vertical room. */
+.captain-wire-ui #visibleInvestigationBody{
+  font-size:.82rem!important;
+  line-height:1.48!important;
+}
+.captain-wire-ui #visibleInvestigationBody p,
+.captain-wire-ui #visibleInvestigationBody li{
+  line-height:1.48!important;
+}
+.captain-wire-ui #visibleEvidenceList{
+  font-size:.8rem!important;
+  line-height:1.42!important;
+}
+.captain-wire-ui #investigation-workspace .wired-footer-actions button{
+  min-height:38px!important;
+}
+
+@media (min-width:761px) and (max-width:1200px){
+  .captain-wire-ui .mid-lanes > .wire-card{
+    min-height:440px!important;
+  }
+  .captain-wire-ui #investigation-workspace .investigation-scroll-shell{
+    min-height:210px!important;
+    max-height:330px!important;
+  }
+}
+
+/* RC9 — Proxuma original identity polish: black, white, gray, neon green */
+.theme-dark.captain-wire-ui{
+  --bg:#020403;
+  --panel:#070b09;
+  --panel-2:#0b100d;
+  --border:#24402f;
+  --border-strong:#39ff73;
+  --border-soft:rgba(57,255,115,.34);
+  --text:#f7fff9;
+  --muted:#9ba6a0;
+  --accent:#39ff73;
+  --card-glow:0 0 0 1px rgba(57,255,115,.08),0 18px 48px rgba(0,0,0,.42);
+  background:
+    radial-gradient(circle at 50% -12%,rgba(57,255,115,.09),transparent 30%),
+    linear-gradient(180deg,#050806 0%,#010201 100%);
+}
+.theme-dark.captain-wire-ui .ambient-grid{
+  opacity:.1;
+  background-image:
+    linear-gradient(to right,rgba(57,255,115,.08) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(57,255,115,.08) 1px,transparent 1px);
+}
+.theme-dark.captain-wire-ui :is(.wire-header,.wire-hero,.wire-workspace,.wire-footer,.optional-tools){
+  border-color:rgba(57,255,115,.52)!important;
+  background:linear-gradient(180deg,rgba(8,13,10,.98),rgba(3,6,4,.99))!important;
+  box-shadow:0 0 0 1px rgba(57,255,115,.06),0 16px 42px rgba(0,0,0,.4)!important;
+}
+.theme-dark.captain-wire-ui .wire-card{
+  border-color:rgba(57,255,115,.46)!important;
+  background:linear-gradient(180deg,rgba(10,15,12,.98),rgba(4,7,5,.99))!important;
+  box-shadow:0 0 0 1px rgba(57,255,115,.05),0 14px 34px rgba(0,0,0,.34)!important;
+}
+.theme-dark.captain-wire-ui :is(.snapshot-grid>div,.mini-grid>span,.drawer-stage,.trust-finding-list,.severity-board>div,.workflow-card,.workflow-step,.tool-grid button,#visibleInvestigationBody,#visibleEvidenceList li,#scan-detail-controls p,.offline-card li,.wired-history-strip,.case-packet-status){
+  border-color:rgba(57,255,115,.22)!important;
+  background:rgba(255,255,255,.018)!important;
+}
+.theme-dark.captain-wire-ui :is(h1,h2,h3,h4,strong,b,label,.wire-brand){color:#f8fff9}
+.theme-dark.captain-wire-ui :is(p,li,small,.fine-print,.privacy-line,.lane-compact-head p){color:#9ba6a0}
+.theme-dark.captain-wire-ui :is(.eyebrow,.section-title>span,.status-pill,.privacy-line,.proof-row span){color:#39ff73!important}
+.theme-dark.captain-wire-ui :is(.wire-button,.secondary-action,.tab-row button,.drawer-tab,.finding-filter,.tool-grid button){
+  border-color:rgba(57,255,115,.3)!important;
+  background:linear-gradient(180deg,rgba(16,24,18,.98),rgba(7,11,8,.98))!important;
+  color:#edf7f0!important;
+}
+.theme-dark.captain-wire-ui :is(.primary-action,.tab-row button.active,.drawer-tab.active,.finding-filter.active){
+  border-color:#39ff73!important;
+  background:linear-gradient(180deg,#164c27,#0b2915)!important;
+  color:#f8fff9!important;
+  box-shadow:0 0 0 1px rgba(57,255,115,.15),0 0 18px rgba(57,255,115,.12)!important;
+}
+.theme-dark.captain-wire-ui :is(button,a,input,textarea):focus-visible{
+  outline:2px solid #39ff73!important;
+  outline-offset:3px!important;
+}
+.theme-dark.captain-wire-ui :is(button,.wire-nav a,.guide-actions a):hover{
+  border-color:#39ff73!important;
+  box-shadow:0 0 14px rgba(57,255,115,.14)!important;
+}
+.theme-dark.captain-wire-ui :is(input,textarea){
+  border-color:rgba(57,255,115,.3)!important;
+  background:#030604!important;
+  color:#f7fff9!important;
+}
+.theme-dark.captain-wire-ui :is(input,textarea)::placeholder{color:#69736d}
+.theme-dark.captain-wire-ui .score-ring{
+  border-color:#39ff73!important;
+  background:radial-gradient(circle at 50% 0%,rgba(57,255,115,.12),rgba(4,8,5,.98))!important;
+  box-shadow:inset 0 0 20px rgba(57,255,115,.05)!important;
+}
+.theme-dark.captain-wire-ui .heat-bar{border-color:rgba(57,255,115,.32)!important;background:#020403!important}
+.theme-dark.captain-wire-ui .wire-nav a{color:#aeb9b2;border-color:transparent}
+.theme-dark.captain-wire-ui .wire-nav a:hover{color:#ffffff;background:rgba(57,255,115,.06)}
+.theme-dark.captain-wire-ui .wire-pill{border-color:rgba(57,255,115,.34)!important;color:#b9c5bd!important;background:rgba(57,255,115,.04)!important}
+.theme-dark.captain-wire-ui .internal-scroll-cue{color:#39ff73!important}
+
+/* Preserve a calm, readable light theme while echoing the brand. */
+.theme-light.captain-wire-ui :is(.wire-header,.wire-hero,.wire-workspace,.wire-footer,.optional-tools,.wire-card){
+  border-color:rgba(21,162,80,.5)!important;
+}
+.theme-light.captain-wire-ui :is(.primary-action,.tab-row button.active,.drawer-tab.active,.finding-filter.active){
+  border-color:#129447!important;
+}
+
+/* RC9 — Proxuma neon contrast boost: stronger identity, no-squint typography */
+.theme-dark.captain-wire-ui{
+  --border:#315c40;
+  --border-strong:#4dff82;
+  --border-soft:rgba(77,255,130,.48);
+  --accent:#4dff82;
+  --muted:#c4d0c8;
+  --wire-muted:#c4d0c8;
+}
+.theme-dark.captain-wire-ui :is(.wire-header,.wire-hero,.wire-workspace,.wire-footer){
+  border-color:rgba(77,255,130,.72)!important;
+  box-shadow:0 0 0 1px rgba(77,255,130,.10),0 0 22px rgba(77,255,130,.055),0 16px 42px rgba(0,0,0,.42)!important;
+}
+.theme-dark.captain-wire-ui .wire-card{
+  border-color:rgba(77,255,130,.62)!important;
+  box-shadow:0 0 0 1px rgba(77,255,130,.08),0 12px 34px rgba(0,0,0,.36)!important;
+}
+.theme-dark.captain-wire-ui :is(.snapshot-grid>div,.mini-grid>span,.drawer-stage,.trust-finding-list,.severity-board>div,.workflow-card,.workflow-step,#visibleInvestigationBody,#visibleEvidenceList li,#scan-detail-controls p,.offline-card li,.wired-history-strip,.case-packet-status){
+  border-color:rgba(77,255,130,.36)!important;
+}
+.theme-dark.captain-wire-ui :is(p,li,small,.fine-print,.privacy-line,.lane-compact-head p,.muted,.subtle,.quiet-note,.card-summary,.panel-selector-copy p,.workflow-fixed-head .muted,.scan-details-header .muted){
+  color:#c4d0c8!important;
+}
+.theme-dark.captain-wire-ui :is(.eyebrow,.section-title>span,.status-pill,.proof-row span,.internal-scroll-cue){
+  color:#4dff82!important;
+  text-shadow:0 0 10px rgba(77,255,130,.18);
+}
+.theme-dark.captain-wire-ui :is(.wire-button,.secondary-action,.tab-row button,.drawer-tab,.finding-filter,.tool-grid button){
+  border-color:rgba(77,255,130,.48)!important;
+  color:#f4fff7!important;
+}
+.theme-dark.captain-wire-ui :is(.primary-action,.tab-row button.active,.drawer-tab.active,.finding-filter.active){
+  border-color:#4dff82!important;
+  box-shadow:0 0 0 1px rgba(77,255,130,.22),0 0 20px rgba(77,255,130,.19)!important;
+}
+.theme-dark.captain-wire-ui :is(button,.wire-nav a,.guide-actions a):hover{
+  border-color:#4dff82!important;
+  box-shadow:0 0 18px rgba(77,255,130,.22)!important;
+}
+.theme-dark.captain-wire-ui :is(button,a,input,textarea):focus-visible{
+  outline-color:#4dff82!important;
+  box-shadow:0 0 0 4px rgba(77,255,130,.13)!important;
+}
+.theme-dark.captain-wire-ui :is(input,textarea)::placeholder{color:#919e96!important}
+.theme-dark.captain-wire-ui .wire-nav a{color:#c2cec6!important}
+.theme-dark.captain-wire-ui .wire-pill{border-color:rgba(77,255,130,.5)!important;color:#d8e4dc!important}
+
+/* Optional Tools is intentionally a stronger brand landmark. */
+.theme-dark.captain-wire-ui .optional-tools{
+  border-color:#4dff82!important;
+  box-shadow:0 0 0 1px rgba(77,255,130,.18),0 0 24px rgba(77,255,130,.11),0 16px 42px rgba(0,0,0,.40)!important;
+}
+.theme-dark.captain-wire-ui .optional-tools > summary{
+  border-color:rgba(77,255,130,.62)!important;
+  background:linear-gradient(180deg,rgba(19,50,29,.72),rgba(7,17,10,.92))!important;
+}
+.theme-dark.captain-wire-ui .optional-tools > summary :is(strong,h2,span:first-child){
+  color:#f8fff9!important;
+}
+.theme-dark.captain-wire-ui .optional-tools > summary small,
+.theme-dark.captain-wire-ui .optional-tools > summary p{
+  color:#d0dbd4!important;
+}
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button{
+  border-color:rgba(77,255,130,.58)!important;
+  background:linear-gradient(180deg,rgba(18,31,22,.98),rgba(6,12,8,.99))!important;
+}
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button:hover{
+  border-color:#4dff82!important;
+  background:linear-gradient(180deg,rgba(24,59,34,.98),rgba(8,23,13,.99))!important;
+}
+
+
+/* RC9 — Optional Tools tile lift, App Guide polish, and complete light-mode contrast audit */
+.theme-dark.captain-wire-ui .optional-tools .tool-grid{
+  gap:12px!important;
+}
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button{
+  min-height:78px!important;
+  border:1.5px solid rgba(77,255,130,.82)!important;
+  background:
+    linear-gradient(135deg,rgba(77,255,130,.10),transparent 46%),
+    linear-gradient(180deg,rgba(15,34,21,.99),rgba(4,10,6,.99))!important;
+  color:#fbfffc!important;
+  font-weight:800!important;
+  letter-spacing:.01em;
+  box-shadow:inset 0 0 0 1px rgba(77,255,130,.08),0 0 14px rgba(77,255,130,.08)!important;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease,background .16s ease!important;
+}
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button small{
+  display:inline-block;
+  margin-top:5px;
+  color:#d4e2d8!important;
+  font-weight:650!important;
+  line-height:1.25;
+}
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button:hover,
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button:focus-visible{
+  transform:translateY(-2px);
+  border-color:#4dff82!important;
+  background:
+    linear-gradient(135deg,rgba(77,255,130,.18),transparent 52%),
+    linear-gradient(180deg,rgba(22,54,31,.99),rgba(6,19,10,.99))!important;
+  box-shadow:inset 0 0 0 1px rgba(77,255,130,.16),0 0 24px rgba(77,255,130,.22)!important;
+}
+
+/* App Guide: compact, clearly interactive, and readable in both states. */
+.captain-wire-ui #explain.wire-guide{
+  overflow:hidden;
+}
+.captain-wire-ui #explain .guide-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+.captain-wire-ui #explain .collapse-toggle{
+  flex:0 0 auto;
+  min-width:92px;
+}
+.theme-dark.captain-wire-ui #explain.wire-guide{
+  border-color:rgba(77,255,130,.7)!important;
+  background:linear-gradient(180deg,rgba(10,20,13,.98),rgba(4,8,5,.99))!important;
+}
+.theme-dark.captain-wire-ui #explain .guide-title strong{
+  color:#f9fffa!important;
+}
+.theme-dark.captain-wire-ui #explain .collapse-toggle{
+  border-color:#4dff82!important;
+  color:#f9fffa!important;
+  box-shadow:0 0 14px rgba(77,255,130,.12)!important;
+}
+.theme-dark.captain-wire-ui #explain .collapsible-card-body{
+  border-top:1px solid rgba(77,255,130,.35);
+  margin-top:10px;
+  padding-top:12px;
+}
+
+/* Light mode: every content layer receives explicit readable foregrounds. */
+.theme-light.captain-wire-ui{
+  --text:#102319;
+  --muted:#355544;
+  --wire-muted:#355544;
+  color:#102319!important;
+  background:#edf5ef!important;
+}
+.theme-light.captain-wire-ui :is(.wire-header,.wire-hero,.wire-workspace,.wire-footer,.optional-tools,.wire-card,.wire-guide){
+  color:#102319!important;
+  background:linear-gradient(180deg,#ffffff,#f2f8f4)!important;
+  border-color:rgba(18,148,71,.58)!important;
+}
+.theme-light.captain-wire-ui :is(h1,h2,h3,h4,h5,h6,strong,b,label,.wire-brand,.guide-title strong){
+  color:#0c2014!important;
+}
+.theme-light.captain-wire-ui :is(p,li,small,.fine-print,.privacy-line,.lane-compact-head p,.muted,.subtle,.quiet-note,.card-summary,.panel-selector-copy p,.workflow-fixed-head .muted,.scan-details-header .muted){
+  color:#355544!important;
+}
+.theme-light.captain-wire-ui :is(.snapshot-grid>div,.mini-grid>span,.drawer-stage,.drawer-panel,.trust-finding-list,.severity-board>div,.workflow-card,.workflow-step,.tool-grid button,#visibleInvestigationBody,#visibleEvidenceList li,#scan-detail-controls p,.offline-card li,.wired-history-strip,.case-packet-status){
+  background:#f7fbf8!important;
+  color:#153321!important;
+  border-color:rgba(18,148,71,.34)!important;
+}
+.theme-light.captain-wire-ui :is(.wire-button,.secondary-action,.tab-row button,.drawer-tab,.finding-filter,.tool-grid button,.guide-actions a){
+  background:linear-gradient(180deg,#ffffff,#eaf5ed)!important;
+  color:#163b24!important;
+  border-color:rgba(18,148,71,.52)!important;
+}
+.theme-light.captain-wire-ui :is(.primary-action,.tab-row button.active,.drawer-tab.active,.finding-filter.active){
+  background:linear-gradient(180deg,#1caf59,#128640)!important;
+  color:#ffffff!important;
+  border-color:#0d7736!important;
+}
+.theme-light.captain-wire-ui :is(input,textarea,select){
+  background:#ffffff!important;
+  color:#102319!important;
+  border-color:rgba(18,148,71,.48)!important;
+}
+.theme-light.captain-wire-ui :is(input,textarea)::placeholder{
+  color:#587261!important;
+  opacity:1!important;
+}
+.theme-light.captain-wire-ui :is(.eyebrow,.section-title>span,.proof-row span,.internal-scroll-cue){
+  color:#087b34!important;
+  text-shadow:none!important;
+}
+.theme-light.captain-wire-ui .status-pill{
+  color:#075d29!important;
+  background:#e3f5e8!important;
+  border-color:rgba(13,119,54,.4)!important;
+}
+.theme-light.captain-wire-ui .wire-nav a{
+  color:#294c37!important;
+}
+.theme-light.captain-wire-ui .wire-nav a:hover,
+.theme-light.captain-wire-ui .wire-nav a.active{
+  color:#073d1d!important;
+  background:#ddf4e4!important;
+}
+.theme-light.captain-wire-ui .optional-tools{
+  border-color:#129447!important;
+  box-shadow:0 0 0 1px rgba(18,148,71,.12),0 14px 34px rgba(31,73,46,.14)!important;
+}
+.theme-light.captain-wire-ui .optional-tools .tool-grid button{
+  min-height:78px!important;
+  background:linear-gradient(145deg,#ffffff,#e9f7ed)!important;
+  color:#0e3b20!important;
+  border:1.5px solid rgba(18,148,71,.72)!important;
+  font-weight:800!important;
+  box-shadow:0 5px 14px rgba(21,86,43,.08)!important;
+}
+.theme-light.captain-wire-ui .optional-tools .tool-grid button small{
+  color:#365d43!important;
+  font-weight:650!important;
+}
+.theme-light.captain-wire-ui #explain .collapsible-card-body{
+  border-top:1px solid rgba(18,148,71,.28);
+  margin-top:10px;
+  padding-top:12px;
+}
+.theme-light.captain-wire-ui :is(button,a,input,textarea,select):focus-visible{
+  outline:2px solid #0c8d3d!important;
+  outline-offset:3px!important;
+  box-shadow:0 0 0 4px rgba(12,141,61,.14)!important;
+}
+
+/* RC9 — Locked hero/App Guide height and light-mode workflow-step contrast */
+.captain-wire-ui .wire-hero{
+  height:238px;
+  min-height:238px;
+  max-height:238px;
+  overflow:hidden;
+  align-items:stretch;
+}
+.captain-wire-ui #explain.wire-guide{
+  height:100%;
+  min-height:0;
+  max-height:100%;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden!important;
+}
+.captain-wire-ui #explain .guide-title{
+  flex:0 0 auto;
+}
+.captain-wire-ui #explain .collapsible-card-body{
+  flex:1 1 auto;
+  min-height:0;
+  max-height:none!important;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  scrollbar-gutter:stable;
+  padding-right:8px;
+}
+.captain-wire-ui #explain .collapsible-card-body[hidden]{
+  display:none!important;
+}
+.captain-wire-ui #explain .collapsible-card-body:not([hidden]){
+  display:block;
+}
+
+/* Keep the three workflow steps readable in light mode. */
+.theme-light.captain-wire-ui .wire-steps span{
+  background:linear-gradient(180deg,#ffffff,#e7f4eb)!important;
+  color:#102319!important;
+  border-color:rgba(18,148,71,.62)!important;
+  box-shadow:0 4px 12px rgba(21,86,43,.08)!important;
+}
+.theme-light.captain-wire-ui .wire-steps span b{
+  color:#ffffff!important;
+  background:linear-gradient(180deg,#1caf59,#128640)!important;
+  border-color:#0d7736!important;
+}
+.theme-light.captain-wire-ui .wire-steps span small{
+  color:#355544!important;
+  font-weight:700!important;
+}
+
+@media (max-width:1180px){
+  .captain-wire-ui .wire-hero{
+    height:auto;
+    min-height:0;
+    max-height:none;
+    overflow:visible;
+  }
+  .captain-wire-ui #explain.wire-guide{
+    height:190px;
+    min-height:190px;
+    max-height:190px;
+  }
+}
+
+@media (max-width:720px){
+  .captain-wire-ui #explain.wire-guide{
+    height:180px;
+    min-height:180px;
+    max-height:180px;
+  }
+}
+
+/* RC9 — Proxuma neon lift: Optional Tools + hero workflow map cards */
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button{
+  position:relative;
+  overflow:hidden;
+  border:2px solid #53ff83!important;
+  background:
+    radial-gradient(circle at 88% 18%,rgba(83,255,131,.16),transparent 30%),
+    linear-gradient(145deg,#0b1810,#050a07)!important;
+  color:#f7fff9!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(132,255,166,.10),
+    0 0 12px rgba(83,255,131,.24),
+    0 8px 22px rgba(0,0,0,.30)!important;
+  text-shadow:0 0 10px rgba(83,255,131,.10);
+}
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:#53ff83;
+  box-shadow:0 0 14px rgba(83,255,131,.9);
+}
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button small{
+  color:#d8e9dd!important;
+  font-weight:700!important;
+}
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button:hover,
+.theme-dark.captain-wire-ui .optional-tools .tool-grid button:focus-visible{
+  border-color:#87ffa8!important;
+  background:
+    radial-gradient(circle at 88% 18%,rgba(83,255,131,.25),transparent 34%),
+    linear-gradient(145deg,#0e2115,#061009)!important;
+  box-shadow:
+    inset 0 0 0 1px rgba(170,255,192,.18),
+    0 0 22px rgba(83,255,131,.42),
+    0 12px 26px rgba(0,0,0,.36)!important;
+  transform:translateY(-2px);
+}
+
+/* Map-card treatment for the three hero workflow steps. */
+.theme-dark.captain-wire-ui .wire-steps span{
+  position:relative;
+  min-height:76px;
+  padding:12px 14px 12px 52px!important;
+  border:1.8px solid #53ff83!important;
+  border-radius:14px!important;
+  background:
+    linear-gradient(135deg,rgba(83,255,131,.12),transparent 48%),
+    #07110b!important;
+  color:#f7fff9!important;
+  box-shadow:inset 0 0 0 1px rgba(118,255,155,.08),0 0 13px rgba(83,255,131,.20)!important;
+  font-weight:850;
+}
+.theme-dark.captain-wire-ui .wire-steps span::after{
+  content:"";
+  position:absolute;
+  left:20px;
+  top:44px;
+  bottom:-14px;
+  width:1px;
+  background:linear-gradient(#53ff83,rgba(83,255,131,0));
+  opacity:.55;
+}
+.theme-dark.captain-wire-ui .wire-steps span:last-child::after{display:none;}
+.theme-dark.captain-wire-ui .wire-steps b{
+  position:absolute;
+  left:10px;
+  top:11px;
+  width:32px!important;
+  height:32px!important;
+  margin:0!important;
+  color:#041007!important;
+  background:#53ff83!important;
+  border:1px solid #9affb6!important;
+  box-shadow:0 0 16px rgba(83,255,131,.48)!important;
+}
+.theme-dark.captain-wire-ui .wire-steps small{
+  color:#d8e9dd!important;
+  font-weight:700!important;
+  line-height:1.3;
+}
+
+/* Light mode keeps the same identity with darker text and controlled green. */
+.theme-light.captain-wire-ui .optional-tools .tool-grid button{
+  position:relative;
+  overflow:hidden;
+  border:2px solid #159447!important;
+  background:linear-gradient(145deg,#ffffff,#e8f7ed)!important;
+  color:#0d2c18!important;
+  box-shadow:inset 0 0 0 1px rgba(21,148,71,.08),0 5px 16px rgba(17,99,49,.14)!important;
+}
+.theme-light.captain-wire-ui .optional-tools .tool-grid button::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:#159447;
+}
+.theme-light.captain-wire-ui .optional-tools .tool-grid button small{
+  color:#315b3f!important;
+  font-weight:700!important;
+}
+.theme-light.captain-wire-ui .optional-tools .tool-grid button:hover,
+.theme-light.captain-wire-ui .optional-tools .tool-grid button:focus-visible{
+  border-color:#087f36!important;
+  background:linear-gradient(145deg,#ffffff,#dcf3e4)!important;
+  box-shadow:0 0 0 3px rgba(21,148,71,.13),0 10px 22px rgba(17,99,49,.18)!important;
+  transform:translateY(-2px);
+}
+.theme-light.captain-wire-ui .wire-steps span{
+  position:relative;
+  min-height:76px;
+  padding:12px 14px 12px 52px!important;
+  border:1.8px solid #159447!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,#ffffff,#e7f5eb)!important;
+  color:#0d2c18!important;
+  box-shadow:inset 0 0 0 1px rgba(21,148,71,.07),0 5px 14px rgba(17,99,49,.12)!important;
+  font-weight:850;
+}
+.theme-light.captain-wire-ui .wire-steps b{
+  position:absolute;
+  left:10px;
+  top:11px;
+  width:32px!important;
+  height:32px!important;
+  margin:0!important;
+  color:#ffffff!important;
+  background:#159447!important;
+  border-color:#087f36!important;
+  box-shadow:0 0 0 3px rgba(21,148,71,.12)!important;
+}
+.theme-light.captain-wire-ui .wire-steps small{
+  color:#315b3f!important;
+  font-weight:700!important;
+}
+
+@media (max-width:680px){
+  .captain-wire-ui .wire-steps span{min-height:68px;}
+}
+
+/* RC9 severity integrity: detections without a real severity bucket stay visibly unclassified. */
+.sev-unclassified{color:#d7dee8;font-style:normal;white-space:nowrap;}
+html[data-theme="light"] .sev-unclassified,body.light-theme .sev-unclassified{color:#394452!important;}
+
+
+/* RC9 Analysis View risk-state restoration.
+   One explicit, readable state: red high, orange moderate, green good. */
+:root {
+  --proxuma-live-risk-accent: #9aa8b8;
+  --proxuma-live-risk-soft: rgba(154,168,184,.14);
+  --proxuma-live-risk-line: rgba(154,168,184,.62);
+  --proxuma-live-risk-glow: rgba(154,168,184,.24);
+}
+html[data-risk-tone="standby"] {
+  --proxuma-live-risk-accent:#9aa8b8;
+  --proxuma-live-risk-soft:rgba(154,168,184,.14);
+  --proxuma-live-risk-line:rgba(154,168,184,.62);
+  --proxuma-live-risk-glow:rgba(154,168,184,.24);
+}
+html[data-risk-tone="high"] {
+  --proxuma-live-risk-accent:#ff4d57;
+  --proxuma-live-risk-soft:rgba(255,77,87,.16);
+  --proxuma-live-risk-line:rgba(255,77,87,.82);
+  --proxuma-live-risk-glow:rgba(255,77,87,.32);
+}
+html[data-risk-tone="moderate"] {
+  --proxuma-live-risk-accent:#ff9f2f;
+  --proxuma-live-risk-soft:rgba(255,159,47,.17);
+  --proxuma-live-risk-line:rgba(255,159,47,.82);
+  --proxuma-live-risk-glow:rgba(255,159,47,.30);
+}
+html[data-risk-tone="good"] {
+  --proxuma-live-risk-accent:#39ff88;
+  --proxuma-live-risk-soft:rgba(57,255,136,.14);
+  --proxuma-live-risk-line:rgba(57,255,136,.78);
+  --proxuma-live-risk-glow:rgba(57,255,136,.28);
+}
+#details[data-risk-tone] {
+  border-color:var(--proxuma-live-risk-line)!important;
+  box-shadow:inset 0 3px 0 var(--proxuma-live-risk-accent),0 0 0 1px var(--proxuma-live-risk-soft),0 12px 30px rgba(0,0,0,.14)!important;
+}
+#details .analysis-view-status {
+  color:var(--proxuma-live-risk-accent)!important;
+  border:1px solid var(--proxuma-live-risk-line)!important;
+  background:var(--proxuma-live-risk-soft)!important;
+  box-shadow:0 0 16px var(--proxuma-live-risk-glow)!important;
+}
+#details .analysis-view-head .eyebrow,
+#details .drawer-panel > h3,
+#details #explainStatus {
+  color:var(--proxuma-live-risk-accent)!important;
+}
+#details .drawer-tab.active {
+  color:#07110c!important;
+  background:var(--proxuma-live-risk-accent)!important;
+  border-color:var(--proxuma-live-risk-accent)!important;
+  box-shadow:0 0 16px var(--proxuma-live-risk-glow)!important;
+}
+#details .drawer-panel {
+  border-left-color:var(--proxuma-live-risk-accent)!important;
+}
+html[data-theme="light"] #details .analysis-view-status,
+body.light-theme #details .analysis-view-status {
+  color:#111827!important;
+  background:color-mix(in srgb,var(--proxuma-live-risk-accent) 18%,white)!important;
+}
+
+/* RC10 full application guide */
+.app-guide-launcher{min-height:0!important; overflow:hidden;}
+.app-guide-launcher .guide-title{align-items:center;}
+.app-guide-launcher .fine-print{margin:.55rem 0 0; color:var(--muted, #c9d1d9);}
+.wire-steps button{font:inherit; text-align:left; cursor:pointer;}
+.wire-steps button:hover,.wire-steps button:focus-visible{border-color:#69ff9a!important; box-shadow:0 0 0 1px rgba(105,255,154,.72),0 0 22px rgba(32,255,112,.22); transform:translateY(-1px);}
+body.app-guide-open{overflow:hidden;}
+.app-guide-overlay[hidden]{display:none!important;}
+.app-guide-overlay{position:fixed; inset:0; z-index:10000; display:grid; place-items:center; padding:clamp(.75rem,2vw,1.5rem);}
+.app-guide-backdrop{position:absolute; inset:0; background:rgba(0,0,0,.82); backdrop-filter:blur(7px);}
+.app-guide-dialog{position:relative; width:min(1180px,96vw); height:min(880px,94vh); display:grid; grid-template-rows:auto auto minmax(0,1fr); overflow:hidden; border:1.5px solid #49ff83; border-radius:20px; background:linear-gradient(180deg,#090e0b 0%,#050806 100%); color:#f7fff9; box-shadow:0 0 0 1px rgba(73,255,131,.28),0 0 42px rgba(32,255,112,.24),0 26px 90px rgba(0,0,0,.62); outline:none;}
+.app-guide-dialog-head{display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; padding:1.25rem 1.35rem 1rem; border-bottom:1px solid rgba(73,255,131,.34);}
+.app-guide-dialog-head h2{margin:.2rem 0 .35rem; font-size:clamp(1.35rem,2.4vw,2rem);}
+.app-guide-dialog-head p:last-child{margin:0; color:#d2ddd5; max-width:72ch;}
+.app-guide-close{flex:0 0 auto; border-color:#69ff9a!important; color:#f7fff9!important;}
+.app-guide-index{display:flex; gap:.5rem; overflow-x:auto; padding:.75rem 1.35rem; border-bottom:1px solid rgba(73,255,131,.25); scrollbar-width:thin;}
+.app-guide-index button,.app-guide-section button{border:1px solid rgba(73,255,131,.72); border-radius:999px; background:rgba(25,255,103,.08); color:#eaffef; padding:.55rem .82rem; font-weight:800; white-space:nowrap; cursor:pointer;}
+.app-guide-index button:hover,.app-guide-index button:focus-visible,.app-guide-section button:hover,.app-guide-section button:focus-visible{background:rgba(32,255,112,.18); border-color:#8affac; box-shadow:0 0 16px rgba(32,255,112,.2); outline:none;}
+.app-guide-content{overflow:auto; padding:1rem 1.35rem 1.5rem; scroll-behavior:smooth;}
+.app-guide-section{scroll-margin-top:1rem; display:grid; grid-template-columns:52px minmax(0,1fr); gap:1rem; padding:1.1rem; margin-bottom:.85rem; border:1px solid rgba(73,255,131,.44); border-radius:16px; background:linear-gradient(145deg,rgba(24,255,100,.075),rgba(255,255,255,.018));}
+.app-guide-section h3{margin:.05rem 0 .45rem; color:#f7fff9; font-size:1.08rem;}
+.app-guide-section p{margin:0 0 .8rem; color:#d7e1da; line-height:1.62;}
+.guide-number{display:grid; place-items:center; width:44px; height:44px; border-radius:13px; border:1px solid #64ff96; color:#8affac; background:rgba(32,255,112,.12); font-weight:900; font-size:1.05rem; box-shadow:inset 0 0 18px rgba(32,255,112,.08);}
+@media (max-width:720px){.app-guide-overlay{padding:.45rem}.app-guide-dialog{width:100%;height:97vh;border-radius:15px}.app-guide-dialog-head{padding:1rem;display:grid}.app-guide-close{width:100%}.app-guide-index{padding:.65rem 1rem}.app-guide-content{padding:.8rem 1rem 1.25rem}.app-guide-section{grid-template-columns:42px minmax(0,1fr);padding:.9rem;gap:.75rem}.guide-number{width:38px;height:38px}.app-guide-section button{white-space:normal;width:100%}}
+body.theme-light .app-guide-backdrop{background:rgba(5,10,7,.66);}
+body.theme-light .app-guide-dialog{background:linear-gradient(180deg,#f7fff9,#edf8f0); color:#101a13; border-color:#0eb44d; box-shadow:0 0 0 1px rgba(14,180,77,.2),0 24px 70px rgba(0,0,0,.26);}
+body.theme-light .app-guide-dialog-head,body.theme-light .app-guide-index{border-color:rgba(14,180,77,.28);}
+body.theme-light .app-guide-dialog-head h2,body.theme-light .app-guide-section h3{color:#0b1710!important;}
+body.theme-light .app-guide-dialog-head p:last-child,body.theme-light .app-guide-section p{color:#33483a!important;}
+body.theme-light .app-guide-index button,body.theme-light .app-guide-section button{background:#effbf2;color:#0b5528;border-color:#19a84d;}
+body.theme-light .app-guide-section{background:linear-gradient(145deg,rgba(16,176,72,.09),rgba(255,255,255,.9));border-color:rgba(14,180,77,.4);}
+body.theme-light .guide-number{color:#076c2d;background:#e8f9ed;border-color:#14a84a;}
+body.theme-light .app-guide-close{color:#0b5528!important;}
+
+/* RC10 — Final light-mode visibility audit.
+   This layer intentionally comes last so legacy dark component rules cannot
+   leave dark text on dark surfaces or white text on white surfaces. */
+.theme-light.captain-wire-ui{
+  --wire-text:#0a1722;
+  --wire-muted:#405164;
+  --light-surface:#ffffff;
+  --light-surface-soft:#eef7f1;
+  --light-line:#149447;
+  color:#0a1722!important;
+}
+.theme-light.captain-wire-ui :is(.wire-header,.wire-hero,.wire-workspace,.wire-card,.wire-guide,.drawer-stage,.drawer-panel,.workflow-layer,.intelligence-drawer,.optional-tools,.offline-card,.investigation-workspace,.scan-details-workspace,.result-card,.command-panel,.guided-result-card,.report-snapshot-card,.mode-card,.trust-finding-list,.finding-block,.case-file-block,.intel-card,.im-dialog,.im-case-box,.app-guide-launcher){
+  color:#0a1722!important;
+}
+.theme-light.captain-wire-ui :is(.wire-header,.wire-hero,.wire-workspace,.wire-card,.wire-guide,.drawer-stage,.analysis-strip,.snapshot-grid>div,.mini-grid>span,.trust-finding-list,.severity-board>div,.support-lines p,.offline-card li,.intel-card,.finding-block,.case-file-block,.im-dialog,.im-case-box){
+  background:#ffffff!important;
+  border-color:rgba(20,148,71,.48)!important;
+}
+.theme-light.captain-wire-ui :is(h1,h2,h3,h4,h5,h6,strong,b,label,legend,summary,dt,th){
+  color:#08151f!important;
+}
+.theme-light.captain-wire-ui :is(p,li,dd,td,span,small,em,code,.fine-print,.privacy-line,.muted,.lead,.report-summary,.section-title p,.wire-card p,.wire-hero p,.app-guide-launcher .fine-print){
+  color:#405164!important;
+}
+.theme-light.captain-wire-ui :is(.eyebrow,.status-pill,.proof-row span,.quick-tests button){
+  color:#086b30!important;
+}
+.theme-light.captain-wire-ui :is(.wire-button,.secondary-action,.ghost-button,.tab-row button,.drawer-tab,.workflow-toggle,.focus-reading-toggle,.finding-toolbar button,.app-guide-close){
+  background:#f5fbf7!important;
+  color:#0b3f20!important;
+  border-color:#159447!important;
+}
+.theme-light.captain-wire-ui :is(.tab-row button.active,.drawer-tab.active){
+  background:#159447!important;
+  color:#ffffff!important;
+  border-color:#087f36!important;
+}
+.theme-light.captain-wire-ui :is(input,textarea,select,.input-wrap input){
+  background:#ffffff!important;
+  color:#08151f!important;
+  border-color:#6cae83!important;
+  caret-color:#08151f!important;
+}
+.theme-light.captain-wire-ui :is(input,textarea)::placeholder{color:#667789!important;opacity:1!important;}
+.theme-light.captain-wire-ui a:not(.primary-action){color:#075f2a!important;}
+.theme-light.captain-wire-ui .wire-brand strong,
+.theme-light.captain-wire-ui .wire-nav a,
+.theme-light.captain-wire-ui .wire-pill{color:#0a1722!important;}
+.theme-light.captain-wire-ui .wire-brand small{color:#46586b!important;}
+
+/* Components intentionally kept dark in light mode receive light text. */
+.theme-light.captain-wire-ui :is(.score-ring,.fake-qr,.heat-bar,.primary-action){
+  color:#f7fff9!important;
+}
+.theme-light.captain-wire-ui .score-ring :is(span,small,strong),
+.theme-light.captain-wire-ui .fake-qr,
+.theme-light.captain-wire-ui .primary-action,
+.theme-light.captain-wire-ui .primary-action :is(span,strong,small){
+  color:#f7fff9!important;
+}
+
+/* Hero map cards and full App Guide must remain readable in light mode. */
+.theme-light.captain-wire-ui .wire-steps button,
+.theme-light.captain-wire-ui .wire-steps span{
+  background:linear-gradient(145deg,#ffffff,#e8f7ed)!important;
+  color:#0b2a17!important;
+  border-color:#159447!important;
+}
+.theme-light.captain-wire-ui .wire-steps :is(strong,span){color:#0b2a17!important;}
+.theme-light.captain-wire-ui .wire-steps small{color:#365946!important;}
+.theme-light.captain-wire-ui .wire-steps b{color:#ffffff!important;background:#159447!important;}
+.theme-light.captain-wire-ui .app-guide-dialog{color:#101a13!important;}
+.theme-light.captain-wire-ui .app-guide-dialog :is(h1,h2,h3,h4,strong,b,label){color:#0b1710!important;}
+.theme-light.captain-wire-ui .app-guide-dialog :is(p,li,small,span){color:#33483a!important;}
+.theme-light.captain-wire-ui .app-guide-index button,
+.theme-light.captain-wire-ui .app-guide-section button{color:#0b5528!important;background:#effbf2!important;}
+
+/* Preserve semantic risk colors while keeping the text legible. */
+.theme-light.captain-wire-ui #details .analysis-view-status{color:#111827!important;}
+.theme-light.captain-wire-ui #details .drawer-tab.active{color:#07110c!important;}
+.theme-light.captain-wire-ui :is(.risk-high,.danger,.critical){color:#b4232d!important;}
+.theme-light.captain-wire-ui :is(.risk-moderate,.warning){color:#9a5700!important;}
+.theme-light.captain-wire-ui :is(.risk-good,.safe,.success){color:#087332!important;}
+
+/* RC10 — Light Mode Border Contrast Boost.
+   Preserve layout and dark mode; strengthen hierarchy against white surfaces. */
+.theme-light.captain-wire-ui{
+  --light-border-strong:#087a36;
+  --light-border-main:#159447;
+  --light-border-inner:#48a96b;
+  --light-border-soft:#82c697;
+}
+
+/* Major page frames and primary cards. */
+.theme-light.captain-wire-ui :is(
+  .wire-header,
+  .wire-hero,
+  .wire-workspace,
+  .workflow-layer,
+  .optional-tools,
+  .app-guide-launcher,
+  .investigation-workspace,
+  .scan-details-workspace,
+  .offline-card,
+  #details
+){
+  border-color:var(--light-border-main)!important;
+  border-width:1.6px!important;
+  box-shadow:0 0 0 1px rgba(21,148,71,.10),0 7px 20px rgba(10,86,39,.08)!important;
+}
+
+/* Cards and controls inside the main frames. */
+.theme-light.captain-wire-ui :is(
+  .wire-card,
+  .wire-guide,
+  .drawer-stage,
+  .drawer-panel,
+  .analysis-strip,
+  .snapshot-grid>div,
+  .mini-grid>span,
+  .trust-finding-list,
+  .severity-board>div,
+  .support-lines p,
+  .offline-card li,
+  .intel-card,
+  .finding-block,
+  .case-file-block,
+  .case-packet-status,
+  .qr-stage,
+  .input-wrap input
+){
+  border-color:var(--light-border-inner)!important;
+  border-width:1.35px!important;
+}
+
+/* Buttons and tabs need a visible edge on white. */
+.theme-light.captain-wire-ui :is(
+  .wire-button,
+  .secondary-action,
+  .ghost-button,
+  .tab-row button,
+  .drawer-tab,
+  .workflow-toggle,
+  .focus-reading-toggle,
+  .finding-toolbar button,
+  .quick-tests button,
+  .app-guide-close
+){
+  border-color:var(--light-border-main)!important;
+  box-shadow:0 0 0 1px rgba(21,148,71,.08)!important;
+}
+
+/* Primary actions: dark green, clear white text, no fluorescent washout. */
+.theme-light.captain-wire-ui .primary-action,
+.theme-light.captain-wire-ui #scanButton,
+.theme-light.captain-wire-ui #qrStartButton{
+  background:linear-gradient(180deg,#159447 0%,#087a36 100%)!important;
+  color:#ffffff!important;
+  border:1.7px solid #045f2a!important;
+  box-shadow:0 0 0 1px rgba(4,95,42,.14),0 7px 15px rgba(8,122,54,.20)!important;
+  text-shadow:0 1px 1px rgba(0,0,0,.20)!important;
+}
+.theme-light.captain-wire-ui .primary-action:hover,
+.theme-light.captain-wire-ui .primary-action:focus-visible,
+.theme-light.captain-wire-ui #scanButton:hover,
+.theme-light.captain-wire-ui #scanButton:focus-visible,
+.theme-light.captain-wire-ui #qrStartButton:hover,
+.theme-light.captain-wire-ui #qrStartButton:focus-visible{
+  background:linear-gradient(180deg,#087a36 0%,#056329 100%)!important;
+  border-color:#034d21!important;
+  box-shadow:0 0 0 3px rgba(21,148,71,.20),0 9px 19px rgba(8,122,54,.24)!important;
+}
+.theme-light.captain-wire-ui .primary-action:disabled,
+.theme-light.captain-wire-ui #scanButton:disabled{
+  background:#8bbf9d!important;
+  border-color:#6cae83!important;
+  color:#f8fffa!important;
+  box-shadow:none!important;
+}
+
+/* Hero map cards and Optional Tools receive the strongest visible green edge. */
+.theme-light.captain-wire-ui .wire-steps button,
+.theme-light.captain-wire-ui .optional-tools .tool-grid button{
+  border-color:var(--light-border-strong)!important;
+  border-width:2px!important;
+  box-shadow:inset 0 0 0 1px rgba(8,122,54,.08),0 6px 16px rgba(8,92,40,.12)!important;
+}
+
+/* Intentionally dark result panels need a bright perimeter in light mode. */
+.theme-light.captain-wire-ui :is(.result-card,.investigation-workspace,.scan-details-workspace){
+  border-color:#20ad55!important;
+  box-shadow:0 0 0 1px rgba(32,173,85,.22),0 8px 22px rgba(6,55,26,.13)!important;
+}
+
+/* Strong, consistent keyboard visibility. */
+.theme-light.captain-wire-ui :is(button,a,input,textarea,select):focus-visible{
+  outline:3px solid rgba(8,122,54,.34)!important;
+  outline-offset:2px!important;
+}
+
+/* RC10 hero workflow badge anchor fix.
+   Current markup uses buttons, so every number must be positioned inside its own card. */
+.captain-wire-ui .wire-steps > button{
+  position:relative!important;
+  min-height:76px;
+  padding:12px 14px 12px 52px!important;
+  border-radius:14px!important;
+  overflow:hidden;
+  isolation:isolate;
+}
+.captain-wire-ui .wire-steps > button > b{
+  position:absolute!important;
+  left:10px!important;
+  top:11px!important;
+  width:32px!important;
+  height:32px!important;
+  margin:0!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:50%!important;
+  z-index:1;
+}
+.theme-dark.captain-wire-ui .wire-steps > button{
+  border:1.8px solid #53ff83!important;
+  background:linear-gradient(135deg,rgba(83,255,131,.12),transparent 48%),#07110b!important;
+  color:#f7fff9!important;
+  box-shadow:inset 0 0 0 1px rgba(118,255,155,.08),0 0 13px rgba(83,255,131,.20)!important;
+}
+.theme-dark.captain-wire-ui .wire-steps > button > b{
+  color:#041007!important;
+  background:#53ff83!important;
+  border:1px solid #9affb6!important;
+  box-shadow:0 0 16px rgba(83,255,131,.48)!important;
+}
+.theme-dark.captain-wire-ui .wire-steps > button small{
+  color:#d8e9dd!important;
+  font-weight:700!important;
+}
+.theme-light.captain-wire-ui .wire-steps > button{
+  border:2px solid #159447!important;
+  background:linear-gradient(135deg,#ffffff,#e7f5eb)!important;
+  color:#0d2c18!important;
+  box-shadow:inset 0 0 0 1px rgba(21,148,71,.07),0 5px 14px rgba(17,99,49,.12)!important;
+}
+.theme-light.captain-wire-ui .wire-steps > button > b{
+  color:#ffffff!important;
+  background:#159447!important;
+  border:1px solid #087f36!important;
+  box-shadow:0 0 0 3px rgba(21,148,71,.12)!important;
+}
+.theme-light.captain-wire-ui .wire-steps > button small{
+  color:#315b3f!important;
+  font-weight:700!important;
+}
+/* Proxuma identity for the hero shield badge in both themes. */
+.captain-wire-ui .hero-symbol{
+  border-color:#35e86d!important;
+  box-shadow:0 0 0 1px rgba(53,232,109,.22),0 0 18px rgba(53,232,109,.16)!important;
+}
+.theme-light.captain-wire-ui .hero-symbol{
+  border-color:#159447!important;
+  box-shadow:0 0 0 1px rgba(21,148,71,.18),0 5px 14px rgba(17,99,49,.12)!important;
+}

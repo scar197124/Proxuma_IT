@@ -15,6 +15,7 @@
   let originalParent = null;
   let originalNextSibling = null;
   let pageScrollY = 0;
+  let savedInternalScroll = [];
 
   const viewportLayer = document.createElement('div');
   viewportLayer.className = 'focus-reading-viewport';
@@ -65,6 +66,9 @@
     previousFocus = document.activeElement;
     pageScrollY = window.scrollY || document.documentElement.scrollTop || 0;
     active = target;
+    savedInternalScroll = Array.from(target.querySelectorAll('[tabindex], .wired-investigation-body, .wired-evidence-list, .drawer-stage, .trust-finding-list'))
+      .filter(el => el.scrollHeight > el.clientHeight + 2)
+      .map(el => ({el, top:el.scrollTop, left:el.scrollLeft}));
     originalParent = target.parentNode;
     originalNextSibling = target.nextSibling;
     placeholder = document.createComment(`focus-placeholder-${target.id}`);
@@ -130,15 +134,19 @@
           body.style.removeProperty('display');
           body.style.removeProperty('visibility');
           body.style.removeProperty('opacity');
-          body.scrollTop = 0;
         }
+        savedInternalScroll.forEach(item => { try { item.el.scrollTop=item.top; item.el.scrollLeft=item.left; } catch(e){} });
         const activeTab = exitingTarget.querySelector('#investigation-controls button.active') || exitingTarget.querySelector('#investigation-controls button');
         if(activeTab) activeTab.click();
         document.dispatchEvent(new CustomEvent('proxuma:focus-restored', {detail:{target:'investigation-workspace'}}));
       });
     }
 
+    if(exitingTarget && exitingTarget.id !== 'investigation-workspace'){
+      requestAnimationFrame(() => savedInternalScroll.forEach(item => { try { item.el.scrollTop=item.top; item.el.scrollLeft=item.left; } catch(e){} }));
+    }
     active = null;
+    savedInternalScroll = [];
     placeholder = null;
     originalParent = null;
     originalNextSibling = null;

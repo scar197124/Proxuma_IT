@@ -4651,6 +4651,52 @@
     if (els.confidenceBrief) { els.confidenceBrief.textContent = report.confidenceBrief || "Waiting"; els.confidenceBrief.className = numberClass; }
     if (els.scanMemory) { els.scanMemory.textContent = report.scanMemory || "No previous scan"; els.scanMemory.className = numberClass; }
     if (els.compareLast) { els.compareLast.textContent = report.compareLast || "Waiting for the first scan."; els.compareLast.className = numberClass; }
+
+    // RC-9 direct Supporting Evidence bridge. This visible card is updated by
+    // the authoritative scan engine itself, so it does not depend on a later
+    // dashboard relay or user interaction.
+    (function updateVisibleSupportingEvidence(){
+      const card = document.getElementById("scan-detail-workspace");
+      if (!card) return;
+      let high = Number(report.high || 0) || 0;
+      let medium = Number(report.medium || 0) || 0;
+      let low = Number(report.low || 0) || 0;
+      const evidenceTotal = Array.isArray(report.evidence) ? report.evidence.filter(Boolean).length : 0;
+      const score = Number(report.score || 0) || 0;
+      const total = Math.max(Number(report.count || 0) || 0, evidenceTotal, score > 0 ? 1 : 0);
+      const suppliedClassifiedTotal = high + medium + low;
+      let unclassified = Math.max(Number(report.unclassified || 0) || 0, total - suppliedClassifiedTotal, 0);
+      // Conservative fallback for reports without genuine severity buckets:
+      // classify the leading signal only and preserve the remainder as
+      // unclassified. Overall risk is not a per-signal severity label.
+      if (suppliedClassifiedTotal === 0 && total > 0) {
+        if (report.risk === "High Risk" || score >= 70) high = 1;
+        else if (report.risk === "Needs Review" || score >= 35) medium = 1;
+        else low = 1;
+        unclassified = Math.max(total - 1, 0);
+      }
+      const mix = card.querySelector(".severity-breakdown");
+      if (mix) {
+        mix.innerHTML = `<em class="sev-high">${high} high</em> <em class="sev-medium">${medium} medium</em> <em class="sev-low">${low} low</em>${unclassified ? ` <em class="sev-unclassified">${unclassified} unclassified</em>` : ""}`;
+        mix.setAttribute("aria-label", `${high} high, ${medium} medium, ${low} low${unclassified ? `, ${unclassified} unclassified` : ""} signals`);
+      }
+      const strength = document.getElementById("evidenceStrength");
+      if (strength) {
+        strength.textContent = report.evidenceStrength || makeEvidenceStrength(Number(report.score || 0), high, medium, low, report.target) || "Evidence available";
+        strength.className = numberClass;
+      }
+      const memory = document.getElementById("scanMemory");
+      if (memory) {
+        memory.textContent = report.scanMemory || "No previous scan";
+        memory.className = numberClass;
+      }
+      const list = document.getElementById("visibleEvidenceList");
+      if (list) {
+        const evidence = Array.isArray(report.evidence) ? report.evidence.filter(Boolean) : [];
+        list.innerHTML = (evidence.length ? evidence : ["No supporting evidence was returned for this scan."])
+          .map(item => `<li>${escapeHtml(String(item))}</li>`).join("");
+      }
+    })();
     renderPatternMemoryDashboard();
     const heatBar = document.querySelector(".heat-bar");
     if (heatBar) heatBar.setAttribute("aria-valuenow", String(report.heatPercent || 0));
@@ -5250,7 +5296,13 @@
     // engine has finished rendering and persisting the complete report.
     // Every dashboard surface can now refresh from the same completed scan.
     window.ProxumaLegacyLastReport = lastReport;
-    const completedDetail = { report: lastReport, source: scanSource, completedAt: Date.now() };
+    const activeFoundationState = window.ProxumaScanState?.getState?.();
+    const completedDetail = {
+      report: lastReport,
+      source: scanSource,
+      scanId: activeFoundationState?.scanId || null,
+      completedAt: new Date().toISOString()
+    };
     document.dispatchEvent(new CustomEvent("proxuma:legacy-scan-complete", { detail: completedDetail }));
     // Direct integration hook: avoids timing/order differences between browsers.
     if (typeof window.ProxumaApplyLegacyScanReport === "function") {
