@@ -18550,3 +18550,431 @@ body.theme-light .app-guide-close{color:#0b5528!important;}
     max-height:450px !important;
   }
 }
+
+/* ==========================================================
+   RC10 — Portrait Findings & Actions containment repair
+   Keeps summary controls left-to-right, gives generated
+   findings a predictable two-column reading pattern, and
+   prevents any content from bleeding into the next card.
+   ========================================================== */
+@media (max-width: 900px) {
+  .captain-wire-ui #workflow.workflow-layer {
+    display:flex !important;
+    flex-direction:column !important;
+    min-width:0 !important;
+    width:100% !important;
+    max-width:100% !important;
+    overflow:hidden !important;
+    contain:layout paint !important;
+  }
+
+  .captain-wire-ui #workflow > * {
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+
+  .captain-wire-ui #workflow .severity-board {
+    display:grid !important;
+    grid-template-columns:repeat(5,minmax(72px,1fr)) !important;
+    gap:7px !important;
+    width:100% !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    padding:2px 0 6px !important;
+    scrollbar-width:thin;
+    overscroll-behavior-inline:contain;
+  }
+
+  .captain-wire-ui #workflow .severity-board > div {
+    min-width:72px !important;
+    width:auto !important;
+    padding:8px 6px !important;
+    white-space:nowrap !important;
+  }
+
+  .captain-wire-ui #workflow .finding-toolbar {
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:7px !important;
+    width:100% !important;
+    margin:8px 0 !important;
+    overflow:visible !important;
+  }
+
+  .captain-wire-ui #workflow .finding-toolbar > button {
+    width:100% !important;
+    min-width:0 !important;
+    padding-inline:8px !important;
+    white-space:normal !important;
+  }
+
+  .captain-wire-ui #workflow .trust-finding-list {
+    flex:1 1 auto !important;
+    min-height:0 !important;
+    width:100% !important;
+    max-width:100% !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    padding-right:5px !important;
+    contain:layout paint !important;
+  }
+
+  .captain-wire-ui #workflow .trust-finding-card {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    gap:8px 9px !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    overflow:hidden !important;
+    padding:10px !important;
+  }
+
+  .captain-wire-ui #workflow .trust-finding-card > *,
+  .captain-wire-ui #workflow .finding-head > * {
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+
+  .captain-wire-ui #workflow .finding-head,
+  .captain-wire-ui #workflow .finding-confidence,
+  .captain-wire-ui #workflow .finding-evidence-details {
+    grid-column:1 / -1 !important;
+    width:100% !important;
+  }
+
+  .captain-wire-ui #workflow .finding-block {
+    grid-column:auto !important;
+    min-width:0 !important;
+    width:100% !important;
+    margin-top:0 !important;
+    overflow:hidden !important;
+  }
+
+  .captain-wire-ui #workflow :is(.finding-block p,.finding-head h4,.finding-confidence,.finding-evidence-details,.trust-empty,#trustActionStatus) {
+    overflow-wrap:anywhere !important;
+    word-break:normal !important;
+    white-space:normal !important;
+  }
+}
+
+@media (max-width: 430px) and (orientation: portrait) {
+  .captain-wire-ui #workflow.workflow-layer {
+    height:500px !important;
+    min-height:500px !important;
+    max-height:500px !important;
+  }
+
+  .captain-wire-ui #workflow .workflow-fixed-head h2 {
+    font-size:1.35rem !important;
+    line-height:1.15 !important;
+  }
+
+  .captain-wire-ui #workflow .trust-finding-card {
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+  }
+
+  .captain-wire-ui #workflow .finding-block {
+    padding:8px !important;
+  }
+
+  .captain-wire-ui #workflow .finding-block p {
+    font-size:12px !important;
+    line-height:1.38 !important;
+  }
+}
+
+/* RC10 Scan Source & Freshness bar */
+.scan-source-bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;margin:12px 0 16px;padding:10px 14px;min-width:0;border:1px solid rgba(84,255,126,.68);border-radius:14px;background:linear-gradient(180deg,rgba(10,20,14,.94),rgba(5,11,8,.94));box-shadow:inset 0 0 0 1px rgba(84,255,126,.08),0 0 18px rgba(84,255,126,.08)}
+.scan-source-summary{display:flex;align-items:baseline;gap:8px;white-space:nowrap}.scan-source-label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#aebbb2}#scanSourceState{font-size:.86rem;color:#f5fff7}.scan-source-items{display:flex;align-items:center;gap:8px;min-width:0;overflow-x:auto;scrollbar-width:thin;padding:2px 0}.scan-source-chip{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;padding:5px 9px;border:1px solid rgba(84,255,126,.38);border-radius:999px;background:rgba(84,255,126,.06);color:#dce9df;font-size:.76rem;line-height:1.1}.scan-source-chip i{width:7px;height:7px;border-radius:50%;background:#88958b;box-shadow:0 0 0 3px rgba(136,149,139,.12)}.scan-source-chip.is-running i{background:#ffd05b;box-shadow:0 0 0 3px rgba(255,208,91,.15),0 0 10px rgba(255,208,91,.45)}.scan-source-chip.is-complete i,.scan-source-chip.is-live i{background:#54ff7e;box-shadow:0 0 0 3px rgba(84,255,126,.14),0 0 10px rgba(84,255,126,.4)}.scan-source-chip.is-cached i{background:#66b7ff;box-shadow:0 0 0 3px rgba(102,183,255,.14)}.scan-source-chip.is-partial i{background:#ffad4d;box-shadow:0 0 0 3px rgba(255,173,77,.14)}.scan-source-chip.is-error i,.scan-source-chip.is-unavailable i{background:#ff657a;box-shadow:0 0 0 3px rgba(255,101,122,.14)}#scanSourceFreshness{white-space:nowrap;color:#b8c6bb;font-size:.75rem;text-align:right}body.theme-light .scan-source-bar{background:#f7fff8;border-color:#14843d;box-shadow:inset 0 0 0 1px rgba(20,132,61,.1),0 2px 10px rgba(8,56,25,.08)}body.theme-light #scanSourceState{color:#102417}body.theme-light .scan-source-label,body.theme-light #scanSourceFreshness{color:#405747}body.theme-light .scan-source-chip{background:#edf9f0;border-color:#2d9950;color:#173820}
+@media (max-width:760px){.scan-source-bar{grid-template-columns:1fr auto;gap:8px 10px;padding:9px 10px}.scan-source-items{grid-column:1/-1;grid-row:2}#scanSourceFreshness{grid-column:2;grid-row:1}}
+@media (max-width:440px){.scan-source-bar{grid-template-columns:1fr}#scanSourceFreshness{grid-column:1;grid-row:auto;text-align:left}.scan-source-items{grid-column:1;grid-row:auto}}
+
+/* === RC10: scorecard compaction + complete source-state fuse === */
+.captain-wire-ui #report.result-card .snapshot-grid{
+  gap:7px !important;
+  margin-top:10px !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+}
+.captain-wire-ui #report.result-card .snapshot-grid > div{
+  min-width:0 !important;
+  padding:8px 9px !important;
+  overflow:hidden !important;
+}
+.captain-wire-ui #report.result-card .snapshot-grid small{
+  margin-bottom:3px !important;
+  font-size:.66rem !important;
+  line-height:1.05 !important;
+}
+.captain-wire-ui #report.result-card .snapshot-grid strong{
+  display:block !important;
+  min-width:0 !important;
+  font-size:.77rem !important;
+  line-height:1.15 !important;
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+  white-space:normal !important;
+}
+.captain-wire-ui #report.result-card #reportTimestamp{
+  font-size:.7rem !important;
+  line-height:1.1 !important;
+}
+@media (max-width:760px){
+  .captain-wire-ui #report.result-card .snapshot-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:5px !important;
+  }
+  .captain-wire-ui #report.result-card .snapshot-grid > div{padding:7px 6px !important;}
+  .captain-wire-ui #report.result-card .snapshot-grid strong{font-size:.7rem !important;}
+  .captain-wire-ui #report.result-card #reportTimestamp{font-size:.64rem !important;}
+}
+@media (max-width:430px){
+  .captain-wire-ui #report.result-card .snapshot-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+/* ==========================================================
+   RC10 — Analysis Results score placement + timestamp fit
+   Pins the risk score to the card's top-right and gives the
+   timestamp a full-width row so it can never be clipped.
+   ========================================================== */
+.captain-wire-ui #report.result-card{
+  position:relative !important;
+  min-width:0 !important;
+  overflow:hidden !important;
+}
+.captain-wire-ui #report.result-card > h3{
+  padding-right:94px !important;
+  margin-bottom:8px !important;
+}
+.captain-wire-ui #report.result-card .score-layout{
+  display:block !important;
+  position:relative !important;
+  min-width:0 !important;
+}
+.captain-wire-ui #report.result-card .score-layout > div:first-child{
+  min-width:0 !important;
+  padding-right:96px !important;
+}
+.captain-wire-ui #report.result-card .score-ring{
+  position:absolute !important;
+  top:-34px !important;
+  right:0 !important;
+  width:82px !important;
+  min-width:82px !important;
+  height:82px !important;
+  padding:8px 6px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  z-index:2 !important;
+}
+.captain-wire-ui #report.result-card .score-ring span{
+  font-size:1.72rem !important;
+  line-height:1 !important;
+}
+.captain-wire-ui #report.result-card .score-ring small{
+  font-size:.61rem !important;
+  line-height:1.05 !important;
+  white-space:nowrap !important;
+}
+.captain-wire-ui #report.result-card .snapshot-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:7px !important;
+  width:100% !important;
+  min-width:0 !important;
+}
+.captain-wire-ui #report.result-card .snapshot-grid > div:nth-child(4){
+  grid-column:1 / -1 !important;
+  display:grid !important;
+  grid-template-columns:auto minmax(0,1fr) !important;
+  align-items:center !important;
+  column-gap:10px !important;
+  text-align:left !important;
+}
+.captain-wire-ui #report.result-card .snapshot-grid > div:nth-child(4) small{
+  margin:0 !important;
+  white-space:nowrap !important;
+}
+.captain-wire-ui #report.result-card #reportTimestamp{
+  font-size:.76rem !important;
+  line-height:1.2 !important;
+  text-align:right !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+  white-space:normal !important;
+}
+@media (max-width:760px){
+  .captain-wire-ui #report.result-card > h3{padding-right:78px !important;}
+  .captain-wire-ui #report.result-card .score-layout > div:first-child{padding-right:80px !important;}
+  .captain-wire-ui #report.result-card .score-ring{
+    top:-31px !important;
+    width:70px !important;
+    min-width:70px !important;
+    height:70px !important;
+  }
+  .captain-wire-ui #report.result-card .score-ring span{font-size:1.45rem !important;}
+  .captain-wire-ui #report.result-card .snapshot-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+}
+@media (max-width:430px){
+  .captain-wire-ui #report.result-card .snapshot-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+  .captain-wire-ui #report.result-card .snapshot-grid > div:nth-child(3){
+    grid-column:1 / -1 !important;
+  }
+  .captain-wire-ui #report.result-card .snapshot-grid > div:nth-child(4){
+    grid-column:1 / -1 !important;
+  }
+}
+/* RC11 domain intelligence — additive, layout-safe */
+.domain-intel-panel{margin-top:10px;padding:10px;border:1px solid rgba(57,255,20,.62);border-radius:12px;background:rgba(7,14,10,.58);min-width:0;overflow:auto}
+.domain-intel-head{display:flex;align-items:center;justify-content:space-between;gap:8px}.domain-intel-panel p{margin:7px 0;font-size:.78rem;line-height:1.35}.domain-intel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:8px 0}.domain-intel-grid>div{min-width:0;padding:7px;border:1px solid rgba(57,255,20,.32);border-radius:9px;background:rgba(0,0,0,.2)}.domain-intel-grid dt{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;opacity:.75}.domain-intel-grid dd{margin:2px 0 0;font-size:.76rem;font-weight:700;overflow-wrap:anywhere}.domain-intel-run{width:100%;margin-top:2px}
+.theme-light .domain-intel-panel{background:#f7fff8;border-color:#137a2c}.theme-light .domain-intel-grid>div{background:#fff;border-color:#45a85a}.theme-light .domain-intel-panel,.theme-light .domain-intel-panel p,.theme-light .domain-intel-panel dt,.theme-light .domain-intel-panel dd{color:#102317}
+@media(max-width:760px){.domain-intel-grid{grid-template-columns:1fr 1fr}.domain-intel-panel{max-height:245px}}
+
+/* RC11.1 — Domain intelligence reliability layer */
+.domain-intel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.domain-intel-run:disabled{opacity:.72;cursor:progress}
+#domainIntelRetrieved,#domainIntelProfile{font-variant-numeric:tabular-nums}
+.wired-evidence-list [data-domain-intel-evidence]{border-left:2px solid rgba(57,255,20,.72);padding-left:8px}
+@media(min-width:1180px){.domain-intel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.domain-intel-grid{grid-template-columns:1fr}.domain-intel-panel{max-height:300px}}
+
+/* ==========================================================
+   RC11.3 — Investigation footer containment
+   Keeps Save Case / Copy Case Packet permanently inside the
+   card while every investigation view scrolls independently.
+   ========================================================== */
+.captain-wire-ui #investigation-workspace.investigation-workspace{
+  display:grid !important;
+  grid-template-rows:auto auto auto auto minmax(0,1fr) auto !important;
+  align-content:stretch !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  overflow:hidden !important;
+}
+.captain-wire-ui #investigation-workspace > .lane-compact-head,
+.captain-wire-ui #investigation-workspace > .case-packet-status,
+.captain-wire-ui #investigation-workspace > #investigation-controls,
+.captain-wire-ui #investigation-workspace > #investigation-summary,
+.captain-wire-ui #investigation-workspace > .fine-print,
+.captain-wire-ui #investigation-workspace > .wired-footer-actions{
+  min-width:0 !important;
+  flex:none !important;
+}
+/* Keep the case line with the compact summary, without letting it
+   consume the reading viewport. */
+.captain-wire-ui #investigation-workspace > .fine-print{
+  position:absolute !important;
+  left:12px !important;
+  right:12px !important;
+  transform:translateY(-100%) !important;
+  pointer-events:none !important;
+  opacity:0 !important;
+  height:0 !important;
+  margin:0 !important;
+  overflow:hidden !important;
+}
+.captain-wire-ui #investigation-workspace > .investigation-scroll-shell{
+  grid-row:5 !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  max-height:none !important;
+  height:auto !important;
+  margin:.35rem 0 0 !important;
+  overflow:hidden !important;
+}
+.captain-wire-ui #investigation-workspace #visibleInvestigationBody{
+  min-width:0 !important;
+  min-height:0 !important;
+  width:100% !important;
+  height:100% !important;
+  max-height:none !important;
+  overflow-x:hidden !important;
+  overflow-y:auto !important;
+  overscroll-behavior:contain !important;
+  padding:6px 10px 42px 2px !important;
+  scroll-padding-bottom:44px !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+}
+.captain-wire-ui #investigation-workspace #visibleInvestigationBody > *{
+  max-width:100% !important;
+  min-width:0 !important;
+}
+.captain-wire-ui #investigation-workspace #visibleInvestigationBody :is(pre,code,table){
+  max-width:100% !important;
+}
+.captain-wire-ui #investigation-workspace #visibleInvestigationBody pre{
+  overflow:auto !important;
+  white-space:pre-wrap !important;
+}
+.captain-wire-ui #investigation-workspace > .wired-footer-actions{
+  grid-row:6 !important;
+  position:relative !important;
+  z-index:5 !important;
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:.5rem !important;
+  margin:.5rem 0 0 !important;
+  padding:.55rem 0 0 !important;
+  border-top:1px solid rgba(57,255,20,.38) !important;
+  background:linear-gradient(180deg,rgba(5,13,10,.04),rgba(5,13,10,.96) 30%) !important;
+}
+.captain-wire-ui #investigation-workspace > .wired-footer-actions button{
+  width:100% !important;
+  min-width:0 !important;
+  min-height:38px !important;
+  margin:0 !important;
+}
+.theme-light.captain-wire-ui #investigation-workspace > .wired-footer-actions{
+  background:linear-gradient(180deg,rgba(247,255,248,.04),rgba(247,255,248,.98) 30%) !important;
+  border-top-color:rgba(19,122,44,.45) !important;
+}
+@media (min-width:1201px){
+  .captain-wire-ui .mid-lanes{
+    grid-auto-rows:520px !important;
+  }
+  .captain-wire-ui .mid-lanes > .wire-card{
+    height:520px !important;
+    max-height:520px !important;
+  }
+}
+@media (max-width:1200px){
+  .captain-wire-ui #investigation-workspace.investigation-workspace{
+    height:clamp(520px,72svh,680px) !important;
+    max-height:680px !important;
+  }
+  .captain-wire-ui #investigation-workspace > .investigation-scroll-shell{
+    min-height:0 !important;
+    max-height:none !important;
+  }
+}
+@media (max-width:760px){
+  .captain-wire-ui #investigation-workspace.investigation-workspace{
+    height:clamp(560px,78svh,720px) !important;
+    max-height:720px !important;
+  }
+  .captain-wire-ui #investigation-workspace > .wired-footer-actions{
+    grid-template-columns:1fr 1fr !important;
+  }
+  .captain-wire-ui #investigation-workspace > .wired-footer-actions button{
+    font-size:.76rem !important;
+    padding:.48rem .4rem !important;
+  }
+}
+@media (max-width:420px){
+  .captain-wire-ui #investigation-workspace > .wired-footer-actions{
+    grid-template-columns:1fr !important;
+  }
+  .captain-wire-ui #investigation-workspace.investigation-workspace{
+    height:min(760px,84svh) !important;
+    min-height:620px !important;
+  }
+}

@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#070a0d" />
 <meta name="color-scheme" content="dark light" />
 <meta name="description" content="Check suspicious links, QR payloads, and messages locally before you trust them." />
-<link rel="stylesheet" href="assets/css/styles.css?v=rc10-analysis-actions-responsive" />
+<link rel="stylesheet" href="assets/css/styles.css?v=rc11-3-investigation-footer" />
 <meta name="proxuma-build" content="ui-1.0-rc-github-ready-ecosystem-link" />
 </head>
 <body class="theme-dark captain-wire-ui">
@@ -66,6 +66,17 @@
       </article>
     </div>
 
+    <aside id="scanSourceBar" class="scan-source-bar" aria-label="Scan source and freshness" aria-live="polite">
+      <div class="scan-source-summary">
+        <span class="scan-source-label">Data Status</span>
+        <strong id="scanSourceState">Ready</strong>
+      </div>
+      <div id="scanSourceItems" class="scan-source-items">
+        <span class="scan-source-chip is-ready"><i aria-hidden="true"></i>Local analysis · ready</span>
+      </div>
+      <time id="scanSourceFreshness" datetime="">Not scanned</time>
+    </aside>
+
     <section class="mid-lanes" aria-label="Investigation, evidence, and offline controls">
       <article class="wire-card investigation-workspace" id="investigation-workspace">
         <div class="lane-compact-head"><h3>🔎 Investigation</h3><p>Choose view</p></div><div class="case-packet-status" aria-live="polite"><span id="casePacketBadge">Mission ready</span><span id="casePacketMeta">Run a scan to build a case packet.</span></div>
@@ -86,6 +97,24 @@
         <div class="lane-compact-head"><h3>🛜 Offline Checks</h3><p>Remain off unless chosen</p></div>
         <ul><li>Analyzed locally</li><li>Nothing is uploaded</li><li>Online checks remain off unless chosen</li></ul>
         <button id="enableOnlineConsentButton" class="secondary-action" type="button">Enable Online Checks</button>
+        <section id="domainIntelPanel" class="domain-intel-panel" aria-live="polite">
+          <div class="domain-intel-head"><strong>Domain Intelligence</strong><span id="domainIntelStatus" class="status-pill status-low">Offline</span></div>
+          <p id="domainIntelSummary">Enable online checks, then run a URL or domain scan to retrieve live registration context.</p>
+          <dl id="domainIntelGrid" class="domain-intel-grid">
+            <div><dt>Scanned host</dt><dd id="domainIntelDomain">Waiting</dd></div>
+            <div><dt>Registrable domain</dt><dd id="domainIntelRegistrable">—</dd></div>
+            <div><dt>Hosting platform</dt><dd id="domainIntelPlatform">Not identified</dd></div>
+            <div><dt>Lookup scope</dt><dd id="domainIntelScope">—</dd></div>
+            <div><dt>Parent-domain age</dt><dd id="domainIntelAge">—</dd></div>
+            <div><dt>Registrar</dt><dd id="domainIntelRegistrar">—</dd></div>
+            <div><dt>Created</dt><dd id="domainIntelCreated">—</dd></div>
+            <div><dt>Expires</dt><dd id="domainIntelExpires">—</dd></div>
+            <div><dt>Source</dt><dd id="domainIntelSource">Local only</dd></div>
+            <div><dt>Domain profile</dt><dd id="domainIntelProfile">Not available</dd></div>
+            <div><dt>Retrieved</dt><dd id="domainIntelRetrieved">Not available</dd></div>
+          </dl>
+          <button id="runDomainIntelButton" class="secondary-action domain-intel-run" type="button">Run Domain Intelligence</button>
+        </section>
       </article>
     </section>
 
@@ -138,23 +167,23 @@
     <button id="copyExplanationButton" type="button"></button><button id="explainCurrentButton" type="button"></button><div id="localAdvisorOutput"></div><span id="advisorStatus"></span><input id="sessionNameInput" /><button id="saveNamedSessionButton" type="button"></button><button id="exportSessionsButton" type="button"></button><span id="sessionStatus"></span><ul id="namedSessionList"></ul><div id="sessionComparison"></div><button id="exportTrustHtml" type="button"></button><button id="exportTrustJson" type="button"></button><button id="resetWorkspaceButton" type="button"></button><span id="trustExportStatus"></span>
   </section>
 </main>
-<script src="assets/js/proxuma-api-foundation.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/proxuma-it.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/proxuma-api-foundation.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/proxuma-it.js?v=rc11-2-hosted-subdomain"></script>
 <div id="legacyCompatibilityFields" hidden aria-hidden="true">
   <span id="scanMode">Standby</span><span id="scanModeNote">Waiting for a target.</span>
   <span id="nextStep">Enter a target</span><span id="rootDomain">Waiting</span>
   <span id="severityMix">0 high · 0 medium · 0 low</span><span id="severityNote">Not scanned</span>
   <span id="actionTitle">Scan first</span>
 </div>
-<script src="assets/js/ui-consistency.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/workflow-intelligence.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/focus-reading.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/report-trust-action.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/guided-results.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/grouped-panel-controls.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/product-simplification.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/mobile-simplification.js?v=rc10-hero-badge-anchor"></script>
-<script src="assets/js/proxuma-ui-wiring.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/ui-consistency.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/workflow-intelligence.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/focus-reading.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/report-trust-action.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/guided-results.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/grouped-panel-controls.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/product-simplification.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/mobile-simplification.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/proxuma-ui-wiring.js?v=rc11-2-hosted-subdomain"></script>
 
 <script id="proxumaThemeToggleScript">
 (function(){var k='proxuma-it-theme-v1',b=document.body,m=document.querySelector('meta[name="theme-color"]'),t=document.getElementById('themeToggle');function a(x){var l=x==='light';b.classList.toggle('theme-light',l);b.classList.toggle('theme-dark',!l);if(t){t.setAttribute('aria-pressed',String(l));t.textContent=l?'🌙 Dark Mode':'☀️ Light Mode';}if(m){m.setAttribute('content',l?'#f7fbff':'#070a0d');}}var s='dark';try{s=localStorage.getItem(k)||'dark'}catch(e){}a(s);if(t){t.addEventListener('click',function(){var n=b.classList.contains('theme-light')?'dark':'light';try{localStorage.setItem(k,n)}catch(e){}a(n);});}})();
@@ -184,5 +213,7 @@
   </section>
 </div>
 
-<script src="assets/js/app-guide-overlay.js?v=rc10-hero-badge-anchor"></script>
+<script src="assets/js/app-guide-overlay.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/scan-source-status.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/domain-intelligence.js?v=rc11-2-hosted-subdomain"></script>
 </body></html>
