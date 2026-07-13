@@ -18475,3 +18475,78 @@ body.theme-light .app-guide-close{color:#0b5528!important;}
   border-color:#159447!important;
   box-shadow:0 0 0 1px rgba(21,148,71,.18),0 5px 14px rgba(17,99,49,.12)!important;
 }
+
+/* ==========================================================
+   RC10 — Analysis / Actions responsive breathing-room fix
+   Two-column layout is reserved for genuinely wide desktops.
+   Tablet portrait, tablet landscape, and smaller laptops stack
+   the two information-heavy cards at full width.
+   ========================================================== */
+.captain-wire-ui .action-review-grid{
+  align-items:stretch !important;
+  min-width:0 !important;
+}
+.captain-wire-ui .action-review-grid > #details,
+.captain-wire-ui .action-review-grid > #workflow{
+  min-width:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+}
+
+@media (min-width:1501px){
+  .captain-wire-ui .action-review-grid{
+    grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr) !important;
+  }
+}
+
+@media (max-width:1500px){
+  .captain-wire-ui .action-review-grid{
+    grid-template-columns:minmax(0,1fr) !important;
+    gap:14px !important;
+  }
+
+  .captain-wire-ui #details.intelligence-drawer.grouped-content-card,
+  .captain-wire-ui #workflow.workflow-layer{
+    height:500px !important;
+    min-height:500px !important;
+    max-height:500px !important;
+  }
+
+  .captain-wire-ui #details.intelligence-drawer{
+    grid-template-columns:minmax(170px,220px) minmax(0,1fr) !important;
+  }
+}
+
+@media (max-width:900px){
+  .captain-wire-ui #details.intelligence-drawer{
+    grid-template-columns:minmax(0,1fr) !important;
+  }
+
+  .captain-wire-ui #details.intelligence-drawer.grouped-content-card,
+  .captain-wire-ui #workflow.workflow-layer{
+    height:480px !important;
+    min-height:480px !important;
+    max-height:480px !important;
+  }
+
+  .captain-wire-ui #details .drawer-tabs.analysis-segmented-tabs{
+    display:flex !important;
+    overflow-x:auto !important;
+    overscroll-behavior-inline:contain;
+    scrollbar-width:thin;
+  }
+
+  .captain-wire-ui #details .drawer-tab{
+    flex:0 0 auto !important;
+    white-space:nowrap !important;
+  }
+}
+
+@media (max-width:680px){
+  .captain-wire-ui #details.intelligence-drawer.grouped-content-card,
+  .captain-wire-ui #workflow.workflow-layer{
+    height:450px !important;
+    min-height:450px !important;
+    max-height:450px !important;
+  }
+}
