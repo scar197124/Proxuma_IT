@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Proxuma IT | UI 1.0 RC13 Guided Decision Flow</title>
+<title>Proxuma IT | UI 1.0 RC14.1 Case Notes & Timeline</title>
 <meta name="theme-color" content="#070a0d" />
 <meta name="color-scheme" content="dark light" />
 <meta name="description" content="Check suspicious links, QR payloads, and messages locally before you trust them." />
-<link rel="stylesheet" href="assets/css/styles.css?v=rc13-guided-decision-flow" />
-<meta name="proxuma-build" content="ui-1.0-rc13-guided-decision-flow" />
+<link rel="stylesheet" href="assets/css/styles.css?v=rc14-1-case-notes-timeline" />
+<meta name="proxuma-build" content="ui-1.0-rc14-1-case-notes-timeline" />
 </head>
 <body class="theme-dark captain-wire-ui">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
@@ -103,6 +103,35 @@
         <div><small>Recommended next step</small><strong id="decisionFlowNext">Run a scan</strong><p id="decisionFlowReason">No case is active yet.</p></div>
         <button id="decisionFlowContinue" class="primary-action" type="button">Start Scan</button>
       </div>
+    </section>
+
+
+    <section id="caseCommandCenter" class="case-command-center" aria-labelledby="caseCommandTitle">
+      <div class="case-command-head">
+        <div><small>RC14.1 · Case Intelligence</small><h2 id="caseCommandTitle">Case Command Center</h2><p>Search, reopen, classify, document, and follow every saved investigation over time.</p></div>
+        <div class="case-command-stats" aria-label="Case summary">
+          <div><span id="caseStatTotal">0</span><small>Total</small></div><div><span id="caseStatOpen">0</span><small>Open</small></div><div><span id="caseStatPriority">0</span><small>Priority</small></div><div><span id="caseStatResolved">0</span><small>Resolved</small></div>
+        </div>
+      </div>
+      <div class="case-command-toolbar">
+        <label class="case-search"><span>Search saved cases</span><input id="caseCommandSearch" type="search" placeholder="Case ID, target, verdict, status, or note" autocomplete="off" /></label>
+        <div class="case-filters" role="group" aria-label="Filter cases"><button class="active" data-case-filter="all" type="button">All</button><button data-case-filter="open" type="button">Open</button><button data-case-filter="priority" type="button">Priority</button><button data-case-filter="resolved" type="button">Resolved</button></div>
+      </div>
+      <div class="case-command-layout">
+        <div>
+          <div id="caseCommandList" class="case-command-list" aria-live="polite"></div>
+          <div id="caseCommandEmpty" class="case-command-empty"><strong>No saved investigations yet.</strong><span>Complete a scan and use Save Case to begin building local case intelligence.</span><button id="caseCommandStart" class="primary-action" type="button">Start a Scan</button></div>
+        </div>
+        <aside id="caseJournal" class="case-journal" aria-labelledby="caseJournalTitle">
+          <div class="case-journal-head"><div><small>Case Journal</small><h3 id="caseJournalTitle">Select a saved case</h3></div><span id="caseJournalStatus" class="case-journal-badge">Waiting</span></div>
+          <p id="caseJournalTarget" class="case-journal-target">Choose a case to view notes and its investigation timeline.</p>
+          <label class="case-note-field"><span>Investigation note</span><textarea id="caseJournalNote" rows="4" maxlength="1200" placeholder="Record what was checked, what happened, or what still needs attention." disabled></textarea></label>
+          <div class="case-journal-actions"><button id="caseJournalAdd" class="primary-action" type="button" disabled>Add Note</button><button id="caseJournalCopy" type="button" disabled>Copy Timeline</button></div>
+          <div class="case-timeline-head"><strong>Activity Timeline</strong><span id="caseTimelineCount">0 entries</span></div>
+          <ol id="caseTimeline" class="case-timeline"><li class="case-timeline-empty">No case selected.</li></ol>
+        </aside>
+      </div>
+      <p id="caseCommandStatus" class="fine-print" aria-live="polite">Case intelligence is stored locally in this browser.</p>
     </section>
 
     <section class="mid-lanes" aria-label="Investigation, evidence, and offline controls">
@@ -246,5 +275,7 @@
 <script src="assets/js/domain-intelligence.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/mission-control.js?v=rc12-mission-control"></script>
 <script src="assets/js/decision-flow.js?v=rc13-guided-decision-flow"></script>
+
+<script src="assets/js/case-command-center.js?v=rc14-1-case-notes-timeline"></script>
 
 </body></html>

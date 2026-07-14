@@ -1,19 +1,33 @@
-# Proxuma IT UI 1.0 RC13 — Guided Decision Flow
+# Proxuma IT UI 1.0 RC14.1 — Case Notes & Investigation Timeline
 
-- Added a five-stage investigation path: Scan, Understand, Verify, Act, and Save.
-- Progress is driven by real scan and workspace activity, not a static illustration.
-- Added a persistent recommended-next-step control with direct navigation.
-- Stores progress per active case in local browser storage.
-- Preserved RC12 Mission Control and the existing local-first analysis engine.
-- Updated `index.html`, `404.html`, styles, and release metadata.
+## Added
+- Selectable Case Journal attached to every saved investigation.
+- Private local investigation notes with timestamps.
+- Automatic activity timeline for save, reopen, status, note, and brief-copy events.
+- Search now includes case notes.
+- Copyable investigation timeline and note-enriched case brief.
+- Responsive two-column Command Center and journal workspace.
 
-# Proxuma IT release notes
+## Preserved
+- RC12 Mission Control.
+- RC13 Guided Decision Flow.
+- RC14 saved case search, filters, lifecycle status, reopening, and removal.
+- Offline-first storage and existing scanner behavior.
 
-## UI 1.0 RC12 — Mission Control
+# Proxuma IT UI 1.0 RC14 — Case Command Center
 
-- Added a responsive Mission Control strip that synchronizes with every scan result.
-- Surfaces verdict, numeric risk, confidence, and recommended next action without opening another panel.
-- Added direct jumps to Investigation and Supporting Evidence.
-- Added a compact copyable case brief and a New Scan control that reuses the existing investigation manager.
-- Added `/` keyboard shortcut to focus the universal scanner input.
-- Preserved offline-first behavior and the existing scan engine.
+- Added a responsive Case Command Center powered by the existing private local case history.
+- Added case totals for all, open, priority, and resolved investigations.
+- Added search and lifecycle filters.
+- Added lifecycle statuses: New, Investigating, Action Required, Monitoring, and Resolved.
+- Added case reopening that restores the target and re-runs the current analysis engine.
+- Added copyable case briefs and local case removal.
+- Preserved RC13 Guided Decision Flow, RC12 Mission Control, and the local-first scanner.
+- Updated `index.html`, `404.html`, styles, scripts, and release metadata.
+
+# Previous milestone
+
+## UI 1.0 RC13 — Guided Decision Flow
+
+- Added the five-stage Scan, Understand, Verify, Act, and Save investigation path.
+- Added case-specific progress and recommended-next-step navigation.
