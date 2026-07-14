@@ -1,129 +1,19 @@
+# Proxuma IT UI 1.0 RC13 — Guided Decision Flow
 
-## RC-2 — Master Dashboard Sync
-- Added an authoritative scan-complete event at the end of the legacy analysis pipeline.
-- Synchronized every visible dashboard card immediately after example, pasted URL, history, and QR-triggered scans.
-- Removed the need to click another Analysis View tab before current scan data appears.
+- Added a five-stage investigation path: Scan, Understand, Verify, Act, and Save.
+- Progress is driven by real scan and workspace activity, not a static illustration.
+- Added a persistent recommended-next-step control with direct navigation.
+- Stores progress per active case in local browser storage.
+- Preserved RC12 Mission Control and the existing local-first analysis engine.
+- Updated `index.html`, `404.html`, styles, and release metadata.
 
-## Sprint 19 — Light Mode Full Visibility
-- Fixed disappearing text in Light Mode for Analysis Results, Captain Summary, and App Guide.
-- Compacted Analysis Results snapshot cards so Time does not overflow.
-- Raised borders slightly on dark cockpit cards while preserving dark mode.
+# Proxuma IT release notes
 
-# Sprint 15 — Matched Analysis + Action Heights
+## UI 1.0 RC12 — Mission Control
 
-- Locked Analysis Views and Step 5 cards to the same desktop height.
-- Added internal scrolling for long content.
-- Preserved tablet/mobile responsive behavior.
-- No scan-engine changes.
-
-# v3.54.1 — Step 5 mobile side-scroll repair
-
-- Fixed mobile portrait Step 5 text collapsing into stacked one-letter columns.
-- Added horizontal side-scroll containment for the Step 5 workflow workspace on narrow phones.
-- Preserved existing scanner logic and GitHub Pages deployment structure.
-
-# Changelog
-
-## v3.54.0 — Unified Mobile Findings
-
-- Removed the separate Step 5 Focus control so Open/Close is the only section interaction.
-- Added a portrait swipe rail for colored finding cards with scroll snapping.
-- Compacted finding cards in phone landscape so more can fit across one row.
-- Preserved desktop full-width Findings and all scanner, session, explanation, and export behavior.
-
-## v3.53.3 — Mobile Viewport Containment
-
-- Removed the Step 5 Focus control from phone layouts at the JavaScript source.
-- Added hard viewport containment for all Step 5 cards and controls.
-- Prevented inherited desktop positioning, transforms, and widths from shifting the mobile workspace.
-- Preserved desktop Focus mode and the full-width desktop Findings layout.
-
-
-## v3.53.3 — Desktop Width Balance
-
-- Expanded the primary Findings workspace across the full Step 5 card on desktop.
-- Kept Save and Explain in balanced secondary columns.
-- Let Export use the full row for clearer report actions.
-- Preserved the v3.53.1 iPhone portrait accordion and width constraints.
-
-## v3.53.1 — iPhone Portrait Repair
-
-- Rebuilt Step 5 around a simple-by-default, powerful-on-demand model.
-- Added mobile accordions for Findings, Save or Compare, Explain, and Export or Reset.
-- Kept Findings open by default while collapsing secondary tools on phones.
-- Replaced technical labels with clearer everyday language.
-- Added a compact mobile shortcut bar and horizontally scrollable progress, severity, and filter controls.
-- Combined trust-boundary explanations into one optional disclosure.
-- Preserved all existing scanner, session, explanation, export, and reset control IDs and behavior.
-
-## v3.52.2 — Learning Clarity
-
-- Renamed the static “Learning Mode” description to “Plain-language guidance” because it is not a selectable mode.
-- Renamed the result-level “Learning Note” to “Safety Takeaway.”
-- Clarified that the guidance card explains presentation behavior, while the takeaway is generated from each scan.
-- Removed the duplicate Interpreted / Why it matters card from the guided summary.
-- Kept the existing report-level Why it matters explanation as the single source of truth.
-- Simplified the guided boundary layout to Observed and Not verified.
-- Preserved confidence, recommended next action, supporting evidence, scanner scoring, and evidence logic.
-
-## v3.52.0 — Guided Results + Indexing Foundation
-- Added a plain-language guided result summary.
-- Separated observed evidence, local interpretation, and unverified external facts.
-- Added confidence and recommended next action cues.
-- Made technical finding evidence collapsible.
-- Added canonical, Open Graph, robots.txt, and sitemap.xml support.
-
-## v3.50.0 — Validation Foundation
-
-- Added a current capability matrix covering inspected inputs, evidence sources, limitations, and privacy behavior.
-- Added a keyboard-visible “Skip to scanner” entry point and a focusable main region.
-- Connected the universal scanner input to its live detection status and help text.
-- Corrected the hero product mark from “Proxuma ID” to “Proxuma IT.”
-- Added a current v3.50.0 regression test instead of relying only on historical version-pinned tests.
-- Updated release metadata across the app, README, and optional RDAP bridge.
-- Preserved scanner rules, storage keys, exports, and consent boundaries.
-
-
-## v3.49.0 — Stable Code Cleanup
-
-- Removed an unused embedded release-roadmap array from the production scanner script.
-- Removed dead internal build-banner and offline sample-lab code whose UI no longer exists.
-- Removed stale DOM references to deleted developer-only controls.
-- Aligned current release metadata across the app, documentation, exports, and optional RDAP bridge.
-- Preserved storage keys and case-packet schema identifiers for backward compatibility.
-- Preserved the working v3.48.1 responsive layout and scan behavior.
-
-
-## UI 1.0 RC Wired Sprint 13 — Dashboard Balance
-- Balanced the Analysis Views drawer with a full-width segmented toolbar.
-- Kept buttons compact while reducing dead space.
-- Preserved layout freeze and Sprint 12 dashboard sync fixes.
-
-## RC-3 — Unified Scan Entry + Analysis Sync
-- Routed examples, Analyze Link, Enter, and QR decode through one scan entry path.
-- Added a direct completed-report integration hook between the legacy engine and dashboard.
-- Removed reliance on a later tab click to populate Analysis Views.
-- Preserved frozen layout, themes, ecosystem links, and responsive behavior.
-
-## RC-4 — Analysis Render Fuse Fix
-- Prevented missing optional legacy fields from aborting `renderReport()`.
-- Restored immediate Analysis View population after every completed scan.
-- Added compatibility relay fields and cache-busting script version.
-
-## RC-5 — Risk Color Intelligence
-- Added dynamic scan-driven risk color mapping across the live dashboard.
-- Added six distinct visual risk tones from Minimal through Critical.
-- Added Analysis Views band/score status and synchronized active-tab accents.
-- Preserved RC-4 render fuse fix, layout, themes, and ecosystem navigation.
-
-
-## RC-6 — Fixed Summary & Scroll Discovery
-- Locked Captain Summary to a stable desktop/tablet height with compact metrics and internal overflow.
-- Added an automatic Investigation scroll cue and clearer scrollbar styling.
-- Preserved mobile auto-height behavior, scan synchronization, and risk color intelligence.
-
-## RC-7 — Hard-Locked Summary + Focus Restoration
-- Strict fixed Captain Summary heights across desktop, tablet, and mobile.
-- Compact internal metric scrolling instead of card growth.
-- Investigation status readability improvements.
-- Fixed Investigation content disappearing after exiting Focus mode.
+- Added a responsive Mission Control strip that synchronizes with every scan result.
+- Surfaces verdict, numeric risk, confidence, and recommended next action without opening another panel.
+- Added direct jumps to Investigation and Supporting Evidence.
+- Added a compact copyable case brief and a New Scan control that reuses the existing investigation manager.
+- Added `/` keyboard shortcut to focus the universal scanner input.
+- Preserved offline-first behavior and the existing scan engine.

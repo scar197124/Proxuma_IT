@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Proxuma IT | UI 1.0 RC GitHub Ready Ecosystem Link</title>
+<title>Proxuma IT | UI 1.0 RC13 Guided Decision Flow</title>
 <meta name="theme-color" content="#070a0d" />
 <meta name="color-scheme" content="dark light" />
 <meta name="description" content="Check suspicious links, QR payloads, and messages locally before you trust them." />
-<link rel="stylesheet" href="assets/css/styles.css?v=rc11-3-investigation-footer" />
-<meta name="proxuma-build" content="ui-1.0-rc-github-ready-ecosystem-link" />
+<link rel="stylesheet" href="assets/css/styles.css?v=rc13-guided-decision-flow" />
+<meta name="proxuma-build" content="ui-1.0-rc13-guided-decision-flow" />
 </head>
 <body class="theme-dark captain-wire-ui">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
@@ -76,6 +76,34 @@
       </div>
       <time id="scanSourceFreshness" datetime="">Not scanned</time>
     </aside>
+
+    <section id="missionControl" class="mission-control" data-mission-tone="idle" data-mission-state="idle" aria-label="Mission Control" aria-live="polite">
+      <div class="mission-heading"><span class="mission-pulse" aria-hidden="true"></span><div><small>Mission Control</small><strong id="missionState">Ready for target</strong></div></div>
+      <div class="mission-fact"><small>Verdict</small><strong id="missionVerdict">No scan yet</strong></div>
+      <div class="mission-score"><small>Risk</small><strong id="missionScore">—</strong><span class="mission-meter" aria-hidden="true"><i id="missionMeterFill"></i></span></div>
+      <div class="mission-fact"><small>Confidence</small><strong id="missionConfidence">Waiting</strong></div>
+      <div class="mission-action-copy"><small>Next action</small><strong id="missionAction">Paste, scan, or choose an example</strong></div>
+      <div class="mission-buttons"><button id="missionReview" type="button">Review</button><button id="missionEvidence" type="button">Evidence</button><button id="missionCopy" type="button">Copy Brief</button><button id="missionNew" type="button">New Scan</button></div>
+    </section>
+
+
+    <section id="decisionFlow" class="decision-flow" data-flow-stage="scan" aria-label="Guided decision flow">
+      <div class="decision-flow-head">
+        <div><small>RC13 · Guided Decision Flow</small><h2>Scan → Understand → Verify → Act → Save</h2><p id="decisionFlowLead">Begin with a scan. Proxuma will keep the next useful step in view.</p></div>
+        <div class="decision-flow-progress" role="progressbar" aria-label="Investigation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="decisionFlowFill"></span><strong id="decisionFlowPercent">0%</strong></div>
+      </div>
+      <ol class="decision-flow-steps">
+        <li data-flow-step="scan" class="is-current"><button type="button" data-flow-target="scan"><b>1</b><span><strong>Scan</strong><small>Analyze the target</small></span><i aria-hidden="true">✓</i></button></li>
+        <li data-flow-step="understand"><button type="button" data-flow-target="details"><b>2</b><span><strong>Understand</strong><small>Read the verdict</small></span><i aria-hidden="true">✓</i></button></li>
+        <li data-flow-step="verify"><button type="button" data-flow-target="scan-detail-workspace"><b>3</b><span><strong>Verify</strong><small>Check evidence</small></span><i aria-hidden="true">✓</i></button></li>
+        <li data-flow-step="act"><button type="button" data-flow-target="workflow"><b>4</b><span><strong>Act</strong><small>Choose a response</small></span><i aria-hidden="true">✓</i></button></li>
+        <li data-flow-step="save"><button type="button" data-flow-target="investigation-workspace"><b>5</b><span><strong>Save</strong><small>Preserve the case</small></span><i aria-hidden="true">✓</i></button></li>
+      </ol>
+      <div class="decision-flow-next">
+        <div><small>Recommended next step</small><strong id="decisionFlowNext">Run a scan</strong><p id="decisionFlowReason">No case is active yet.</p></div>
+        <button id="decisionFlowContinue" class="primary-action" type="button">Start Scan</button>
+      </div>
+    </section>
 
     <section class="mid-lanes" aria-label="Investigation, evidence, and offline controls">
       <article class="wire-card investigation-workspace" id="investigation-workspace">
@@ -216,4 +244,7 @@
 <script src="assets/js/app-guide-overlay.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/scan-source-status.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/domain-intelligence.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/mission-control.js?v=rc12-mission-control"></script>
+<script src="assets/js/decision-flow.js?v=rc13-guided-decision-flow"></script>
+
 </body></html>
