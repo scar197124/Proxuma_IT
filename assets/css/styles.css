@@ -19152,3 +19152,88 @@ body.theme-light .app-guide-close{color:#0b5528!important;}
 .captain-wire-ui .case-timeline{overflow:auto;overscroll-behavior:contain;}
 @media(max-width:1200px){.captain-wire-ui .wire-hero{grid-template-columns:auto 1fr;}.captain-wire-ui .wire-guide,.captain-wire-ui .wire-steps{grid-column:1/-1;}.captain-wire-ui .wire-steps{grid-template-columns:repeat(3,1fr);}}
 @media(max-width:760px){.captain-wire-ui .wire-hero{grid-template-columns:1fr;padding:14px;gap:12px}.captain-wire-ui .hero-symbol{display:none}.captain-wire-ui .wire-guide,.captain-wire-ui .wire-steps{grid-column:auto}.captain-wire-ui .case-current-preview{grid-template-columns:1fr}.captain-wire-ui .case-current-metrics{width:100%}.captain-wire-ui .case-current-metrics>span{flex:1}.captain-wire-ui #caseCurrentSave{width:100%}.captain-wire-ui .case-command-workspace{max-height:430px}.captain-wire-ui .case-command-layout{max-height:350px}}
+
+/* RC15 recovery: keep full page visible and contain Analysis Results */
+.captain-wire-ui #report.result-card{position:relative!important;min-height:340px!important;overflow:hidden!important;padding:22px!important;}
+.captain-wire-ui #report .score-layout{display:grid!important;grid-template-columns:minmax(0,1fr) 104px!important;gap:20px!important;align-items:start!important;}
+.captain-wire-ui #report .score-ring{position:static!important;inset:auto!important;transform:none!important;width:104px!important;height:104px!important;min-width:104px!important;margin:0!important;place-self:start end!important;}
+.captain-wire-ui #report .heat-bar{width:100%!important;overflow:hidden!important;}
+.captain-wire-ui #report #heatFill{display:block!important;min-width:0!important;max-width:100%!important;transition:width .25s ease!important;}
+.captain-wire-ui #report .snapshot-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;}
+@media(max-width:760px){.captain-wire-ui #report.result-card{min-height:390px!important;padding:18px!important}.captain-wire-ui #report .score-layout{grid-template-columns:minmax(0,1fr) 88px!important}.captain-wire-ui #report .score-ring{width:88px!important;height:88px!important;min-width:88px!important}.captain-wire-ui #report .snapshot-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.captain-wire-ui #report .snapshot-grid>div{min-width:0!important}}
+
+/* RC15 recovery synchronization: heat fill uses transform so legacy width rules cannot suppress it. */
+.captain-wire-ui #report .heat-bar{
+  position:relative;
+  overflow:hidden!important;
+}
+.captain-wire-ui #report #heatFill{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  transform:scaleX(var(--proxuma-heat-scale,0));
+  transform-origin:left center;
+  transition:transform .3s ease!important;
+}
+
+
+/* RC15 recovery — direct visible-score heat bar */
+.captain-wire-ui #report .heat-bar{
+  position:relative !important;
+  display:block !important;
+  height:14px !important;
+  min-height:14px !important;
+  overflow:hidden !important;
+  border-radius:999px !important;
+  background:#07111c !important;
+}
+.captain-wire-ui #report #heatFill{
+  position:absolute !important;
+  top:0 !important;
+  bottom:0 !important;
+  left:0 !important;
+  display:block !important;
+  width:0%;
+  max-width:100% !important;
+  height:100% !important;
+  transform:none !important;
+  transform-origin:left center !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  border-radius:inherit !important;
+  background:linear-gradient(90deg,#3df56e 0%,#ff9f1c 55%,#ff3b3b 100%) !important;
+  transition:width .3s ease !important;
+}
+
+
+/* RC15 engine-wired heat bar: idle is always empty; completed scans set inline width. */
+.captain-wire-ui #report #heatFill{
+  width:0 !important;
+  opacity:0 !important;
+  transform:none !important;
+}
+.captain-wire-ui #report #heatFill[style*="width"]{
+  max-width:100% !important;
+}
+
+
+/* RC15 Public Beta release polish */
+.captain-wire-ui .public-beta-safety{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin:0;
+  padding:10px 12px;
+  border:1px solid rgba(255,190,80,.35);
+  border-radius:10px;
+  background:rgba(255,165,40,.08);
+  color:var(--wire-muted);
+  font-size:.78rem;
+  line-height:1.4;
+}
+.captain-wire-ui .public-beta-safety strong{color:var(--wire-text);white-space:nowrap;}
+.theme-light.captain-wire-ui .public-beta-safety{background:#fff8e9;border-color:#e3bd6d;color:#526176;}
+@media(max-width:680px){
+  .captain-wire-ui .public-beta-safety{flex-direction:column;gap:3px;padding:9px 10px;}
+}

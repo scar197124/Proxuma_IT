@@ -1,8 +1,14 @@
-# Proxuma IT RC15.0.2 — Compact Hero & Live Case Preview
+# Proxuma IT RC15 — Public Beta Release Candidate
 
-- Removed the visible RC15 label from Case Intelligence.
-- Added a compact Current Investigation preview after every completed scan.
-- Kept saving optional through a single Save Case action.
-- Locked saved-case management to controlled internal scrolling.
-- Reduced hero height, App Guide size, and Scan/Review/Act controls.
-- Preserved the scan engine, Mission Control, Guided Decision Flow, and saved-case tools.
+## Release polish
+- Updated the browser title and build metadata for the RC15 public beta.
+- Replaced visible internal release labels with public-facing product language.
+- Replaced “Local preview” with “Public Beta”.
+- Added a compact safety limitation near the scan workflow.
+- Added favicon, Apple touch icon, Open Graph, and social sharing metadata.
+- Removed the visible developer console from the public interface.
+- Preserved the engine-wired heat bar, stable page layout, scanner, QR workflow, Mission Control, Guided Decision Flow, and Case Intelligence.
+- No analytics or scan-content collection was added.
+
+## Public-beta limitation
+Proxuma identifies risk signals but cannot guarantee that an item is safe. Users should not open suspicious links solely because a result appears low risk.

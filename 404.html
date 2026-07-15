@@ -3,12 +3,26 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Proxuma IT | UI 1.0 RC14.1 Case Notes & Timeline</title>
+<title>Proxuma IT — Link &amp; QR Risk Analysis</title>
 <meta name="theme-color" content="#070a0d" />
 <meta name="color-scheme" content="dark light" />
-<meta name="description" content="Check suspicious links, QR payloads, and messages locally before you trust them." />
-<link rel="stylesheet" href="assets/css/styles.css?v=rc14-1-case-notes-timeline" />
-<meta name="proxuma-build" content="ui-1.0-rc14-1-case-notes-timeline" />
+<meta name="description" content="Analyze suspicious links, QR payloads, and messages locally before you trust them." />
+<meta name="application-name" content="Proxuma IT" />
+<meta name="robots" content="index, follow" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Proxuma IT" />
+<meta property="og:title" content="Proxuma IT — Link &amp; QR Risk Analysis" />
+<meta property="og:description" content="Analyze suspicious links, QR payloads, and messages locally before you trust them." />
+<meta property="og:image" content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-header-banner.png" />
+<meta property="og:url" content="https://scar197124.github.io/Proxuma_IT/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Proxuma IT — Link &amp; QR Risk Analysis" />
+<meta name="twitter:description" content="Analyze suspicious links, QR payloads, and messages locally before you trust them." />
+<meta name="twitter:image" content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-header-banner.png" />
+<link rel="icon" type="image/png" href="assets/images/proxuma-it-logo.png" />
+<link rel="apple-touch-icon" href="assets/images/proxuma-it-logo.png" />
+<link rel="stylesheet" href="assets/css/styles.css?v=rc15-public-beta-1" />
+<meta name="proxuma-build" content="ui-1.0-rc15-public-beta" />
 </head>
 <body class="theme-dark captain-wire-ui">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
@@ -22,7 +36,7 @@
   <nav class="wire-nav" aria-label="Primary navigation">
     <a href="#scan">Home</a><a href="#scan">Scan</a><a href="#details">Features</a><a href="#workflow">Findings</a><a href="#optional-tools">Tools</a>
   </nav>
-  <div class="wire-actions"><button id="themeToggle" class="wire-button" type="button" aria-pressed="false">☀️ Light Mode</button><span class="wire-pill">Local preview · Private by default</span></div>
+  <div class="wire-actions"><button id="themeToggle" class="wire-button" type="button" aria-pressed="false">☀️ Light Mode</button><span class="wire-pill">Public Beta · Private by default</span></div>
 </header>
 <main id="main-content" class="wire-page" tabindex="-1">
   <section class="wire-hero" aria-labelledby="hero-title">
@@ -49,6 +63,7 @@
         <div id="qrCameraPanel" class="scan-engine-camera" hidden><div class="scan-engine-camera-head"><strong>QR Camera</strong><span id="qrStatus">Camera ready when you choose it. Processing stays on this device.</span></div><video id="qrVideo" class="qr-video" autoplay muted playsinline></video></div>
         <div class="scan-engine-examples"><strong>Try an example</strong><div class="quick-tests" aria-label="Example targets"><button data-example="https://www.rbcroyalbank.com/" type="button">Trusted bank</button><button data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button">Leetspeak phish</button><button data-example="https://www.rbcr0yalbank.com/" type="button">Lookalike bank</button><button data-example="javascript:alert(1)" type="button">Script payload</button></div></div>
       </article>
+      <aside class="public-beta-safety" role="note" aria-label="Safety limitation"><strong>Public beta safety note</strong><span>Proxuma identifies risk signals but cannot guarantee that an item is safe. Do not open suspicious links solely because a result appears low risk.</span></aside>
       <article id="report" class="wire-card report-panel result-card result-card-horizontal" aria-live="polite" aria-label="Analysis results"><div class="result-summary"><div><p class="eyebrow">Step 2 · Analysis result</p><h2 id="riskLabel">Ready to scan</h2><p id="summaryText">Enter a target above to generate a report.</p></div><div class="score-ring"><span id="scoreValue">0</span><small>risk score</small></div></div><div class="result-details"><div class="heat-zone"><div class="heat-meta"><span>Risk Heat</span><strong id="heatLabel">Standby</strong></div><div class="heat-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="heatFill"></span></div></div><div class="snapshot-grid"><div><small>Signals</small><strong id="signalCount">0</strong></div><div><small>Input</small><strong id="inputTypeLabel">Standby</strong></div><div><small>Trigger</small><strong id="primaryTrigger">Waiting</strong></div><div><small>Time</small><strong id="reportTimestamp">Not scanned</strong></div></div></div></article>
     </div>
 
@@ -75,7 +90,7 @@
 
     <section id="decisionFlow" class="decision-flow" data-flow-stage="scan" aria-label="Guided decision flow">
       <div class="decision-flow-head">
-        <div><small>RC13 · Guided Decision Flow</small><h2>Scan → Understand → Verify → Act → Save</h2><p id="decisionFlowLead">Begin with a scan. Proxuma will keep the next useful step in view.</p></div>
+        <div><small>Guided Decision Flow</small><h2>Scan → Understand → Verify → Act → Save</h2><p id="decisionFlowLead">Begin with a scan. Proxuma will keep the next useful step in view.</p></div>
         <div class="decision-flow-progress" role="progressbar" aria-label="Investigation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="decisionFlowFill"></span><strong id="decisionFlowPercent">0%</strong></div>
       </div>
       <ol class="decision-flow-steps">
@@ -176,12 +191,6 @@
     <footer class="wire-footer"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the scan report, or clear this workspace.</p><div class="wired-footer-actions"><button id="visibleCopyReport" class="secondary-action" type="button">Copy Report</button><button id="visibleExportJson" class="secondary-action" type="button">Export JSON</button><button id="visibleNewInvestigation" class="primary-action" type="button">New Investigation</button><button id="visibleResetWorkspace" class="secondary-action" type="button">Reset</button></div><p id="visibleWireStatus" class="fine-print"></p></div></footer>
   </section>
 
-    <details id="developerWirePanel" class="wire-card developer-wire-panel">
-      <summary>Captain Developer Console</summary>
-      <p class="fine-print">Local-only wiring snapshot for testing the RC. This reads the same UI state that reports and cards use.</p>
-      <pre id="scanResultDebug">No scan yet.</pre>
-    </details>
-
   <section class="engine-support" aria-hidden="true">
     <span id="trueTarget">Waiting</span><span id="rootDomainNote"></span><span id="confidenceLabel">Not measured</span><span id="confidenceNote"></span><span id="confidenceBrief">Waiting</span><span id="whyScore">Waiting for local evidence.</span><span id="laneQuality">Standby</span>
     <span id="anatomyStatus"></span><span id="anatomyProtocol"></span><span id="anatomyHost"></span><span id="anatomyRoot"></span><span id="anatomyPath"></span><span id="anatomyQuery"></span><span id="anatomyTokens"></span><span id="anatomyNote"></span>
@@ -248,4 +257,5 @@
 
 <script src="assets/js/case-command-center.js?v=rc14-1-case-notes-timeline"></script>
 
+<script src="assets/js/heatbar-direct-sync.js?v=rc15-public-beta-1"></script>
 </body></html>
