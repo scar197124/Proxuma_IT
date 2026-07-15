@@ -19018,3 +19018,137 @@ body.theme-light .app-guide-close{color:#0b5528!important;}
 .theme-light .case-journal,.theme-light .case-note-field textarea{background:#fff;color:#111b23}
 @media(max-width:1050px){.case-command-layout{grid-template-columns:1fr}.case-journal{position:static}}
 @media(max-width:520px){.case-journal-actions{display:grid;grid-template-columns:1fr 1fr}.case-journal-actions button{width:100%}.case-timeline{max-height:280px}}
+
+
+/* RC14.1.1 — Compact Case Command Center */
+.case-command-center{margin:14px 0;padding:14px;border-radius:17px}
+.case-command-head{gap:12px;margin-bottom:10px}
+.case-command-head h2{margin:.18rem 0 .25rem;font-size:clamp(1.15rem,2vw,1.45rem)}
+.case-command-head p{margin:0;font-size:.82rem;line-height:1.35;max-width:760px}
+.case-command-stats{gap:7px}
+.case-command-stats>div{min-width:70px;padding:8px 10px;border-radius:12px}
+.case-command-stats span{font-size:1rem}
+.case-command-stats small{font-size:.65rem}
+.case-command-toolbar{gap:9px;margin-bottom:10px}
+.case-search{gap:4px}
+.case-search span{font-size:.7rem}
+.case-search input{padding:8px 10px;border-radius:10px}
+.case-filters{gap:5px}
+.case-filters button{padding:7px 9px;border-radius:9px;font-size:.75rem}
+.case-command-layout{grid-template-columns:minmax(0,1.45fr) minmax(280px,.55fr);gap:10px}
+.case-command-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:310px;overflow:auto;padding-right:3px;align-content:start}
+.case-command-card{gap:7px;padding:10px;border-radius:13px}
+.case-card-top,.case-card-meta,.case-card-actions{gap:7px}
+.case-card-risk{padding:4px 7px;font-size:.68rem}
+.case-card-target{font-size:.83rem;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.case-card-meta,.case-card-note-preview{font-size:.7rem}
+.case-card-status{padding:6px 7px;font-size:.72rem;max-width:145px}
+.case-card-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.case-card-actions button{padding:6px 7px;border-radius:8px;font-size:.68rem;white-space:nowrap}
+.case-command-empty{padding:16px;min-height:180px}
+.case-journal{position:sticky;top:10px;gap:8px;padding:11px;border-radius:13px;min-height:0;max-height:310px;overflow:hidden}
+.case-journal-head h3{font-size:1rem;line-height:1.2}
+.case-journal-badge{padding:4px 7px;font-size:.66rem}
+.case-journal-target{font-size:.75rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.case-note-field{gap:4px}
+.case-note-field span{font-size:.7rem}
+.case-note-field textarea{min-height:58px;max-height:72px;padding:8px 9px;border-radius:9px;font-size:.78rem;resize:none}
+.case-journal-actions{gap:6px}
+.case-journal-actions button{padding:7px 9px;border-radius:8px;font-size:.72rem}
+.case-timeline-head{padding-top:3px}
+.case-timeline{gap:7px;max-height:115px;padding-left:19px}
+.case-timeline li{padding:0 0 7px 4px}
+.case-timeline strong{font-size:.76rem}.case-timeline time{font-size:.64rem}.case-timeline span{font-size:.7rem}
+.case-command-center>.fine-print{margin:.55rem 0 0;font-size:.68rem}
+@media(max-width:1050px){.case-command-layout{grid-template-columns:1fr 1fr}.case-journal{position:static}.case-command-list{grid-template-columns:1fr;max-height:300px}}
+@media(max-width:760px){.case-command-layout{grid-template-columns:1fr}.case-command-list{max-height:280px}.case-journal{max-height:300px}.case-card-actions{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.case-command-center{padding:10px}.case-command-head p{display:none}.case-command-stats{grid-template-columns:repeat(4,1fr)}.case-command-stats>div{min-width:0;padding:6px 4px}.case-command-toolbar{gap:7px}.case-filters{display:grid;grid-template-columns:repeat(4,1fr)}.case-filters button{padding:6px 3px}.case-command-list{max-height:255px}.case-journal{max-height:280px}.case-journal-actions{grid-template-columns:1fr 1fr}.case-timeline{max-height:100px}}
+
+
+/* RC14.1.2 — single visible scan engine */
+.captain-wire-ui .scan-trio{grid-template-columns:minmax(520px,1.35fr) minmax(420px,1fr);}
+.captain-wire-ui .scan-engine-card{display:flex;flex-direction:column;gap:10px;}
+.captain-wire-ui .scan-engine-head{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.captain-wire-ui .scan-engine-head h3{margin:0;}
+.captain-wire-ui .scan-engine-head .eyebrow{margin-bottom:4px;}
+.captain-wire-ui .scan-engine-qr{white-space:nowrap;}
+.captain-wire-ui .scan-engine-camera{border:1px solid var(--wire-line);border-radius:12px;padding:12px;background:#07111c;}
+.captain-wire-ui .scan-engine-camera .qr-video{width:100%;max-height:260px;border-radius:10px;object-fit:cover;}
+.captain-wire-ui .scan-engine-camera p{margin:8px 0;}
+@media (max-width:1200px){.captain-wire-ui .scan-trio{grid-template-columns:1fr;}}
+@media (max-width:680px){.captain-wire-ui .scan-engine-head{align-items:flex-start;flex-direction:column;}.captain-wire-ui .scan-engine-qr{width:100%;}}
+
+
+/* RC14.1.3 — unified scan workspace */
+.captain-wire-ui .scan-trio{grid-template-columns:minmax(560px,1.35fr) minmax(420px,1fr);align-items:start;}
+.captain-wire-ui .scan-engine-card{display:flex;flex-direction:column;gap:12px;min-height:100%;}
+.captain-wire-ui .scan-engine-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+.captain-wire-ui .scan-engine-head h3{margin:0 0 6px;}
+.captain-wire-ui .scan-engine-head .fine-print{margin:0;max-width:58ch;}
+.captain-wire-ui .scan-engine-inline-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.captain-wire-ui .scan-engine-qr,.captain-wire-ui .scan-engine-stop{padding:10px 14px;white-space:nowrap;}
+.captain-wire-ui .scan-engine-camera{border:1px solid var(--wire-line);border-radius:12px;padding:12px;background:#07111c;display:grid;gap:10px;}
+.captain-wire-ui .scan-engine-camera-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;}
+.captain-wire-ui .scan-engine-camera-head strong{font-size:.96rem;}
+.captain-wire-ui .scan-engine-camera-head span{color:var(--wire-muted);font-size:.86rem;}
+.captain-wire-ui .scan-engine-camera .qr-video{width:100%;max-height:250px;border-radius:10px;object-fit:cover;background:#000;}
+.captain-wire-ui .scan-engine-examples{display:grid;gap:8px;padding-top:4px;}
+.captain-wire-ui .scan-engine-examples-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;}
+.captain-wire-ui .scan-engine-examples-head strong{font-size:.95rem;}
+.captain-wire-ui .scan-engine-examples-head span{color:var(--wire-muted);font-size:.84rem;}
+@media (max-width:1200px){.captain-wire-ui .scan-trio{grid-template-columns:1fr;}}
+@media (max-width:680px){
+  .captain-wire-ui .scan-engine-head{flex-direction:column;}
+  .captain-wire-ui .scan-engine-inline-actions{width:100%;}
+  .captain-wire-ui .scan-engine-qr,.captain-wire-ui .scan-engine-stop{flex:1 1 auto;}
+  .captain-wire-ui .scan-engine-camera-head{flex-direction:column;align-items:flex-start;}
+}
+.theme-light.captain-wire-ui .scan-engine-camera{background:#fff;}
+
+/* RC15 simplified scan and case intelligence */
+.captain-wire-ui .scan-stack{display:grid;gap:14px}.captain-wire-ui .scan-engine-horizontal{display:grid;grid-template-columns:minmax(220px,.7fr) minmax(500px,1.8fr);gap:16px;align-items:center}.captain-wire-ui .scan-engine-title h3{margin:0 0 6px}.captain-wire-ui .scan-engine-title p{margin:0;color:var(--wire-muted)}.captain-wire-ui .scan-engine-main{display:grid;gap:6px}.captain-wire-ui .scan-engine-horizontal .input-wrap{grid-template-columns:minmax(0,1fr) auto auto auto}.captain-wire-ui .scan-engine-horizontal .fine-print{margin:0}.captain-wire-ui .scan-engine-horizontal .scan-engine-camera,.captain-wire-ui .scan-engine-horizontal .scan-engine-examples{grid-column:1/-1}.captain-wire-ui .scan-engine-examples{display:flex;align-items:center;gap:12px;min-width:0}.captain-wire-ui .scan-engine-examples>strong{white-space:nowrap;font-size:.86rem}.captain-wire-ui .scan-engine-examples .quick-tests{margin:0;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px}.captain-wire-ui .result-card-horizontal{display:grid;grid-template-columns:minmax(300px,.85fr) minmax(480px,1.4fr);gap:22px;align-items:center;padding:16px 20px}.captain-wire-ui .result-summary{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}.captain-wire-ui .result-summary h2{margin:.15rem 0}.captain-wire-ui .result-summary p{margin:.25rem 0}.captain-wire-ui .result-details{display:grid;gap:12px}.captain-wire-ui .result-card-horizontal .snapshot-grid{margin-top:0}.captain-wire-ui .case-intelligence-compact{padding:12px 14px}.captain-wire-ui .case-intelligence-head{display:grid;grid-template-columns:minmax(260px,1fr) auto auto;align-items:center;gap:16px}.captain-wire-ui .case-intelligence-head h2{margin:.1rem 0}.captain-wire-ui .case-intelligence-head p{margin:0;color:var(--wire-muted)}.captain-wire-ui .case-command-toggle{white-space:nowrap}.captain-wire-ui .case-command-workspace{margin-top:12px;padding-top:12px;border-top:1px solid var(--wire-line)}.captain-wire-ui .case-command-workspace[hidden],.captain-wire-ui .case-journal[hidden]{display:none!important}.captain-wire-ui .case-command-layout{grid-template-columns:minmax(0,1fr)}.captain-wire-ui .case-command-list{grid-template-columns:repeat(2,minmax(0,1fr));max-height:300px}.captain-wire-ui .case-journal{margin-top:10px;max-height:300px;position:static}.captain-wire-ui .case-journal-head-actions{display:flex;align-items:center;gap:8px}.captain-wire-ui #caseJournalClose{padding:6px 9px;border-radius:8px}@media(max-width:1100px){.captain-wire-ui .scan-engine-horizontal,.captain-wire-ui .result-card-horizontal{grid-template-columns:1fr}.captain-wire-ui .case-intelligence-head{grid-template-columns:1fr auto}.captain-wire-ui .case-intelligence-head .case-command-stats{grid-column:1/-1;order:3}}@media(max-width:760px){.captain-wire-ui .scan-engine-horizontal .input-wrap{grid-template-columns:1fr 1fr}.captain-wire-ui .scan-engine-horizontal .input-wrap input{grid-column:1/-1}.captain-wire-ui .scan-engine-examples{align-items:flex-start;flex-direction:column}.captain-wire-ui .case-intelligence-head{grid-template-columns:1fr}.captain-wire-ui .case-command-toggle{width:100%}.captain-wire-ui .case-command-list{grid-template-columns:1fr}}@media(max-width:520px){.captain-wire-ui .scan-engine-horizontal .input-wrap{grid-template-columns:1fr}.captain-wire-ui .scan-engine-horizontal .input-wrap input{grid-column:auto}.captain-wire-ui .case-intelligence-head p{display:none}}
+
+
+/* RC15.0.1 — compact zero-case intelligence state */
+.captain-wire-ui .case-intelligence-empty{display:flex;align-items:center;gap:10px;margin-top:8px;padding:8px 10px;border:1px dashed color-mix(in srgb,var(--wire-line) 78%,transparent);border-radius:10px;background:rgba(127,151,170,.045);color:var(--wire-muted)}
+.captain-wire-ui .case-intelligence-empty strong{color:var(--wire-text);font-size:.82rem;white-space:nowrap}
+.captain-wire-ui .case-intelligence-empty span{font-size:.76rem}
+.captain-wire-ui .case-intelligence-empty[hidden],.captain-wire-ui .case-command-toggle[hidden]{display:none!important}
+.captain-wire-ui .case-intelligence-compact:has(.case-intelligence-empty:not([hidden])){padding-block:10px}
+.captain-wire-ui .case-intelligence-compact:has(.case-intelligence-empty:not([hidden])) .case-intelligence-head{grid-template-columns:minmax(220px,1fr) auto}
+@media(max-width:760px){.captain-wire-ui .case-intelligence-empty{align-items:flex-start;flex-direction:column;gap:3px}.captain-wire-ui .case-intelligence-compact:has(.case-intelligence-empty:not([hidden])) .case-intelligence-head{grid-template-columns:1fr}.captain-wire-ui .case-intelligence-head .case-command-stats{grid-column:auto;order:initial}}
+
+
+/* RC15.0.2 — compact hero and live case preview */
+.captain-wire-ui .wire-hero{grid-template-columns:auto minmax(280px,1fr) minmax(230px,300px) minmax(270px,340px);gap:20px;padding:18px 22px;}
+.captain-wire-ui .hero-symbol{width:68px;height:68px;font-size:38px;border-radius:17px;}
+.captain-wire-ui .wire-hero h1{font-size:clamp(1.7rem,2.6vw,2.8rem);margin:.05rem 0;}
+.captain-wire-ui .wire-hero p{font-size:.94rem;margin:.35rem 0;}
+.captain-wire-ui .proof-row span{padding:4px 9px;font-size:.74rem;}
+.captain-wire-ui .wire-guide{padding:10px 12px;border-radius:12px;}
+.captain-wire-ui .guide-title{gap:8px;}
+.captain-wire-ui .guide-title strong{font-size:.88rem;}
+.captain-wire-ui .guide-title .wire-button{padding:7px 9px;font-size:.72rem;}
+.captain-wire-ui .wire-guide .fine-print{font-size:.7rem;line-height:1.3;margin:.35rem 0 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.captain-wire-ui .wire-steps{gap:7px;}
+.captain-wire-ui .wire-steps button{min-width:0;padding:7px 8px;border-radius:10px;font-size:.72rem;line-height:1.15;}
+.captain-wire-ui .wire-steps b{width:25px;height:25px;margin-right:4px;font-size:.72rem;}
+.captain-wire-ui .wire-steps small{font-size:.62rem;}
+.captain-wire-ui .case-current-preview{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;margin-top:8px;padding:9px 10px;border:1px solid var(--wire-line);border-radius:11px;background:rgba(22,119,255,.06);}
+.captain-wire-ui .case-current-preview[hidden]{display:none!important;}
+.captain-wire-ui .case-current-copy{display:grid;gap:2px;min-width:0;}
+.captain-wire-ui .case-current-copy small{font-size:.65rem;text-transform:uppercase;letter-spacing:.1em;color:var(--wire-muted);font-weight:800;}
+.captain-wire-ui .case-current-copy strong{font-size:.9rem;}
+.captain-wire-ui .case-current-copy span{font-size:.72rem;color:var(--wire-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.captain-wire-ui .case-current-metrics{display:flex;gap:7px;}
+.captain-wire-ui .case-current-metrics>span{min-width:62px;padding:6px 8px;border:1px solid var(--wire-line);border-radius:9px;text-align:center;display:grid;gap:1px;}
+.captain-wire-ui .case-current-metrics b{font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.captain-wire-ui .case-current-metrics small{font-size:.6rem;color:var(--wire-muted);text-transform:uppercase;}
+.captain-wire-ui #caseCurrentSave{padding:8px 11px;font-size:.72rem;white-space:nowrap;}
+.captain-wire-ui .case-command-workspace{max-height:390px;overflow:hidden;}
+.captain-wire-ui .case-command-layout{max-height:315px;overflow:hidden;}
+.captain-wire-ui .case-command-list{max-height:300px;overflow:auto;overscroll-behavior:contain;}
+.captain-wire-ui .case-journal{max-height:300px;overflow:hidden;}
+.captain-wire-ui .case-timeline{overflow:auto;overscroll-behavior:contain;}
+@media(max-width:1200px){.captain-wire-ui .wire-hero{grid-template-columns:auto 1fr;}.captain-wire-ui .wire-guide,.captain-wire-ui .wire-steps{grid-column:1/-1;}.captain-wire-ui .wire-steps{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:760px){.captain-wire-ui .wire-hero{grid-template-columns:1fr;padding:14px;gap:12px}.captain-wire-ui .hero-symbol{display:none}.captain-wire-ui .wire-guide,.captain-wire-ui .wire-steps{grid-column:auto}.captain-wire-ui .case-current-preview{grid-template-columns:1fr}.captain-wire-ui .case-current-metrics{width:100%}.captain-wire-ui .case-current-metrics>span{flex:1}.captain-wire-ui #caseCurrentSave{width:100%}.captain-wire-ui .case-command-workspace{max-height:430px}.captain-wire-ui .case-command-layout{max-height:350px}}

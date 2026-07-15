@@ -41,29 +41,15 @@
   </section>
 
   <section id="scan" class="wire-workspace" aria-label="Scan center">
-    <div class="section-title"><span>▣</span><div><h2>Scan Center</h2><p>One clean workspace: start the camera, paste a link, or review the result in the same card.</p></div></div>
-    <div class="scan-trio">
-      <article class="wire-card qr-card" aria-label="Scan QR code">
-        <h3>▦ Scan QR Code</h3>
-        <div class="qr-stage"><div class="fake-qr" aria-hidden="true">▦</div><p id="qrStatus">Camera ready when you choose it. Processing stays on this device.</p></div>
-        <button id="qrStartButton" class="primary-action" type="button">Start QR Scanner</button>
-        <button id="qrStopButton" class="secondary-action" type="button" hidden>Stop</button>
-        <div id="qrCameraPanel" class="qr-camera-panel" hidden><video id="qrVideo" class="qr-video" autoplay muted playsinline></video></div>
+    <div class="section-title"><span>▣</span><div><h2>Scan Center</h2><p>One clear place to begin. Results appear directly beneath the scan controls.</p></div></div>
+    <div class="scan-stack">
+      <article class="wire-card scan-engine-card scan-engine-horizontal" aria-label="Universal scan engine">
+        <div class="scan-engine-title"><p class="eyebrow">Step 1 · Start here</p><h3>🧭 Universal Scan Engine</h3><p>Paste a link, message, suspicious text, or QR payload. Everything enters through this one workspace.</p></div>
+        <div class="scan-engine-main"><label class="sr-only" for="targetInput">Start a scan</label><div class="input-wrap"><input id="targetInput" autocomplete="off" spellcheck="false" enterkeyhint="go" placeholder="Paste a link, message, suspicious text, or QR payload" aria-describedby="scannerInputHelp detectedInputType" /><button id="scanButton" class="primary-action" type="button">Analyze</button><button id="qrStartButton" class="secondary-action" type="button">Scan QR</button><button id="qrStopButton" class="secondary-action" type="button" hidden>Stop QR</button></div><p id="scannerInputHelp" class="fine-print"><span id="detectedInputType">Detected: waiting for input</span> · Local-first review. We do not visit or store your target.</p></div>
+        <div id="qrCameraPanel" class="scan-engine-camera" hidden><div class="scan-engine-camera-head"><strong>QR Camera</strong><span id="qrStatus">Camera ready when you choose it. Processing stays on this device.</span></div><video id="qrVideo" class="qr-video" autoplay muted playsinline></video></div>
+        <div class="scan-engine-examples"><strong>Try an example</strong><div class="quick-tests" aria-label="Example targets"><button data-example="https://www.rbcroyalbank.com/" type="button">Trusted bank</button><button data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button">Leetspeak phish</button><button data-example="https://www.rbcr0yalbank.com/" type="button">Lookalike bank</button><button data-example="javascript:alert(1)" type="button">Script payload</button></div></div>
       </article>
-      <article class="wire-card paste-card" aria-label="Paste link or message">
-        <h3>🔗 Paste Link</h3>
-        <label class="input-label" for="targetInput">Universal scanner input</label>
-        <div class="input-wrap"><input id="targetInput" autocomplete="off" spellcheck="false" enterkeyhint="go" placeholder="https://paste-suspicious-link.com" aria-describedby="scannerInputHelp detectedInputType" /><button id="scanButton" class="primary-action" type="button">Analyze Link</button></div>
-        <p id="scannerInputHelp" class="fine-print">Paste the full link, QR payload, message, or snippet. <span id="detectedInputType">Detected: waiting for input</span></p>
-        <div class="quick-tests" aria-label="Example targets"><button data-example="https://www.rbcroyalbank.com/" type="button">Trusted bank</button><button data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button">Leetspeak phish</button><button data-example="https://www.rbcr0yalbank.com/" type="button">Lookalike bank</button><button data-example="javascript:alert(1)" type="button">Script payload</button></div>
-        <p class="privacy-line">🔒 We never visit or store your link.</p>
-      </article>
-      <article id="report" class="wire-card report-panel result-card" aria-live="polite" aria-label="Analysis results">
-        <h3>🛡️ Analysis Results</h3>
-        <div class="score-layout"><div><p class="eyebrow">Step 2 · Result</p><h2 id="riskLabel">Ready to scan</h2><p id="summaryText">Enter a URL, domain, QR payload, or message to generate a report.</p></div><div class="score-ring"><span id="scoreValue">0</span><small>risk score</small></div></div>
-        <div class="heat-zone"><div class="heat-meta"><span>Risk Heat</span><strong id="heatLabel">Standby</strong></div><div class="heat-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="heatFill"></span></div></div>
-        <div class="snapshot-grid"><div><small>Signals</small><strong id="signalCount">0</strong></div><div><small>Input</small><strong id="inputTypeLabel">Standby</strong></div><div><small>Trigger</small><strong id="primaryTrigger">Waiting</strong></div><div><small>Time</small><strong id="reportTimestamp">Not scanned</strong></div></div>
-      </article>
+      <article id="report" class="wire-card report-panel result-card result-card-horizontal" aria-live="polite" aria-label="Analysis results"><div class="result-summary"><div><p class="eyebrow">Step 2 · Analysis result</p><h2 id="riskLabel">Ready to scan</h2><p id="summaryText">Enter a target above to generate a report.</p></div><div class="score-ring"><span id="scoreValue">0</span><small>risk score</small></div></div><div class="result-details"><div class="heat-zone"><div class="heat-meta"><span>Risk Heat</span><strong id="heatLabel">Standby</strong></div><div class="heat-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="heatFill"></span></div></div><div class="snapshot-grid"><div><small>Signals</small><strong id="signalCount">0</strong></div><div><small>Input</small><strong id="inputTypeLabel">Standby</strong></div><div><small>Trigger</small><strong id="primaryTrigger">Waiting</strong></div><div><small>Time</small><strong id="reportTimestamp">Not scanned</strong></div></div></div></article>
     </div>
 
     <aside id="scanSourceBar" class="scan-source-bar" aria-label="Scan source and freshness" aria-live="polite">
@@ -106,31 +92,15 @@
     </section>
 
 
-    <section id="caseCommandCenter" class="case-command-center" aria-labelledby="caseCommandTitle">
-      <div class="case-command-head">
-        <div><small>RC14.1 · Case Intelligence</small><h2 id="caseCommandTitle">Case Command Center</h2><p>Search, reopen, classify, document, and follow every saved investigation over time.</p></div>
-        <div class="case-command-stats" aria-label="Case summary">
-          <div><span id="caseStatTotal">0</span><small>Total</small></div><div><span id="caseStatOpen">0</span><small>Open</small></div><div><span id="caseStatPriority">0</span><small>Priority</small></div><div><span id="caseStatResolved">0</span><small>Resolved</small></div>
-        </div>
+    <section id="caseCommandCenter" class="case-command-center case-intelligence-compact" aria-labelledby="caseCommandTitle">
+      <div class="case-command-head case-intelligence-head"><div><small>Saved Investigation Memory</small><h2 id="caseCommandTitle">Case Intelligence</h2><p>Saved investigations stay available without crowding the main workflow.</p></div><div class="case-command-stats" aria-label="Case summary"><div><span id="caseStatTotal">0</span><small>Total</small></div><div><span id="caseStatOpen">0</span><small>Open</small></div><div><span id="caseStatPriority">0</span><small>Priority</small></div><div><span id="caseStatResolved">0</span><small>Resolved</small></div></div><button id="caseCommandToggle" class="secondary-action case-command-toggle" type="button" aria-expanded="false" aria-controls="caseCommandWorkspace" hidden>Manage Cases</button></div>
+      <div id="caseCurrentPreview" class="case-current-preview" hidden aria-live="polite">
+        <div class="case-current-copy"><small>Current Investigation</small><strong id="caseCurrentVerdict">Waiting for a scan</strong><span id="caseCurrentTarget">Complete a scan to generate a compact case preview.</span></div>
+        <div class="case-current-metrics"><span><b id="caseCurrentRisk">0</b><small>Risk</small></span><span><b id="caseCurrentConfidence">—</b><small>Confidence</small></span></div>
+        <button id="caseCurrentSave" class="secondary-action" type="button">Save Case</button>
       </div>
-      <div class="case-command-toolbar">
-        <label class="case-search"><span>Search saved cases</span><input id="caseCommandSearch" type="search" placeholder="Case ID, target, verdict, status, or note" autocomplete="off" /></label>
-        <div class="case-filters" role="group" aria-label="Filter cases"><button class="active" data-case-filter="all" type="button">All</button><button data-case-filter="open" type="button">Open</button><button data-case-filter="priority" type="button">Priority</button><button data-case-filter="resolved" type="button">Resolved</button></div>
-      </div>
-      <div class="case-command-layout">
-        <div>
-          <div id="caseCommandList" class="case-command-list" aria-live="polite"></div>
-          <div id="caseCommandEmpty" class="case-command-empty"><strong>No saved investigations yet.</strong><span>Complete a scan and use Save Case to begin building local case intelligence.</span><button id="caseCommandStart" class="primary-action" type="button">Start a Scan</button></div>
-        </div>
-        <aside id="caseJournal" class="case-journal" aria-labelledby="caseJournalTitle">
-          <div class="case-journal-head"><div><small>Case Journal</small><h3 id="caseJournalTitle">Select a saved case</h3></div><span id="caseJournalStatus" class="case-journal-badge">Waiting</span></div>
-          <p id="caseJournalTarget" class="case-journal-target">Choose a case to view notes and its investigation timeline.</p>
-          <label class="case-note-field"><span>Investigation note</span><textarea id="caseJournalNote" rows="4" maxlength="1200" placeholder="Record what was checked, what happened, or what still needs attention." disabled></textarea></label>
-          <div class="case-journal-actions"><button id="caseJournalAdd" class="primary-action" type="button" disabled>Add Note</button><button id="caseJournalCopy" type="button" disabled>Copy Timeline</button></div>
-          <div class="case-timeline-head"><strong>Activity Timeline</strong><span id="caseTimelineCount">0 entries</span></div>
-          <ol id="caseTimeline" class="case-timeline"><li class="case-timeline-empty">No case selected.</li></ol>
-        </aside>
-      </div>
+      <div id="caseIntelligenceEmpty" class="case-intelligence-empty" role="status"><strong>No saved cases</strong><span>After a scan, the current investigation appears above. Save it only when you want it kept here.</span></div>
+      <div id="caseCommandWorkspace" class="case-command-workspace" hidden><div class="case-command-toolbar"><label class="case-search"><span class="sr-only">Search saved cases</span><input id="caseCommandSearch" type="search" placeholder="Search cases, targets, status, or notes" autocomplete="off" /></label><div class="case-filters" role="group" aria-label="Filter cases"><button class="active" data-case-filter="all" type="button">All</button><button data-case-filter="open" type="button">Open</button><button data-case-filter="priority" type="button">Priority</button><button data-case-filter="resolved" type="button">Resolved</button></div></div><div class="case-command-layout"><div><div id="caseCommandList" class="case-command-list" aria-live="polite"></div><div id="caseCommandEmpty" class="case-command-empty" hidden><strong>No matching cases.</strong><span>Change the search or filter to see other investigations.</span></div></div><aside id="caseJournal" class="case-journal" aria-labelledby="caseJournalTitle" hidden><div class="case-journal-head"><div><small>Selected Case</small><h3 id="caseJournalTitle">Select a saved case</h3></div><div class="case-journal-head-actions"><span id="caseJournalStatus" class="case-journal-badge">Waiting</span><button id="caseJournalClose" type="button" aria-label="Close case journal">Close</button></div></div><p id="caseJournalTarget" class="case-journal-target">Choose a case to view notes and its investigation timeline.</p><label class="case-note-field"><span>Investigation note</span><textarea id="caseJournalNote" rows="3" maxlength="1200" placeholder="Record what was checked or what still needs attention." disabled></textarea></label><div class="case-journal-actions"><button id="caseJournalAdd" class="primary-action" type="button" disabled>Add Note</button><button id="caseJournalCopy" type="button" disabled>Copy Timeline</button></div><div class="case-timeline-head"><strong>Activity</strong><span id="caseTimelineCount">0 entries</span></div><ol id="caseTimeline" class="case-timeline"><li class="case-timeline-empty">No case selected.</li></ol></aside></div></div>
       <p id="caseCommandStatus" class="fine-print" aria-live="polite">Case intelligence is stored locally in this browser.</p>
     </section>
 
@@ -257,7 +227,7 @@
       <button data-guide-jump="guide-scan">1 Scan</button><button data-guide-jump="guide-score">2 Score</button><button data-guide-jump="guide-analysis">3 Analysis</button><button data-guide-jump="guide-investigation">4 Investigation</button><button data-guide-jump="guide-evidence">5 Evidence</button><button data-guide-jump="guide-checks">6 Checks</button><button data-guide-jump="guide-actions">7 Actions</button><button data-guide-jump="guide-tools">8 Tools</button><button data-guide-jump="guide-status">9 Data Status</button>
     </nav>
     <div class="app-guide-content">
-      <article id="guide-scan" class="app-guide-section"><span class="guide-number">1</span><div><h3>Start a scan</h3><p>Paste a URL, domain, message, or QR payload, use the camera scanner, upload supported content, or choose an example target. Proxuma first performs local analysis without visiting the target.</p><button data-guide-target="#scan">Take Me to Scan Center</button></div></article>
+      <article id="guide-scan" class="app-guide-section"><span class="guide-number">1</span><div><h3>Start a scan</h3><p>Use the unified scan workspace to paste a URL, domain, message, or QR payload, open the camera scanner inside the same card, or choose an example target. Proxuma first performs local analysis without visiting the target.</p><button data-guide-target="#scan">Open Unified Scan Workspace</button></div></article>
       <article id="guide-score" class="app-guide-section"><span class="guide-number">2</span><div><h3>Read the risk score</h3><p>The main result combines detected signals into an overall risk level. High Risk appears red, Moderate appears orange, and Good to Go appears green. The score is a combined judgment, not a count of individual high-severity findings.</p><button data-guide-target="#report">Take Me to Results</button></div></article>
       <article id="guide-analysis" class="app-guide-section"><span class="guide-number">3</span><div><h3>Use Analysis View</h3><p>Why This Score explains the decision, Trust Timeline shows how confidence developed, Threat Story connects the signals, and Decision Guide turns the result into a clear response.</p><button data-guide-target="#details">Take Me to Analysis View</button></div></article>
       <article id="guide-investigation" class="app-guide-section"><span class="guide-number">4</span><div><h3>Open the Investigation layer</h3><p>Overview summarizes the case. Deep Analysis expands the reasoning. Evidence organizes supporting details. Case File prepares a reusable packet that can be saved or copied.</p><button data-guide-target="#investigation-workspace">Take Me to Investigation</button></div></article>

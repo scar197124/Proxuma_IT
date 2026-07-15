@@ -42,7 +42,11 @@
     const cases=normalized(); const q=String($('caseCommandSearch')?.value||'').trim().toLowerCase();
     const view=cases.filter(c=>{const noteText=(c.notes||[]).map(n=>n.text).join(' ');const blob=`${c.caseId} ${c.target} ${c.riskLabel} ${c.status} ${c.action} ${noteText}`.toLowerCase();if(q&&!blob.includes(q))return false;if(filter==='priority')return priority(c);if(filter==='resolved')return statusGroup(c.status)==='resolved';if(filter==='open')return statusGroup(c.status)==='open';return true;});
     if($('caseStatTotal'))$('caseStatTotal').textContent=cases.length;if($('caseStatOpen'))$('caseStatOpen').textContent=cases.filter(c=>statusGroup(c.status)==='open').length;if($('caseStatPriority'))$('caseStatPriority').textContent=cases.filter(priority).length;if($('caseStatResolved'))$('caseStatResolved').textContent=cases.filter(c=>statusGroup(c.status)==='resolved').length;
-    const list=$('caseCommandList'); if(!list)return; list.innerHTML=''; if($('caseCommandEmpty'))$('caseCommandEmpty').hidden=cases.length!==0;
+    const hasCases=cases.length>0;const toggle=$('caseCommandToggle'),workspace=$('caseCommandWorkspace'),emptySummary=$('caseIntelligenceEmpty');
+    if(toggle){toggle.hidden=!hasCases;if(!hasCases){toggle.setAttribute('aria-expanded','false');toggle.textContent='Manage Cases';}}
+    if(emptySummary)emptySummary.hidden=hasCases;
+    if(!hasCases&&workspace)workspace.hidden=true;
+    const list=$('caseCommandList'); if(!list)return; list.innerHTML=''; if($('caseCommandEmpty'))$('caseCommandEmpty').hidden=true;
     view.forEach(c=>{const card=document.createElement('article');card.className='case-command-card'+(selectedId===c.caseId?' is-selected':'');card.dataset.priority=String(priority(c));const lastNote=(c.notes||[])[0]?.text||'No investigation notes yet.';card.innerHTML=`<div class="case-card-top"><span class="case-card-id">${escapeHTML(c.caseId)}</span><span class="case-card-risk">${escapeHTML(c.riskLabel||'Unknown')} · ${escapeHTML(c.riskScore??0)}</span></div><div class="case-card-target">${escapeHTML(c.target||'Unknown target')}</div><div class="case-card-meta"><span>${escapeHTML(c.confidence||'Confidence unknown')}</span><span>•</span><span>${escapeHTML(stamp(c.timestamp))}</span></div><div class="case-card-note-preview" title="${escapeHTML(lastNote)}">Latest note: ${escapeHTML(lastNote)}</div><div class="case-card-top"><label><span class="sr-only">Case status</span><select class="case-card-status" data-case-status="${escapeHTML(c.caseId)}"><option>New</option><option>Investigating</option><option>Action Required</option><option>Monitoring</option><option>Resolved</option></select></label><span>${priority(c)?'Priority case':'Standard case'}</span></div><div class="case-card-actions"><button type="button" class="case-journal-open" data-case-journal="${escapeHTML(c.caseId)}">Notes & Timeline</button><button type="button" class="case-open" data-case-open="${escapeHTML(c.caseId)}">Reopen</button><button type="button" data-case-copy="${escapeHTML(c.caseId)}">Copy Brief</button><button type="button" data-case-remove="${escapeHTML(c.caseId)}">Remove</button></div>`;card.querySelector('select').value=c.status;list.appendChild(card);});
     if(cases.length&&view.length===0)list.innerHTML='<div class="case-command-empty"><strong>No matching cases.</strong><span>Change the search or filter to see other investigations.</span></div>';
     if(selectedId&&!cases.some(c=>c.caseId===selectedId))selectedId='';
@@ -50,12 +54,12 @@
   }
   function renderJournal(c){
     const title=$('caseJournalTitle'),target=$('caseJournalTarget'),badge=$('caseJournalStatus'),note=$('caseJournalNote'),add=$('caseJournalAdd'),copy=$('caseJournalCopy'),timeline=$('caseTimeline'),count=$('caseTimelineCount');if(!title||!timeline)return;
-    if(!c){title.textContent='Select a saved case';target.textContent='Choose a case to view notes and its investigation timeline.';badge.textContent='Waiting';note.disabled=true;add.disabled=true;copy.disabled=true;timeline.innerHTML='<li class="case-timeline-empty">No case selected.</li>';count.textContent='0 entries';return;}
-    title.textContent=c.caseId;target.textContent=c.target||'Unknown target';badge.textContent=c.status;note.disabled=false;add.disabled=false;copy.disabled=false;
+    if(!c){if($('caseJournal'))$('caseJournal').hidden=true;title.textContent='Select a saved case';target.textContent='Choose a case to view notes and its investigation timeline.';badge.textContent='Waiting';note.disabled=true;add.disabled=true;copy.disabled=true;timeline.innerHTML='<li class="case-timeline-empty">No case selected.</li>';count.textContent='0 entries';return;}
+    if($('caseJournal'))$('caseJournal').hidden=false;title.textContent=c.caseId;target.textContent=c.target||'Unknown target';badge.textContent=c.status;note.disabled=false;add.disabled=false;copy.disabled=false;
     const entries=[...(c.timeline||[])].sort((a,b)=>String(b.at).localeCompare(String(a.at)));count.textContent=`${entries.length} ${entries.length===1?'entry':'entries'}`;timeline.innerHTML=entries.length?entries.map(e=>`<li><strong>${escapeHTML(e.title||'Activity')}</strong><time datetime="${escapeHTML(e.at||'')}">${escapeHTML(stamp(e.at))}</time><span>${escapeHTML(e.detail||'')}</span></li>`).join(''):'<li class="case-timeline-empty">No activity recorded.</li>';
   }
   function findCase(id){return normalized().find(c=>c.caseId===id);}
-  function selectCase(id){selectedId=id;render();setTimeout(()=>$('caseJournal')?.scrollIntoView({behavior:'smooth',block:'nearest'}),20);announce(`${id} journal opened.`);}
+  function selectCase(id){selectedId=id;if($('caseCommandWorkspace'))$('caseCommandWorkspace').hidden=false;if($('caseCommandToggle')){$('caseCommandToggle').setAttribute('aria-expanded','true');$('caseCommandToggle').textContent='Hide Cases';}render();setTimeout(()=>$('caseJournal')?.scrollIntoView({behavior:'smooth',block:'nearest'}),20);announce(`${id} journal opened.`);}
   function openCase(id){const c=findCase(id);if(!c)return;selectedId=id;const input=$('targetInput');if(input){input.value=c.target||'';input.dispatchEvent(new Event('input',{bubbles:true}));}const m=meta();const r=ensureRecord(m,c);if(r.status==='New')r.status='Investigating';r.openedAt=now();r.updatedAt=now();r.timeline.unshift({type:'reopened',title:'Case reopened',detail:'Saved target restored and submitted for a fresh local analysis.',at:now()});saveMeta(m);$('scanButton')?.click();setTimeout(()=>document.getElementById('missionControl')?.scrollIntoView({behavior:'smooth',block:'center'}),250);announce(`${id} reopened and re-analyzed.`);render();}
   function brief(c){const notes=(c.notes||[]).map(n=>`- ${stamp(n.at)}: ${n.text}`).join('\n')||'- No notes recorded';return `Proxuma IT Case Brief\nCase: ${c.caseId}\nTarget: ${c.target}\nVerdict: ${c.riskLabel} (${c.riskScore}/100)\nConfidence: ${c.confidence}\nStatus: ${c.status}\nRecommended action: ${c.action||'Review the case.'}\n\nInvestigation Notes\n${notes}`;}
   function copyText(text,done){if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(done).catch(done);else done();}
@@ -63,13 +67,39 @@
   function copyTimeline(){const c=findCase(selectedId);if(!c)return;const rows=(c.timeline||[]).sort((a,b)=>String(a.at).localeCompare(String(b.at))).map(e=>`${stamp(e.at)} — ${e.title}: ${e.detail}`).join('\n');copyText(`Proxuma IT Investigation Timeline\nCase: ${c.caseId}\nTarget: ${c.target}\n\n${rows}`,()=>announce(`${c.caseId} timeline copied.`));}
   function addNote(){const input=$('caseJournalNote');const text=String(input?.value||'').trim();const c=findCase(selectedId);if(!c||!text)return;const m=meta();const r=ensureRecord(m,c);const entry={text,at:now()};r.notes.unshift(entry);r.timeline.unshift({type:'note',title:'Investigation note added',detail:text,at:entry.at});r.updatedAt=entry.at;if(r.status==='New')r.status='Investigating';saveMeta(m);input.value='';render();announce(`Note added to ${c.caseId}.`);}
   function removeCase(id){const remaining=history().filter(c=>c.caseId!==id);try{localStorage.setItem(HISTORY_KEY,JSON.stringify(remaining));}catch(_){}const m=meta();delete m[id];saveMeta(m);if(selectedId===id)selectedId='';render();document.dispatchEvent(new CustomEvent('proxuma:case-history-changed'));announce(`${id} removed from local case history.`);}
+
+  function currentReport(detail){
+    const d=detail&&typeof detail==='object'?(detail.report||detail):{};
+    const r=(d&&Object.keys(d).length?d:null)||window.ProxumaReport||window.ProxumaLegacyLastReport||{};
+    const target=String(r.target||r.input||$('targetInput')?.value||'').trim();
+    const scanned=Boolean(r.scanned||target&&(r.riskLabel||r.verdict||Number.isFinite(Number(r.riskScore))));
+    return {scanned,target,riskLabel:String(r.riskLabel||r.verdict||$('riskLabel')?.textContent||'Result'),riskScore:Number(r.riskScore??r.score??$('scoreValue')?.textContent??0)||0,confidence:String(r.confidence||$('confidenceBrief')?.textContent||'Not measured'),action:String(r.action||r.nextStep||$('missionNext')?.textContent||'Review the findings')};
+  }
+  function renderCurrent(detail){
+    const r=currentReport(detail),preview=$('caseCurrentPreview');
+    if(!preview)return;
+    preview.hidden=!r.scanned;
+    if(!r.scanned)return;
+    if($('caseCurrentVerdict'))$('caseCurrentVerdict').textContent=r.riskLabel;
+    if($('caseCurrentTarget'))$('caseCurrentTarget').textContent=r.target||r.action;
+    if($('caseCurrentRisk'))$('caseCurrentRisk').textContent=String(r.riskScore);
+    if($('caseCurrentConfidence'))$('caseCurrentConfidence').textContent=r.confidence;
+  }
+
   function syncSavedCases(){const m=meta();let changed=false;history().forEach(c=>{if(!m[c.caseId]){ensureRecord(m,c);changed=true;}});if(changed)saveMeta(m);render();document.dispatchEvent(new CustomEvent('proxuma:case-history-changed'));}
   function bind(){
+    const toggle=$('caseCommandToggle'),workspace=$('caseCommandWorkspace');
+    toggle?.addEventListener('click',()=>{const opening=workspace?.hidden!==false;if(workspace)workspace.hidden=!opening;toggle.setAttribute('aria-expanded',String(opening));toggle.textContent=opening?'Close Cases':'Manage Cases';if(!opening){selectedId='';renderJournal(null);}});
+    $('caseJournalClose')?.addEventListener('click',()=>{selectedId='';render();});
     $('caseCommandSearch')?.addEventListener('input',render);document.querySelectorAll('[data-case-filter]').forEach(btn=>btn.addEventListener('click',()=>{filter=btn.dataset.caseFilter;document.querySelectorAll('[data-case-filter]').forEach(x=>x.classList.toggle('active',x===btn));render();}));
     $('caseCommandList')?.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.caseJournal)selectCase(b.dataset.caseJournal);else if(b.dataset.caseOpen)openCase(b.dataset.caseOpen);else if(b.dataset.caseCopy)copyCase(b.dataset.caseCopy);else if(b.dataset.caseRemove)removeCase(b.dataset.caseRemove);});
     $('caseCommandList')?.addEventListener('change',e=>{const s=e.target.closest('[data-case-status]');if(s)setStatus(s.dataset.caseStatus,s.value);});
-    $('caseCommandStart')?.addEventListener('click',()=>document.getElementById('scan')?.scrollIntoView({behavior:'smooth',block:'start'}));$('caseJournalAdd')?.addEventListener('click',addNote);$('caseJournalCopy')?.addEventListener('click',copyTimeline);$('caseJournalNote')?.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')addNote();});
-    $('visibleSaveCase')?.addEventListener('click',()=>setTimeout(syncSavedCases,100));const recent=$('visibleCaseHistory');if(recent)new MutationObserver(syncSavedCases).observe(recent,{childList:true,subtree:true,characterData:true});window.addEventListener('storage',e=>{if([HISTORY_KEY,META_KEY,LEGACY_META_KEY].includes(e.key))render();});render();
+    $('caseJournalAdd')?.addEventListener('click',addNote);$('caseJournalCopy')?.addEventListener('click',copyTimeline);$('caseJournalNote')?.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')addNote();});
+    $('visibleSaveCase')?.addEventListener('click',()=>setTimeout(syncSavedCases,100));
+    $('caseCurrentSave')?.addEventListener('click',()=>$('visibleSaveCase')?.click());
+    ['proxuma:legacy-scan-complete','proxuma:scan-result','proxuma:dashboard-synced','proxuma:report-ready'].forEach(name=>document.addEventListener(name,e=>setTimeout(()=>renderCurrent(e.detail),0)));
+    document.addEventListener('proxuma:new-investigation',()=>{if($('caseCurrentPreview'))$('caseCurrentPreview').hidden=true;});
+    const recent=$('visibleCaseHistory');if(recent)new MutationObserver(syncSavedCases).observe(recent,{childList:true,subtree:true,characterData:true});window.addEventListener('storage',e=>{if([HISTORY_KEY,META_KEY,LEGACY_META_KEY].includes(e.key))render();});render();renderCurrent();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();
 })();
