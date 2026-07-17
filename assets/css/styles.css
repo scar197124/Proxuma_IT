@@ -19237,3 +19237,199 @@ body.theme-light .app-guide-close{color:#0b5528!important;}
 @media(max-width:680px){
   .captain-wire-ui .public-beta-safety{flex-direction:column;gap:3px;padding:9px 10px;}
 }
+
+/* ==========================================================
+   RC15.1 — Mobile Landscape Analysis View + Footer Containment
+   Keeps the Analysis View header fully visible, preserves a true
+   internal-scroll content lane, and prevents footer actions from
+   overflowing short landscape viewports.
+   ========================================================== */
+@media (max-width: 950px) and (orientation: landscape),
+       (max-width: 900px) and (max-height: 650px) {
+  .captain-wire-ui #details.intelligence-drawer.grouped-content-card{
+    display:grid !important;
+    grid-template-columns:minmax(138px, 174px) minmax(0,1fr) !important;
+    grid-template-rows:auto minmax(0,1fr) !important;
+    height:clamp(340px, calc(100dvh - 76px), 470px) !important;
+    min-height:340px !important;
+    max-height:470px !important;
+    overflow:hidden !important;
+    padding:12px !important;
+    gap:9px !important;
+  }
+
+  .captain-wire-ui #details .analysis-view-head{
+    grid-column:1 / -1 !important;
+    grid-row:1 !important;
+    min-width:0 !important;
+    min-height:44px !important;
+    padding:3px 78px 7px 8px !important;
+    display:block !important;
+    text-align:left !important;
+    overflow:visible !important;
+  }
+
+  .captain-wire-ui #details .analysis-view-head > div{
+    min-width:0 !important;
+  }
+
+  .captain-wire-ui #details .analysis-view-head .eyebrow{
+    font-size:.64rem !important;
+    line-height:1 !important;
+    letter-spacing:.14em !important;
+  }
+
+  .captain-wire-ui #details .analysis-view-head h3{
+    max-width:100% !important;
+    margin-top:3px !important;
+    font-size:clamp(.78rem, 2.1vw, .96rem) !important;
+    line-height:1.12 !important;
+    white-space:normal !important;
+    overflow-wrap:anywhere !important;
+  }
+
+  .captain-wire-ui #details .analysis-view-status{
+    position:absolute !important;
+    inset:auto 5px auto auto !important;
+    top:50% !important;
+    transform:translateY(-50%) !important;
+    max-width:68px !important;
+    margin:0 !important;
+    padding:4px 7px !important;
+    font-size:.62rem !important;
+    line-height:1 !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+
+  .captain-wire-ui #details .drawer-tabs.analysis-segmented-tabs{
+    grid-column:1 !important;
+    grid-row:2 !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    height:100% !important;
+    max-height:100% !important;
+    flex-direction:column !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    padding:0 7px 8px 0 !important;
+    border-right:1px solid rgba(170,184,200,.18) !important;
+    border-bottom:0 !important;
+    overscroll-behavior:contain !important;
+  }
+
+  .captain-wire-ui #details .analysis-segmented-tabs .drawer-tab{
+    width:100% !important;
+    min-width:0 !important;
+    min-height:30px !important;
+    padding:6px 8px !important;
+    font-size:.68rem !important;
+    line-height:1.05 !important;
+    text-align:left !important;
+    white-space:normal !important;
+  }
+
+  .captain-wire-ui #details .drawer-stage{
+    grid-column:2 !important;
+    grid-row:2 !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    height:100% !important;
+    max-height:100% !important;
+    overflow:hidden !important;
+    padding:10px 9px 8px 11px !important;
+  }
+
+  .captain-wire-ui #details .drawer-panel,
+  .captain-wire-ui #details .drawer-panel:not([hidden]){
+    min-width:0 !important;
+    min-height:0 !important;
+    height:100% !important;
+    max-height:100% !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    overscroll-behavior:contain !important;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-gutter:stable;
+    padding:0 8px 18px 0 !important;
+  }
+
+  .captain-wire-ui #details .drawer-panel > *{
+    max-width:100% !important;
+  }
+
+  .captain-wire-ui #details .drawer-panel h3{
+    font-size:1rem !important;
+    margin-bottom:6px !important;
+  }
+
+  .captain-wire-ui #details .drawer-panel :is(p,li){
+    font-size:.76rem !important;
+    line-height:1.38 !important;
+  }
+
+  .captain-wire-ui .wire-footer{
+    grid-template-columns:minmax(120px,.32fr) minmax(0,1fr) !important;
+    gap:10px !important;
+    align-items:start !important;
+    padding:10px !important;
+  }
+
+  .captain-wire-ui .wire-footer > .secondary-action{
+    width:100% !important;
+    min-width:0 !important;
+    padding:9px 10px !important;
+    text-align:center !important;
+  }
+
+  .captain-wire-ui .wire-footer > div{
+    min-width:0 !important;
+  }
+
+  .captain-wire-ui .wire-footer > div > p:not(.fine-print){
+    margin:3px 0 6px !important;
+    font-size:.72rem !important;
+  }
+
+  .captain-wire-ui .wire-footer .wired-footer-actions{
+    display:grid !important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:6px !important;
+    margin-top:6px !important;
+  }
+
+  .captain-wire-ui .wire-footer .wired-footer-actions button{
+    min-width:0 !important;
+    width:100% !important;
+    padding:8px 6px !important;
+    font-size:.68rem !important;
+    line-height:1.08 !important;
+    white-space:normal !important;
+  }
+}
+
+@media (max-width: 620px) and (orientation: landscape),
+       (max-width: 620px) and (max-height: 520px) {
+  .captain-wire-ui #details.intelligence-drawer.grouped-content-card{
+    grid-template-columns:124px minmax(0,1fr) !important;
+    height:clamp(320px, calc(100dvh - 58px), 410px) !important;
+    min-height:320px !important;
+  }
+
+  .captain-wire-ui #details .analysis-view-head{
+    padding-right:66px !important;
+  }
+
+  .captain-wire-ui #details .analysis-view-status{
+    max-width:58px !important;
+    font-size:.58rem !important;
+  }
+
+  .captain-wire-ui .wire-footer{
+    grid-template-columns:1fr !important;
+  }
+
+  .captain-wire-ui .wire-footer .wired-footer-actions{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
