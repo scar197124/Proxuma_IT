@@ -19736,3 +19736,208 @@ body.theme-light .app-guide-close{color:#0b5528!important;}
   :root{--wire-width:calc(100vw - 18px)!important;}
   .captain-wire-ui #workflow .finding-progress-copy{align-items:flex-start;}
 }
+
+/* v3.51.0 Case Management Workspace */
+.case-management-workspace{display:grid;gap:14px}.case-management-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.case-management-head h2{margin:.12rem 0 .25rem}.case-management-head p:last-child{margin:0;max-width:760px}.case-management-grid{display:grid;grid-template-columns:minmax(220px,1.5fr) repeat(3,minmax(150px,.7fr));gap:10px}.case-management-grid label,.case-management-notes label{display:grid;gap:6px}.case-management-grid label>span,.case-management-notes label>span{font-size:.72rem;font-weight:800;letter-spacing:.055em;text-transform:uppercase;opacity:.78}.case-management-grid :is(input,select,output),.case-management-notes textarea{width:100%;min-height:42px;padding:9px 11px;border:1px solid color-mix(in srgb,var(--proxuma-live-risk-accent,#52f902) 18%,rgba(138,157,179,.42));border-radius:10px;background:rgba(8,14,20,.48);color:inherit;font:inherit}.case-management-grid output{display:flex;align-items:center}.case-management-notes{display:grid;grid-template-columns:1fr 1fr;gap:10px}.case-management-notes textarea{resize:vertical;min-height:92px;line-height:1.45}.case-management-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.case-management-actions small{margin-left:auto;opacity:.7}.case-management-workspace[data-status="resolved"]{border-color:rgba(82,249,2,.42)}.case-management-workspace[data-priority="critical"]{box-shadow:inset 4px 0 0 #ff4d57}.case-management-workspace[data-priority="high"]{box-shadow:inset 4px 0 0 #ff8b3d}.theme-light.captain-wire-ui .case-management-grid :is(input,select,output),.theme-light.captain-wire-ui .case-management-notes textarea{background:#fff;color:#172033;border-color:rgba(65,83,107,.28)}
+@media(max-width:980px){.case-management-grid{grid-template-columns:1fr 1fr}.case-management-notes{grid-template-columns:1fr}}
+@media(max-width:620px){.case-management-head{display:grid}.case-management-grid{grid-template-columns:1fr}.case-management-actions>*{width:100%}.case-management-actions small{margin-left:0}.case-management-notes textarea{min-height:84px}}
+
+
+/* v3.51.1 Unified Case Intelligence & Management */
+.case-command-center{overflow:hidden}
+.unified-case-tabs{display:none}
+.unified-case-grid{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(390px,.82fr);gap:14px;align-items:stretch;margin-top:12px}
+.unified-case-pane,.unified-case-management{min-width:0;border:1px solid color-mix(in srgb,var(--wire-line,#33404c) 72%,transparent);border-radius:14px;background:color-mix(in srgb,var(--panel,#10161c) 88%,transparent);padding:12px}
+.unified-case-intelligence{display:grid;align-content:start;gap:10px}
+.unified-case-intelligence>.case-current-preview,.unified-case-intelligence>.case-intelligence-empty,.unified-case-intelligence>.case-comparison-panel,.unified-case-intelligence>.case-command-workspace{margin-top:0}
+.unified-case-intelligence>#caseCommandStatus{margin:.25rem 0 0}
+.unified-case-management{display:grid;align-content:start;gap:12px;margin:0}
+.unified-case-management .case-management-head{padding-bottom:9px;border-bottom:1px solid color-mix(in srgb,var(--wire-line,#33404c) 72%,transparent)}
+.unified-case-management .case-management-head p:last-child{font-size:.78rem}
+.unified-case-management .case-management-grid{grid-template-columns:1fr 1fr}
+.unified-case-management .case-management-notes{grid-template-columns:1fr}
+.unified-case-management .case-management-notes textarea{min-height:78px}
+.unified-case-management .case-management-actions small{width:100%;margin-left:0}
+.theme-light.captain-wire-ui .unified-case-pane,.theme-light.captain-wire-ui .unified-case-management{background:#fff;border-color:rgba(65,83,107,.2)}
+@media(max-width:1100px){.unified-case-grid{grid-template-columns:minmax(0,1fr) minmax(340px,.82fr)}}
+@media(max-width:900px){
+  .unified-case-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:11px;padding:4px;border:1px solid var(--wire-line);border-radius:12px;background:color-mix(in srgb,var(--panel,#10161c) 82%,transparent)}
+  .unified-case-tabs button{min-height:38px;border:0;border-radius:9px;background:transparent;color:inherit;font-weight:800}
+  .unified-case-tabs button.active{background:color-mix(in srgb,var(--proxuma-live-risk-accent,#52f902) 16%,var(--panel,#10161c));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--proxuma-live-risk-accent,#52f902) 36%,transparent)}
+  .unified-case-grid{display:block;margin-top:8px}
+  .unified-case-grid>[data-unified-case-hidden="true"]{display:none!important}
+  .unified-case-pane,.unified-case-management{border-radius:13px}
+}
+@media(max-width:620px){
+  .unified-case-pane,.unified-case-management{padding:10px}
+  .unified-case-management .case-management-grid{grid-template-columns:1fr}
+  .unified-case-management .case-management-head{display:grid;gap:7px}
+  .unified-case-management .case-management-actions{display:grid;grid-template-columns:1fr 1fr}
+  .unified-case-management .case-management-actions small{grid-column:1/-1}
+}
+
+/* === v3.52.0 Progressive Investigation Flow === */
+body.proxuma-progressive:not(.proxuma-has-scan) .progressive-result,
+body.proxuma-progressive:not(.proxuma-has-scan) #caseWorkspaceLauncher,
+body.proxuma-progressive:not(.proxuma-has-scan) #caseCommandCenter {
+  display: none !important;
+}
+body.proxuma-progressive.proxuma-has-scan .progressive-result {
+  animation: proxuma-progressive-reveal .34s ease both;
+}
+@keyframes proxuma-progressive-reveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.case-workspace-launcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 16px 0;
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, var(--accent, #57d3ff) 36%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--panel, #101820) 92%, var(--accent, #57d3ff) 8%);
+}
+.case-workspace-launcher > div:first-child { min-width: 0; }
+.case-workspace-launcher small { display:block; margin-bottom:4px; text-transform:uppercase; letter-spacing:.08em; opacity:.72; }
+.case-workspace-launcher strong { display:block; font-size:1.05rem; }
+.case-workspace-launcher p { margin:4px 0 0; opacity:.78; }
+.case-workspace-launcher-actions { display:flex; gap:8px; flex:0 0 auto; }
+.case-workspace-launcher.is-open { border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
+#caseCommandCenter[hidden] { display:none !important; }
+#caseCommandCenter:not([hidden]) { animation: proxuma-progressive-reveal .28s ease both; }
+@media (max-width: 760px) {
+  .case-workspace-launcher { align-items:stretch; flex-direction:column; padding:14px; }
+  .case-workspace-launcher-actions { display:grid; grid-template-columns:1fr 1fr; width:100%; }
+  .case-workspace-launcher-actions button { min-width:0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.proxuma-progressive.proxuma-has-scan .progressive-result,
+  #caseCommandCenter:not([hidden]) { animation:none; }
+}
+
+/* v3.53.0 — Unified Investigation Workspace */
+#investigation-workspace{
+  grid-column:1/-1;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  padding:16px;
+}
+.unified-investigation-head{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:10px}
+.unified-investigation-head h2{margin:2px 0 4px;font-size:clamp(1.25rem,2vw,1.7rem)}
+.unified-investigation-head p:not(.eyebrow){margin:0;color:var(--wire-muted);max-width:780px}
+.unified-investigation-status{flex:0 0 auto}
+#missionControl.unified-investigation-status{position:relative;top:auto;margin:0 0 12px;grid-template-columns:minmax(170px,1.1fr) repeat(3,minmax(110px,.7fr)) minmax(180px,1.2fr) auto;border-radius:14px;box-shadow:none}
+.unified-investigation-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 12px;padding:5px;border:1px solid color-mix(in srgb,var(--wire-line) 70%,transparent);border-radius:13px;background:rgba(127,151,170,.055)}
+.unified-investigation-tabs button{min-height:40px;border:1px solid transparent;border-radius:10px;background:transparent;color:inherit;font:inherit;font-weight:850;cursor:pointer}
+.unified-investigation-tabs button.active{border-color:#2d8eff;background:rgba(45,142,255,.14);box-shadow:inset 0 0 0 1px rgba(45,142,255,.12)}
+.unified-investigation-pane[hidden]{display:none!important}
+.unified-investigation-pane{animation:unifiedInvestigationIn .2s ease}
+.unified-investigation-decision{margin:0;box-shadow:none}
+.unified-act-intro{display:grid;gap:4px;padding:14px;border:1px solid rgba(127,151,170,.18);border-radius:13px;background:rgba(127,151,170,.055)}
+.unified-act-intro small{text-transform:uppercase;letter-spacing:.09em;opacity:.68;font-weight:800}
+.unified-act-intro strong{font-size:1.05rem}.unified-act-intro p{margin:0;color:var(--wire-muted)}
+.unified-act-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:10px}
+.unified-act-grid button{min-height:44px}
+.unified-act-status{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:10px;padding:10px 12px;border-radius:11px;background:rgba(61,245,110,.065);border:1px solid rgba(61,245,110,.18)}
+.unified-act-status span{font-weight:850;color:#73ff9d}.unified-act-status small{color:var(--wire-muted);text-align:right}
+.mid-lanes{grid-template-columns:1fr 1fr!important}
+.mid-lanes>#scan-detail-workspace,.mid-lanes>.offline-card{min-width:0}
+@keyframes unifiedInvestigationIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(max-width:1100px){
+  #missionControl.unified-investigation-status{grid-template-columns:repeat(4,minmax(0,1fr))}
+  #missionControl.unified-investigation-status .mission-heading,#missionControl.unified-investigation-status .mission-action-copy{grid-column:span 2}
+  #missionControl.unified-investigation-status .mission-buttons{grid-column:1/-1}
+}
+@media(max-width:820px){
+  .unified-investigation-head{align-items:flex-start;flex-direction:column}.unified-investigation-status{align-self:flex-start}
+  .unified-act-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .unified-act-status{align-items:flex-start;flex-direction:column}.unified-act-status small{text-align:left}
+  .mid-lanes{grid-template-columns:1fr!important}
+}
+@media(max-width:560px){
+  #investigation-workspace{padding:12px}
+  .unified-investigation-tabs{position:sticky;top:8px;z-index:4}
+  .unified-investigation-tabs button{font-size:.78rem;padding:8px 4px}
+  .unified-act-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){.unified-investigation-pane{animation:none}}
+
+/* === Proxuma IT v3.53.1 — Final Investigation Control Polish === */
+.unified-investigation-tabs{
+  gap:5px;
+  margin-bottom:9px;
+  padding:3px;
+  border-radius:11px;
+}
+.unified-investigation-tabs button{
+  min-height:32px;
+  padding:5px 8px;
+  border-radius:8px;
+  font-size:.78rem;
+  line-height:1.05;
+  letter-spacing:.01em;
+}
+#investigation-controls.tab-row{
+  gap:5px!important;
+  margin:5px 0 8px!important;
+}
+#investigation-controls.tab-row button{
+  min-height:30px!important;
+  padding:5px 9px!important;
+  border-radius:8px!important;
+  font-size:.74rem!important;
+  line-height:1.05!important;
+}
+@media(max-width:760px){
+  .unified-investigation-tabs{gap:4px;padding:3px;top:6px}
+  .unified-investigation-tabs button{min-height:30px;padding:4px 5px;font-size:.72rem}
+  #investigation-controls.tab-row button{min-height:29px!important;padding:5px 6px!important;font-size:.7rem!important}
+}
+
+/* === Proxuma IT v3.54.0 — Stability and Accessibility Release Candidate === */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid color-mix(in srgb, #62e6ff 82%, white);
+  outline-offset: 3px;
+}
+
+input[aria-invalid="true"], textarea[aria-invalid="true"] {
+  border-color: #ff6b72 !important;
+  box-shadow: 0 0 0 3px rgb(255 107 114 / 18%);
+}
+
+.release-status {
+  position: fixed;
+  z-index: 10000;
+  right: 1rem;
+  bottom: 1rem;
+  width: min(30rem, calc(100vw - 2rem));
+  padding: .8rem 1rem;
+  border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-radius: .8rem;
+  background: color-mix(in srgb, var(--panel, #101820) 94%, black);
+  color: var(--text, #f5f9fc);
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 28%);
+  font-size: .88rem;
+  line-height: 1.45;
+}
+.release-status.is-warning { border-color: #f1bb52; }
+.release-status.is-error { border-color: #ff6b72; }
+
+[role="tab"] { touch-action: manipulation; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .release-status { right: .75rem; bottom: .75rem; width: calc(100vw - 1.5rem); }
+}

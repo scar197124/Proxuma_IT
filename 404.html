@@ -22,7 +22,7 @@
 <link rel="icon" type="image/png" href="assets/images/proxuma-it-logo.png" />
 <link rel="apple-touch-icon" href="assets/images/proxuma-it-logo.png" />
 <link rel="stylesheet" href="assets/css/styles.css?v=rc15-public-beta-1" />
-<meta name="proxuma-build" content="ui-1.0-rc15-public-beta" />
+<meta name="proxuma-build" content="v3.54.0-release-candidate" />
 </head>
 <body class="theme-dark captain-wire-ui">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
@@ -64,10 +64,10 @@
         <div class="scan-engine-examples"><strong>Try an example</strong><div class="quick-tests" aria-label="Example targets"><button data-example="https://www.rbcroyalbank.com/" type="button">Trusted bank</button><button data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button">Leetspeak phish</button><button data-example="https://www.rbcr0yalbank.com/" type="button">Lookalike bank</button><button data-example="javascript:alert(1)" type="button">Script payload</button></div></div>
       </article>
       <aside class="public-beta-safety" role="note" aria-label="Safety limitation"><strong>Public beta safety note</strong><span>Proxuma identifies risk signals but cannot guarantee that an item is safe. Do not open suspicious links solely because a result appears low risk.</span></aside>
-      <article id="report" class="wire-card report-panel result-card result-card-horizontal" aria-live="polite" aria-label="Analysis results"><div class="result-summary"><div><p class="eyebrow">Step 2 · Analysis result</p><h2 id="riskLabel">Ready to scan</h2><p id="summaryText">Enter a target above to generate a report.</p></div><div class="score-ring"><span id="scoreValue">0</span><small>risk score</small></div></div><div class="result-details"><div class="heat-zone"><div class="heat-meta"><span>Risk Heat</span><strong id="heatLabel">Standby</strong></div><div class="heat-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="heatFill"></span></div></div><div class="snapshot-grid"><div><small>Signals</small><strong id="signalCount">0</strong></div><div><small>Input</small><strong id="inputTypeLabel">Standby</strong></div><div><small>Trigger</small><strong id="primaryTrigger">Waiting</strong></div><div><small>Time</small><strong id="reportTimestamp">Not scanned</strong></div></div></div></article>
+      <article id="report" class="progressive-result wire-card report-panel result-card result-card-horizontal" aria-live="polite" aria-label="Analysis results"><div class="result-summary"><div><p class="eyebrow">Step 2 · Analysis result</p><h2 id="riskLabel">Ready to scan</h2><p id="summaryText">Enter a target above to generate a report.</p></div><div class="score-ring"><span id="scoreValue">0</span><small>risk score</small></div></div><div class="result-details"><div class="heat-zone"><div class="heat-meta"><span>Risk Heat</span><strong id="heatLabel">Standby</strong></div><div class="heat-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="heatFill"></span></div></div><div class="snapshot-grid"><div><small>Signals</small><strong id="signalCount">0</strong></div><div><small>Input</small><strong id="inputTypeLabel">Standby</strong></div><div><small>Trigger</small><strong id="primaryTrigger">Waiting</strong></div><div><small>Time</small><strong id="reportTimestamp">Not scanned</strong></div></div></div></article>
     </div>
 
-    <aside id="scanSourceBar" class="scan-source-bar" aria-label="Scan source and freshness" aria-live="polite">
+    <aside id="scanSourceBar" class="progressive-result scan-source-bar" aria-label="Scan source and freshness" aria-live="polite">
       <div class="scan-source-summary">
         <span class="scan-source-label">Data Status</span>
         <strong id="scanSourceState">Ready</strong>
@@ -78,7 +78,7 @@
       <time id="scanSourceFreshness" datetime="">Not scanned</time>
     </aside>
 
-    <section id="missionControl" class="mission-control" data-mission-tone="idle" data-mission-state="idle" aria-label="Mission Control" aria-live="polite">
+    <section id="missionControl" class="progressive-result mission-control" data-mission-tone="idle" data-mission-state="idle" aria-label="Mission Control" aria-live="polite">
       <div class="mission-heading"><span class="mission-pulse" aria-hidden="true"></span><div><small>Mission Control</small><strong id="missionState">Ready for target</strong></div></div>
       <div class="mission-fact"><small>Verdict</small><strong id="missionVerdict">No scan yet</strong></div>
       <div class="mission-score"><small>Risk</small><strong id="missionScore">—</strong><span class="mission-meter" aria-hidden="true"><i id="missionMeterFill"></i></span></div>
@@ -88,7 +88,7 @@
     </section>
 
 
-    <section id="decisionFlow" class="decision-flow" data-flow-stage="scan" aria-label="Guided decision flow">
+    <section id="decisionFlow" class="progressive-result decision-flow" data-flow-stage="scan" aria-label="Guided decision flow">
       <div class="decision-flow-head">
         <div><small>Guided Decision Flow</small><h2>Scan → Understand → Verify → Act → Save</h2><p id="decisionFlowLead">Begin with a scan. Proxuma will keep the next useful step in view.</p></div>
         <div class="decision-flow-progress" role="progressbar" aria-label="Investigation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="decisionFlowFill"></span><strong id="decisionFlowPercent">0%</strong></div>
@@ -107,7 +107,13 @@
     </section>
 
 
-    <section id="caseCommandCenter" class="case-command-center case-intelligence-compact" aria-labelledby="caseCommandTitle">
+
+    <section id="caseWorkspaceLauncher" class="case-workspace-launcher progressive-result" aria-label="Case workspace controls">
+      <div><small>Case workspace available</small><strong>Continue this investigation</strong><p>Review case intelligence, add notes, set status and priority, or save the investigation.</p></div>
+      <div class="case-workspace-launcher-actions"><button id="openCaseWorkspace" class="primary-action" type="button" aria-expanded="false" aria-controls="caseCommandCenter">Open Case Workspace</button><button id="quickSaveCase" class="secondary-action" type="button">Save Case</button></div>
+    </section>
+
+    <section id="caseCommandCenter" class="case-workspace-surface case-command-center case-intelligence-compact" aria-labelledby="caseCommandTitle">
       <div class="case-command-head case-intelligence-head"><div><small>Saved Investigation Memory</small><h2 id="caseCommandTitle">Case Intelligence</h2><p>Saved investigations stay available without crowding the main workflow.</p></div><div class="case-command-stats" aria-label="Case summary"><div><span id="caseStatTotal">0</span><small>Total</small></div><div><span id="caseStatOpen">0</span><small>Open</small></div><div><span id="caseStatPriority">0</span><small>Priority</small></div><div><span id="caseStatResolved">0</span><small>Resolved</small></div></div><button id="caseCommandToggle" class="secondary-action case-command-toggle" type="button" aria-expanded="false" aria-controls="caseCommandWorkspace" hidden>Manage Cases</button></div>
       <div id="caseCurrentPreview" class="case-current-preview" hidden aria-live="polite">
         <div class="case-current-copy"><small>Current Investigation</small><strong id="caseCurrentVerdict">Waiting for a scan</strong><span id="caseCurrentTarget">Complete a scan to generate a compact case preview.</span></div>
@@ -119,7 +125,7 @@
       <p id="caseCommandStatus" class="fine-print" aria-live="polite">Case intelligence is stored locally in this browser.</p>
     </section>
 
-    <section class="mid-lanes" aria-label="Investigation, evidence, and offline controls">
+    <section class="mid-lanes progressive-result" aria-label="Investigation, evidence, and offline controls">
       <article class="wire-card investigation-workspace" id="investigation-workspace">
         <div class="lane-compact-head"><h3>🔎 Investigation</h3><p>Choose view</p></div><div class="case-packet-status" aria-live="polite"><span id="casePacketBadge">Mission ready</span><span id="casePacketMeta">Run a scan to build a case packet.</span></div>
         <div id="investigation-controls" class="tab-row"><button type="button" class="active" data-investigation-view="overview">Overview</button><button type="button" data-investigation-view="evidence">Evidence</button><button type="button" data-investigation-view="deep">Deep Analysis</button><button type="button" data-investigation-view="case">Case File</button></div>
@@ -161,7 +167,7 @@
       </article>
     </section>
 
-    <div class="action-review-grid" aria-label="Result explanation and action plan">
+    <div class="action-review-grid progressive-result" aria-label="Result explanation and action plan">
     <section id="details" class="wire-card intelligence-drawer grouped-content-card" aria-label="Deep analysis">
       <div class="analysis-view-head"><div><p class="eyebrow">Analysis Views</p><h3>Why, timeline, story, and decision guide</h3></div><span class="analysis-view-status" id="analysisViewStatus">Ready</span></div>
       <div class="drawer-tabs analysis-segmented-tabs" role="tablist" aria-label="Analysis view selector"><button class="drawer-tab active" data-drawer-target="explainPanel" type="button">Why This Score</button><button class="drawer-tab" data-drawer-target="timelinePanel" type="button">Trust Timeline</button><button class="drawer-tab" data-drawer-target="threatPanel" type="button">Threat Story</button><button class="drawer-tab" data-drawer-target="decisionPanel" type="button">Decision Guide</button><button class="drawer-tab" data-drawer-target="technicalPanel" type="button">Details</button><button class="drawer-tab" data-drawer-target="memoryPanel" type="button">Scan Memory</button><button class="drawer-tab" data-drawer-target="onlinePanel" type="button">Online Intel</button></div>
@@ -184,12 +190,12 @@
     </section>
     </div>
 
-    <section id="optional-tools" class="wire-card optional-tools" aria-label="Optional tools">
+    <section id="optional-tools" class="progressive-result wire-card optional-tools" aria-label="Optional tools">
       <h2>🛠 Optional Tools</h2><p>Helpful tools for deeper investigation.</p>
       <div class="tool-grid wired-tools"><button data-tool-action="ip">Check IP<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="domain">Lookup Domain<br><small>Enable online checks first</small></button><button data-tool-action="file">Upload File<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="capture">Capture<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="dns">Lookup DNS<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="cert">View Certificate<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="headers">View Headers<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="unshorten">Unshorten URL<br><small>Uses current pasted target</small></button></div><p id="toolActionStatus" class="fine-print">Tools now report whether they are wired or planned instead of showing fake output.</p><div class="wired-history-strip"><strong>Recent Cases</strong><ul id="visibleCaseHistory"><li>No saved cases yet.</li></ul></div>
     </section>
 
-    <footer class="wire-footer"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the scan report, or clear this workspace.</p><div class="wired-footer-actions"><button id="visibleCopyReport" class="secondary-action" type="button">Copy Report</button><button id="visibleExportJson" class="secondary-action" type="button">Export JSON</button><button id="visibleNewInvestigation" class="primary-action" type="button">New Investigation</button><button id="visibleResetWorkspace" class="secondary-action" type="button">Reset</button></div><p id="visibleWireStatus" class="fine-print"></p></div></footer>
+    <footer class="wire-footer progressive-result"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the scan report, or clear this workspace.</p><div class="wired-footer-actions"><button id="visibleCopyReport" class="secondary-action" type="button">Copy Report</button><button id="visibleExportJson" class="secondary-action" type="button">Export JSON</button><button id="visibleNewInvestigation" class="primary-action" type="button">New Investigation</button><button id="visibleResetWorkspace" class="secondary-action" type="button">Reset</button></div><p id="visibleWireStatus" class="fine-print"></p></div></footer>
   </section>
 
   <section class="engine-support" aria-hidden="true">
@@ -259,4 +265,4 @@
 <script src="assets/js/case-command-center.js?v=rc14-1-case-notes-timeline"></script>
 
 <script src="assets/js/heatbar-direct-sync.js?v=rc15-public-beta-1"></script>
-</body></html>
+<script src="assets/js/release-candidate-audit.js?v=v3.54.0-release-candidate"></script></body></html>

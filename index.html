@@ -1,289 +1,301 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Proxuma IT — Link &amp; QR Risk Analysis</title>
-<meta name="theme-color" content="#070a0d" />
-<meta name="color-scheme" content="dark light" />
-<meta name="description" content="Analyze suspicious links, QR payloads, and messages locally before you trust them." />
-<meta name="application-name" content="Proxuma IT" />
-<meta name="robots" content="index, follow" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="Proxuma IT" />
-<meta property="og:title" content="Proxuma IT — Link &amp; QR Risk Analysis" />
-<meta property="og:description" content="Analyze suspicious links, QR payloads, and messages locally before you trust them." />
-<meta property="og:image" content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-header-banner.png" />
-<meta property="og:url" content="https://scar197124.github.io/Proxuma_IT/" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Proxuma IT — Link &amp; QR Risk Analysis" />
-<meta name="twitter:description" content="Analyze suspicious links, QR payloads, and messages locally before you trust them." />
-<meta name="twitter:image" content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-header-banner.png" />
-<link rel="icon" type="image/png" href="assets/images/proxuma-it-logo.png" />
-<link rel="apple-touch-icon" href="assets/images/proxuma-it-logo.png" />
-<link rel="stylesheet" href="assets/css/styles.css?v=v3.49.0-desktop-refinement" />
-<meta name="proxuma-build" content="ui-1.0-rc15-public-beta" />
+<meta content="#070a0d" name="theme-color"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="Analyze suspicious links, QR payloads, and messages locally before you trust them." name="description"/>
+<meta content="Proxuma IT" name="application-name"/>
+<meta content="index, follow" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="Proxuma IT" property="og:site_name"/>
+<meta content="Proxuma IT — Link &amp; QR Risk Analysis" property="og:title"/>
+<meta content="Analyze suspicious links, QR payloads, and messages locally before you trust them." property="og:description"/>
+<meta content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-header-banner.png" property="og:image"/>
+<meta content="https://scar197124.github.io/Proxuma_IT/" property="og:url"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Proxuma IT — Link &amp; QR Risk Analysis" name="twitter:title"/>
+<meta content="Analyze suspicious links, QR payloads, and messages locally before you trust them." name="twitter:description"/>
+<meta content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-header-banner.png" name="twitter:image"/>
+<link href="assets/images/proxuma-it-logo.png" rel="icon" type="image/png"/>
+<link href="assets/images/proxuma-it-logo.png" rel="apple-touch-icon"/>
+<link href="assets/css/styles.css?v=v3.54.0-release-candidate" rel="stylesheet"/>
+<meta content="v3.54.0-release-candidate" name="proxuma-build"/>
 </head>
 <body class="theme-dark captain-wire-ui">
 <noscript><div class="noscript-notice" role="alert">Proxuma IT needs JavaScript to run its local scanner. No scan data is uploaded.</div></noscript>
 <a class="skip-link" href="#main-content">Skip to scanner</a>
-<div class="ambient-grid" aria-hidden="true"></div>
+<div aria-hidden="true" class="ambient-grid"></div>
 <header class="wire-header">
-  <a class="wire-brand" href="https://scar197124.github.io/PROXUMA/" aria-label="Return to PROXUMA home">
-    <img src="assets/images/proxuma-it-logo.png" alt="" />
-    <span><strong>Proxuma IT</strong><small>Offline link intelligence</small></span>
-  </a>
-  <nav class="wire-nav" aria-label="Primary navigation">
-    <a href="#scan">Home</a><a href="#scan">Scan</a><a href="#details">Features</a><a href="#workflow">Findings</a><a href="#optional-tools">Tools</a>
-  </nav>
-  <div class="wire-actions"><button id="themeToggle" class="wire-button" type="button" aria-pressed="false">☀️ Light Mode</button><span class="wire-pill">Public Beta · Private by default</span></div>
+<a aria-label="Return to PROXUMA home" class="wire-brand" href="https://scar197124.github.io/PROXUMA/">
+<img alt="" src="assets/images/proxuma-it-logo.png"/>
+<span><strong>Proxuma IT</strong><small>Offline link intelligence</small></span>
+</a>
+<nav aria-label="Primary navigation" class="wire-nav">
+<a href="#scan">Home</a><a href="#scan">Scan</a><a href="#details">Features</a><a href="#workflow">Findings</a><a href="#optional-tools">Tools</a>
+</nav>
+<div class="wire-actions"><button aria-pressed="false" class="wire-button" id="themeToggle" type="button">☀️ Light Mode</button><span class="wire-pill">Public Beta · Private by default</span></div>
 </header>
-<main id="main-content" class="wire-page" tabindex="-1">
-  <section class="wire-hero" aria-labelledby="hero-title">
-    <div class="hero-symbol" aria-hidden="true">🛡️</div>
-    <div class="hero-copy">
-      <p class="eyebrow">Proxuma IT</p>
-      <h1 id="hero-title">Check the link before you trust it.</h1>
-      <p>Scan a QR code, paste a message, or inspect a URL locally before opening it.</p>
-      <div class="proof-row"><span>Local analysis</span><span>No account required</span><span>Works offline</span></div>
-    </div>
-    <section id="explain" class="wire-guide app-guide-launcher" aria-label="App guide">
-      <div class="guide-title"><strong>📖 App Guide</strong><button id="openAppGuide" class="wire-button" type="button" aria-haspopup="dialog" aria-controls="appGuideOverlay">Open Full Guide</button></div>
-      <p class="fine-print">A complete walkthrough of scanning, evidence, investigation, actions, tools, and live intelligence.</p>
-    </section>
-    <div class="wire-steps" aria-label="Simple workflow"><button type="button" data-guide-step="scan"><b>1</b>Scan<br><small>Check the item</small></button><button type="button" data-guide-step="review"><b>2</b>Review<br><small>See what matters</small></button><button type="button" data-guide-step="act"><b>3</b>Act<br><small>Choose response</small></button></div>
-  </section>
-
-  <section id="scan" class="wire-workspace" aria-label="Scan center">
-    <div class="section-title"><span>▣</span><div><h2>Scan Center</h2><p>One clear place to begin. Results appear directly beneath the scan controls.</p></div></div>
-    <div class="scan-stack">
-      <article class="wire-card scan-engine-card scan-engine-horizontal" aria-label="Universal scan engine">
-        <div class="scan-engine-title"><p class="eyebrow">Step 1 · Start here</p><h3>🧭 Universal Scan Engine</h3><p>Paste a link, message, suspicious text, or QR payload. Everything enters through this one workspace.</p></div>
-        <div class="scan-engine-main"><label class="sr-only" for="targetInput">Start a scan</label><div class="input-wrap"><input id="targetInput" autocomplete="off" spellcheck="false" enterkeyhint="go" placeholder="Paste a link, message, suspicious text, or QR payload" aria-describedby="scannerInputHelp detectedInputType" /><button id="scanButton" class="primary-action" type="button">Analyze</button><button id="qrStartButton" class="secondary-action" type="button">Scan QR</button><button id="qrStopButton" class="secondary-action" type="button" hidden>Stop QR</button></div><p id="scannerInputHelp" class="fine-print"><span id="detectedInputType">Detected: waiting for input</span> · Local-first review. We do not visit or store your target.</p></div>
-        <div id="qrCameraPanel" class="scan-engine-camera" hidden><div class="scan-engine-camera-head"><strong>QR Camera</strong><span id="qrStatus">Camera ready when you choose it. Processing stays on this device.</span></div><video id="qrVideo" class="qr-video" autoplay muted playsinline></video></div>
-        <div class="scan-engine-examples"><strong>Try an example</strong><div class="quick-tests" aria-label="Example targets"><button data-example="https://www.rbcroyalbank.com/" type="button">Trusted bank</button><button data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button">Leetspeak phish</button><button data-example="https://www.rbcr0yalbank.com/" type="button">Lookalike bank</button><button data-example="javascript:alert(1)" type="button">Script payload</button></div></div>
-      </article>
-      <aside class="public-beta-safety" role="note" aria-label="Safety limitation"><strong>Public beta safety note</strong><span>Proxuma identifies risk signals but cannot guarantee that an item is safe. Do not open suspicious links solely because a result appears low risk.</span></aside>
-      <article id="report" class="wire-card report-panel result-card result-card-horizontal" aria-live="polite" aria-label="Analysis results"><div class="result-summary"><div><p class="eyebrow">Step 2 · Analysis result</p><h2 id="riskLabel">Ready to scan</h2><p id="summaryText">Enter a target above to generate a report.</p></div><div class="score-ring"><span id="scoreValue">0</span><small>risk score</small></div></div><div class="result-details"><div class="heat-zone"><div class="heat-meta"><span>Risk Heat</span><strong id="heatLabel">Standby</strong></div><div class="heat-bar" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="heatFill"></span></div></div><div class="snapshot-grid"><div><small>Signals</small><strong id="signalCount">0</strong></div><div><small>Input</small><strong id="inputTypeLabel">Standby</strong></div><div><small>Trigger</small><strong id="primaryTrigger">Waiting</strong></div><div><small>Time</small><strong id="reportTimestamp">Not scanned</strong></div></div></div></article>
-    </div>
-
-    <aside id="scanSourceBar" class="scan-source-bar" aria-label="Scan source and freshness" aria-live="polite">
-      <div class="scan-source-summary">
-        <span class="scan-source-label">Data Status</span>
-        <strong id="scanSourceState">Ready</strong>
-      </div>
-      <div id="scanSourceItems" class="scan-source-items">
-        <span class="scan-source-chip is-ready"><i aria-hidden="true"></i>Local analysis · ready</span>
-      </div>
-      <time id="scanSourceFreshness" datetime="">Not scanned</time>
-    </aside>
-
-    <section id="missionControl" class="mission-control" data-mission-tone="idle" data-mission-state="idle" aria-label="Mission Control" aria-live="polite">
-      <div class="mission-heading"><span class="mission-pulse" aria-hidden="true"></span><div><small>Mission Control</small><strong id="missionState">Ready for target</strong></div></div>
-      <div class="mission-fact"><small>Verdict</small><strong id="missionVerdict">No scan yet</strong></div>
-      <div class="mission-score"><small>Risk</small><strong id="missionScore">—</strong><span class="mission-meter" aria-hidden="true"><i id="missionMeterFill"></i></span></div>
-      <div class="mission-fact"><small>Confidence</small><strong id="missionConfidence">Waiting</strong></div>
-      <div class="mission-action-copy"><small>Next action</small><strong id="missionAction">Paste, scan, or choose an example</strong></div>
-      <div class="mission-buttons"><button id="missionReview" type="button">Review</button><button id="missionEvidence" type="button">Evidence</button><button id="missionCopy" type="button">Copy Brief</button><button id="missionNew" type="button">New Scan</button></div>
-    </section>
+<main class="wire-page" id="main-content" tabindex="-1">
+<section aria-labelledby="hero-title" class="wire-hero">
+<div aria-hidden="true" class="hero-symbol">🛡️</div>
+<div class="hero-copy">
+<p class="eyebrow">Proxuma IT</p>
+<h1 id="hero-title">Check the link before you trust it.</h1>
+<p>Scan a QR code, paste a message, or inspect a URL locally before opening it.</p>
+<div class="proof-row"><span>Local analysis</span><span>No account required</span><span>Works offline</span></div>
+</div>
+<section aria-label="App guide" class="wire-guide app-guide-launcher" id="explain">
+<div class="guide-title"><strong>📖 App Guide</strong><button aria-controls="appGuideOverlay" aria-haspopup="dialog" class="wire-button" id="openAppGuide" type="button">Open Full Guide</button></div>
+<p class="fine-print">A complete walkthrough of scanning, evidence, investigation, actions, tools, and live intelligence.</p>
+</section>
+<div aria-label="Simple workflow" class="wire-steps"><button data-guide-step="scan" type="button"><b>1</b>Scan<br/><small>Check the item</small></button><button data-guide-step="review" type="button"><b>2</b>Review<br/><small>See what matters</small></button><button data-guide-step="act" type="button"><b>3</b>Act<br/><small>Choose response</small></button></div>
+</section>
+<section aria-label="Scan center" class="wire-workspace" id="scan">
+<div class="section-title"><span>▣</span><div><h2>Scan Center</h2><p>One clear place to begin. Results appear directly beneath the scan controls.</p></div></div>
+<div class="scan-stack">
+<article aria-label="Universal scan engine" class="wire-card scan-engine-card scan-engine-horizontal">
+<div class="scan-engine-title"><p class="eyebrow">Step 1 · Start here</p><h3>🧭 Universal Scan Engine</h3><p>Paste a link, message, suspicious text, or QR payload. Everything enters through this one workspace.</p></div>
+<div class="scan-engine-main"><label class="sr-only" for="targetInput">Start a scan</label><div class="input-wrap"><input aria-describedby="scannerInputHelp detectedInputType" autocomplete="off" enterkeyhint="go" id="targetInput" placeholder="Paste a link, message, suspicious text, or QR payload" spellcheck="false"/><button class="primary-action" id="scanButton" type="button">Analyze</button><button class="secondary-action" id="qrStartButton" type="button">Scan QR</button><button class="secondary-action" hidden="" id="qrStopButton" type="button">Stop QR</button></div><p class="fine-print" id="scannerInputHelp"><span id="detectedInputType">Detected: waiting for input</span> · Local-first review. We do not visit or store your target.</p></div>
+<div class="scan-engine-camera" hidden="" id="qrCameraPanel"><div class="scan-engine-camera-head"><strong>QR Camera</strong><span id="qrStatus">Camera ready when you choose it. Processing stays on this device.</span></div><video autoplay="" class="qr-video" id="qrVideo" muted="" playsinline=""></video></div>
+<div class="scan-engine-examples"><strong>Try an example</strong><div aria-label="Example targets" class="quick-tests"><button data-example="https://www.rbcroyalbank.com/" type="button">Trusted bank</button><button data-example="https://secure-l0gin-rbc.verify-account.example/login" type="button">Leetspeak phish</button><button data-example="https://www.rbcr0yalbank.com/" type="button">Lookalike bank</button><button data-example="javascript:alert(1)" type="button">Script payload</button></div></div>
+</article>
+<aside aria-label="Safety limitation" class="public-beta-safety" role="note"><strong>Public beta safety note</strong><span>Proxuma identifies risk signals but cannot guarantee that an item is safe. Do not open suspicious links solely because a result appears low risk.</span></aside>
+<article aria-label="Analysis results" aria-live="polite" class="progressive-result wire-card report-panel result-card result-card-horizontal" id="report"><div class="result-summary"><div><p class="eyebrow">Step 2 · Analysis result</p><h2 id="riskLabel">Ready to scan</h2><p id="summaryText">Enter a target above to generate a report.</p></div><div class="score-ring"><span id="scoreValue">0</span><small>risk score</small></div></div><div class="result-details"><div class="heat-zone"><div class="heat-meta"><span>Risk Heat</span><strong id="heatLabel">Standby</strong></div><div aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="heat-bar" role="meter"><span id="heatFill"></span></div></div><div class="snapshot-grid"><div><small>Signals</small><strong id="signalCount">0</strong></div><div><small>Input</small><strong id="inputTypeLabel">Standby</strong></div><div><small>Trigger</small><strong id="primaryTrigger">Waiting</strong></div><div><small>Time</small><strong id="reportTimestamp">Not scanned</strong></div></div></div></article>
+</div>
+<aside aria-label="Scan source and freshness" aria-live="polite" class="progressive-result scan-source-bar" id="scanSourceBar">
+<div class="scan-source-summary">
+<span class="scan-source-label">Data Status</span>
+<strong id="scanSourceState">Ready</strong>
+</div>
+<div class="scan-source-items" id="scanSourceItems">
+<span class="scan-source-chip is-ready"><i aria-hidden="true"></i>Local analysis · ready</span>
+</div>
+<time datetime="" id="scanSourceFreshness">Not scanned</time>
+</aside>
 
 
-    <section id="decisionFlow" class="decision-flow" data-flow-stage="scan" aria-label="Guided decision flow">
-      <div class="decision-flow-head">
-        <div><small>Guided Decision Flow</small><h2>Scan → Understand → Verify → Act → Save</h2><p id="decisionFlowLead">Begin with a scan. Proxuma will keep the next useful step in view.</p></div>
-        <div class="decision-flow-progress" role="progressbar" aria-label="Investigation progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="decisionFlowFill"></span><strong id="decisionFlowPercent">0%</strong></div>
-      </div>
-      <ol class="decision-flow-steps">
-        <li data-flow-step="scan" class="is-current"><button type="button" data-flow-target="scan"><b>1</b><span><strong>Scan</strong><small>Analyze the target</small></span><i aria-hidden="true">✓</i></button></li>
-        <li data-flow-step="understand"><button type="button" data-flow-target="details"><b>2</b><span><strong>Understand</strong><small>Read the verdict</small></span><i aria-hidden="true">✓</i></button></li>
-        <li data-flow-step="verify"><button type="button" data-flow-target="scan-detail-workspace"><b>3</b><span><strong>Verify</strong><small>Check evidence</small></span><i aria-hidden="true">✓</i></button></li>
-        <li data-flow-step="act"><button type="button" data-flow-target="workflow"><b>4</b><span><strong>Act</strong><small>Choose a response</small></span><i aria-hidden="true">✓</i></button></li>
-        <li data-flow-step="save"><button type="button" data-flow-target="investigation-workspace"><b>5</b><span><strong>Save</strong><small>Preserve the case</small></span><i aria-hidden="true">✓</i></button></li>
-      </ol>
-      <div class="decision-flow-next">
-        <div><small>Recommended next step</small><strong id="decisionFlowNext">Run a scan</strong><p id="decisionFlowReason">No case is active yet.</p></div>
-        <button id="decisionFlowContinue" class="primary-action" type="button">Start Scan</button>
-      </div>
-    </section>
-
-
-    <section id="caseCommandCenter" class="case-command-center case-intelligence-compact" aria-labelledby="caseCommandTitle">
-      <div class="case-command-head case-intelligence-head"><div><small>Saved Investigation Memory</small><h2 id="caseCommandTitle">Case Intelligence</h2><p>Saved investigations stay available without crowding the main workflow.</p></div><div class="case-command-stats" aria-label="Case summary"><div><span id="caseStatTotal">0</span><small>Total</small></div><div><span id="caseStatOpen">0</span><small>Open</small></div><div><span id="caseStatPriority">0</span><small>Priority</small></div><div><span id="caseStatResolved">0</span><small>Resolved</small></div></div><button id="caseCommandToggle" class="secondary-action case-command-toggle" type="button" aria-expanded="false" aria-controls="caseCommandWorkspace" hidden>Manage Cases</button></div>
-      <div id="caseCurrentPreview" class="case-current-preview" hidden aria-live="polite">
-        <div class="case-current-copy"><small>Current Investigation</small><strong id="caseCurrentVerdict">Waiting for a scan</strong><span id="caseCurrentTarget">Complete a scan to generate a compact case preview.</span></div>
-        <div class="case-current-metrics"><span><b id="caseCurrentRisk">0</b><small>Risk</small></span><span><b id="caseCurrentConfidence">—</b><small>Confidence</small></span></div>
-        <button id="caseCurrentSave" class="secondary-action" type="button">Save Case</button>
-      </div>
-      <div id="caseIntelligenceEmpty" class="case-intelligence-empty" role="status"><strong>No saved cases</strong><span>After a scan, the current investigation appears above. Save it only when you want it kept here.</span></div>
-      <section id="caseComparisonPanel" class="case-comparison-panel" hidden aria-live="polite" aria-labelledby="caseComparisonTitle">
-        <div class="case-comparison-head"><div><small>Case Comparison Engine</small><div class="comparison-active-line"><span class="comparison-active-badge">Comparison active</span><strong id="caseComparisonContext">Current scan vs saved baseline</strong></div><h3 id="caseComparisonTitle">Rescan comparison</h3><p id="caseComparisonSummary">Open a saved case and choose Rescan &amp; Compare.</p></div><button id="caseComparisonClose" type="button" class="secondary-action">Close</button></div>
-        <div class="case-comparison-score"><div><span>Previous</span><strong id="caseComparisonPrevious">—</strong></div><div class="case-comparison-direction"><b id="caseComparisonDirection">Waiting</b><small id="caseComparisonDelta">No comparison yet</small></div><div><span>Current</span><strong id="caseComparisonCurrent">—</strong></div></div>
-        <div class="case-comparison-counts"><div><strong id="caseCompareNewCount">0</strong><span>New</span></div><div><strong id="caseCompareResolvedCount">0</strong><span>Resolved</span></div><div><strong id="caseCompareChangedCount">0</strong><span>Severity changed</span></div><div><strong id="caseCompareUnchangedCount">0</strong><span>Unchanged</span></div></div>
-        <div class="case-comparison-groups"><section><h4>What changed</h4><ul id="caseComparisonChanges"><li>Run a comparison to see changes.</li></ul></section><section><h4>Recommended response</h4><p id="caseComparisonAction">The safest next action will appear here.</p></section></div>
-      </section>
-      <div id="caseCommandWorkspace" class="case-command-workspace" hidden><div class="case-command-toolbar"><label class="case-search"><span class="sr-only">Search saved cases</span><input id="caseCommandSearch" type="search" placeholder="Search cases, targets, status, or notes" autocomplete="off" /></label><div class="case-filters" role="group" aria-label="Filter cases"><button class="active" data-case-filter="all" type="button">All</button><button data-case-filter="open" type="button">Open</button><button data-case-filter="priority" type="button">Priority</button><button data-case-filter="resolved" type="button">Resolved</button></div></div><div class="case-command-layout"><div><div id="caseCommandList" class="case-command-list" aria-live="polite"></div><div id="caseCommandEmpty" class="case-command-empty" hidden><strong>No matching cases.</strong><span>Change the search or filter to see other investigations.</span></div></div><aside id="caseJournal" class="case-journal" aria-labelledby="caseJournalTitle" hidden><div class="case-journal-head"><div><small>Selected Case</small><h3 id="caseJournalTitle">Select a saved case</h3></div><div class="case-journal-head-actions"><span id="caseJournalStatus" class="case-journal-badge">Waiting</span><button id="caseJournalClose" type="button" aria-label="Close case journal">Close</button></div></div><p id="caseJournalTarget" class="case-journal-target">Choose a case to view notes and its investigation timeline.</p><label class="case-note-field"><span>Investigation note</span><textarea id="caseJournalNote" rows="3" maxlength="1200" placeholder="Record what was checked or what still needs attention." disabled></textarea></label><div class="case-journal-actions"><button id="caseJournalAdd" class="primary-action" type="button" disabled>Add Note</button><button id="caseJournalCopy" type="button" disabled>Copy Timeline</button></div><div class="case-timeline-head"><strong>Activity</strong><span id="caseTimelineCount">0 entries</span></div><ol id="caseTimeline" class="case-timeline"><li class="case-timeline-empty">No case selected.</li></ol></aside></div></div>
-      <p id="caseCommandStatus" class="fine-print" aria-live="polite">Case intelligence is stored locally in this browser.</p>
-    </section>
-
-    <section class="mid-lanes" aria-label="Investigation, evidence, and offline controls">
-      <article class="wire-card investigation-workspace" id="investigation-workspace">
-        <div class="lane-compact-head"><h3>🔎 Investigation</h3><p>Choose view</p></div><div class="case-packet-status" aria-live="polite"><span id="casePacketBadge">Mission ready</span><span id="casePacketMeta">Run a scan to build a case packet.</span></div>
-        <div id="investigation-controls" class="tab-row"><button type="button" class="active" data-investigation-view="overview">Overview</button><button type="button" data-investigation-view="evidence">Evidence</button><button type="button" data-investigation-view="deep">Deep Analysis</button><button type="button" data-investigation-view="case">Case File</button></div>
-        <div id="investigation-summary" class="mini-grid"><span>Risk <b id="investigationSummaryScore">0</b></span><span>Confidence <b id="investigationSummaryConfidence">Not measured</b></span><span>Main concern <b id="investigationSummaryConcern">Waiting</b></span><span>Action <b id="investigationSummaryAction">Paste a target</b></span></div>
-        <p class="fine-print"><b>Case:</b> <span id="visibleCaseId">No case yet</span> · <span id="visibleCaseStatus">Waiting for scan</span></p>
-        <div class="investigation-scroll-shell">
-          <div id="visibleInvestigationBody" class="wired-investigation-body" tabindex="0" aria-describedby="investigationScrollCue"><strong>Overview</strong><p>Run a scan to populate this investigation lane.</p></div>
-          <div id="investigationScrollCue" class="internal-scroll-cue" aria-live="polite">More investigation details ↓</div>
-        </div>
-        <div class="wired-footer-actions"><button id="visibleSaveCase" class="secondary-action" type="button">Save Case</button><button id="visibleCopyCase" class="secondary-action" type="button">Copy Case Packet</button></div>
-      </article>
-      <article id="scan-detail-workspace" class="wire-card scan-details-workspace">
-        <div class="lane-compact-head"><h3>📁 Supporting Evidence</h3><p>Facts behind the result</p></div>
-        <div id="scan-detail-controls" class="support-lines"><p><b>Signal Mix:</b> <span class="severity-breakdown"> <em class="sev-high">0 high</em> <em class="sev-medium">0 medium</em> <em class="sev-low">0 low</em></span></p><p><b>Evidence Strength:</b> <span id="evidenceStrength">Waiting</span></p><p><b>Last Scan:</b> <span id="scanMemory">No previous scan</span></p></div><ul id="visibleEvidenceList" class="wired-evidence-list"><li>Run a scan to build evidence.</li></ul>
-      </article>
-      <article class="wire-card offline-card">
-        <div class="lane-compact-head"><h3>🛜 Offline Checks</h3><p>Remain off unless chosen</p></div>
-        <ul><li>Analyzed locally</li><li>Nothing is uploaded</li><li>Online checks remain off unless chosen</li></ul>
-        <button id="enableOnlineConsentButton" class="secondary-action" type="button">Enable Online Checks</button>
-        <section id="domainIntelPanel" class="domain-intel-panel" aria-live="polite">
-          <div class="domain-intel-head"><strong>Domain Intelligence</strong><div class="domain-intel-statuses"><span id="domainIntelVerified" class="domain-intel-verified" hidden>✓ Live Verified</span><span id="domainIntelStatus" class="status-pill status-low">Offline</span></div></div>
-          <p id="domainIntelSummary">Enable online checks, then run a URL or domain scan to retrieve live registration context.</p>
-          <dl id="domainIntelGrid" class="domain-intel-grid">
-            <div><dt>Scanned host</dt><dd id="domainIntelDomain">Waiting</dd></div>
-            <div><dt>Registrable domain</dt><dd id="domainIntelRegistrable">—</dd></div>
-            <div><dt>Hosting platform</dt><dd id="domainIntelPlatform">Not identified</dd></div>
-            <div><dt>Lookup scope</dt><dd id="domainIntelScope">—</dd></div>
-            <div><dt>Parent-domain age</dt><dd id="domainIntelAge">—</dd></div>
-            <div><dt>Registrar</dt><dd id="domainIntelRegistrar">—</dd></div>
-            <div><dt>Created</dt><dd id="domainIntelCreated">—</dd></div>
-            <div><dt>Expires</dt><dd id="domainIntelExpires">—</dd></div>
-            <div><dt>Source</dt><dd id="domainIntelSource">Local only</dd></div>
-            <div><dt>Domain profile</dt><dd id="domainIntelProfile">Not available</dd></div>
-            <div><dt>Interpretation</dt><dd id="domainIntelInterpretation">Not available</dd></div>
-            <div><dt>Retrieved</dt><dd id="domainIntelRetrieved">Not available</dd></div>
-          </dl>
-          <div class="domain-intel-actions"><button id="runDomainIntelButton" class="secondary-action domain-intel-run" type="button">Run Domain Intelligence</button><button id="copyDomainIntelButton" class="secondary-action domain-intel-copy" type="button" disabled>Copy Intelligence</button></div><p id="domainIntelCopyStatus" class="domain-intel-copy-status" aria-live="polite">Live results can be copied after retrieval.</p>
-        </section>
-      </article>
-    </section>
-
-    <div class="action-review-grid" aria-label="Result explanation and action plan">
-    <section id="details" class="wire-card intelligence-drawer grouped-content-card" aria-label="Deep analysis">
-      <div class="analysis-view-head"><div><p class="eyebrow">Analysis Views</p><h3>Why, timeline, story, and decision guide</h3></div><span class="analysis-view-status" id="analysisViewStatus">Ready</span></div>
-      <div class="drawer-tabs analysis-segmented-tabs" role="tablist" aria-label="Analysis view selector"><button class="drawer-tab active" data-drawer-target="explainPanel" type="button">Why This Score</button><button class="drawer-tab" data-drawer-target="timelinePanel" type="button">Trust Timeline</button><button class="drawer-tab" data-drawer-target="threatPanel" type="button">Threat Story</button><button class="drawer-tab" data-drawer-target="decisionPanel" type="button">Decision Guide</button><button class="drawer-tab" data-drawer-target="technicalPanel" type="button">Details</button><button class="drawer-tab" data-drawer-target="memoryPanel" type="button">Scan Memory</button><button class="drawer-tab" data-drawer-target="onlinePanel" type="button">Online Intel</button></div>
-      <div class="drawer-stage">
-        <article id="explainPanel" class="drawer-panel active"><h3>Why this score</h3><span id="explainStatus" class="status-pill">Awaiting scan</span><p id="explainSummary">Run a scan to see the strongest reason behind the verdict.</p><ul id="evidenceList"><li>No target scanned yet.</li></ul></article>
-        <article id="timelinePanel" class="drawer-panel" hidden><h3>Trust timeline</h3><span id="timelineStatus">0 steps</span><p id="trustStatus">Local only</p><ul id="trustTrail"></ul><ol id="timelineList"></ol></article>
-        <article id="threatPanel" class="drawer-panel" hidden><h3>Threat story</h3><span id="threatStatus">Standby</span><p id="threatStory">Paste a target and Proxuma will explain what could be happening.</p></article>
-        <article id="decisionPanel" class="drawer-panel" hidden><h3>Safe next move</h3><span id="decisionStatus">Standby</span><ol id="decisionList"></ol></article>
-        <article id="technicalPanel" class="drawer-panel" hidden><h3>Technical signals</h3><ul id="technicalList"></ul></article>
-        <article id="memoryPanel" class="drawer-panel" hidden><h3>Scan memory</h3><p><b>Compare last scan:</b> <span id="compareLast">Waiting for the first scan.</span></p><p><b>Safe move:</b> <span id="safeMove">Scan first</span></p><p id="safeMoveNote">Proxuma explains the safest next step after analysis.</p></article>
-        <article id="onlinePanel" class="drawer-panel" hidden><h3>Online intelligence</h3><span id="onlineConsentStatus">Offline locked</span><p id="onlinePreview">Optional online checks remain off until you choose them.</p><p id="onlineConsentDetail">Online checks are optional.</p></article>
-      </div>
-    </section>
-
-    <section id="workflow" class="wire-card workflow-layer" aria-label="Findings and next steps">
-      <div class="workflow-fixed-head"><p class="eyebrow">Step 5 · What to do next</p><h2>Turn findings into actions</h2></div>
-      <div class="severity-board"><div><em id="sevCritical">0</em>Critical</div><div><em id="sevHigh">0</em>High</div><div><em id="sevMedium">0</em>Medium</div><div><em id="sevLow">0</em>Low</div><div><em id="sevInfo">0</em>Info</div></div>
-      <div class="finding-toolbar"><button class="finding-filter active" data-filter="all" type="button">All</button><button class="finding-filter" data-filter="open" type="button">Needs action</button><button class="finding-filter" data-filter="resolved" type="button">Finished</button></div>
-      <div class="finding-progress" aria-live="polite"><div class="finding-progress-copy"><strong id="findingProgressText">0 of 0 actions completed</strong><span id="findingProgressPercent">0%</span></div><div class="finding-progress-track" role="progressbar" aria-label="Finding actions completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="findingProgressFill"></span></div></div>
-      <div id="trustFindingList" class="trust-finding-list"><div class="trust-empty">Run a scan to see clear findings and next steps.</div></div><p id="trustActionStatus"></p>
-    </section>
-    </div>
-
-    <section id="optional-tools" class="wire-card optional-tools" aria-label="Optional tools">
-      <h2>🛠 Optional Tools</h2><p>Helpful tools for deeper investigation.</p>
-      <div class="tool-grid wired-tools"><button data-tool-action="ip">Check IP<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="domain">Lookup Domain<br><small>Enable online checks first</small></button><button data-tool-action="file">Upload File<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="capture">Capture<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="dns">Lookup DNS<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="cert">View Certificate<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="headers">View Headers<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="unshorten">Unshorten URL<br><small>Uses current pasted target</small></button></div><p id="toolActionStatus" class="fine-print">Tools now report whether they are wired or planned instead of showing fake output.</p><div class="wired-history-strip"><strong>Recent Cases</strong><ul id="visibleCaseHistory"><li>No saved cases yet.</li></ul></div>
-    </section>
-
-    <footer class="wire-footer"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the scan report, or clear this workspace.</p><div class="wired-footer-actions"><button id="visibleCopyReport" class="secondary-action" type="button">Copy Report</button><button id="visibleCaseReport" class="primary-action" type="button">Export Case Report</button><button id="visibleExportJson" class="secondary-action" type="button">Quick JSON</button><button id="visibleNewInvestigation" class="primary-action" type="button">New Investigation</button><button id="visibleResetWorkspace" class="secondary-action" type="button">Reset</button></div><p id="visibleWireStatus" class="fine-print"></p></div></footer>
-  </section>
-
-  <div id="caseReportDialog" class="case-report-dialog" hidden>
-    <div class="case-report-backdrop" data-report-close></div>
-    <section class="case-report-sheet" role="dialog" aria-modal="true" aria-labelledby="caseReportTitle">
-      <div class="case-report-head">
-        <div><small>Local Case Export</small><h2 id="caseReportTitle">Case Report</h2><p id="caseReportLead">Generate a shareable investigation record without uploading the case.</p></div>
-        <button id="caseReportClose" class="secondary-action" type="button">Close</button>
-      </div>
-      <div id="caseReportPreview" class="case-report-preview" aria-live="polite"></div>
-      <div class="case-report-actions">
-        <button id="caseReportPrint" class="primary-action" type="button">Print / Save PDF</button>
-        <button id="caseReportHtml" class="secondary-action" type="button">Download HTML</button>
-        <button id="caseReportText" class="secondary-action" type="button">Download TXT</button>
-        <button id="caseReportJson" class="secondary-action" type="button">Download JSON</button>
-        <button id="caseReportCopy" class="secondary-action" type="button">Copy Summary</button>
-      </div>
-      <p id="caseReportStatus" class="fine-print" aria-live="polite">Reports are created locally in this browser.</p>
-    </section>
-  </div>
-
-  <section class="engine-support" aria-hidden="true">
-    <span id="trueTarget">Waiting</span><span id="rootDomainNote"></span><span id="confidenceLabel">Not measured</span><span id="confidenceNote"></span><span id="confidenceBrief">Waiting</span><span id="whyScore">Waiting for local evidence.</span><span id="laneQuality">Standby</span>
-    <span id="anatomyStatus"></span><span id="anatomyProtocol"></span><span id="anatomyHost"></span><span id="anatomyRoot"></span><span id="anatomyPath"></span><span id="anatomyQuery"></span><span id="anatomyTokens"></span><span id="anatomyNote"></span>
-    <button id="copyReportButton" type="button"></button><button id="copySummaryButton" type="button"></button><button id="copyCasePacketButton" type="button"></button><button id="downloadCaseTextButton" type="button"></button><button id="downloadCasePacketButton" type="button"></button><button id="explainVerdictButton" type="button"></button><span id="copyStatus"></span><button id="userViewButton" type="button"></button><button id="analystViewButton" type="button"></button><span id="activeAudienceMode"></span><span id="reportDepthNote"></span>
-    <ul id="analystBriefList"></ul><span id="analystBriefStatus"></span><span id="learningStatus"></span><span id="learningText"></span><span id="actionText"></span><span id="whyMatterTitle"></span><span id="whyMatterText"></span><span id="safetyTitle"></span><span id="safetyText"></span>
-    <textarea id="caseNotes"></textarea><button id="saveCaseButton" type="button"></button><button id="clearHistoryButton" type="button"></button><button id="clearAllLocalDataButton" type="button"></button><ul id="historyList"></ul><span id="historyStatus"></span>
-    <span id="memoryDashboardStatus"></span><span id="memoryTotalScans"></span><span id="memoryRootCount"></span><span id="memoryFamilyCount"></span><ul id="memoryRootList"></ul><ul id="memoryFamilyList"></ul><button id="copyMemorySummaryButton" type="button"></button><button id="downloadMemoryJsonButton" type="button"></button><button id="clearPatternMemoryButton" type="button"></button><span id="memoryDashboardNote"></span>
-    <button id="revokeOnlineConsentButton" type="button"></button><ul id="onlineScopeList"></ul><ul id="onlinePrivacyList"></ul><button id="onlineRunPreviewButton" type="button"></button><button id="onlineLookupLinksButton" type="button"></button><button id="onlineRdapLookupButton" type="button"></button><span id="onlineRdapStatus"></span><ul id="onlineRdapResult"></ul><span id="onlineArchitectureNote"></span><textarea id="onlineFindingsNotes"></textarea><button id="saveOnlineFindingsButton" type="button"></button><button id="clearOnlineFindingsButton" type="button"></button><span id="onlineFindingsStatus"></span><ul id="onlineProviderSlotList"></ul><ul id="onlineReadinessList"></ul><span id="onlineReadinessStatus"></span>
-    <span id="guidedConfidenceBadge"></span><span id="guidedResultTitle"></span><span id="guidedResultLead"></span><span id="guidedObservedTitle"></span><span id="guidedObservedText"></span><span id="guidedUnverifiedText"></span><span id="guidedNextAction"></span><ul id="guidedEvidenceList"></ul>
-    <button id="copyExplanationButton" type="button"></button><button id="explainCurrentButton" type="button"></button><div id="localAdvisorOutput"></div><span id="advisorStatus"></span><input id="sessionNameInput" /><button id="saveNamedSessionButton" type="button"></button><button id="exportSessionsButton" type="button"></button><span id="sessionStatus"></span><ul id="namedSessionList"></ul><div id="sessionComparison"></div><button id="exportTrustHtml" type="button"></button><button id="exportTrustJson" type="button"></button><button id="resetWorkspaceButton" type="button"></button><span id="trustExportStatus"></span>
-  </section>
+<section aria-label="Case workspace controls" class="case-workspace-launcher progressive-result" id="caseWorkspaceLauncher">
+<div><small>Case workspace available</small><strong>Continue this investigation</strong><p>Review case intelligence, add notes, set status and priority, or save the investigation.</p></div>
+<div class="case-workspace-launcher-actions"><button aria-controls="caseCommandCenter" aria-expanded="false" class="primary-action" id="openCaseWorkspace" type="button">Open Case Workspace</button><button class="secondary-action" id="quickSaveCase" type="button">Save Case</button></div>
+</section>
+<section aria-labelledby="caseCommandTitle" class="case-workspace-surface case-command-center case-intelligence-compact" id="caseCommandCenter">
+<div class="case-command-head case-intelligence-head"><div><small>Saved Investigation Memory</small><h2 id="caseCommandTitle">Case Intelligence</h2><p>Saved investigations stay available without crowding the main workflow.</p></div><div aria-label="Case summary" class="case-command-stats"><div><span id="caseStatTotal">0</span><small>Total</small></div><div><span id="caseStatOpen">0</span><small>Open</small></div><div><span id="caseStatPriority">0</span><small>Priority</small></div><div><span id="caseStatResolved">0</span><small>Resolved</small></div></div><button aria-controls="caseCommandWorkspace" aria-expanded="false" class="secondary-action case-command-toggle" hidden="" id="caseCommandToggle" type="button">Manage Cases</button></div>
+<div aria-label="Unified case workspace views" class="unified-case-tabs" role="tablist">
+<button aria-controls="unifiedCaseIntelligence" aria-selected="true" class="active" data-unified-case-tab="intelligence" id="unifiedCaseIntelligenceTab" role="tab" type="button">Intelligence</button>
+<button aria-controls="case-management" aria-selected="false" data-unified-case-tab="management" id="unifiedCaseManagementTab" role="tab" type="button">Management</button>
+</div>
+<div class="unified-case-grid">
+<div aria-labelledby="unifiedCaseIntelligenceTab" class="unified-case-pane unified-case-intelligence" id="unifiedCaseIntelligence" role="tabpanel">
+<div aria-live="polite" class="case-current-preview" hidden="" id="caseCurrentPreview">
+<div class="case-current-copy"><small>Current Investigation</small><strong id="caseCurrentVerdict">Waiting for a scan</strong><span id="caseCurrentTarget">Complete a scan to generate a compact case preview.</span></div>
+<div class="case-current-metrics"><span><b id="caseCurrentRisk">0</b><small>Risk</small></span><span><b id="caseCurrentConfidence">—</b><small>Confidence</small></span></div>
+<button class="secondary-action" id="caseCurrentSave" type="button">Save Case</button>
+</div>
+<div class="case-intelligence-empty" id="caseIntelligenceEmpty" role="status"><strong>No saved cases</strong><span>After a scan, the current investigation appears above. Save it only when you want it kept here.</span></div>
+<section aria-labelledby="caseComparisonTitle" aria-live="polite" class="case-comparison-panel" hidden="" id="caseComparisonPanel">
+<div class="case-comparison-head"><div><small>Case Comparison Engine</small><div class="comparison-active-line"><span class="comparison-active-badge">Comparison active</span><strong id="caseComparisonContext">Current scan vs saved baseline</strong></div><h3 id="caseComparisonTitle">Rescan comparison</h3><p id="caseComparisonSummary">Open a saved case and choose Rescan &amp; Compare.</p></div><button class="secondary-action" id="caseComparisonClose" type="button">Close</button></div>
+<div class="case-comparison-score"><div><span>Previous</span><strong id="caseComparisonPrevious">—</strong></div><div class="case-comparison-direction"><b id="caseComparisonDirection">Waiting</b><small id="caseComparisonDelta">No comparison yet</small></div><div><span>Current</span><strong id="caseComparisonCurrent">—</strong></div></div>
+<div class="case-comparison-counts"><div><strong id="caseCompareNewCount">0</strong><span>New</span></div><div><strong id="caseCompareResolvedCount">0</strong><span>Resolved</span></div><div><strong id="caseCompareChangedCount">0</strong><span>Severity changed</span></div><div><strong id="caseCompareUnchangedCount">0</strong><span>Unchanged</span></div></div>
+<div class="case-comparison-groups"><section><h4>What changed</h4><ul id="caseComparisonChanges"><li>Run a comparison to see changes.</li></ul></section><section><h4>Recommended response</h4><p id="caseComparisonAction">The safest next action will appear here.</p></section></div>
+</section>
+<div class="case-command-workspace" hidden="" id="caseCommandWorkspace"><div class="case-command-toolbar"><label class="case-search"><span class="sr-only">Search saved cases</span><input autocomplete="off" id="caseCommandSearch" placeholder="Search cases, targets, status, or notes" type="search"/></label><div aria-label="Filter cases" class="case-filters" role="group"><button class="active" data-case-filter="all" type="button">All</button><button data-case-filter="open" type="button">Open</button><button data-case-filter="priority" type="button">Priority</button><button data-case-filter="resolved" type="button">Resolved</button></div></div><div class="case-command-layout"><div><div aria-live="polite" class="case-command-list" id="caseCommandList"></div><div class="case-command-empty" hidden="" id="caseCommandEmpty"><strong>No matching cases.</strong><span>Change the search or filter to see other investigations.</span></div></div><aside aria-labelledby="caseJournalTitle" class="case-journal" hidden="" id="caseJournal"><div class="case-journal-head"><div><small>Selected Case</small><h3 id="caseJournalTitle">Select a saved case</h3></div><div class="case-journal-head-actions"><span class="case-journal-badge" id="caseJournalStatus">Waiting</span><button aria-label="Close case journal" id="caseJournalClose" type="button">Close</button></div></div><p class="case-journal-target" id="caseJournalTarget">Choose a case to view notes and its investigation timeline.</p><label class="case-note-field"><span>Investigation note</span><textarea disabled="" id="caseJournalNote" maxlength="1200" placeholder="Record what was checked or what still needs attention." rows="3"></textarea></label><div class="case-journal-actions"><button class="primary-action" disabled="" id="caseJournalAdd" type="button">Add Note</button><button disabled="" id="caseJournalCopy" type="button">Copy Timeline</button></div><div class="case-timeline-head"><strong>Activity</strong><span id="caseTimelineCount">0 entries</span></div><ol class="case-timeline" id="caseTimeline"><li class="case-timeline-empty">No case selected.</li></ol></aside></div></div>
+<p aria-live="polite" class="fine-print" id="caseCommandStatus">Case intelligence is stored locally in this browser.</p>
+</div>
+<section aria-label="Case management workspace" class="case-management-workspace unified-case-management" id="case-management">
+<div class="case-management-head"><div><p class="eyebrow">Case Management</p><h2>Manage this investigation</h2><p>Track ownership, urgency, notes, and the final outcome. Changes save locally.</p></div><span class="analysis-view-status" id="caseManagementSaveState">Ready</span></div>
+<div class="case-management-grid">
+<label><span>Case name</span><input id="caseManagementName" maxlength="80" placeholder="Name this investigation" type="text"/></label>
+<label><span>Status</span><select id="caseManagementStatus"><option value="open">Open</option><option value="watching">Watching</option><option value="resolved">Resolved</option><option value="archived">Archived</option></select></label>
+<label><span>Priority</span><select id="caseManagementPriority"><option value="critical">Critical</option><option value="high">High</option><option selected="" value="medium">Medium</option><option value="low">Low</option></select></label>
+<label><span>Last updated</span><output id="caseManagementUpdated">Not saved yet</output></label>
+</div>
+<div class="case-management-notes">
+<label><span>Investigation notes</span><textarea id="caseManagementNotes" maxlength="3000" placeholder="Add observations, calls made, evidence checked, or follow-up details." rows="4"></textarea></label>
+<label><span>Final decision</span><textarea id="caseManagementDecision" maxlength="1600" placeholder="Record the final decision or resolution when the case is complete." rows="4"></textarea></label>
+</div>
+<div class="case-management-actions"><button class="primary-action" id="caseManagementSave" type="button">Save Case Details</button><button class="secondary-action" id="caseManagementClear" type="button">Clear Details</button><small>Stored in this browser and included in case reports.</small></div>
+</section>
+</div>
+</section>
+<section aria-label="Investigation, evidence, and offline controls" class="mid-lanes progressive-result">
+<article aria-labelledby="unifiedInvestigationTitle" class="wire-card investigation-workspace" id="investigation-workspace"><div class="unified-investigation-head"><div><p class="eyebrow">Guided Investigation</p><h2 id="unifiedInvestigationTitle">Review → Decide → Act</h2><p>One workspace for understanding the result, verifying evidence, choosing a response, and continuing the case.</p></div><span aria-live="polite" class="analysis-view-status" id="unifiedInvestigationSync">Report synchronized</span></div><section aria-label="Mission Control" aria-live="polite" class="mission-control unified-investigation-status" data-mission-state="idle" data-mission-tone="idle" id="missionControl">
+<div class="mission-heading"><span aria-hidden="true" class="mission-pulse"></span><div><small>Mission Control</small><strong id="missionState">Ready for target</strong></div></div>
+<div class="mission-fact"><small>Verdict</small><strong id="missionVerdict">No scan yet</strong></div>
+<div class="mission-score"><small>Risk</small><strong id="missionScore">—</strong><span aria-hidden="true" class="mission-meter"><i id="missionMeterFill"></i></span></div>
+<div class="mission-fact"><small>Confidence</small><strong id="missionConfidence">Waiting</strong></div>
+<div class="mission-action-copy"><small>Next action</small><strong id="missionAction">Paste, scan, or choose an example</strong></div>
+<div class="mission-buttons"><button id="missionReview" type="button">Review</button><button id="missionEvidence" type="button">Evidence</button><button id="missionCopy" type="button">Copy Brief</button><button id="missionNew" type="button">New Scan</button></div>
+</section><div aria-label="Investigation workflow stages" class="unified-investigation-tabs" role="tablist"><button aria-controls="unifiedInvestigationReview" aria-selected="true" class="active" data-unified-investigation-tab="review" id="unifiedInvestigationReviewTab" role="tab" type="button">1 Review</button><button aria-controls="unifiedInvestigationDecide" aria-selected="false" data-unified-investigation-tab="decide" id="unifiedInvestigationDecideTab" role="tab" type="button">2 Decide</button><button aria-controls="unifiedInvestigationAct" aria-selected="false" data-unified-investigation-tab="act" id="unifiedInvestigationActTab" role="tab" type="button">3 Act</button></div><div aria-labelledby="unifiedInvestigationReviewTab" class="unified-investigation-pane active" id="unifiedInvestigationReview" role="tabpanel">
+<div class="lane-compact-head"><h3>🔎 Investigation</h3><p>Choose view</p></div><div aria-live="polite" class="case-packet-status"><span id="casePacketBadge">Mission ready</span><span id="casePacketMeta">Run a scan to build a case packet.</span></div>
+<div class="tab-row" id="investigation-controls"><button class="active" data-investigation-view="overview" type="button">Overview</button><button data-investigation-view="evidence" type="button">Evidence</button><button data-investigation-view="deep" type="button">Deep Analysis</button><button data-investigation-view="case" type="button">Case File</button></div>
+<div class="mini-grid" id="investigation-summary"><span>Risk <b id="investigationSummaryScore">0</b></span><span>Confidence <b id="investigationSummaryConfidence">Not measured</b></span><span>Main concern <b id="investigationSummaryConcern">Waiting</b></span><span>Action <b id="investigationSummaryAction">Paste a target</b></span></div>
+<p class="fine-print"><b>Case:</b> <span id="visibleCaseId">No case yet</span> · <span id="visibleCaseStatus">Waiting for scan</span></p>
+<div class="investigation-scroll-shell">
+<div aria-describedby="investigationScrollCue" class="wired-investigation-body" id="visibleInvestigationBody" tabindex="0"><strong>Overview</strong><p>Run a scan to populate this investigation lane.</p></div>
+<div aria-live="polite" class="internal-scroll-cue" id="investigationScrollCue">More investigation details ↓</div>
+</div>
+<div class="wired-footer-actions"><button class="secondary-action" id="visibleSaveCase" type="button">Save Case</button><button class="secondary-action" id="visibleCopyCase" type="button">Copy Case Packet</button></div>
+</div><div aria-labelledby="unifiedInvestigationDecideTab" class="unified-investigation-pane" hidden="" id="unifiedInvestigationDecide" role="tabpanel"><section aria-label="Guided decision flow" class="decision-flow unified-investigation-decision" data-flow-stage="scan" id="decisionFlow">
+<div class="decision-flow-head">
+<div><small>Guided Decision Flow</small><h2>Scan → Understand → Verify → Act → Save</h2><p id="decisionFlowLead">Begin with a scan. Proxuma will keep the next useful step in view.</p></div>
+<div aria-label="Investigation progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="decision-flow-progress" role="progressbar"><span id="decisionFlowFill"></span><strong id="decisionFlowPercent">0%</strong></div>
+</div>
+<ol class="decision-flow-steps">
+<li class="is-current" data-flow-step="scan"><button data-flow-target="scan" type="button"><b>1</b><span><strong>Scan</strong><small>Analyze the target</small></span><i aria-hidden="true">✓</i></button></li>
+<li data-flow-step="understand"><button data-flow-target="details" type="button"><b>2</b><span><strong>Understand</strong><small>Read the verdict</small></span><i aria-hidden="true">✓</i></button></li>
+<li data-flow-step="verify"><button data-flow-target="scan-detail-workspace" type="button"><b>3</b><span><strong>Verify</strong><small>Check evidence</small></span><i aria-hidden="true">✓</i></button></li>
+<li data-flow-step="act"><button data-flow-target="workflow" type="button"><b>4</b><span><strong>Act</strong><small>Choose a response</small></span><i aria-hidden="true">✓</i></button></li>
+<li data-flow-step="save"><button data-flow-target="investigation-workspace" type="button"><b>5</b><span><strong>Save</strong><small>Preserve the case</small></span><i aria-hidden="true">✓</i></button></li>
+</ol>
+<div class="decision-flow-next">
+<div><small>Recommended next step</small><strong id="decisionFlowNext">Run a scan</strong><p id="decisionFlowReason">No case is active yet.</p></div>
+<button class="primary-action" id="decisionFlowContinue" type="button">Start Scan</button>
+</div>
+</section></div><div aria-labelledby="unifiedInvestigationActTab" class="unified-investigation-pane" hidden="" id="unifiedInvestigationAct" role="tabpanel"><div class="unified-act-intro"><small>Operational actions</small><strong>Finish the investigation without hunting across the dashboard.</strong><p>Open findings, save the case, copy or export the report, or begin a protected new scan.</p></div><div class="unified-act-grid"><button class="primary-action" data-scroll-target="workflow" id="unifiedActFindings" type="button">Open Findings &amp; Actions</button><button class="secondary-action" id="unifiedActCase" type="button">Open Case Workspace</button><button class="secondary-action" id="unifiedActSave" type="button">Save Case</button><button class="secondary-action" id="unifiedActCopy" type="button">Copy Brief</button><button class="secondary-action" id="unifiedActExport" type="button">Export Case Report</button><button class="secondary-action" id="unifiedActNew" type="button">New Scan</button></div><div class="unified-act-status"><span>✓ Scan report synchronized</span><small>Actions use the current result and remain local unless you enable online checks.</small></div></div></article>
+<article class="wire-card scan-details-workspace" id="scan-detail-workspace">
+<div class="lane-compact-head"><h3>📁 Supporting Evidence</h3><p>Facts behind the result</p></div>
+<div class="support-lines" id="scan-detail-controls"><p><b>Signal Mix:</b> <span class="severity-breakdown"> <em class="sev-high">0 high</em> <em class="sev-medium">0 medium</em> <em class="sev-low">0 low</em></span></p><p><b>Evidence Strength:</b> <span id="evidenceStrength">Waiting</span></p><p><b>Last Scan:</b> <span id="scanMemory">No previous scan</span></p></div><ul class="wired-evidence-list" id="visibleEvidenceList"><li>Run a scan to build evidence.</li></ul>
+</article>
+<article class="wire-card offline-card">
+<div class="lane-compact-head"><h3>🛜 Offline Checks</h3><p>Remain off unless chosen</p></div>
+<ul><li>Analyzed locally</li><li>Nothing is uploaded</li><li>Online checks remain off unless chosen</li></ul>
+<button class="secondary-action" id="enableOnlineConsentButton" type="button">Enable Online Checks</button>
+<section aria-live="polite" class="domain-intel-panel" id="domainIntelPanel">
+<div class="domain-intel-head"><strong>Domain Intelligence</strong><div class="domain-intel-statuses"><span class="domain-intel-verified" hidden="" id="domainIntelVerified">✓ Live Verified</span><span class="status-pill status-low" id="domainIntelStatus">Offline</span></div></div>
+<p id="domainIntelSummary">Enable online checks, then run a URL or domain scan to retrieve live registration context.</p>
+<dl class="domain-intel-grid" id="domainIntelGrid">
+<div><dt>Scanned host</dt><dd id="domainIntelDomain">Waiting</dd></div>
+<div><dt>Registrable domain</dt><dd id="domainIntelRegistrable">—</dd></div>
+<div><dt>Hosting platform</dt><dd id="domainIntelPlatform">Not identified</dd></div>
+<div><dt>Lookup scope</dt><dd id="domainIntelScope">—</dd></div>
+<div><dt>Parent-domain age</dt><dd id="domainIntelAge">—</dd></div>
+<div><dt>Registrar</dt><dd id="domainIntelRegistrar">—</dd></div>
+<div><dt>Created</dt><dd id="domainIntelCreated">—</dd></div>
+<div><dt>Expires</dt><dd id="domainIntelExpires">—</dd></div>
+<div><dt>Source</dt><dd id="domainIntelSource">Local only</dd></div>
+<div><dt>Domain profile</dt><dd id="domainIntelProfile">Not available</dd></div>
+<div><dt>Interpretation</dt><dd id="domainIntelInterpretation">Not available</dd></div>
+<div><dt>Retrieved</dt><dd id="domainIntelRetrieved">Not available</dd></div>
+</dl>
+<div class="domain-intel-actions"><button class="secondary-action domain-intel-run" id="runDomainIntelButton" type="button">Run Domain Intelligence</button><button class="secondary-action domain-intel-copy" disabled="" id="copyDomainIntelButton" type="button">Copy Intelligence</button></div><p aria-live="polite" class="domain-intel-copy-status" id="domainIntelCopyStatus">Live results can be copied after retrieval.</p>
+</section>
+</article>
+</section>
+<div aria-label="Result explanation and action plan" class="action-review-grid progressive-result">
+<section aria-label="Deep analysis" class="wire-card intelligence-drawer grouped-content-card" id="details">
+<div class="analysis-view-head"><div><p class="eyebrow">Analysis Views</p><h3>Why, timeline, story, and decision guide</h3></div><span class="analysis-view-status" id="analysisViewStatus">Ready</span></div>
+<div aria-label="Analysis view selector" class="drawer-tabs analysis-segmented-tabs" role="tablist"><button class="drawer-tab active" data-drawer-target="explainPanel" type="button">Why This Score</button><button class="drawer-tab" data-drawer-target="timelinePanel" type="button">Trust Timeline</button><button class="drawer-tab" data-drawer-target="threatPanel" type="button">Threat Story</button><button class="drawer-tab" data-drawer-target="decisionPanel" type="button">Decision Guide</button><button class="drawer-tab" data-drawer-target="technicalPanel" type="button">Details</button><button class="drawer-tab" data-drawer-target="memoryPanel" type="button">Scan Memory</button><button class="drawer-tab" data-drawer-target="onlinePanel" type="button">Online Intel</button></div>
+<div class="drawer-stage">
+<article class="drawer-panel active" id="explainPanel"><h3>Why this score</h3><span class="status-pill" id="explainStatus">Awaiting scan</span><p id="explainSummary">Run a scan to see the strongest reason behind the verdict.</p><ul id="evidenceList"><li>No target scanned yet.</li></ul></article>
+<article class="drawer-panel" hidden="" id="timelinePanel"><h3>Trust timeline</h3><span id="timelineStatus">0 steps</span><p id="trustStatus">Local only</p><ul id="trustTrail"></ul><ol id="timelineList"></ol></article>
+<article class="drawer-panel" hidden="" id="threatPanel"><h3>Threat story</h3><span id="threatStatus">Standby</span><p id="threatStory">Paste a target and Proxuma will explain what could be happening.</p></article>
+<article class="drawer-panel" hidden="" id="decisionPanel"><h3>Safe next move</h3><span id="decisionStatus">Standby</span><ol id="decisionList"></ol></article>
+<article class="drawer-panel" hidden="" id="technicalPanel"><h3>Technical signals</h3><ul id="technicalList"></ul></article>
+<article class="drawer-panel" hidden="" id="memoryPanel"><h3>Scan memory</h3><p><b>Compare last scan:</b> <span id="compareLast">Waiting for the first scan.</span></p><p><b>Safe move:</b> <span id="safeMove">Scan first</span></p><p id="safeMoveNote">Proxuma explains the safest next step after analysis.</p></article>
+<article class="drawer-panel" hidden="" id="onlinePanel"><h3>Online intelligence</h3><span id="onlineConsentStatus">Offline locked</span><p id="onlinePreview">Optional online checks remain off until you choose them.</p><p id="onlineConsentDetail">Online checks are optional.</p></article>
+</div>
+</section>
+<section aria-label="Findings and next steps" class="wire-card workflow-layer" id="workflow">
+<div class="workflow-fixed-head"><p class="eyebrow">Step 5 · What to do next</p><h2>Turn findings into actions</h2></div>
+<div class="severity-board"><div><em id="sevCritical">0</em>Critical</div><div><em id="sevHigh">0</em>High</div><div><em id="sevMedium">0</em>Medium</div><div><em id="sevLow">0</em>Low</div><div><em id="sevInfo">0</em>Info</div></div>
+<div class="finding-toolbar"><button class="finding-filter active" data-filter="all" type="button">All</button><button class="finding-filter" data-filter="open" type="button">Needs action</button><button class="finding-filter" data-filter="resolved" type="button">Finished</button></div>
+<div aria-live="polite" class="finding-progress"><div class="finding-progress-copy"><strong id="findingProgressText">0 of 0 actions completed</strong><span id="findingProgressPercent">0%</span></div><div aria-label="Finding actions completed" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="finding-progress-track" role="progressbar"><span id="findingProgressFill"></span></div></div>
+<div class="trust-finding-list" id="trustFindingList"><div class="trust-empty">Run a scan to see clear findings and next steps.</div></div><p id="trustActionStatus"></p>
+</section>
+</div>
+<section aria-label="Optional tools" class="progressive-result wire-card optional-tools" id="optional-tools">
+<h2>🛠 Optional Tools</h2><p>Helpful tools for deeper investigation.</p>
+<div class="tool-grid wired-tools"><button data-tool-action="ip">Check IP<br/><small>Coming in Intelligence 1.1</small></button><button data-tool-action="domain">Lookup Domain<br/><small>Enable online checks first</small></button><button data-tool-action="file">Upload File<br/><small>Coming in Intelligence 1.1</small></button><button data-tool-action="capture">Capture<br/><small>Coming in Intelligence 1.1</small></button><button data-tool-action="dns">Lookup DNS<br/><small>Coming in Intelligence 1.1</small></button><button data-tool-action="cert">View Certificate<br/><small>Coming in Intelligence 1.1</small></button><button data-tool-action="headers">View Headers<br/><small>Coming in Intelligence 1.1</small></button><button data-tool-action="unshorten">Unshorten URL<br/><small>Uses current pasted target</small></button></div><p class="fine-print" id="toolActionStatus">Tools now report whether they are wired or planned instead of showing fake output.</p><div class="wired-history-strip"><strong>Recent Cases</strong><ul id="visibleCaseHistory"><li>No saved cases yet.</li></ul></div>
+</section>
+<footer class="wire-footer progressive-result"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the scan report, or clear this workspace.</p><div class="wired-footer-actions"><button class="secondary-action" id="visibleCopyReport" type="button">Copy Report</button><button class="primary-action" id="visibleCaseReport" type="button">Export Case Report</button><button class="secondary-action" id="visibleExportJson" type="button">Quick JSON</button><button class="primary-action" id="visibleNewInvestigation" type="button">New Investigation</button><button class="secondary-action" id="visibleResetWorkspace" type="button">Reset</button></div><p class="fine-print" id="visibleWireStatus"></p></div></footer>
+</section>
+<div class="case-report-dialog" hidden="" id="caseReportDialog">
+<div class="case-report-backdrop" data-report-close=""></div>
+<section aria-labelledby="caseReportTitle" aria-modal="true" class="case-report-sheet" role="dialog">
+<div class="case-report-head">
+<div><small>Local Case Export</small><h2 id="caseReportTitle">Case Report</h2><p id="caseReportLead">Generate a shareable investigation record without uploading the case.</p></div>
+<button class="secondary-action" id="caseReportClose" type="button">Close</button>
+</div>
+<div aria-live="polite" class="case-report-preview" id="caseReportPreview"></div>
+<div class="case-report-actions">
+<button class="primary-action" id="caseReportPrint" type="button">Print / Save PDF</button>
+<button class="secondary-action" id="caseReportHtml" type="button">Download HTML</button>
+<button class="secondary-action" id="caseReportText" type="button">Download TXT</button>
+<button class="secondary-action" id="caseReportJson" type="button">Download JSON</button>
+<button class="secondary-action" id="caseReportCopy" type="button">Copy Summary</button>
+</div>
+<p aria-live="polite" class="fine-print" id="caseReportStatus">Reports are created locally in this browser.</p>
+</section>
+</div>
+<section aria-hidden="true" class="engine-support">
+<span id="trueTarget">Waiting</span><span id="rootDomainNote"></span><span id="confidenceLabel">Not measured</span><span id="confidenceNote"></span><span id="confidenceBrief">Waiting</span><span id="whyScore">Waiting for local evidence.</span><span id="laneQuality">Standby</span>
+<span id="anatomyStatus"></span><span id="anatomyProtocol"></span><span id="anatomyHost"></span><span id="anatomyRoot"></span><span id="anatomyPath"></span><span id="anatomyQuery"></span><span id="anatomyTokens"></span><span id="anatomyNote"></span>
+<button id="copyReportButton" type="button"></button><button id="copySummaryButton" type="button"></button><button id="copyCasePacketButton" type="button"></button><button id="downloadCaseTextButton" type="button"></button><button id="downloadCasePacketButton" type="button"></button><button id="explainVerdictButton" type="button"></button><span id="copyStatus"></span><button id="userViewButton" type="button"></button><button id="analystViewButton" type="button"></button><span id="activeAudienceMode"></span><span id="reportDepthNote"></span>
+<ul id="analystBriefList"></ul><span id="analystBriefStatus"></span><span id="learningStatus"></span><span id="learningText"></span><span id="actionText"></span><span id="whyMatterTitle"></span><span id="whyMatterText"></span><span id="safetyTitle"></span><span id="safetyText"></span>
+<textarea id="caseNotes"></textarea><button id="saveCaseButton" type="button"></button><button id="clearHistoryButton" type="button"></button><button id="clearAllLocalDataButton" type="button"></button><ul id="historyList"></ul><span id="historyStatus"></span>
+<span id="memoryDashboardStatus"></span><span id="memoryTotalScans"></span><span id="memoryRootCount"></span><span id="memoryFamilyCount"></span><ul id="memoryRootList"></ul><ul id="memoryFamilyList"></ul><button id="copyMemorySummaryButton" type="button"></button><button id="downloadMemoryJsonButton" type="button"></button><button id="clearPatternMemoryButton" type="button"></button><span id="memoryDashboardNote"></span>
+<button id="revokeOnlineConsentButton" type="button"></button><ul id="onlineScopeList"></ul><ul id="onlinePrivacyList"></ul><button id="onlineRunPreviewButton" type="button"></button><button id="onlineLookupLinksButton" type="button"></button><button id="onlineRdapLookupButton" type="button"></button><span id="onlineRdapStatus"></span><ul id="onlineRdapResult"></ul><span id="onlineArchitectureNote"></span><textarea id="onlineFindingsNotes"></textarea><button id="saveOnlineFindingsButton" type="button"></button><button id="clearOnlineFindingsButton" type="button"></button><span id="onlineFindingsStatus"></span><ul id="onlineProviderSlotList"></ul><ul id="onlineReadinessList"></ul><span id="onlineReadinessStatus"></span>
+<span id="guidedConfidenceBadge"></span><span id="guidedResultTitle"></span><span id="guidedResultLead"></span><span id="guidedObservedTitle"></span><span id="guidedObservedText"></span><span id="guidedUnverifiedText"></span><span id="guidedNextAction"></span><ul id="guidedEvidenceList"></ul>
+<button id="copyExplanationButton" type="button"></button><button id="explainCurrentButton" type="button"></button><div id="localAdvisorOutput"></div><span id="advisorStatus"></span><input id="sessionNameInput"><button id="saveNamedSessionButton" type="button"></button><button id="exportSessionsButton" type="button"></button><span id="sessionStatus"></span><ul id="namedSessionList"></ul><div id="sessionComparison"></div><button id="exportTrustHtml" type="button"></button><button id="exportTrustJson" type="button"></button><button id="resetWorkspaceButton" type="button"></button><span id="trustExportStatus"></span>
+</input></section>
 </main>
 <script src="assets/js/proxuma-api-foundation.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/proxuma-it.js?v=rc11-2-hosted-subdomain"></script>
-<div id="legacyCompatibilityFields" hidden aria-hidden="true">
-  <span id="scanMode">Standby</span><span id="scanModeNote">Waiting for a target.</span>
-  <span id="nextStep">Enter a target</span><span id="rootDomain">Waiting</span>
-  <span id="severityMix">0 high · 0 medium · 0 low</span><span id="severityNote">Not scanned</span>
-  <span id="actionTitle">Scan first</span>
+<div aria-hidden="true" hidden="" id="legacyCompatibilityFields">
+<span id="scanMode">Standby</span><span id="scanModeNote">Waiting for a target.</span>
+<span id="nextStep">Enter a target</span><span id="rootDomain">Waiting</span>
+<span id="severityMix">0 high · 0 medium · 0 low</span><span id="severityNote">Not scanned</span>
+<span id="actionTitle">Scan first</span>
 </div>
 <script src="assets/js/ui-consistency.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/workflow-intelligence.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/focus-reading.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/report-trust-action.js?v=v3.50.0-case-report"></script>
-<script src="assets/js/case-report-export.js?v=v3.50.0-case-report"></script>
+<script src="assets/js/case-report-export.js?v=v3.52.0-progressive-flow"></script>
 <script src="assets/js/guided-results.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/grouped-panel-controls.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/product-simplification.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/mobile-simplification.js?v=rc11-2-hosted-subdomain"></script>
-<script src="assets/js/proxuma-ui-wiring.js?v=v3.49.0-desktop-refinement"></script>
-
+<script src="assets/js/proxuma-ui-wiring.js?v=v3.54.0-release-candidate"></script>
+<script src="assets/js/unified-case-workspace.js?v=v3.52.0-progressive-flow"></script>
+<script src="assets/js/progressive-investigation-flow.js?v=v3.54.0-release-candidate"></script>
+<script src="assets/js/case-management-workspace.js?v=v3.52.0-progressive-flow"></script>
 <script id="proxumaThemeToggleScript">
 (function(){var k='proxuma-it-theme-v1',b=document.body,m=document.querySelector('meta[name="theme-color"]'),t=document.getElementById('themeToggle');function a(x){var l=x==='light';b.classList.toggle('theme-light',l);b.classList.toggle('theme-dark',!l);if(t){t.setAttribute('aria-pressed',String(l));t.textContent=l?'🌙 Dark Mode':'☀️ Light Mode';}if(m){m.setAttribute('content',l?'#f7fbff':'#070a0d');}}var s='dark';try{s=localStorage.getItem(k)||'dark'}catch(e){}a(s);if(t){t.addEventListener('click',function(){var n=b.classList.contains('theme-light')?'dark':'light';try{localStorage.setItem(k,n)}catch(e){}a(n);});}})();
 </script>
-
-<div id="appGuideOverlay" class="app-guide-overlay" hidden aria-hidden="true">
-  <div class="app-guide-backdrop" data-guide-close></div>
-  <section class="app-guide-dialog" role="dialog" aria-modal="true" aria-labelledby="appGuideTitle" tabindex="-1">
-    <header class="app-guide-dialog-head">
-      <div><p class="eyebrow">Proxuma IT Manual</p><h2 id="appGuideTitle">How the entire app works</h2><p>Follow the workflow from first scan to final action. Each section can take you directly to the matching workspace.</p></div>
-      <button id="closeAppGuide" class="wire-button app-guide-close" type="button" aria-label="Close app guide">Close Guide ✕</button>
-    </header>
-    <nav class="app-guide-index" aria-label="Guide sections">
-      <button data-guide-jump="guide-scan">1 Scan</button><button data-guide-jump="guide-score">2 Score</button><button data-guide-jump="guide-analysis">3 Analysis</button><button data-guide-jump="guide-investigation">4 Investigation</button><button data-guide-jump="guide-evidence">5 Evidence</button><button data-guide-jump="guide-checks">6 Checks</button><button data-guide-jump="guide-actions">7 Actions</button><button data-guide-jump="guide-tools">8 Tools</button><button data-guide-jump="guide-status">9 Data Status</button>
-    </nav>
-    <div class="app-guide-content">
-      <article id="guide-scan" class="app-guide-section"><span class="guide-number">1</span><div><h3>Start a scan</h3><p>Use the unified scan workspace to paste a URL, domain, message, or QR payload, open the camera scanner inside the same card, or choose an example target. Proxuma first performs local analysis without visiting the target.</p><button data-guide-target="#scan">Open Unified Scan Workspace</button></div></article>
-      <article id="guide-score" class="app-guide-section"><span class="guide-number">2</span><div><h3>Read the risk score</h3><p>The main result combines detected signals into an overall risk level. High Risk appears red, Moderate appears orange, and Good to Go appears green. The score is a combined judgment, not a count of individual high-severity findings.</p><button data-guide-target="#report">Take Me to Results</button></div></article>
-      <article id="guide-analysis" class="app-guide-section"><span class="guide-number">3</span><div><h3>Use Analysis View</h3><p>Why This Score explains the decision, Trust Timeline shows how confidence developed, Threat Story connects the signals, and Decision Guide turns the result into a clear response.</p><button data-guide-target="#details">Take Me to Analysis View</button></div></article>
-      <article id="guide-investigation" class="app-guide-section"><span class="guide-number">4</span><div><h3>Open the Investigation layer</h3><p>Overview summarizes the case. Deep Analysis expands the reasoning. Evidence organizes supporting details. Case File prepares a reusable packet that can be saved or copied.</p><button data-guide-target="#investigation-workspace">Take Me to Investigation</button></div></article>
-      <article id="guide-evidence" class="app-guide-section"><span class="guide-number">5</span><div><h3>Review Supporting Evidence</h3><p>This card shows the signal mix, evidence strength, previous-scan context, and the facts behind the current result. Classified and unclassified signals should be treated separately.</p><button data-guide-target="#scan-detail-workspace">Take Me to Supporting Evidence</button></div></article>
-      <article id="guide-checks" class="app-guide-section"><span class="guide-number">6</span><div><h3>Understand Local and Online Checks</h3><p>Local checks inspect the target on the device. Online intelligence can later add live domain, DNS, IP, certificate, reputation, and threat-database results. A failed online source should never erase the local result.</p><button data-guide-target="#scan-detail-workspace">Take Me to Checks</button></div></article>
-      <article id="guide-actions" class="app-guide-section"><span class="guide-number">7</span><div><h3>Turn findings into action</h3><p>Current Findings & Actions organizes what was detected, what matters most, and the safest next response. Use it as the operational conclusion rather than repeating instructions across multiple cards.</p><button data-guide-target="#workflow">Take Me to Findings & Actions</button></div></article>
-      <article id="guide-tools" class="app-guide-section"><span class="guide-number">8</span><div><h3>Use Optional Tools</h3><p>Check IP, Lookup Domain, Upload File, CAPTCHA, Lookup DNS, Verify Certificate, View Headers, and Unshorten URL provide focused investigations outside the main scan flow.</p><button data-guide-target="#optional-tools">Take Me to Optional Tools</button></div></article>
-      <article id="guide-status" class="app-guide-section"><span class="guide-number">9</span><div><h3>Know the data status</h3><p>Local means processed on the device. Live means returned by an external source. Cached means previously retrieved. Partial means some sources succeeded and others did not. Unavailable means a specific source failed while the rest of the report can continue.</p><button data-guide-target="#scan">Return to Scan Center</button></div></article>
-    </div>
-  </section>
+<div aria-hidden="true" class="app-guide-overlay" hidden="" id="appGuideOverlay">
+<div class="app-guide-backdrop" data-guide-close=""></div>
+<section aria-labelledby="appGuideTitle" aria-modal="true" class="app-guide-dialog" role="dialog" tabindex="-1">
+<header class="app-guide-dialog-head">
+<div><p class="eyebrow">Proxuma IT Manual</p><h2 id="appGuideTitle">How the entire app works</h2><p>Follow the workflow from first scan to final action. Each section can take you directly to the matching workspace.</p></div>
+<button aria-label="Close app guide" class="wire-button app-guide-close" id="closeAppGuide" type="button">Close Guide ✕</button>
+</header>
+<nav aria-label="Guide sections" class="app-guide-index">
+<button data-guide-jump="guide-scan">1 Scan</button><button data-guide-jump="guide-score">2 Score</button><button data-guide-jump="guide-analysis">3 Analysis</button><button data-guide-jump="guide-investigation">4 Investigation</button><button data-guide-jump="guide-evidence">5 Evidence</button><button data-guide-jump="guide-checks">6 Checks</button><button data-guide-jump="guide-actions">7 Actions</button><button data-guide-jump="guide-tools">8 Tools</button><button data-guide-jump="guide-status">9 Data Status</button>
+</nav>
+<div class="app-guide-content">
+<article class="app-guide-section" id="guide-scan"><span class="guide-number">1</span><div><h3>Start a scan</h3><p>Use the unified scan workspace to paste a URL, domain, message, or QR payload, open the camera scanner inside the same card, or choose an example target. Proxuma first performs local analysis without visiting the target.</p><button data-guide-target="#scan">Open Unified Scan Workspace</button></div></article>
+<article class="app-guide-section" id="guide-score"><span class="guide-number">2</span><div><h3>Read the risk score</h3><p>The main result combines detected signals into an overall risk level. High Risk appears red, Moderate appears orange, and Good to Go appears green. The score is a combined judgment, not a count of individual high-severity findings.</p><button data-guide-target="#report">Take Me to Results</button></div></article>
+<article class="app-guide-section" id="guide-analysis"><span class="guide-number">3</span><div><h3>Use Analysis View</h3><p>Why This Score explains the decision, Trust Timeline shows how confidence developed, Threat Story connects the signals, and Decision Guide turns the result into a clear response.</p><button data-guide-target="#details">Take Me to Analysis View</button></div></article>
+<article class="app-guide-section" id="guide-investigation"><span class="guide-number">4</span><div><h3>Open the Investigation layer</h3><p>Overview summarizes the case. Deep Analysis expands the reasoning. Evidence organizes supporting details. Case File prepares a reusable packet that can be saved or copied.</p><button data-guide-target="#investigation-workspace">Take Me to Investigation</button></div></article>
+<article class="app-guide-section" id="guide-evidence"><span class="guide-number">5</span><div><h3>Review Supporting Evidence</h3><p>This card shows the signal mix, evidence strength, previous-scan context, and the facts behind the current result. Classified and unclassified signals should be treated separately.</p><button data-guide-target="#scan-detail-workspace">Take Me to Supporting Evidence</button></div></article>
+<article class="app-guide-section" id="guide-checks"><span class="guide-number">6</span><div><h3>Understand Local and Online Checks</h3><p>Local checks inspect the target on the device. Online intelligence can later add live domain, DNS, IP, certificate, reputation, and threat-database results. A failed online source should never erase the local result.</p><button data-guide-target="#scan-detail-workspace">Take Me to Checks</button></div></article>
+<article class="app-guide-section" id="guide-actions"><span class="guide-number">7</span><div><h3>Turn findings into action</h3><p>Current Findings &amp; Actions organizes what was detected, what matters most, and the safest next response. Use it as the operational conclusion rather than repeating instructions across multiple cards.</p><button data-guide-target="#workflow">Take Me to Findings &amp; Actions</button></div></article>
+<article class="app-guide-section" id="guide-tools"><span class="guide-number">8</span><div><h3>Use Optional Tools</h3><p>Check IP, Lookup Domain, Upload File, CAPTCHA, Lookup DNS, Verify Certificate, View Headers, and Unshorten URL provide focused investigations outside the main scan flow.</p><button data-guide-target="#optional-tools">Take Me to Optional Tools</button></div></article>
+<article class="app-guide-section" id="guide-status"><span class="guide-number">9</span><div><h3>Know the data status</h3><p>Local means processed on the device. Live means returned by an external source. Cached means previously retrieved. Partial means some sources succeeded and others did not. Unavailable means a specific source failed while the rest of the report can continue.</p><button data-guide-target="#scan">Return to Scan Center</button></div></article>
 </div>
-
+</section>
+</div>
 <script src="assets/js/app-guide-overlay.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/scan-source-status.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/domain-intelligence.js?v=v3.48.1-live-intelligence"></script>
-<script src="assets/js/mission-control.js?v=rc12-mission-control"></script>
-<script src="assets/js/decision-flow.js?v=rc13-guided-decision-flow"></script>
-
+<script src="assets/js/mission-control.js?v=v3.54.0-release-candidate"></script>
+<script src="assets/js/decision-flow.js?v=v3.54.0-release-candidate"></script>
 <script src="assets/js/case-command-center.js?v=rc14-1-case-notes-timeline"></script>
-
 <script src="assets/js/heatbar-direct-sync.js?v=rc15-public-beta-1"></script>
-</body></html>
+<script src="assets/js/unified-investigation-workspace.js?v=v3.54.0-release-candidate"></script>
+<script src="assets/js/investigation-view-controls.js?v=v3.54.0-release-candidate"></script><script src="assets/js/release-candidate-audit.js?v=v3.54.0-release-candidate"></script></body></html>

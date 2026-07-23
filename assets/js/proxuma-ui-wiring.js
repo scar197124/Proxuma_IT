@@ -446,6 +446,7 @@
     }
     comparisonBaseline = JSON.parse(JSON.stringify(saved));
     comparisonArmed = true;
+    document.dispatchEvent(new CustomEvent("proxuma:case-workspace-request", { detail:{ reason:"comparison" } }));
     openSavedCase(saved.caseId);
     setTimeout(() => {
       set("visibleWireStatus", `Rescanning ${saved.caseId} against its saved baseline…`);
@@ -469,7 +470,7 @@
       const li = document.createElement("li");
       li.className = "visible-case-memory-item";
       li.dataset.caseId = item.caseId || "";
-      li.innerHTML = `<div><strong>${esc(item.caseId || "Saved case")}</strong><small>${esc(item.riskLabel || "Unknown")} · ${esc(item.target || "No target")}</small></div><div class="visible-case-memory-actions"><button type="button" class="secondary-action" data-case-open="${esc(item.caseId || "")}">Open</button><button type="button" class="primary-action" data-case-compare="${esc(item.caseId || "")}" ${item.snapshot ? "" : "disabled"}>Rescan &amp; Compare</button></div>`;
+      li.innerHTML = `<div><strong>${esc(item.caseManagement?.name || item.caseId || "Saved case")}</strong><small>${esc(item.caseManagement?.status ? item.caseManagement.status.charAt(0).toUpperCase()+item.caseManagement.status.slice(1) : item.riskLabel || "Unknown")} · ${esc(item.caseManagement?.priority ? item.caseManagement.priority.charAt(0).toUpperCase()+item.caseManagement.priority.slice(1)+" priority · " : "")}${esc(item.target || "No target")}</small></div><div class="visible-case-memory-actions"><button type="button" class="secondary-action" data-case-open="${esc(item.caseId || "")}">Open</button><button type="button" class="primary-action" data-case-compare="${esc(item.caseId || "")}" ${item.snapshot ? "" : "disabled"}>Rescan &amp; Compare</button></div>`;
       list.appendChild(li);
     });
   }
@@ -495,6 +496,7 @@
       updateMissionStatus("Saved Case Open");
       set("visibleCaseStatus", `Restored ${saved.caseId} from Scan Memory.`);
       set("visibleWireStatus", "Saved investigation reopened with its score, evidence, analysis, and action state.");
+      document.dispatchEvent(new CustomEvent("proxuma:case-workspace-request", { detail:{ reason:"saved-case" } }));
       document.querySelector("#report")?.scrollIntoView({behavior:"smooth", block:"start"});
     };
     if (shouldProtectCurrentInvestigation()) showInvestigationDialog(restore);
@@ -519,7 +521,8 @@
       timestamp:r.timestamp,
       action:r.action,
       savedAt:new Date().toISOString(),
-      snapshot:JSON.parse(JSON.stringify(r))
+      snapshot:JSON.parse(JSON.stringify(r)),
+      caseManagement: window.ProxumaCaseManagement?.get?.() || null
     });
     writeHistory(history);
     if (!auto) { investigationDirty = false; investigationState = "CASE_SAVED"; updateMissionStatus("Case Saved"); }
