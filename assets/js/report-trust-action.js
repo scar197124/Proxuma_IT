@@ -19,8 +19,19 @@
     findings=arr.map((text,i)=>({id:hash(text),title:clean(text).split(/[.!?]/)[0].slice(0,90)||`Finding ${i+1}`,evidence:clean(text),severity:severityOf(text)}));
     render();
   }
+  function updateProgress(states){
+    const total=findings.length;
+    const completed=findings.filter(f=>states[f.id]==='resolved').length;
+    const percent=total?Math.round((completed/total)*100):0;
+    if($('findingProgressText')) $('findingProgressText').textContent=`${completed} of ${total} actions completed`;
+    if($('findingProgressPercent')) $('findingProgressPercent').textContent=`${percent}%`;
+    if($('findingProgressFill')) $('findingProgressFill').style.width=`${percent}%`;
+    const track=document.querySelector('.finding-progress-track');
+    if(track) track.setAttribute('aria-valuenow',String(percent));
+  }
   function render(){
     const list=$('trustFindingList'); if(!list)return; const states=readStatuses();
+    updateProgress(states);
     const visible=findings.filter(f=>activeFilter==='all'||(activeFilter==='resolved'?states[f.id]==='resolved':states[f.id]!=='resolved'));
     if(!visible.length){list.innerHTML='<div class="trust-empty">'+(findings.length?'No findings match this filter.':'Run a scan to build unified finding cards.')+'</div>';return;}
     list.innerHTML=visible.map((f,i)=>{const status=states[f.id]||'review';return `<article class="trust-finding-card severity-${f.severity}" data-finding-id="${f.id}"><div class="finding-head"><span class="finding-rank">${i+1}</span><div><span class="finding-severity">${esc(f.severity)}</span><h4>${esc(f.title)}</h4></div><select class="remediation-status" aria-label="Remediation status for ${esc(f.title)}"><option value="review" ${status==='review'?'selected':''}>To review</option><option value="progress" ${status==='progress'?'selected':''}>In progress</option><option value="resolved" ${status==='resolved'?'selected':''}>Resolved</option><option value="accepted" ${status==='accepted'?'selected':''}>Accepted risk</option></select></div><div class="finding-confidence"><b>Confidence</b><span>${f.severity==='critical'||f.severity==='high'?'High':f.severity==='medium'?'Moderate':'Contextual'}</span></div><div class="finding-block action-block"><b>Why this matters</b><p>${esc(f.title)}</p></div><div class="finding-block action-block"><b>Recommended next step</b><p>${esc(actionFor(f.severity))}</p></div><details class="finding-evidence-details"><summary>Technical evidence</summary><div class="finding-block verified-block"><b>Observed by the local scanner</b><p>${esc(f.evidence)}</p></div></details></article>`}).join('');

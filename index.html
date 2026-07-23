@@ -21,7 +21,7 @@
 <meta name="twitter:image" content="https://scar197124.github.io/Proxuma_IT/assets/images/proxuma-header-banner.png" />
 <link rel="icon" type="image/png" href="assets/images/proxuma-it-logo.png" />
 <link rel="apple-touch-icon" href="assets/images/proxuma-it-logo.png" />
-<link rel="stylesheet" href="assets/css/styles.css?v=rc15-public-beta-1" />
+<link rel="stylesheet" href="assets/css/styles.css?v=v3.49.0-desktop-refinement" />
 <meta name="proxuma-build" content="ui-1.0-rc15-public-beta" />
 </head>
 <body class="theme-dark captain-wire-ui">
@@ -115,6 +115,12 @@
         <button id="caseCurrentSave" class="secondary-action" type="button">Save Case</button>
       </div>
       <div id="caseIntelligenceEmpty" class="case-intelligence-empty" role="status"><strong>No saved cases</strong><span>After a scan, the current investigation appears above. Save it only when you want it kept here.</span></div>
+      <section id="caseComparisonPanel" class="case-comparison-panel" hidden aria-live="polite" aria-labelledby="caseComparisonTitle">
+        <div class="case-comparison-head"><div><small>Case Comparison Engine</small><div class="comparison-active-line"><span class="comparison-active-badge">Comparison active</span><strong id="caseComparisonContext">Current scan vs saved baseline</strong></div><h3 id="caseComparisonTitle">Rescan comparison</h3><p id="caseComparisonSummary">Open a saved case and choose Rescan &amp; Compare.</p></div><button id="caseComparisonClose" type="button" class="secondary-action">Close</button></div>
+        <div class="case-comparison-score"><div><span>Previous</span><strong id="caseComparisonPrevious">—</strong></div><div class="case-comparison-direction"><b id="caseComparisonDirection">Waiting</b><small id="caseComparisonDelta">No comparison yet</small></div><div><span>Current</span><strong id="caseComparisonCurrent">—</strong></div></div>
+        <div class="case-comparison-counts"><div><strong id="caseCompareNewCount">0</strong><span>New</span></div><div><strong id="caseCompareResolvedCount">0</strong><span>Resolved</span></div><div><strong id="caseCompareChangedCount">0</strong><span>Severity changed</span></div><div><strong id="caseCompareUnchangedCount">0</strong><span>Unchanged</span></div></div>
+        <div class="case-comparison-groups"><section><h4>What changed</h4><ul id="caseComparisonChanges"><li>Run a comparison to see changes.</li></ul></section><section><h4>Recommended response</h4><p id="caseComparisonAction">The safest next action will appear here.</p></section></div>
+      </section>
       <div id="caseCommandWorkspace" class="case-command-workspace" hidden><div class="case-command-toolbar"><label class="case-search"><span class="sr-only">Search saved cases</span><input id="caseCommandSearch" type="search" placeholder="Search cases, targets, status, or notes" autocomplete="off" /></label><div class="case-filters" role="group" aria-label="Filter cases"><button class="active" data-case-filter="all" type="button">All</button><button data-case-filter="open" type="button">Open</button><button data-case-filter="priority" type="button">Priority</button><button data-case-filter="resolved" type="button">Resolved</button></div></div><div class="case-command-layout"><div><div id="caseCommandList" class="case-command-list" aria-live="polite"></div><div id="caseCommandEmpty" class="case-command-empty" hidden><strong>No matching cases.</strong><span>Change the search or filter to see other investigations.</span></div></div><aside id="caseJournal" class="case-journal" aria-labelledby="caseJournalTitle" hidden><div class="case-journal-head"><div><small>Selected Case</small><h3 id="caseJournalTitle">Select a saved case</h3></div><div class="case-journal-head-actions"><span id="caseJournalStatus" class="case-journal-badge">Waiting</span><button id="caseJournalClose" type="button" aria-label="Close case journal">Close</button></div></div><p id="caseJournalTarget" class="case-journal-target">Choose a case to view notes and its investigation timeline.</p><label class="case-note-field"><span>Investigation note</span><textarea id="caseJournalNote" rows="3" maxlength="1200" placeholder="Record what was checked or what still needs attention." disabled></textarea></label><div class="case-journal-actions"><button id="caseJournalAdd" class="primary-action" type="button" disabled>Add Note</button><button id="caseJournalCopy" type="button" disabled>Copy Timeline</button></div><div class="case-timeline-head"><strong>Activity</strong><span id="caseTimelineCount">0 entries</span></div><ol id="caseTimeline" class="case-timeline"><li class="case-timeline-empty">No case selected.</li></ol></aside></div></div>
       <p id="caseCommandStatus" class="fine-print" aria-live="polite">Case intelligence is stored locally in this browser.</p>
     </section>
@@ -140,7 +146,7 @@
         <ul><li>Analyzed locally</li><li>Nothing is uploaded</li><li>Online checks remain off unless chosen</li></ul>
         <button id="enableOnlineConsentButton" class="secondary-action" type="button">Enable Online Checks</button>
         <section id="domainIntelPanel" class="domain-intel-panel" aria-live="polite">
-          <div class="domain-intel-head"><strong>Domain Intelligence</strong><span id="domainIntelStatus" class="status-pill status-low">Offline</span></div>
+          <div class="domain-intel-head"><strong>Domain Intelligence</strong><div class="domain-intel-statuses"><span id="domainIntelVerified" class="domain-intel-verified" hidden>✓ Live Verified</span><span id="domainIntelStatus" class="status-pill status-low">Offline</span></div></div>
           <p id="domainIntelSummary">Enable online checks, then run a URL or domain scan to retrieve live registration context.</p>
           <dl id="domainIntelGrid" class="domain-intel-grid">
             <div><dt>Scanned host</dt><dd id="domainIntelDomain">Waiting</dd></div>
@@ -153,9 +159,10 @@
             <div><dt>Expires</dt><dd id="domainIntelExpires">—</dd></div>
             <div><dt>Source</dt><dd id="domainIntelSource">Local only</dd></div>
             <div><dt>Domain profile</dt><dd id="domainIntelProfile">Not available</dd></div>
+            <div><dt>Interpretation</dt><dd id="domainIntelInterpretation">Not available</dd></div>
             <div><dt>Retrieved</dt><dd id="domainIntelRetrieved">Not available</dd></div>
           </dl>
-          <button id="runDomainIntelButton" class="secondary-action domain-intel-run" type="button">Run Domain Intelligence</button>
+          <div class="domain-intel-actions"><button id="runDomainIntelButton" class="secondary-action domain-intel-run" type="button">Run Domain Intelligence</button><button id="copyDomainIntelButton" class="secondary-action domain-intel-copy" type="button" disabled>Copy Intelligence</button></div><p id="domainIntelCopyStatus" class="domain-intel-copy-status" aria-live="polite">Live results can be copied after retrieval.</p>
         </section>
       </article>
     </section>
@@ -179,6 +186,7 @@
       <div class="workflow-fixed-head"><p class="eyebrow">Step 5 · What to do next</p><h2>Turn findings into actions</h2></div>
       <div class="severity-board"><div><em id="sevCritical">0</em>Critical</div><div><em id="sevHigh">0</em>High</div><div><em id="sevMedium">0</em>Medium</div><div><em id="sevLow">0</em>Low</div><div><em id="sevInfo">0</em>Info</div></div>
       <div class="finding-toolbar"><button class="finding-filter active" data-filter="all" type="button">All</button><button class="finding-filter" data-filter="open" type="button">Needs action</button><button class="finding-filter" data-filter="resolved" type="button">Finished</button></div>
+      <div class="finding-progress" aria-live="polite"><div class="finding-progress-copy"><strong id="findingProgressText">0 of 0 actions completed</strong><span id="findingProgressPercent">0%</span></div><div class="finding-progress-track" role="progressbar" aria-label="Finding actions completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="findingProgressFill"></span></div></div>
       <div id="trustFindingList" class="trust-finding-list"><div class="trust-empty">Run a scan to see clear findings and next steps.</div></div><p id="trustActionStatus"></p>
     </section>
     </div>
@@ -188,8 +196,27 @@
       <div class="tool-grid wired-tools"><button data-tool-action="ip">Check IP<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="domain">Lookup Domain<br><small>Enable online checks first</small></button><button data-tool-action="file">Upload File<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="capture">Capture<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="dns">Lookup DNS<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="cert">View Certificate<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="headers">View Headers<br><small>Coming in Intelligence 1.1</small></button><button data-tool-action="unshorten">Unshorten URL<br><small>Uses current pasted target</small></button></div><p id="toolActionStatus" class="fine-print">Tools now report whether they are wired or planned instead of showing fake output.</p><div class="wired-history-strip"><strong>Recent Cases</strong><ul id="visibleCaseHistory"><li>No saved cases yet.</li></ul></div>
     </section>
 
-    <footer class="wire-footer"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the scan report, or clear this workspace.</p><div class="wired-footer-actions"><button id="visibleCopyReport" class="secondary-action" type="button">Copy Report</button><button id="visibleExportJson" class="secondary-action" type="button">Export JSON</button><button id="visibleNewInvestigation" class="primary-action" type="button">New Investigation</button><button id="visibleResetWorkspace" class="secondary-action" type="button">Reset</button></div><p id="visibleWireStatus" class="fine-print"></p></div></footer>
+    <footer class="wire-footer"><a class="secondary-action" href="https://scar197124.github.io/PROXUMA/">← Return to PROXUMA</a><div><strong>Export / Reset Workspace</strong><p>Download a report, copy the scan report, or clear this workspace.</p><div class="wired-footer-actions"><button id="visibleCopyReport" class="secondary-action" type="button">Copy Report</button><button id="visibleCaseReport" class="primary-action" type="button">Export Case Report</button><button id="visibleExportJson" class="secondary-action" type="button">Quick JSON</button><button id="visibleNewInvestigation" class="primary-action" type="button">New Investigation</button><button id="visibleResetWorkspace" class="secondary-action" type="button">Reset</button></div><p id="visibleWireStatus" class="fine-print"></p></div></footer>
   </section>
+
+  <div id="caseReportDialog" class="case-report-dialog" hidden>
+    <div class="case-report-backdrop" data-report-close></div>
+    <section class="case-report-sheet" role="dialog" aria-modal="true" aria-labelledby="caseReportTitle">
+      <div class="case-report-head">
+        <div><small>Local Case Export</small><h2 id="caseReportTitle">Case Report</h2><p id="caseReportLead">Generate a shareable investigation record without uploading the case.</p></div>
+        <button id="caseReportClose" class="secondary-action" type="button">Close</button>
+      </div>
+      <div id="caseReportPreview" class="case-report-preview" aria-live="polite"></div>
+      <div class="case-report-actions">
+        <button id="caseReportPrint" class="primary-action" type="button">Print / Save PDF</button>
+        <button id="caseReportHtml" class="secondary-action" type="button">Download HTML</button>
+        <button id="caseReportText" class="secondary-action" type="button">Download TXT</button>
+        <button id="caseReportJson" class="secondary-action" type="button">Download JSON</button>
+        <button id="caseReportCopy" class="secondary-action" type="button">Copy Summary</button>
+      </div>
+      <p id="caseReportStatus" class="fine-print" aria-live="polite">Reports are created locally in this browser.</p>
+    </section>
+  </div>
 
   <section class="engine-support" aria-hidden="true">
     <span id="trueTarget">Waiting</span><span id="rootDomainNote"></span><span id="confidenceLabel">Not measured</span><span id="confidenceNote"></span><span id="confidenceBrief">Waiting</span><span id="whyScore">Waiting for local evidence.</span><span id="laneQuality">Standby</span>
@@ -214,12 +241,13 @@
 <script src="assets/js/ui-consistency.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/workflow-intelligence.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/focus-reading.js?v=rc11-2-hosted-subdomain"></script>
-<script src="assets/js/report-trust-action.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/report-trust-action.js?v=v3.50.0-case-report"></script>
+<script src="assets/js/case-report-export.js?v=v3.50.0-case-report"></script>
 <script src="assets/js/guided-results.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/grouped-panel-controls.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/product-simplification.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/mobile-simplification.js?v=rc11-2-hosted-subdomain"></script>
-<script src="assets/js/proxuma-ui-wiring.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/proxuma-ui-wiring.js?v=v3.49.0-desktop-refinement"></script>
 
 <script id="proxumaThemeToggleScript">
 (function(){var k='proxuma-it-theme-v1',b=document.body,m=document.querySelector('meta[name="theme-color"]'),t=document.getElementById('themeToggle');function a(x){var l=x==='light';b.classList.toggle('theme-light',l);b.classList.toggle('theme-dark',!l);if(t){t.setAttribute('aria-pressed',String(l));t.textContent=l?'🌙 Dark Mode':'☀️ Light Mode';}if(m){m.setAttribute('content',l?'#f7fbff':'#070a0d');}}var s='dark';try{s=localStorage.getItem(k)||'dark'}catch(e){}a(s);if(t){t.addEventListener('click',function(){var n=b.classList.contains('theme-light')?'dark':'light';try{localStorage.setItem(k,n)}catch(e){}a(n);});}})();
@@ -251,7 +279,7 @@
 
 <script src="assets/js/app-guide-overlay.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/scan-source-status.js?v=rc11-2-hosted-subdomain"></script>
-<script src="assets/js/domain-intelligence.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/domain-intelligence.js?v=v3.48.1-live-intelligence"></script>
 <script src="assets/js/mission-control.js?v=rc12-mission-control"></script>
 <script src="assets/js/decision-flow.js?v=rc13-guided-decision-flow"></script>
 

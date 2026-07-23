@@ -19433,3 +19433,306 @@ body.theme-light .app-guide-close{color:#0b5528!important;}
     grid-template-columns:repeat(2,minmax(0,1fr)) !important;
   }
 }
+
+/* === Proxuma IT v3.47.0 — synchronized dashboard balance === */
+.mid-lanes{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:12px!important;
+}
+.mid-lanes > .wire-card{
+  min-width:0!important;
+  height:clamp(410px,48vh,560px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+}
+#investigation-workspace .investigation-scroll-shell,
+#scan-detail-workspace .wired-evidence-list,
+.mid-lanes > .offline-card .domain-intel-panel{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow:auto!important;
+  overscroll-behavior:contain;
+}
+#scan-detail-workspace .wired-evidence-list{
+  margin-bottom:0!important;
+  padding-right:4px!important;
+}
+.mid-lanes > .offline-card > ul{
+  flex:0 0 auto!important;
+}
+.action-review-grid{
+  align-items:stretch!important;
+}
+.action-review-grid > .wire-card{
+  min-width:0!important;
+}
+@media(max-width:1050px){
+  .mid-lanes{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .mid-lanes > .offline-card{grid-column:1/-1!important;height:auto!important;min-height:360px!important}
+}
+@media(max-width:720px){
+  .mid-lanes{grid-template-columns:minmax(0,1fr)!important}
+  .mid-lanes > .wire-card,
+  .mid-lanes > .offline-card{grid-column:auto!important;height:auto!important;min-height:360px!important;max-height:72vh!important}
+}
+
+/* ==========================================================
+   Proxuma IT v3.47.1 — Step 5 compact action header
+   Reduces control chrome so the findings list receives more
+   vertical room while preserving five severity counters and
+   three filters in a clear left-to-right layout.
+   ========================================================== */
+.captain-wire-ui #workflow.workflow-layer{
+  gap:0 !important;
+}
+.captain-wire-ui #workflow .workflow-fixed-head{
+  padding-bottom:7px !important;
+  margin-bottom:0 !important;
+}
+.captain-wire-ui #workflow .workflow-fixed-head .eyebrow{
+  margin-bottom:2px !important;
+  font-size:.68rem !important;
+  line-height:1.1 !important;
+}
+.captain-wire-ui #workflow .workflow-fixed-head h2{
+  margin:0 !important;
+  font-size:1.3rem !important;
+  line-height:1.12 !important;
+}
+.captain-wire-ui #workflow .severity-board{
+  gap:5px !important;
+  margin:7px 0 5px !important;
+  padding:0 !important;
+}
+.captain-wire-ui #workflow .severity-board > div{
+  min-height:42px !important;
+  padding:5px 5px !important;
+  border-radius:9px !important;
+  font-size:.66rem !important;
+  line-height:1.05 !important;
+  letter-spacing:.01em !important;
+}
+.captain-wire-ui #workflow .severity-board em{
+  margin:0 0 1px !important;
+  font-size:1.05rem !important;
+  line-height:1 !important;
+}
+.captain-wire-ui #workflow .finding-toolbar{
+  gap:5px !important;
+  margin:4px 0 7px !important;
+}
+.captain-wire-ui #workflow .finding-toolbar > .finding-filter{
+  min-height:30px !important;
+  height:30px !important;
+  padding:4px 10px !important;
+  border-radius:8px !important;
+  font-size:.72rem !important;
+  line-height:1 !important;
+}
+.captain-wire-ui #workflow .trust-finding-list{
+  margin-top:0 !important;
+}
+
+@media (max-width:900px){
+  .captain-wire-ui #workflow .severity-board{
+    grid-template-columns:repeat(5,minmax(62px,1fr)) !important;
+    gap:5px !important;
+    padding:0 0 3px !important;
+  }
+  .captain-wire-ui #workflow .severity-board > div{
+    min-width:62px !important;
+    min-height:39px !important;
+    padding:4px 4px !important;
+    font-size:.62rem !important;
+  }
+  .captain-wire-ui #workflow .finding-toolbar{
+    gap:5px !important;
+    margin:3px 0 6px !important;
+  }
+  .captain-wire-ui #workflow .finding-toolbar > button{
+    min-height:29px !important;
+    height:29px !important;
+    padding:3px 5px !important;
+    font-size:.68rem !important;
+    white-space:nowrap !important;
+  }
+}
+
+@media (max-width:430px) and (orientation:portrait){
+  .captain-wire-ui #workflow .workflow-fixed-head h2{
+    font-size:1.18rem !important;
+  }
+  .captain-wire-ui #workflow .severity-board{
+    grid-template-columns:repeat(5,minmax(58px,1fr)) !important;
+  }
+  .captain-wire-ui #workflow .severity-board > div{
+    min-width:58px !important;
+  }
+}
+
+/* v3.47.2 — saved investigation memory controls */
+.visible-case-memory-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.65rem;
+}
+.visible-case-memory-item > div{
+  display:grid;
+  min-width:0;
+  gap:.12rem;
+}
+.visible-case-memory-item strong,
+.visible-case-memory-item small{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.visible-case-memory-item button{
+  flex:0 0 auto;
+  min-height:2rem;
+  padding:.32rem .68rem;
+}
+@media (max-width:560px){
+  .visible-case-memory-item{align-items:flex-start;}
+  .visible-case-memory-item > div{max-width:calc(100% - 4.5rem);}
+}
+
+/* v3.48.0 — Case Comparison Engine */
+.case-comparison-panel{margin:14px 0;border:1px solid var(--line,rgba(255,255,255,.14));border-radius:16px;padding:14px;background:linear-gradient(145deg,rgba(25,211,173,.07),rgba(50,125,255,.04));box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.case-comparison-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.case-comparison-head small{letter-spacing:.08em;text-transform:uppercase;opacity:.7}.case-comparison-head h3{margin:2px 0 4px}.case-comparison-head p{margin:0;opacity:.78}
+.case-comparison-score{display:grid;grid-template-columns:1fr minmax(130px,.7fr) 1fr;gap:10px;align-items:center;margin:14px 0}.case-comparison-score>div{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:12px;padding:10px;text-align:center}.case-comparison-score span,.case-comparison-score small{display:block;opacity:.7;font-size:.78rem}.case-comparison-score strong{font-size:1.45rem}.case-comparison-direction b{display:block;font-size:.95rem}
+.case-comparison-counts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.case-comparison-counts>div{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:10px;padding:8px;text-align:center}.case-comparison-counts strong{display:block;font-size:1.15rem}.case-comparison-counts span{font-size:.72rem;opacity:.74}
+.case-comparison-groups{display:grid;grid-template-columns:1.35fr 1fr;gap:10px;margin-top:10px}.case-comparison-groups section{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:12px;padding:10px}.case-comparison-groups h4{margin:0 0 7px}.case-comparison-groups ul{margin:0;padding-left:18px}.case-comparison-groups p{margin:0;line-height:1.5}
+.visible-case-memory-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.visible-case-memory-actions button{min-height:30px;padding:5px 9px;font-size:.76rem}
+.case-comparison-panel[data-direction="worse"] .case-comparison-direction b{color:#ff766f}.case-comparison-panel[data-direction="improved"] .case-comparison-direction b{color:#49d69d}.case-comparison-panel[data-direction="stable"] .case-comparison-direction b{color:#f2c963}
+@media(max-width:720px){.case-comparison-score{grid-template-columns:1fr 1fr}.case-comparison-direction{grid-column:1/-1;grid-row:2}.case-comparison-counts{grid-template-columns:repeat(2,1fr)}.case-comparison-groups{grid-template-columns:1fr}.case-comparison-head{align-items:center}.visible-case-memory-item{align-items:flex-start}.visible-case-memory-actions{max-width:150px}}
+
+/* v3.48.1 — Live intelligence clarity and copy controls */
+.domain-intel-statuses{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex-wrap:wrap}
+.domain-intel-verified{display:inline-flex;align-items:center;min-height:24px;padding:3px 8px;border:1px solid rgba(57,255,20,.68);border-radius:999px;background:rgba(57,255,20,.12);font-size:.68rem;font-weight:800;letter-spacing:.03em;white-space:nowrap}
+.domain-intel-actions{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:7px;margin-top:3px}
+.domain-intel-actions .domain-intel-run,.domain-intel-actions .domain-intel-copy{width:100%;margin:0;min-height:36px}
+.domain-intel-copy:disabled{opacity:.48;cursor:not-allowed}
+.domain-intel-copy-status{margin:5px 0 0!important;font-size:.68rem!important;opacity:.78}
+#domainIntelInterpretation{line-height:1.35}
+.theme-light .domain-intel-verified{border-color:#137a2c;background:#e5f8e9;color:#0b5720}
+@media(max-width:520px){.domain-intel-actions{grid-template-columns:1fr}.domain-intel-statuses{justify-content:flex-start}.domain-intel-head{align-items:flex-start;flex-direction:column}}
+
+/* ==========================================================
+   Proxuma IT v3.49.0 — Desktop refinement
+   Controlled desktop width, quieter inner borders, unified
+   card headers, compact empty states, action progress, and a
+   clearer active-comparison state.
+   ========================================================== */
+@media (min-width:1201px){
+  :root{--wire-width:min(1440px,calc(100vw - 56px))!important;}
+}
+@media (min-width:1480px){
+  .captain-wire-ui .wire-header,
+  .captain-wire-ui .wire-page{margin-inline:auto!important;}
+}
+
+/* One header rhythm across the main dashboard cards. */
+.captain-wire-ui :is(.lane-compact-head,.analysis-view-head,.scan-details-header,.workflow-fixed-head,.case-comparison-head){
+  padding-bottom:9px;
+  margin-bottom:9px;
+  border-bottom:1px solid rgba(132,169,204,.22);
+}
+.captain-wire-ui :is(.lane-compact-head,.analysis-view-head,.scan-details-header,.workflow-fixed-head) :is(.eyebrow,small){
+  margin-bottom:3px;
+}
+.captain-wire-ui :is(.lane-compact-head,.analysis-view-head,.scan-details-header,.workflow-fixed-head) :is(h2,h3){
+  line-height:1.15;
+}
+
+/* Main shells remain clear; nested surfaces become quieter. */
+.captain-wire-ui :is(.snapshot-grid>div,.mini-grid>span,.severity-board>div,.support-lines p,.offline-card li,.drawer-stage,.drawer-panel,.trust-finding-list,.finding-block,.case-comparison-score>div,.case-comparison-counts>div,.case-comparison-groups section){
+  border-color:rgba(126,164,199,.24)!important;
+}
+.theme-light.captain-wire-ui :is(.snapshot-grid>div,.mini-grid>span,.severity-board>div,.support-lines p,.offline-card li,.drawer-stage,.drawer-panel,.trust-finding-list,.finding-block,.case-comparison-score>div,.case-comparison-counts>div,.case-comparison-groups section){
+  border-color:rgba(62,104,143,.22)!important;
+}
+
+/* Empty cards use less visual height while staying easy to understand. */
+.captain-wire-ui .trust-empty{
+  min-height:88px!important;
+  padding:16px!important;
+  display:grid!important;
+  place-items:center!important;
+  line-height:1.45!important;
+}
+.captain-wire-ui :is(.drawer-panel,.offline-card,.intel-card) > :only-child{
+  margin-block:auto;
+}
+
+/* Step 5 completion visibility. */
+.captain-wire-ui #workflow.workflow-layer{
+  grid-template-rows:auto auto auto auto 1fr auto!important;
+}
+.captain-wire-ui #workflow .finding-progress{
+  display:grid;
+  gap:5px;
+  margin:0 0 8px;
+}
+.captain-wire-ui #workflow .finding-progress-copy{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  font-size:.76rem;
+  color:var(--wire-muted);
+}
+.captain-wire-ui #workflow .finding-progress-copy strong{color:var(--wire-text);font-size:.78rem;}
+.captain-wire-ui #workflow .finding-progress-track{
+  height:6px;
+  overflow:hidden;
+  border:1px solid rgba(126,164,199,.32);
+  border-radius:999px;
+  background:rgba(4,14,24,.5);
+}
+.captain-wire-ui #workflow .finding-progress-track span{
+  display:block;
+  width:0;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#1eb980,#55e69f);
+  transition:width .22s ease;
+}
+.theme-light.captain-wire-ui #workflow .finding-progress-track{background:#e8f1f8;}
+
+/* Persistent context while a saved baseline is being compared. */
+.captain-wire-ui .comparison-active-line{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:5px 0 3px;
+}
+.captain-wire-ui .comparison-active-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:3px 8px;
+  border:1px solid rgba(61,245,110,.48);
+  border-radius:999px;
+  background:rgba(61,245,110,.1);
+  color:#75f59a;
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.captain-wire-ui #caseComparisonContext{font-size:.78rem;color:var(--wire-muted);}
+.theme-light.captain-wire-ui .comparison-active-badge{color:#116c39;background:#e4f8ec;border-color:#78bf93;}
+
+@media (max-width:1200px){
+  :root{--wire-width:min(100vw - 28px,1100px)!important;}
+}
+@media (max-width:680px){
+  :root{--wire-width:calc(100vw - 18px)!important;}
+  .captain-wire-ui #workflow .finding-progress-copy{align-items:flex-start;}
+}

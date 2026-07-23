@@ -69,7 +69,7 @@
     const snap=currentSnapshot(); if(!snap.target){setStatus('sessionStatus','Run a scan before saving a session.');return;}
     const items=read(); items.unshift(snap); write(items); renderSessions(); setStatus('sessionStatus',`Saved “${snap.name}” locally.`); workflowState('save');
   });
-  $('exportSessionsButton')?.addEventListener('click',()=>{const items=read();download('proxuma-it-sessions.json',JSON.stringify({version:'3.49.0',exportedAt:new Date().toISOString(),sessions:items},null,2));setStatus('sessionStatus','All named sessions exported.');});
+  $('exportSessionsButton')?.addEventListener('click',()=>{const items=read();download('proxuma-it-sessions.json',JSON.stringify({version:'3.50.0',exportedAt:new Date().toISOString(),sessions:items},null,2));setStatus('sessionStatus','All named sessions exported.');});
   $('namedSessionList')?.addEventListener('click',e=>{
     const btn=e.target.closest('button[data-action]'); if(!btn)return; const li=btn.closest('[data-id]'); const items=read(); const item=items.find(x=>x.id===li.dataset.id); if(!item)return;
     if(btn.dataset.action==='open'){if($('targetInput')) $('targetInput').value=item.target; if($('sessionNameInput')) $('sessionNameInput').value=item.name; setStatus('sessionStatus',`Opened “${item.name}”. Press Analyze to refresh the verified result.`); document.querySelector('#scan')?.scrollIntoView({behavior:'smooth'});}

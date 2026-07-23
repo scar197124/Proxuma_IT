@@ -30,14 +30,33 @@
   let lastAuthoritativeResult = null;
   let authoritativeScanActive = false;
   let lastAppliedLegacyReport = null;
+  let settledRenderToken = 0;
+  let comparisonBaseline = null;
+  let comparisonArmed = false;
   function scheduleCaptainRender(state="Complete", delay=120){
     clearTimeout(renderTimer);
     renderTimer = setTimeout(() => renderCaptainWiring(state, authoritativeScanActive ? lastAuthoritativeResult : undefined), delay);
   }
   function scheduleScanSettledRenders(explicitResult){
-    // Scan completion is already rendered synchronously. Do not issue a second
-    // paint pass: self-observed summary fields can turn that into a feedback loop.
-    return;
+    // Some cards are laid out or enhanced by scripts that run after the legacy
+    // engine's synchronous render. Re-apply the same authoritative result over
+    // the next two animation frames so every visible surface settles together.
+    // The token cancels stale passes when scans happen back-to-back, and the
+    // authoritative flag prevents MutationObservers from creating a loop.
+    const token = ++settledRenderToken;
+    const result = explicitResult || lastAuthoritativeResult;
+    if (!result) return;
+    requestAnimationFrame(() => {
+      if (token !== settledRenderToken) return;
+      renderCaptainWiring("Complete", result);
+      requestAnimationFrame(() => {
+        if (token !== settledRenderToken) return;
+        renderCaptainWiring("Complete", result);
+        document.dispatchEvent(new CustomEvent("proxuma:dashboard-settled", {
+          detail:{ result, completedAt:Date.now() }
+        }));
+      });
+    });
   }
   function forceDashboardSync(reason="Complete", explicitResult){
     const authoritative = explicitResult || lastAuthoritativeResult || window.ProxumaScanResult || undefined;
@@ -334,9 +353,152 @@
     return result;
   }
 
+
+  function comparisonItems(snapshot){
+    const severityRank = {info:0, low:1, medium:2, high:3, critical:4};
+    const inferSeverity = (value) => {
+      const t = String(value || "").toLowerCase();
+      if (/critical|credential theft|phishing|malware|compromis/.test(t)) return "critical";
+      if (/high|danger|urgent|suspicious|lookalike|redirect/.test(t)) return "high";
+      if (/medium|warning|review|verify|uncertain/.test(t)) return "medium";
+      if (/low|minor|caution/.test(t)) return "low";
+      return "info";
+    };
+    const source = [];
+    ["evidence","technical","decisionSteps","timeline"].forEach((key) => {
+      (Array.isArray(snapshot && snapshot[key]) ? snapshot[key] : []).forEach((value) => {
+        const label = typeof value === "string" ? value : (value && (value.title || value.detail || value.label)) || "";
+        const clean = String(label).replace(/\s+/g," ").trim();
+        if (clean) source.push(clean);
+      });
+    });
+    if (snapshot && snapshot.primaryTrigger && snapshot.primaryTrigger !== "Waiting") source.push(`Primary trigger: ${snapshot.primaryTrigger}`);
+    const unique = new Map();
+    source.forEach((label) => {
+      const id = label.toLowerCase().replace(/[^a-z0-9]+/g," ").trim().slice(0,120);
+      const severity = inferSeverity(label);
+      const previous = unique.get(id);
+      if (!previous || severityRank[severity] > severityRank[previous.severity]) unique.set(id,{id,label,severity});
+    });
+    return Array.from(unique.values());
+  }
+
+  function compareCaseSnapshots(saved, current){
+    const oldItems = comparisonItems(saved);
+    const newItems = comparisonItems(current);
+    const oldMap = new Map(oldItems.map(item => [item.id,item]));
+    const newMap = new Map(newItems.map(item => [item.id,item]));
+    const added = newItems.filter(item => !oldMap.has(item.id));
+    const resolved = oldItems.filter(item => !newMap.has(item.id));
+    const changed = newItems.filter(item => oldMap.has(item.id) && oldMap.get(item.id).severity !== item.severity)
+      .map(item => ({...item, from:oldMap.get(item.id).severity}));
+    const unchanged = newItems.filter(item => oldMap.has(item.id) && oldMap.get(item.id).severity === item.severity);
+    const previousScore = Number(saved && saved.riskScore || 0);
+    const currentScore = Number(current && current.riskScore || 0);
+    return {added,resolved,changed,unchanged,previousScore,currentScore,delta:currentScore-previousScore};
+  }
+
+  function renderCaseComparison(saved, current){
+    const panel = $("caseComparisonPanel");
+    if (!panel || !saved || !current) return;
+    const result = compareCaseSnapshots(saved,current);
+    const direction = result.delta > 0 ? "worse" : result.delta < 0 ? "improved" : "stable";
+    panel.hidden = false;
+    panel.dataset.direction = direction;
+    set("caseComparisonTitle", `Comparison · ${saved.caseId || "Saved case"}`);
+    set("caseComparisonContext", `Current scan compared with ${saved.caseId || "saved baseline"}`);
+    set("caseComparisonPrevious", `${result.previousScore}/100`);
+    set("caseComparisonCurrent", `${result.currentScore}/100`);
+    set("caseComparisonDirection", direction === "worse" ? "Risk increased" : direction === "improved" ? "Risk improved" : "Risk stable");
+    set("caseComparisonDelta", `${result.delta > 0 ? "+" : ""}${result.delta} points`);
+    set("caseCompareNewCount", String(result.added.length));
+    set("caseCompareResolvedCount", String(result.resolved.length));
+    set("caseCompareChangedCount", String(result.changed.length));
+    set("caseCompareUnchangedCount", String(result.unchanged.length));
+    set("caseComparisonSummary", `Compared the new scan with the saved snapshot from ${saved.savedAt ? new Date(saved.savedAt).toLocaleString() : "Scan Memory"}.`);
+    const lines = [
+      ...result.added.slice(0,4).map(item => `New · ${item.label}`),
+      ...result.resolved.slice(0,4).map(item => `Resolved · ${item.label}`),
+      ...result.changed.slice(0,4).map(item => `Changed ${item.from} → ${item.severity} · ${item.label}`)
+    ];
+    htmlList("caseComparisonChanges", lines.length ? lines : ["No material finding changes were detected."]);
+    const action = direction === "worse"
+      ? "Treat the case as escalated. Review the new findings first and independently verify the target before continuing."
+      : direction === "improved"
+        ? "Risk is lower, but confirm which findings disappeared before marking the case resolved."
+        : result.added.length
+          ? "The score is stable, but new evidence appeared. Review the new findings before closing the case."
+          : "The result is stable. Keep the saved case as the baseline or mark it resolved after independent verification.";
+    set("caseComparisonAction", action);
+    set("visibleWireStatus", `Comparison complete: ${result.added.length} new, ${result.resolved.length} resolved, ${result.changed.length} severity changed.`);
+    panel.scrollIntoView({behavior:"smooth",block:"center"});
+    comparisonArmed = false;
+  }
+
+  function armCaseComparison(saved){
+    if (!saved || !saved.snapshot) {
+      set("visibleWireStatus", "This older case cannot be compared because it has no full snapshot.");
+      return;
+    }
+    if (shouldProtectCurrentInvestigation()) {
+      showInvestigationDialog(() => armCaseComparison(saved));
+      return;
+    }
+    comparisonBaseline = JSON.parse(JSON.stringify(saved));
+    comparisonArmed = true;
+    openSavedCase(saved.caseId);
+    setTimeout(() => {
+      set("visibleWireStatus", `Rescanning ${saved.caseId} against its saved baseline…`);
+      const scan = $("scanButton");
+      if (scan) scan.click();
+    }, 260);
+  }
+
   function renderHistory(){
+    const list = $("visibleCaseHistory");
+    if (!list) return;
     const history = readHistory();
-    htmlList("visibleCaseHistory", history.length ? history.map(h => `${h.caseId} · ${h.riskLabel} · ${h.target}`) : ["No saved cases yet."]);
+    list.innerHTML = "";
+    if (!history.length) {
+      const li = document.createElement("li");
+      li.textContent = "No saved cases yet.";
+      list.appendChild(li);
+      return;
+    }
+    history.forEach((item) => {
+      const li = document.createElement("li");
+      li.className = "visible-case-memory-item";
+      li.dataset.caseId = item.caseId || "";
+      li.innerHTML = `<div><strong>${esc(item.caseId || "Saved case")}</strong><small>${esc(item.riskLabel || "Unknown")} · ${esc(item.target || "No target")}</small></div><div class="visible-case-memory-actions"><button type="button" class="secondary-action" data-case-open="${esc(item.caseId || "")}">Open</button><button type="button" class="primary-action" data-case-compare="${esc(item.caseId || "")}" ${item.snapshot ? "" : "disabled"}>Rescan &amp; Compare</button></div>`;
+      list.appendChild(li);
+    });
+  }
+
+  function openSavedCase(caseId){
+    const saved = readHistory().find((item) => item.caseId === caseId);
+    if (!saved || !saved.snapshot) {
+      set("visibleWireStatus", "This older saved case contains summary data only and cannot restore the full dashboard.");
+      return;
+    }
+    const restore = () => {
+      const snapshot = normalizeVisibleResult(JSON.parse(JSON.stringify(saved.snapshot)));
+      const input = $("targetInput");
+      if (input) input.value = snapshot.input || snapshot.target || "";
+      authoritativeScanActive = true;
+      lastAuthoritativeResult = snapshot;
+      lastAppliedLegacyReport = null;
+      investigationState = "INVESTIGATION_ACTIVE";
+      investigationDirty = false;
+      window.ProxumaScanResult = snapshot;
+      renderCaptainWiring("Complete", snapshot);
+      scheduleScanSettledRenders(snapshot);
+      updateMissionStatus("Saved Case Open");
+      set("visibleCaseStatus", `Restored ${saved.caseId} from Scan Memory.`);
+      set("visibleWireStatus", "Saved investigation reopened with its score, evidence, analysis, and action state.");
+      document.querySelector("#report")?.scrollIntoView({behavior:"smooth", block:"start"});
+    };
+    if (shouldProtectCurrentInvestigation()) showInvestigationDialog(restore);
+    else restore();
   }
 
   function saveCurrentCase(auto){
@@ -348,7 +510,17 @@
     if (auto && signature === lastCaseSignature) return;
     lastCaseSignature = signature;
     const history = readHistory().filter(h => h.caseId !== r.caseId);
-    history.unshift({caseId:r.caseId,target:r.target,riskLabel:r.riskLabel,riskScore:r.riskScore,confidence:r.confidence,timestamp:r.timestamp,action:r.action});
+    history.unshift({
+      caseId:r.caseId,
+      target:r.target,
+      riskLabel:r.riskLabel,
+      riskScore:r.riskScore,
+      confidence:r.confidence,
+      timestamp:r.timestamp,
+      action:r.action,
+      savedAt:new Date().toISOString(),
+      snapshot:JSON.parse(JSON.stringify(r))
+    });
     writeHistory(history);
     if (!auto) { investigationDirty = false; investigationState = "CASE_SAVED"; updateMissionStatus("Case Saved"); }
     set("visibleCaseStatus", auto ? "Case auto-saved locally." : "Case saved locally.");
@@ -492,6 +664,9 @@
     set("visibleCaseStatus", "Scan complete. Unsaved case packet ready.");
     renderCaptainWiring("Complete", r);
     scheduleScanSettledRenders(r);
+    if (comparisonArmed && comparisonBaseline && comparisonBaseline.snapshot) {
+      renderCaseComparison(comparisonBaseline, r);
+    }
     const analysisCard = $("details");
     if (analysisCard) {
       analysisCard.classList.remove("dashboard-certified-update");
@@ -601,13 +776,13 @@
       <div class="investigation-manager-backdrop" data-im-cancel="true"></div>
       <section class="investigation-manager-card" role="dialog" aria-modal="true" aria-labelledby="imTitle">
         <p class="eyebrow">Investigation Manager</p>
-        <h2 id="imTitle">Start New Investigation?</h2>
-        <p>You already have an investigation open. Starting another scan will replace the current workspace.</p>
+        <h2 id="imTitle">Start a New Scan?</h2>
+        <p>You are about to start a new scan. Save the previous investigation first?</p>
         <div class="im-case-box"><span>Case</span><strong id="imCaseId">No case yet</strong><span>Target</span><strong id="imTarget">Waiting</strong></div>
         <p class="fine-print">Save the current case to history, continue without saving, or cancel and keep this investigation open.</p>
         <div class="im-actions">
-          <button id="imSaveContinue" class="primary-action" type="button">Save & Continue</button>
-          <button id="imDiscardContinue" class="secondary-action" type="button">Continue Without Saving</button>
+          <button id="imSaveContinue" class="primary-action" type="button">Yes, Save</button>
+          <button id="imDiscardContinue" class="secondary-action" type="button">No, Clear It</button>
           <button id="imCancel" class="secondary-action" type="button">Cancel</button>
         </div>
       </section>`;
@@ -704,7 +879,23 @@
       else copyText(JSON.stringify(buildScanResult().report, null, 2), "visibleWireStatus", "Case JSON copied because download was unavailable.");
     });
     $("visibleNewInvestigation")?.addEventListener("click", () => startNewInvestigation(true));
-    $("visibleResetWorkspace")?.addEventListener("click", () => startNewInvestigation(false));
+    $("missionNew")?.addEventListener("click", () => startNewInvestigation(true));
+    $("visibleResetWorkspace")?.addEventListener("click", () => startNewInvestigation(true));
+    $("visibleCaseHistory")?.addEventListener("click", (event) => {
+      const compareButton = event.target.closest("[data-case-compare]");
+      if (compareButton) {
+        const saved = readHistory().find(item => item.caseId === (compareButton.getAttribute("data-case-compare") || ""));
+        armCaseComparison(saved);
+        return;
+      }
+      const button = event.target.closest("[data-case-open]");
+      if (button) openSavedCase(button.getAttribute("data-case-open") || "");
+    });
+    $("caseComparisonClose")?.addEventListener("click", () => {
+      const panel = $("caseComparisonPanel");
+      if (panel) panel.hidden = true;
+      comparisonArmed = false;
+    });
     $("visibleSaveCase")?.addEventListener("click", () => saveCurrentCase(false));
     $("visibleCopyCase")?.addEventListener("click", () => copyText(JSON.stringify(buildScanResult().report, null, 2), "visibleCaseStatus", "Case packet copied."));
 

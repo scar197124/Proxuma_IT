@@ -29,13 +29,14 @@
     scope:document.getElementById('domainIntelScope'), age:document.getElementById('domainIntelAge'),
     registrar:document.getElementById('domainIntelRegistrar'), created:document.getElementById('domainIntelCreated'),
     expires:document.getElementById('domainIntelExpires'), source:document.getElementById('domainIntelSource'),
-    profile:document.getElementById('domainIntelProfile'), retrieved:document.getElementById('domainIntelRetrieved'),
+    profile:document.getElementById('domainIntelProfile'), interpretation:document.getElementById('domainIntelInterpretation'), retrieved:document.getElementById('domainIntelRetrieved'),
+    verified:document.getElementById('domainIntelVerified'), copy:document.getElementById('copyDomainIntelButton'), copyStatus:document.getElementById('domainIntelCopyStatus'),
     run:document.getElementById('runDomainIntelButton'), consent:document.getElementById('enableOnlineConsentButton'),
     sourceItems:document.getElementById('scanSourceItems'), visibleEvidence:document.getElementById('visibleEvidenceList')
   };
   if(!els.panel)return;
 
-  let activeToken=0,activeController=null,lastHost='',lastFingerprint='',lastResult=null,lastOutcome='idle',lastContext=null;
+  let activeToken=0,activeController=null,lastHost='',lastFingerprint='',lastResult=null,lastOutcome='idle',lastContext=null,lastSource='',lastRetrievedAt=null;
   const text=(el,value)=>{if(el)el.textContent=value;};
   const provided=value=>value===null||value===undefined||String(value).trim()===''?'Not provided':String(value);
   const consentArmed=()=>{try{return JSON.parse(localStorage.getItem(CONSENT_KEY)||'null')?.status==='armed';}catch(_){return false;}};
@@ -85,6 +86,36 @@
   }
   function dateLabel(value){if(!value)return'Not provided';const d=new Date(value);return Number.isNaN(d.getTime())?String(value):d.toLocaleDateString();}
   function timeLabel(value){const d=value?new Date(value):new Date();return Number.isNaN(d.getTime())?'Not available':d.toLocaleString();}
+
+  function expiryInfo(value){
+    if(!value)return {label:'Expiry not provided',tone:'neutral'};
+    const d=new Date(value),now=new Date();if(Number.isNaN(d.getTime()))return {label:'Expiry date provided',tone:'neutral'};
+    const days=Math.ceil((d-now)/(24*60*60*1000));
+    if(days<0)return {label:'Registration appears expired',tone:'urgent'};
+    if(days<=30)return {label:'Registration expires within 30 days',tone:'urgent'};
+    if(days<=90)return {label:'Registration expires within 90 days',tone:'watch'};
+    return {label:'Registration expiry is not near',tone:'stable'};
+  }
+  function interpretation(result,context){
+    const age=ageInfo(result?.created),expiry=expiryInfo(result?.expires);
+    if(context?.kind==='hosted')return `Hosted service · parent ${age.profile.toLowerCase()} · ${expiry.label}`;
+    if(context?.kind==='subdomain')return `Subdomain · parent ${age.profile.toLowerCase()} · ${expiry.label}`;
+    return `${age.profile} · ${expiry.label}`;
+  }
+  function setVerified(on,freshness){
+    if(els.verified){els.verified.hidden=!on;els.verified.textContent=freshness==='cached'?'✓ Cached Verified':'✓ Live Verified';}
+    if(els.copy)els.copy.disabled=!on||!lastResult;
+  }
+  function copyText(){
+    if(!lastResult||!lastContext)return '';const age=ageInfo(lastResult.created);
+    return ['PROXUMA DOMAIN INTELLIGENCE',`Scanned host: ${lastContext.host||'Not available'}`,`Registrable domain: ${lastContext.lookupDomain||lastResult.domain||'Not available'}`,`Hosting platform: ${lastContext.platform||'Not identified'}`,`Lookup scope: ${lastContext.scope||'Not available'}`,`Parent-domain age: ${age.label}`,`Registrar: ${provided(lastResult.registrarName)}`,`Created: ${dateLabel(lastResult.created)}`,`Expires: ${dateLabel(lastResult.expires)}`,`Source: ${provided(lastSource)}`,`Interpretation: ${interpretation(lastResult,lastContext)}`,`Retrieved: ${timeLabel(lastRetrievedAt)}`].join('\n');
+  }
+  async function copyIntelligence(){
+    const value=copyText();if(!value)return;
+    try{await navigator.clipboard.writeText(value);text(els.copyStatus,'Domain intelligence copied.');}
+    catch(_){const area=document.createElement('textarea');area.value=value;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();document.execCommand('copy');area.remove();text(els.copyStatus,'Domain intelligence copied.');}
+  }
+
   function setStatus(label,tone){text(els.status,label);els.status.className='status-pill '+(tone||'status-low');}
   function setRunButton(mode){if(!els.run)return;els.run.disabled=mode==='running';els.run.textContent=mode==='running'?'Checking Domain…':mode==='failed'?'Retry Domain Intelligence':'Run Domain Intelligence';}
   function applyContext(context){
@@ -101,13 +132,13 @@
   }
   function removeEvidence(){els.visibleEvidence?.querySelector('[data-domain-intel-evidence]')?.remove();}
   function render(result,source,retrievedAt,context){
-    lastResult=result||null;lastContext=context||lastContext;applyContext(lastContext);
-    if(!result){text(els.age,'Not available');text(els.registrar,'Not available');text(els.created,'Not available');text(els.expires,'Not available');text(els.source,source||'Local only');text(els.profile,lastContext?.kind==='hosted'?'Hosted subdomain':'Not available');text(els.retrieved,'Not available');return;}
+    lastResult=result||null;lastContext=context||lastContext;lastSource=source||'';lastRetrievedAt=retrievedAt||null;applyContext(lastContext);
+    if(!result){text(els.age,'Not available');text(els.registrar,'Not available');text(els.created,'Not available');text(els.expires,'Not available');text(els.source,source||'Local only');text(els.profile,lastContext?.kind==='hosted'?'Hosted subdomain':'Not available');text(els.interpretation,'Not available');text(els.retrieved,'Not available');setVerified(false);text(els.copyStatus,'Live results can be copied after retrieval.');return;}
     const age=ageInfo(result.created);text(els.age,age.label);text(els.registrar,provided(result.registrarName));text(els.created,dateLabel(result.created));text(els.expires,dateLabel(result.expires));text(els.source,provided(source));
     if(lastContext?.kind==='hosted')text(els.profile,'Hosted subdomain · parent '+age.profile.toLowerCase());
     else if(lastContext?.kind==='subdomain')text(els.profile,'Subdomain · parent '+age.profile.toLowerCase());
     else text(els.profile,age.profile);
-    text(els.retrieved,timeLabel(retrievedAt));
+    text(els.interpretation,interpretation(result,lastContext));text(els.retrieved,timeLabel(retrievedAt));setVerified(true,String(source||'').toLowerCase().includes('cached')?'cached':'live');text(els.copyStatus,'Verified domain intelligence is ready to copy.');
     if(lastContext?.kind==='hosted')text(els.summary,`Hosted subdomain detected on ${lastContext.platform}. Registration data belongs to ${lastContext.lookupDomain}, not to this individual deployment.`);
     else if(lastContext?.kind==='subdomain')text(els.summary,`Subdomain detected. Registration context belongs to ${lastContext.lookupDomain}, not specifically to ${lastContext.host}.`);
     else text(els.summary,`${age.profile} domain context loaded. Registration data supports the investigation but does not determine the safety verdict by itself.`);
@@ -161,6 +192,7 @@
   document.addEventListener('proxuma:legacy-scan-complete',e=>onReport(e.detail?.report));
   document.addEventListener('proxuma:dashboard-synced',()=>onReport(window.ProxumaReport||window.ProxumaLegacyLastReport));
   els.run?.addEventListener('click',()=>run(window.ProxumaReport||window.ProxumaLegacyLastReport,true));
+  els.copy?.addEventListener('click',copyIntelligence);
   els.consent?.addEventListener('click',()=>setTimeout(()=>{setStatus(consentArmed()?(lastContext?.kind==='hosted'?'Hosted subdomain':'Ready'):'Offline',consentArmed()?'status-medium':'status-low');if(consentArmed()&&lastHost)run(window.ProxumaReport||window.ProxumaLegacyLastReport,false);},0));
   document.addEventListener('DOMContentLoaded',()=>{setStatus(consentArmed()?'Ready':'Offline',consentArmed()?'status-medium':'status-low');setRunButton('idle');});
 })();

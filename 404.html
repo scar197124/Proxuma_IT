@@ -140,7 +140,7 @@
         <ul><li>Analyzed locally</li><li>Nothing is uploaded</li><li>Online checks remain off unless chosen</li></ul>
         <button id="enableOnlineConsentButton" class="secondary-action" type="button">Enable Online Checks</button>
         <section id="domainIntelPanel" class="domain-intel-panel" aria-live="polite">
-          <div class="domain-intel-head"><strong>Domain Intelligence</strong><span id="domainIntelStatus" class="status-pill status-low">Offline</span></div>
+          <div class="domain-intel-head"><strong>Domain Intelligence</strong><div class="domain-intel-statuses"><span id="domainIntelVerified" class="domain-intel-verified" hidden>✓ Live Verified</span><span id="domainIntelStatus" class="status-pill status-low">Offline</span></div></div>
           <p id="domainIntelSummary">Enable online checks, then run a URL or domain scan to retrieve live registration context.</p>
           <dl id="domainIntelGrid" class="domain-intel-grid">
             <div><dt>Scanned host</dt><dd id="domainIntelDomain">Waiting</dd></div>
@@ -153,9 +153,10 @@
             <div><dt>Expires</dt><dd id="domainIntelExpires">—</dd></div>
             <div><dt>Source</dt><dd id="domainIntelSource">Local only</dd></div>
             <div><dt>Domain profile</dt><dd id="domainIntelProfile">Not available</dd></div>
+            <div><dt>Interpretation</dt><dd id="domainIntelInterpretation">Not available</dd></div>
             <div><dt>Retrieved</dt><dd id="domainIntelRetrieved">Not available</dd></div>
           </dl>
-          <button id="runDomainIntelButton" class="secondary-action domain-intel-run" type="button">Run Domain Intelligence</button>
+          <div class="domain-intel-actions"><button id="runDomainIntelButton" class="secondary-action domain-intel-run" type="button">Run Domain Intelligence</button><button id="copyDomainIntelButton" class="secondary-action domain-intel-copy" type="button" disabled>Copy Intelligence</button></div><p id="domainIntelCopyStatus" class="domain-intel-copy-status" aria-live="polite">Live results can be copied after retrieval.</p>
         </section>
       </article>
     </section>
@@ -251,7 +252,7 @@
 
 <script src="assets/js/app-guide-overlay.js?v=rc11-2-hosted-subdomain"></script>
 <script src="assets/js/scan-source-status.js?v=rc11-2-hosted-subdomain"></script>
-<script src="assets/js/domain-intelligence.js?v=rc11-2-hosted-subdomain"></script>
+<script src="assets/js/domain-intelligence.js?v=v3.48.1-live-intelligence"></script>
 <script src="assets/js/mission-control.js?v=rc12-mission-control"></script>
 <script src="assets/js/decision-flow.js?v=rc13-guided-decision-flow"></script>
 
